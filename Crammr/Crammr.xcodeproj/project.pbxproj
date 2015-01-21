@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7BD845261A6F52CD00083456 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD845251A6F52CD00083456 /* AppDelegate.swift */; };
+		7BD845291A6F52CD00083456 /* Crammr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7BD845271A6F52CD00083456 /* Crammr.xcdatamodeld */; };
+		7BD8452B1A6F52CD00083456 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD8452A1A6F52CD00083456 /* MasterViewController.swift */; };
+		7BD8452D1A6F52CD00083456 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD8452C1A6F52CD00083456 /* DetailViewController.swift */; };
+		7BD845301A6F52CD00083456 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BD8452E1A6F52CD00083456 /* Main.storyboard */; };
+		7BD845321A6F52CD00083456 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BD845311A6F52CD00083456 /* Images.xcassets */; };
+		7BD845351A6F52CD00083456 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BD845331A6F52CD00083456 /* LaunchScreen.xib */; };
+		7BD845411A6F52CD00083456 /* CrammrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD845401A6F52CD00083456 /* CrammrTests.swift */; };
+		7BD8454D1A6F554200083456 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BD8454C1A6F554200083456 /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7BD8453B1A6F52CD00083456 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BD845181A6F52CC00083456 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7BD8451F1A6F52CD00083456;
+			remoteInfo = Crammr;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7BD845201A6F52CD00083456 /* Crammr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crammr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BD845241A6F52CD00083456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BD845251A6F52CD00083456 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7BD845281A6F52CD00083456 /* Crammr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Crammr.xcdatamodel; sourceTree = "<group>"; };
+		7BD8452A1A6F52CD00083456 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		7BD8452C1A6F52CD00083456 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		7BD8452F1A6F52CD00083456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7BD845311A6F52CD00083456 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BD845341A6F52CD00083456 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7BD8453A1A6F52CD00083456 /* CrammrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrammrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BD8453F1A6F52CD00083456 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BD845401A6F52CD00083456 /* CrammrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrammrTests.swift; sourceTree = "<group>"; };
+		7BD8454C1A6F554200083456 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BD8451D1A6F52CD00083456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD8454D1A6F554200083456 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD845371A6F52CD00083456 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7BD845171A6F52CC00083456 = {
+			isa = PBXGroup;
+			children = (
+				7BD8454C1A6F554200083456 /* MapKit.framework */,
+				7BD845221A6F52CD00083456 /* Crammr */,
+				7BD8453D1A6F52CD00083456 /* CrammrTests */,
+				7BD845211A6F52CD00083456 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7BD845211A6F52CD00083456 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BD845201A6F52CD00083456 /* Crammr.app */,
+				7BD8453A1A6F52CD00083456 /* CrammrTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BD845221A6F52CD00083456 /* Crammr */ = {
+			isa = PBXGroup;
+			children = (
+				7BD845251A6F52CD00083456 /* AppDelegate.swift */,
+				7BD8452A1A6F52CD00083456 /* MasterViewController.swift */,
+				7BD8452C1A6F52CD00083456 /* DetailViewController.swift */,
+				7BD8452E1A6F52CD00083456 /* Main.storyboard */,
+				7BD845311A6F52CD00083456 /* Images.xcassets */,
+				7BD845331A6F52CD00083456 /* LaunchScreen.xib */,
+				7BD845271A6F52CD00083456 /* Crammr.xcdatamodeld */,
+				7BD845231A6F52CD00083456 /* Supporting Files */,
+			);
+			path = Crammr;
+			sourceTree = "<group>";
+		};
+		7BD845231A6F52CD00083456 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BD845241A6F52CD00083456 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7BD8453D1A6F52CD00083456 /* CrammrTests */ = {
+			isa = PBXGroup;
+			children = (
+				7BD845401A6F52CD00083456 /* CrammrTests.swift */,
+				7BD8453E1A6F52CD00083456 /* Supporting Files */,
+			);
+			path = CrammrTests;
+			sourceTree = "<group>";
+		};
+		7BD8453E1A6F52CD00083456 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7BD8453F1A6F52CD00083456 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7BD8451F1A6F52CD00083456 /* Crammr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BD845441A6F52CD00083456 /* Build configuration list for PBXNativeTarget "Crammr" */;
+			buildPhases = (
+				7BD8451C1A6F52CD00083456 /* Sources */,
+				7BD8451D1A6F52CD00083456 /* Frameworks */,
+				7BD8451E1A6F52CD00083456 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Crammr;
+			productName = Crammr;
+			productReference = 7BD845201A6F52CD00083456 /* Crammr.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7BD845391A6F52CD00083456 /* CrammrTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BD845471A6F52CD00083456 /* Build configuration list for PBXNativeTarget "CrammrTests" */;
+			buildPhases = (
+				7BD845361A6F52CD00083456 /* Sources */,
+				7BD845371A6F52CD00083456 /* Frameworks */,
+				7BD845381A6F52CD00083456 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7BD8453C1A6F52CD00083456 /* PBXTargetDependency */,
+			);
+			name = CrammrTests;
+			productName = CrammrTests;
+			productReference = 7BD8453A1A6F52CD00083456 /* CrammrTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BD845181A6F52CC00083456 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Casa, Inc.";
+				TargetAttributes = {
+					7BD8451F1A6F52CD00083456 = {
+						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					7BD845391A6F52CD00083456 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 7BD8451F1A6F52CD00083456;
+					};
+				};
+			};
+			buildConfigurationList = 7BD8451B1A6F52CD00083456 /* Build configuration list for PBXProject "Crammr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7BD845171A6F52CC00083456;
+			productRefGroup = 7BD845211A6F52CD00083456 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BD8451F1A6F52CD00083456 /* Crammr */,
+				7BD845391A6F52CD00083456 /* CrammrTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7BD8451E1A6F52CD00083456 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD845301A6F52CD00083456 /* Main.storyboard in Resources */,
+				7BD845351A6F52CD00083456 /* LaunchScreen.xib in Resources */,
+				7BD845321A6F52CD00083456 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD845381A6F52CD00083456 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BD8451C1A6F52CD00083456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD845261A6F52CD00083456 /* AppDelegate.swift in Sources */,
+				7BD845291A6F52CD00083456 /* Crammr.xcdatamodeld in Sources */,
+				7BD8452B1A6F52CD00083456 /* MasterViewController.swift in Sources */,
+				7BD8452D1A6F52CD00083456 /* DetailViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BD845361A6F52CD00083456 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BD845411A6F52CD00083456 /* CrammrTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7BD8453C1A6F52CD00083456 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7BD8451F1A6F52CD00083456 /* Crammr */;
+			targetProxy = 7BD8453B1A6F52CD00083456 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7BD8452E1A6F52CD00083456 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD8452F1A6F52CD00083456 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7BD845331A6F52CD00083456 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BD845341A6F52CD00083456 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7BD845421A6F52CD00083456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7BD845431A6F52CD00083456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7BD845451A6F52CD00083456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Crammr/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7BD845461A6F52CD00083456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Crammr/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7BD845481A6F52CD00083456 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrammrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crammr.app/Crammr";
+			};
+			name = Debug;
+		};
+		7BD845491A6F52CD00083456 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrammrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crammr.app/Crammr";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BD8451B1A6F52CD00083456 /* Build configuration list for PBXProject "Crammr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD845421A6F52CD00083456 /* Debug */,
+				7BD845431A6F52CD00083456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BD845441A6F52CD00083456 /* Build configuration list for PBXNativeTarget "Crammr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD845451A6F52CD00083456 /* Debug */,
+				7BD845461A6F52CD00083456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7BD845471A6F52CD00083456 /* Build configuration list for PBXNativeTarget "CrammrTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BD845481A6F52CD00083456 /* Debug */,
+				7BD845491A6F52CD00083456 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7BD845271A6F52CD00083456 /* Crammr.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7BD845281A6F52CD00083456 /* Crammr.xcdatamodel */,
+			);
+			currentVersion = 7BD845281A6F52CD00083456 /* Crammr.xcdatamodel */;
+			path = Crammr.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7BD845181A6F52CC00083456 /* Project object */;
+}
