@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/3.21.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0285ad8da812e92dda76ed5d0dcba05724c7911d">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/classes-5afbd4be144ce079cd7cae2ba1a713be11ce14d7.jar" />
+    </item>
+    <item
+        jar="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/classes-6393437071cc19a55025fc36521889849d917214.jar" />
+    </item>
+    <item
+        jar="/Users/roberto/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.2/91c20388c9a45f62b5ed8fe0502bb76ff6251fc7/bolts-android-1.1.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="91c20388c9a45f62b5ed8fe0502bb76ff6251fc7">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.2-0cf8cb4a6140101dddd649b793e7fdf3e0fe876c.jar" />
+    </item>
+    <item
+        jar="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/classes-8c75f5309b26ea25a7b38d3897a72b7b64e59bc1.jar" />
+    </item>
+    <item
+        jar="/Users/roberto/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-55dcbe435a3b8caa57afe773c2ba8dc41263ac25.jar" />
+    </item>
+    <item
+        jar="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/roberto/Desktop/CS194/git/Cramr/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-9da0071b03515476ab682fd09d7cea1ef78de68f.jar" />
+    </item>
+
+</items>

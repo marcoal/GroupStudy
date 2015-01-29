@@ -20,6 +20,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = self.window!.rootViewController as UINavigationController
         let controller = navigationController.topViewController as MasterViewController
         controller.managedObjectContext = self.managedObjectContext
+        //return true
+        
+        Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
+        
+        var testObject0:PFObject = PFObject(className: "Course")
+        testObject0["name"] = "CS106A"
+        
+        var testObject1:PFObject = PFObject(className: "Course")
+        testObject1["name"] = "CS194"
+        
+        var testObject2:PFObject = PFObject(className: "Course")
+        testObject2["name"] = "EE108"
+        
+        //testObject.setObject("Course4", forKey: "name")
+        testObject0.saveInBackground()
+        testObject1.saveInBackground()
+        testObject2.saveInBackground()
+
+        /*
+        // Initialize Parse.
+        [Parse setApplicationId:@"sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw"
+        clientKey:@"Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR"];
+        
+        PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+        testObject[@"foo"] = @"bar";
+        [testObject saveInBackground];
+        */
+        
+        
         return true
     }
 

@@ -95,7 +95,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         newManagedObject.setValue(desc_str, forKey: "course_desc")
         newManagedObject.setValue(term_str, forKey: "course_term")
         newManagedObject.setValue(year_str, forKey: "course_year")
-             
+        
+        
+        
+        
         // Save the context.
         var error: NSError? = nil
         if !context.save(&error) {
@@ -156,7 +159,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel!.text = object.valueForKey("course_name")!.description
+        cell.textLabel.text = object.valueForKey("course_name")!.description
     }
 
     // MARK: - Fetched results controller
