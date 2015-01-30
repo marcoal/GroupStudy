@@ -9,29 +9,51 @@
 import UIKit
 import Foundation
 
-class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+    @IBOutlet weak var classSearch: UISearchBar!
     
     @IBOutlet
     weak var courseTable: UITableView!
     
     var courses = []
     
-
-
     func getParseData() {
         var query = PFQuery(className: "Course")
-//        query.limit = 
+        query.limit = 10
         
         query.findObjectsInBackgroundWithBlock {
             (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
                 self.courses = coursesFromQuery
-            self.courseTable.reloadData()
+                self.courseTable.reloadData()
         }
     }
     
+    func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
+        var query = PFQuery(className: "Course")
+        query.limit = 10
+        query.whereKey("name", containsString: searchText)
+        
+        query.findObjectsInBackgroundWithBlock {
+            (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
+            self.courses = coursesFromQuery
+            self.courseTable.reloadData()
+        }
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        classSearch.placeholder = "Search for classes"
+        var leftNavBarButton = UIBarButtonItem(customView: classSearch)
+        self.navigationItem.leftBarButtonItem = leftNavBarButton
+        classSearch.delegate = self
+        
+        
+        
         
         self.courseTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.getParseData()
