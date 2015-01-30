@@ -7,7 +7,6 @@
         <!--Master-->
         <scene sceneID="cUi-kZ-frf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
                 <navigationController title="Master" id="rS3-R9-Ivy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="3D3-6k-mQi"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
@@ -17,6 +16,7 @@
                         <segue destination="pGg-6v-bdr" kind="relationship" relationship="rootViewController" id="RxB-wf-QIq"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eq9-QA-ai8" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="460" y="64"/>
         </scene>
@@ -58,11 +58,48 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="9Fp-fn-Ty4"/>
-                    <navigationItem key="navigationItem" title="Cramr: The UBER for Study Groups!" id="tQt-TN-PWz"/>
+                    <navigationItem key="navigationItem" title="Cramr: The UBER for Study Groups!" id="tQt-TN-PWz">
+                        <barButtonItem key="rightBarButtonItem" title="Add Course" id="99d-gP-fIg">
+                            <connections>
+                                <segue destination="CWX-q6-Ru7" kind="presentation" id="Pv4-xh-9Xq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1285" y="64"/>
+        </scene>
+        <!--Course List Table View-->
+        <scene sceneID="6Wc-KK-FTS">
+            <objects>
+                <viewController id="CWX-q6-Ru7" customClass="CourseListTableView" customModule="Cramr_v2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mwq-5T-H84"/>
+                        <viewControllerLayoutGuide type="bottom" id="5la-1P-ggm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3ya-cz-zeB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-f1-plM">
+                                <rect key="frame" x="0.0" y="161" width="600" height="439"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CWX-q6-Ru7" id="myk-WG-qea"/>
+                                    <outlet property="delegate" destination="CWX-q6-Ru7" id="lr1-Ia-H9c"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="courseTable" destination="fmk-f1-plM" id="lC7-Ew-GIW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIc-MB-yPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1285" y="791"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Cn3-H9-jdl">

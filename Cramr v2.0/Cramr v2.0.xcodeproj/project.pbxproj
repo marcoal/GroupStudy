@@ -33,6 +33,7 @@
 		7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFDA1A772A570043841E /* LaunchScreen.xib */; };
 		7B33AFE81A772A570043841E /* Cramr_v2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */; };
 		7B33AFF21A77618D0043841E /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFF11A77618D0043841E /* TabViewController.swift */; };
+		7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B54AE1A7B066500064762 /* CourseListTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		7B33AFE61A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cramr_v2_0Tests.swift; sourceTree = "<group>"; };
 		7B33AFF11A77618D0043841E /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		7B9B54AE1A7B066500064762 /* CourseListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD31A772A570043841E /* DetailViewController.swift */,
 				7B33AFF11A77618D0043841E /* TabViewController.swift */,
+				7B9B54AE1A7B066500064762 /* CourseListTableView.swift */,
 				7B33AFD51A772A570043841E /* Main.storyboard */,
 				7B33AFD81A772A570043841E /* Images.xcassets */,
 				7B33AFDA1A772A570043841E /* LaunchScreen.xib */,
@@ -299,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */,
 				7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
 				7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */,
