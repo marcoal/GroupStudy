@@ -159,7 +159,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel.text = object.valueForKey("course_name")!.description
+        cell.textLabel?.text = object.valueForKey("course_name")!.description
     }
 
     // MARK: - Fetched results controller
