@@ -12,6 +12,9 @@ import CoreData
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+    @IBAction func popToPrevView(segue:UIStoryboardSegue) {
+    }
 
 
     override func awakeFromNib() {
