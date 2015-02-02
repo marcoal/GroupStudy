@@ -18,39 +18,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let navigationController = self.window!.rootViewController as UINavigationController
-        let controller = navigationController.topViewController as MasterViewController
-        controller.managedObjectContext = self.managedObjectContext
-        //return true
+        
+        //To get the other view to work
+        //let controller = navigationController.topViewController as MasterViewController
+        //controller.managedObjectContext = self.managedObjectContext
+
+        let controller = navigationController.topViewController as LoginViewController
         
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
         
-//        var testObject0:PFObject = PFObject(className: "Course")
-//        testObject0["name"] = "CS106A"
-//        
-//        var testObject1:PFObject = PFObject(className: "Course")
-//        testObject1["name"] = "CS194"
-//        
-//        var testObject2:PFObject = PFObject(className: "Course")
-//        testObject2["name"] = "EE108"
+        PFFacebookUtils.initializeFacebook()
         
-        //testObject.setObject("Course4", forKey: "name")
-//        testObject0.saveInBackground()
-//        testObject1.saveInBackground()
-//        testObject2.saveInBackground()
-
-        /*
-        // Initialize Parse.
-        [Parse setApplicationId:@"sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw"
-        clientKey:@"Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR"];
-        
-        PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-        testObject[@"foo"] = @"bar";
-        [testObject saveInBackground];
-        */
-        
+        FBLoginView.self
         
         return true
     }
+    
+    
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: NSString?, annotation: AnyObject) -> Bool {
+        var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
+        return wasHandled
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        FBAppEvents.activateApp()
+        FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
+    }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -66,15 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
+
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+
+        FBSession.activeSession().close()
     }
+    
 
     // MARK: - Core Data stack
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		625806821A7D994C002AAD26 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806811A7D994C002AAD26 /* FacebookSDK.framework */; };
+		625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */; };
+		625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */; };
+		625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625806871A7DA2A7002AAD26 /* LoginViewController.swift */; };
 		62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C5D1A7AD64800864C72 /* Accounts.framework */; };
 		62BC8C601A7AD65000864C72 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C5F1A7AD65000864C72 /* AdSupport.framework */; };
 		62BC8C621A7AD65500864C72 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C611A7AD65500864C72 /* Social.framework */; };
@@ -47,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		625806811A7D994C002AAD26 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		625806871A7DA2A7002AAD26 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		62BC8C5D1A7AD64800864C72 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		62BC8C5F1A7AD65000864C72 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		62BC8C611A7AD65500864C72 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -91,6 +99,8 @@
 				62BC8C7B1A7AD78000864C72 /* MobileCoreServices.framework in Frameworks */,
 				62BC8C791A7AD75F00864C72 /* QuartzCore.framework in Frameworks */,
 				62BC8C771A7AD74A00864C72 /* SystemConfiguration.framework in Frameworks */,
+				625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */,
+				625806821A7D994C002AAD26 /* FacebookSDK.framework in Frameworks */,
 				62BC8C641A7AD66700864C72 /* AudioToolbox.framework in Frameworks */,
 				62BC8C661A7AD67000864C72 /* CFNetwork.framework in Frameworks */,
 				62BC8C6A1A7AD67E00864C72 /* CoreLocation.framework in Frameworks */,
@@ -119,6 +129,8 @@
 		62BC8C711A7AD6EE00864C72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */,
+				625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */,
 				62BC8C7E1A7AD7BF00864C72 /* StoreKit.framework */,
 				62BC8C7C1A7AD7B400864C72 /* Security.framework */,
 				62BC8C7A1A7AD78000864C72 /* MobileCoreServices.framework */,
@@ -126,6 +138,7 @@
 				62BC8C761A7AD74A00864C72 /* SystemConfiguration.framework */,
 				62BC8C741A7AD73300864C72 /* libsqlite3.dylib */,
 				62BC8C721A7AD72400864C72 /* libz.dylib */,
+				625806811A7D994C002AAD26 /* FacebookSDK.framework */,
 				62BC8C6D1A7AD6D500864C72 /* Bolts.framework */,
 				62BC8C6E1A7AD6D500864C72 /* Parse.framework */,
 				62BC8C6B1A7AD68600864C72 /* Foundation.framework */,
@@ -162,6 +175,7 @@
 		7B33AFC91A772A570043841E /* Cramr v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD31A772A570043841E /* DetailViewController.swift */,
@@ -282,6 +296,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */,
 				7B33AFD71A772A570043841E /* Main.storyboard in Resources */,
 				7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */,
 				7B33AFD91A772A570043841E /* Images.xcassets in Resources */,
@@ -302,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */,
 				7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */,
 				7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
