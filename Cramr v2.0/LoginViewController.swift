@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        nameLabel.text = ""
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         
@@ -39,8 +39,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         NSLog("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as String
         NSLog("User Email: \(userEmail)")
-        
         nameLabel.text = user.name
+        //self.performSegueWithIdentifier("toMaster", sender: self)
+        
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {

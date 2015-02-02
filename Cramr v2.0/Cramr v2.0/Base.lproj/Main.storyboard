@@ -47,11 +47,12 @@
                     <connections>
                         <outlet property="fbLoginView" destination="oJp-dl-ea2" id="gGy-8H-68g"/>
                         <outlet property="nameLabel" destination="vIT-Oh-zeo" id="xSN-Ad-Tem"/>
+                        <segue destination="pGg-6v-bdr" kind="push" identifier="toMaster" id="41q-4q-0As"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SMK-BE-ewV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="814"/>
+            <point key="canvasLocation" x="245" y="878"/>
         </scene>
         <!--Master-->
         <scene sceneID="VgW-fR-Quf">
