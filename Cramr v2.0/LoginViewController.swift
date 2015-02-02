@@ -27,6 +27,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toMaster" {
+        }
+    }
+    
     // Facebook Delegate Methods
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
@@ -40,7 +46,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         var userEmail = user.objectForKey("email") as String
         NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
-        //self.performSegueWithIdentifier("toMaster", sender: self)
+        self.performSegueWithIdentifier("toMaster", sender: self)
         
     }
     

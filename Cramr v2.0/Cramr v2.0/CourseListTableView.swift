@@ -67,11 +67,23 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var courseName = self.courses[indexPath.row]["title"] as? String
-        var newClass = PFObject(className: "CoursesIn")
-        newClass["name"] = courseName
-        newClass.saveInBackground()
-//        var userID = 42
-//        var
+        var courseName = self.courses[indexPath.row]["title"] as String
+        
+        var user = PFUser()
+        var curr_user = PFUser.currentUser()
+        if curr_user != nil {
+            
+            var course_array = user["enrolled_courses"] as [String]
+            
+            if !contains(course_array, courseName) {
+                course_array.append(courseName)
+                user["enrolled_courses"] = course_array
+            } else {
+                // User has already added course. Popup alert saying you idiot, you're already enrolled.
+            }
+            
+        } else {
+            // Make the user sign in again ?
+        }
     }
 }
