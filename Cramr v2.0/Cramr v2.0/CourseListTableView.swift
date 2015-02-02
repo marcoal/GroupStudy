@@ -56,6 +56,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         self.getParseData()
     }
     
+    // TABLE VIEW FUNCTIONS
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.courses.count;
     }
@@ -68,22 +70,29 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var courseName = self.courses[indexPath.row]["title"] as String
-        
-        var user = PFUser()
-        var curr_user = PFUser.currentUser()
-        if curr_user != nil {
+      
+        var curr_user = currentUserInfo.userID
+        var query = PFQuery(className: "EnrolledCourses")
+        if curr_user != "" {
+            query.whereKey("userID", equalTo: curr_user)
+            var object_user = query.getFirstObject()
             
-            var course_array = user["enrolled_courses"] as [String]
-            
-            if !contains(course_array, courseName) {
-                course_array.append(courseName)
-                user["enrolled_courses"] = course_array
+            if object_user != nil {
+                var course_array = object_user["enrolled_courses"] as [String]
+                if !contains(course_array, courseName) {
+                    course_array += [courseName]
+                    object_user["enrolled_courses"] = course_array
+                    object_user.save()
+                }
             } else {
-                // User has already added course. Popup alert saying you idiot, you're already enrolled.
+                var new_object_user = PFObject(className: "EnrolledCourses")
+                new_object_user["userID"] = curr_user
+                new_object_user["enrolled_courses"] = [courseName]
+                new_object_user.save()
             }
             
         } else {
-            // Make the user sign in again ?
+            // Make the user sign in again?
         }
     }
 }

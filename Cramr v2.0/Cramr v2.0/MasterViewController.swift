@@ -13,19 +13,48 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var managedObjectContext: NSManagedObjectContext? = nil
     
+    var coursesIn: [String] = []
+    
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
+        refreshCourseList()
     }
     
-    @IBAction func foo(segue:UIStoryboardSegue) {
-    }
-
-
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+//    
+//    func loadFB() {
+//        if (FBSession.activeSession().isOpen){
+//            var friendsRequest : FBRequest = FBRequest.requestForMyFriends()
+//            friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
+//                var resultdict = result as NSDictionary
+//                NSLog("Result Dict: \(resultdict)")
+//                var data : NSArray = resultdict.objectForKey("data") as NSArray
+//            }
+//        }}
+//    }
 
+    func refreshCourseList() {
+        var query_courses = PFQuery(className: "EnrolledCourses")
+        query_courses.whereKey("userID", equalTo: currentUserInfo.userID)
+        var courses = query_courses.getFirstObject()
+        
+        if courses != nil {
+            if let enrolled_courses: AnyObject = courses["enrolled_courses"] {
+                self.coursesIn =  enrolled_courses as [String]
+            }
+        } else {
+            self.coursesIn = []
+        }
+//        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshCourseList()
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CourseCell")
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
@@ -36,55 +65,36 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
     
-    func addNewObject(sender: AnyObject) {
-        var alert = UIAlertController(title: "New course",
-            message: "Add a new course to your schedule",
-            preferredStyle: .Alert)
-        
-        let saveAction = UIAlertAction(title: "Save",
-            style: .Default) { (action: UIAlertAction!) -> Void in
-                
-                var courseName = alert.textFields![0] as UITextField
-                var courseDescription = alert.textFields![1] as UITextField
-                var courseYear = alert.textFields![3] as UITextField
-                var courseTerm = alert.textFields![2] as UITextField
-
-//                self.insertNewObject(courseName.text!, desc_str: courseDescription.text!, term_str: courseTerm.text!, year_str: courseYear.text!)
-                
-                //                self.insertNewObject(courseName.text!, description_str: courseDescription.text!, term_str: courseTerm.text!, year_str: courseYear.text!)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-            style: .Default) { (action: UIAlertAction!) -> Void in
-        }
-        
-        alert.addTextFieldWithConfigurationHandler {
-            (q: UITextField!) -> Void in
-            q.placeholder = "Course name"
-        }
-        
-                alert.addTextFieldWithConfigurationHandler {
-                    (w: UITextField!) -> Void in
-                    w.placeholder = "Description"
-                }
-        
-                alert.addTextFieldWithConfigurationHandler {
-                    (e: UITextField!) -> Void in
-                    e.placeholder = "Term"
-                }
-        
-                alert.addTextFieldWithConfigurationHandler {
-                    (r: UITextField!) -> Void in
-                    r.placeholder = "Year"
-                }
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        presentViewController(alert,
-            animated: true,
-            completion: nil)
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.coursesIn.count;
     }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("CourseCell") as UITableViewCell
+        cell.textLabel?.text = self.coursesIn[indexPath.row] as String
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("SELECT ROW")
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            var course_name = self.coursesIn[indexPath.row] as String
+            var query_courses = PFQuery(className: "EnrolledCourses")
+            query_courses.whereKey("userID", equalTo: currentUserInfo.userID)
+            var courses = query_courses.getFirstObject()
+            courses["enrolled_courses"].removeObject(course_name)
+            courses.save()
+            refreshCourseList()
+            
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
+    }
+    
+
+            
 
 //    func insertNewObject(name_str: String, desc_str: String, term_str: String, year_str: String)  {
 //        
@@ -208,11 +218,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 //    func controllerWillChangeContent(controller: NSFetchedResultsController) {
 //        self.tableView.beginUpdates()
 //    }
-//
-//    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+
+//func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
 //        switch type {
-//            case .Insert:
-//                self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
 //            case .Delete:
 //                self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
 //            default:

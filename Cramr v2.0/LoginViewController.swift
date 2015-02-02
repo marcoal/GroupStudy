@@ -8,12 +8,15 @@
 
 import Foundation
 
-
+struct currentUserInfo {
+    static var userID = ""
+}
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fbLoginView: FBLoginView!
+    
     
     
     //var loggedInUser = FBGraphUser()
@@ -33,10 +36,21 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     }
     
+    func setCurrUser() {
+        if (FBSession.activeSession().isOpen){
+            var friendsRequest : FBRequest = FBRequest.requestForMe()
+            friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
+                var resultdict = result as NSDictionary
+                currentUserInfo.userID = resultdict["id"] as String
+            }
+        }
+    }
+    
     // Facebook Delegate Methods
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         NSLog("User Logged In")
+//        setCurrUser()
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
@@ -46,6 +60,23 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         var userEmail = user.objectForKey("email") as String
         NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
+        
+//        setCurrUser()
+        
+        var query = PFQuery(className: "Users")
+        query.whereKey("userID", containsString: user.objectID)
+        
+        if query.countObjects() == 0 {
+            var parse_user = PFUser()
+            parse_user.username = user.name
+            parse_user.password = ""
+            parse_user.email = userEmail
+            parse_user["userID"] = user.objectID
+        
+            parse_user.signUp()
+        }
+    
+        currentUserInfo.userID = user.objectID
         self.performSegueWithIdentifier("toMaster", sender: self)
         
     }

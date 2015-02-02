@@ -91,7 +91,7 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="9Fp-fn-Ty4"/>
+                    <tabBarItem key="tabBarItem" id="9Fp-fn-Ty4"/>
                     <navigationItem key="navigationItem" title="Cramr" id="tQt-TN-PWz">
                         <barButtonItem key="rightBarButtonItem" title="Add Course" systemItem="add" id="99d-gP-fIg">
                             <connections>
