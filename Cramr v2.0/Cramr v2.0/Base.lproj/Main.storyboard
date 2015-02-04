@@ -81,7 +81,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="Ah7-4n-0Wa" kind="modal" identifier="showDetail" id="jUr-3t-vfg"/>
+                                    <segue destination="mrd-yf-uef" kind="modal" identifier="showDetail" id="rH6-8S-Dxc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -126,12 +126,12 @@
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" text="" id="PFj-nZ-4aN">
-                                <rect key="frame" x="0.0" y="64" width="391" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fmk-f1-plM">
-                                <rect key="frame" x="0.0" y="108" width="391" height="635"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="415"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -154,35 +154,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIc-MB-yPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ji3-Mc-0KM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="684.79999999999995" y="806.55999999999995"/>
+            <point key="canvasLocation" x="684" y="806"/>
         </scene>
-        <!--Detail-->
-        <scene sceneID="Cn3-H9-jdl">
+        <!--Session Content View Controller-->
+        <scene sceneID="Gzm-MH-bO7">
             <objects>
-                <viewController title="Detail" id="Ah7-4n-0Wa" customClass="DetailViewController" customModule="Cramr_v2_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MMQ-IT-qOo">
+                <viewController storyboardIdentifier="sessionContent" id="NhR-eP-N76" customClass="SessionContentViewController" customModule="Cramr_v2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YWS-L3-wuo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Lei-5M-9Gs">
-                                <rect key="frame" x="20" y="276" width="280" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASI MESMO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UbZ-yT-dG8">
+                                <rect key="frame" x="120" y="224" width="96" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="Lei-5M-9Gs" id="sCT-F7-F6f"/>
+                        <outlet property="stupidLabel" destination="UbZ-yT-dG8" id="G17-Fm-14l"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-ef-yam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149.3333333333333" y="60.586666666666666"/>
+            <point key="canvasLocation" x="1565" y="68"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="nci-ZD-Cst">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="mrd-yf-uef" customClass="SessionViewController" customModule="Cramr_v2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Title" id="SSf-VD-ygr">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="jw6-5z-8Rd">
+                            <connections>
+                                <segue destination="EWl-hG-adn" kind="unwind" unwindAction="popToPrevView:" id="fQk-Nu-Rx3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K8x-uu-vN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EWl-hG-adn" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1175" y="60"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

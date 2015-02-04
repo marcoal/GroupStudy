@@ -17,22 +17,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         refreshCourseList()
+        self.tableView.reloadData()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-//    
-//    func loadFB() {
-//        if (FBSession.activeSession().isOpen){
-//            var friendsRequest : FBRequest = FBRequest.requestForMyFriends()
-//            friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
-//                var resultdict = result as NSDictionary
-//                NSLog("Result Dict: \(resultdict)")
-//                var data : NSArray = resultdict.objectForKey("data") as NSArray
-//            }
-//        }}
-//    }
+
 
     func refreshCourseList() {
         var query_courses = PFQuery(className: "EnrolledCourses")
@@ -46,7 +37,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         } else {
             self.coursesIn = []
         }
-//        self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        refreshCourseList()
+        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -76,7 +72,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("SELECT ROW")
+        self.performSegueWithIdentifier("showDetail", sender: nil)
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,8 +89,49 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                var courseName = self.coursesIn[indexPath.row] as String
+                (segue.destinationViewController as SessionViewController).detailItem = courseName
+            }
+        }
+    }
 
-            
+    
+
+//    
+//    var query = PFQuery(className: "sessions")
+//    query.whereKey("course_name", equalTo: courseName)
+//    
+//    query.getFirstObjectInBackground({ (object: AnyObject!, error: NSError!) -> Void in
+//    if error == nil {
+//    
+//    
+//    } else {
+//    NSLog("Error in opening coure detail view. Error type: %@", error)
+//    }
+//    })
+//    
+    
+    
+    
+    
+    
+    
+
+//
+//    func loadFB() {
+//        if (FBSession.activeSession().isOpen){
+//            var friendsRequest : FBRequest = FBRequest.requestForMyFriends()
+//            friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
+//                var resultdict = result as NSDictionary
+//                NSLog("Result Dict: \(resultdict)")
+//                var data : NSArray = resultdict.objectForKey("data") as NSArray
+//            }
+//        }}
+//    }
+
 
 //    func insertNewObject(name_str: String, desc_str: String, term_str: String, year_str: String)  {
 //        

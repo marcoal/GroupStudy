@@ -14,9 +14,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var courseTable: UITableView!
     
     @IBOutlet weak var classSearch: UISearchBar!
-    var courses = []
     
-
+    var courses = []
     
     func getParseData() {
         var query = PFQuery(className: "Course")
@@ -42,9 +41,6 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func setupSearch() {
-//        classSearch.placeholder = "Search for classes"
-//        var leftNavBarButton = UIBarButtonItem(customView: classSearch)
-//        self.navigationItem.rightBarButtonItem = leftNavBarButton
         classSearch.delegate = self
     }
     
@@ -94,5 +90,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             // Make the user sign in again?
         }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
