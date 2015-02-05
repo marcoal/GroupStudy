@@ -93,7 +93,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
-                (segue.destinationViewController as SessionViewController).detailItem = courseName
+                (segue.destinationViewController as SessionBrowserViewController).courseName = courseName
             }
         }
     }

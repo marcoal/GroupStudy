@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SessionViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class SessionViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var sessions: [String] = []
     var pageController: UIPageViewController?
@@ -22,8 +22,7 @@ class SessionViewController: UIViewController, UIPageViewControllerDataSource, U
     
     var detailItem: String? {
         didSet {
-            // Update the view.
-//            self.configureView()
+           
         }
     }
     
@@ -33,7 +32,7 @@ class SessionViewController: UIViewController, UIPageViewControllerDataSource, U
         }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let dataViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionContent") as SessionContentViewController
-        dataViewController.dataObject = sessions[index]
+        dataViewController.dataObject = self.sessions[index]
         return dataViewController
     }
     
@@ -104,12 +103,12 @@ class SessionViewController: UIViewController, UIPageViewControllerDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sessions = ["First", "Second"]
-        
+//        sessions = ["First", "Second"]
+        self.configureView()
         organizeChildren()
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,14 +117,7 @@ class SessionViewController: UIViewController, UIPageViewControllerDataSource, U
     }
 
     func configureView() {
-        // Update the user interface for the detail item.
-        //        if let detail: AnyObject = self.detailItem {
-        //            if let label = self.detailDescriptionLabel {
-        //                if (detail.valueForKey("course_desc")? != nil) {
-        //                    label.text = "COURSE DESCRIPTION: " + detail.valueForKey("course_desc")!.description
-        //                }
-        //            }
-        //        }
+         self.sessions = [self.detailItem!, self.detailItem! + " SECOND"]
     }
 
 }

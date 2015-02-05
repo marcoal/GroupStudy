@@ -20,6 +20,8 @@ class SessionContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        stupidLabel.text = self.dataObject
     }
     
     
