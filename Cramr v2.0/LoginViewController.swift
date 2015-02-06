@@ -11,6 +11,7 @@ import Foundation
 struct currentUserInfo {
     static var userID = ""
 }
+let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
@@ -19,17 +20,38 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     
     
-    //var loggedInUser = FBGraphUser()
+    var avplayer: AVPlayer = AVPlayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    /* ---------THIS IMPLEMENTATION USES AVPLayer (also did MPMovie Player stashed) ------------- */
+    override func viewDidAppear(animated: Bool) {
+        let filepath = NSBundle.mainBundle().pathForResource("entrance", ofType: "mp4")
+        let fileURL = NSURL.fileURLWithPath(filepath!)
+        self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
+        var height = UIScreen.mainScreen().bounds.size.height
+        var layer = AVPlayerLayer(player: self.avplayer)
+        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+        layer.frame = CGRectMake(0,0,1024, height)
+        self.view.layer.addSublayer(layer)
+        self.avplayer.play()
+        // Do any additional setup for FB
         nameLabel.text = ""
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
-        
+        self.view.bringSubviewToFront(self.fbLoginView)
     }
     
+    /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
+    func playerItemDidReachEnd(notif: NSNotification){
+        var p:  AVPlayer = notif.object as AVPlayer
+        p.seekToTime(kCMTimeZero)
+        p.play()
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toMaster" {
