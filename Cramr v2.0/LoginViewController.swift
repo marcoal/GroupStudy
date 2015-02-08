@@ -89,12 +89,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
         
         let imageData = UIImagePNGRepresentation(imageURL)
-        let imageFile = PFFile(name:"profilepic.png", data:imageData)
-        
-        var userPhoto = PFObject(className:"UserPhoto")
-        userPhoto["imageName"] = "Profile pic of \(user.objectID)"
-        userPhoto["imageFile"] = imageFile
-        //userPhoto.saveInBackground()
         
         
 //        setCurrUser()
@@ -108,6 +102,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             parse_user.password = ""
             parse_user.email = userEmail
             parse_user["userID"] = user.objectID
+            
+            let imageFile = PFFile(name:"profilepic.png", data:imageData)
+            var userPhoto = PFObject(className:"UserPhoto")
+            userPhoto["imageName"] = "Profile pic of \(user.objectID)"
+            userPhoto["imageFile"] = imageFile
             parse_user["image"] = userPhoto
         
             parse_user.signUp()

@@ -10,6 +10,13 @@ import Foundation
 
 class SessionContentViewController: UIViewController {
 
+    @IBOutlet weak var joinButton: UIButton!
+    
+    @IBOutlet weak var descriptionTitel: UILabel!
+    @IBOutlet weak var location: UILabel!
+    
+    @IBOutlet weak var descriptString: UITextView!
+    
     var dataObject: String? {
         didSet {
             
