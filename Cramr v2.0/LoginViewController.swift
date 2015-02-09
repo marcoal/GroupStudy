@@ -93,7 +93,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
 //        setCurrUser()
         
-        var query = PFQuery(className: "Users")
+        var query = PFUser.query();
         query.whereKey("userID", containsString: user.objectID)
         
         if query.countObjects() == 0 {
