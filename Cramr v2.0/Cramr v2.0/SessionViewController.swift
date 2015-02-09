@@ -117,7 +117,23 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     func configureView() {
-         self.sessions = [self.detailItem!, self.detailItem! + " SECOND"]
+        var sessionQuery = PFQuery(className: "activeSessions")
+        sessionQuery.whereKey("courseName", equalTo: self.detailItem)
+        var session = sessionQuery.getFirstObject()
+        if session == nil {
+            self.sessions = [self.detailItem!]
+            //create new session
+        } else {
+            var currentSessionArray = session["currentSessions"] as [String] //I think we will want to convert this to an object, because it will have information associated with it
+            for currentSession in currentSessionArray {
+                self.sessions.append(currentSession)
+            }
+            //self.sessions = [self.detailItem!, self.detailItem! + " SECOND"]
+        }
+        
+
+        
+        
     }
 
 }
