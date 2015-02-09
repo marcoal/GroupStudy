@@ -19,7 +19,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     
     func getParseData() {
         var query = PFQuery(className: "Course")
-        query.limit = 10
+        query.limit = 15
         
         query.findObjectsInBackgroundWithBlock {
             (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
@@ -28,10 +28,31 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    func getRegexSearchTerm(text: String) -> String {
+
+        
+        var searchText = text.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        if searchText == "" {
+            return text
+        }
+        
+        var regex = ""
+        var spacer = "(?: )?"
+        for ch in searchText {
+            regex = regex + String(ch) + spacer
+        }
+        return regex
+    }
+    
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
         var query = PFQuery(className: "Course")
-        query.limit = 20
-        query.whereKey("title", containsString: searchText)
+        query.limit = 15
+        
+        var regex = self.getRegexSearchTerm(searchText)
+        NSLog(regex)
+
+        query.whereKey("title", matchesRegex: regex, modifiers: "i")
         
         query.findObjectsInBackgroundWithBlock {
             (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
@@ -70,6 +91,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         var curr_user = currentUserInfo.userID
         var query = PFQuery(className: "EnrolledCourses")
         if curr_user != "" {
+
             query.whereKey("userID", equalTo: curr_user)
             var object_user = query.getFirstObject()
             
@@ -78,13 +100,13 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
                 if !contains(course_array, courseName) {
                     course_array += [courseName]
                     object_user["enrolled_courses"] = course_array
-                    object_user.save()
+                    object_user.saveInBackground()
                 }
             } else {
                 var new_object_user = PFObject(className: "EnrolledCourses")
                 new_object_user["userID"] = curr_user
                 new_object_user["enrolled_courses"] = [courseName]
-                new_object_user.save()
+                new_object_user.saveInBackground()
             }
             
         } else {

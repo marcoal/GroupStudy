@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/CourseListTableView.swift"
-            timestampString = "444777043.067217"
+            timestampString = "445213741.624985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
             endingLineNumber = "39"
-            landmarkName = "setCurrUser()"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "setCurrUser()"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -109,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
-            landmarkName = "loginViewFetchedUserInfo(_:user:)"
+            landmarkName = "setCurrUser()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -125,8 +125,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
-            landmarkName = "loginViewFetchedUserInfo(_:user:)"
-            landmarkType = "5">
+            landmarkName = "LoginViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/CourseListTableView.swift"
-            timestampString = "444777123.615304"
+            timestampString = "445213741.624985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
