@@ -119,17 +119,17 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     func configureView() {
         var sessionQuery = PFQuery(className: "Sessions")
         sessionQuery.whereKey("course", equalTo: self.detailItem)
-        //var sessionArray = sessionQuery.findObjects()
-        //for session in sessionArray {
-            //self.sessions.append(session as PFObject)
-        //}
-        
-        sessionQuery.findObjectsInBackgroundWithBlock {
-            (sessionArray: [AnyObject]!, error: NSError!) -> Void in
-            for session in sessionArray {
-                self.sessions.append(session as PFObject)
-            }
+        var sessionArray = sessionQuery.findObjects()
+        for session in sessionArray {
+            self.sessions.append(session as PFObject)
         }
+        
+        //sessionQuery.findObjectsInBackgroundWithBlock {
+           // (sessionArray: [AnyObject]!, error: NSError!) -> Void in
+           // for session in sessionArray {
+             //   self.sessions.append(session as PFObject)
+           // }
+       // }
     }
 
 }
