@@ -32,9 +32,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
         var height = UIScreen.mainScreen().bounds.size.height
+        var width = height*1.77
+
         var layer = AVPlayerLayer(player: self.avplayer)
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-        layer.frame = CGRectMake(0,0,1024, height)
+        layer.frame = CGRectMake(0,0,width, height)
         self.view.layer.addSublayer(layer)
         self.avplayer.play()
         // Do any additional setup for FB
