@@ -82,14 +82,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
         
-        var imageURL : UIImage!
-        let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
-        if let data = NSData(contentsOfURL: url!) {
-            imageURL = UIImage(data: data)
-        }
-        
-        let imageData = UIImagePNGRepresentation(imageURL)
-        
+//        var imageURL : UIImage!
+//        let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+//        if let data = NSData(contentsOfURL: url!) {
+//            imageURL = UIImage(data: data)
+//        }
+//        
+//        let imageData = UIImagePNGRepresentation(imageURL)
+//        
         
 //        setCurrUser()
         
@@ -103,12 +103,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             parse_user.email = userEmail
             parse_user["userID"] = user.objectID
             
-            let imageFile = PFFile(name:"profilepic.png", data:imageData)
-            var userPhoto = PFObject(className:"UserPhoto")
-            userPhoto["imageName"] = "Profile pic of \(user.objectID)"
-            userPhoto["imageFile"] = imageFile
-            parse_user["image"] = userPhoto
-        
+//            let imageFile = PFFile(name:"profilepic.png", data:imageData)
+//            var userPhoto = PFObject(className:"UserPhoto")
+//            userPhoto["imageName"] = "Profile pic of \(user.objectID)"
+//            userPhoto["imageFile"] = imageFile
+//            parse_user["image"] = userPhoto
+//        
             parse_user.signUp()
         }
     

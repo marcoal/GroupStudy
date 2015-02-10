@@ -45,6 +45,29 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.tableView.reloadData()
     }
     
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    func designLayout() {
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+
+        let logo = UIImage(named: "Cramr Logo")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        
+        //        navigationController?.n<#rgbValue: UInt#>avigationBar.barTintColor = UIColorFromRGB()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshCourseList()
@@ -52,8 +75,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CourseCell")
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
+        designLayout()
     }
 
     override func didReceiveMemoryWarning() {
