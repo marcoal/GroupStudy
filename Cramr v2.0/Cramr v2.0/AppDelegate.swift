@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         FBAppEvents.activateApp()
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
+//        self.window?.tintColor = UIColor.grayColor()
     }
     
 
