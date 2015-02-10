@@ -11,14 +11,17 @@ import Foundation
 class SessionContentViewController: UIViewController {
     
     var currentSessionID : String?
+    
+    var curr_session: PFObject!
 
     @IBAction func joinButton(sender: AnyObject) {
         var findSession = PFQuery(className: "Sessions")
-        var session = findSession.getObjectWithId(currentSessionID)
-        var activeUsers = session["active_users"] as [String]
+        curr_session = findSession.getObjectWithId(currentSessionID)
+        var activeUsers = curr_session["active_users"] as [String]
         activeUsers.append(currentUserInfo.userID)
-        session["active_users"] = activeUsers
-        session.saveInBackground()
+        curr_session["active_users"] = activeUsers
+        curr_session.saveInBackground()
+        self.performSegueWithIdentifier("joinLocked", sender: self)
     }
     
     
@@ -46,7 +49,11 @@ class SessionContentViewController: UIViewController {
         currentSessionID = self.dataObject?.objectId
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "joinLocked" {
+            (segue.destinationViewController as SessionLockedViewController).session = self.curr_session
+        }
+    }
     
     
 }

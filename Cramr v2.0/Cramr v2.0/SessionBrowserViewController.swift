@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
+
+
 class SessionBrowserViewController : UIViewController {
+    
+//    var delegate:SessionBrowserViewControllerDelegate! = nil
+    
+    var new_session: PFObject!
     
     var courseName: String? {
         didSet {
@@ -22,18 +28,19 @@ class SessionBrowserViewController : UIViewController {
     
         var curr_user = currentUserInfo.userID
         if curr_user != "" {
-            var session = PFObject(className: "Sessions")
-            session["active_users"] = [curr_user]
-            session["description"] = description
-            session["location"] = location
-            session["course"] = self.courseName
-            session["start_time"] = NSDate()
-            session.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+            new_session = PFObject(className: "Sessions")
+            new_session["active_users"] = [curr_user]
+            new_session["description"] = description
+            new_session["location"] = location
+            new_session["course"] = self.courseName
+            new_session["start_time"] = NSDate()
+            new_session.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                 if (success) {
                     // YAAY
                 }
             }
         }
+
     }
     
     @IBAction func newSesh(sender: AnyObject) {
@@ -60,6 +67,7 @@ class SessionBrowserViewController : UIViewController {
             
             if locText.text != "" && desText.text != "" {
                 self.addSession(locText.text, description: desText.text)
+                self.performSegueWithIdentifier("lockSessionView", sender: self)
             }
         }
         
@@ -67,15 +75,34 @@ class SessionBrowserViewController : UIViewController {
         alert.addAction(createAction)
         alert.addAction(cancelAction)
         
-        
-        
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
     
+    
+    var sessions: [PFObject] = []
+    
+    func getSessions() {
+        var sessionQuery = PFQuery(className: "Sessions")
+        self.sessions = [PFObject]()
+        sessionQuery.whereKey("course", equalTo: self.courseName)
+        var sessionArray = sessionQuery.findObjects()
+        for session in sessionArray {
+            self.sessions.append(session as PFObject)
+        }
+    }
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sessionSwiper" {
-            (segue.destinationViewController as SessionViewController).detailItem = self.courseName
+            self.getSessions()
+            var destController = segue.destinationViewController as SessionViewController
+//            destController.delegate = self
+            destController.detailItem = self.courseName
+            destController.sessions = self.sessions
+        } else if segue.identifier == "lockSessionView" {
+            (segue.destinationViewController as SessionLockedViewController).session = self.new_session
         }
     }
 

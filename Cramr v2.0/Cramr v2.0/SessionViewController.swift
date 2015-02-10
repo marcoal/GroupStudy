@@ -14,17 +14,26 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     var pageController: UIPageViewController?
     
 
+
+
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
     }
 
-    
+
     var detailItem: String? {
         didSet {
            
         }
     }
+
+
+    func sendSessionData(controller: SessionBrowserViewController, arr: [PFObject]) {
+        self.sessions = arr
+    }
+    
     
     func viewControllerAtIndex(index: Int) -> SessionContentViewController? {
         if (sessions.count == 0 || index >= sessions.count) {
@@ -103,9 +112,10 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        sessions = ["First", "Second"]
-        self.configureView()
-        organizeChildren()
+        if sessions.count != 0 {
+            self.organizeChildren()
+        }
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -114,22 +124,6 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func configureView() {
-        var sessionQuery = PFQuery(className: "Sessions")
-        sessionQuery.whereKey("course", equalTo: self.detailItem)
-        var sessionArray = sessionQuery.findObjects()
-        for session in sessionArray {
-            self.sessions.append(session as PFObject)
-        }
-        
-        //sessionQuery.findObjectsInBackgroundWithBlock {
-           // (sessionArray: [AnyObject]!, error: NSError!) -> Void in
-           // for session in sessionArray {
-             //   self.sessions.append(session as PFObject)
-           // }
-       // }
     }
 
 }
