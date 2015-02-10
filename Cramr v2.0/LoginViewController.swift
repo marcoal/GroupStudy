@@ -84,34 +84,33 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
         
-//        var imageURL : UIImage!
-//        let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
-//        if let data = NSData(contentsOfURL: url!) {
-//            imageURL = UIImage(data: data)
-//        }
-//        
-//        let imageData = UIImagePNGRepresentation(imageURL)
-//        
-        
-//        setCurrUser()
+        //        setCurrUser()
         
         var query = PFUser.query();
         query.whereKey("userID", containsString: user.objectID)
-        
-        if query.countObjects() == 0 {
-            var parse_user = PFUser()
-            parse_user.username = user.name
-            parse_user.password = ""
-            parse_user.email = userEmail
-            parse_user["userID"] = user.objectID
-            
-//            let imageFile = PFFile(name:"profilepic.png", data:imageData)
-//            var userPhoto = PFObject(className:"UserPhoto")
-//            userPhoto["imageName"] = "Profile pic of \(user.objectID)"
-//            userPhoto["imageFile"] = imageFile
-//            parse_user["image"] = userPhoto
-//        
-            parse_user.signUp()
+        query.findObjectsInBackgroundWithBlock {
+            (users: [AnyObject]!, error: NSError!) -> Void in
+            if users.count == 0 {
+                var parse_user = PFUser()
+                parse_user.username = user.name
+                parse_user.password = ""
+                parse_user.email = userEmail
+                parse_user["userID"] = user.objectID
+                
+                var imageData : UIImage!
+                let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+                if let data = NSData(contentsOfURL: url!) {
+                    imageData = UIImage(data: data)
+                }
+                let image = UIImagePNGRepresentation(imageData)
+                let imageFile = PFFile(name:"profilepic.png", data:image)
+                var userPhoto = PFObject(className:"UserPhoto")
+                userPhoto["imageName"] = "Profile pic of \(user.objectID)"
+                userPhoto["imageFile"] = imageFile
+                parse_user["image"] = userPhoto
+                
+                parse_user.signUp()
+            }
         }
     
         currentUserInfo.userID = user.objectID
