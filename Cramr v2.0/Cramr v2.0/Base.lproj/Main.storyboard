@@ -252,13 +252,15 @@
                                 <state key="normal" title="Join now!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="joinButton:" destination="NhR-eP-N76" eventType="touchUpInside" id="P78-Fm-b7e"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="descript" destination="1AT-3q-nZF" id="wIs-4q-lEL"/>
-                        <outlet property="joinButton" destination="80m-vO-tIQ" id="wLq-k3-gTB"/>
                         <outlet property="locationLabel" destination="YeO-KK-7hY" id="hgD-eH-Zfx"/>
                         <outlet property="stupidLabel" destination="UbZ-yT-dG8" id="G17-Fm-14l"/>
                     </connections>

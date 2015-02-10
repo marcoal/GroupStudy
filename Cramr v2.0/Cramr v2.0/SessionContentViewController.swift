@@ -9,8 +9,18 @@
 import Foundation
 
 class SessionContentViewController: UIViewController {
+    
+    var currentSessionID : String?
 
-    @IBOutlet weak var joinButton: UIButton!
+    @IBAction func joinButton(sender: AnyObject) {
+        var findSession = PFQuery(className: "Sessions")
+        var session = findSession.getObjectWithId(currentSessionID)
+        var activeUsers = session["active_users"] as [String]
+        activeUsers.append(currentUserInfo.userID)
+        session["active_users"] = activeUsers
+        session.saveInBackground()
+    }
+    
     
     @IBOutlet weak var descript: UILabel!
     
@@ -30,6 +40,10 @@ class SessionContentViewController: UIViewController {
         stupidLabel.text = (self.dataObject?.objectForKey("course") as String)
         descript.text = (self.dataObject?.objectForKey("description") as String)
         locationLabel.text = (self.dataObject?.objectForKey("location") as String)
+        
+        descript.numberOfLines = 0
+        descript.sizeToFit()
+        currentSessionID = self.dataObject?.objectId
     }
     
     
