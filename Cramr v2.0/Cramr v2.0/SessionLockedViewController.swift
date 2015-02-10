@@ -17,6 +17,8 @@ class SessionLockedViewController: UIViewController {
     
     @IBOutlet weak var locationLabel: UILabel!
     
+    @IBOutlet weak var currentUsers: UILabel!
+    
     var session: PFObject? {
         didSet {
             
@@ -49,6 +51,23 @@ class SessionLockedViewController: UIViewController {
             desciptLabel.text = (self.session?.objectForKey("description") as String)
             locationLabel.text = (self.session?.objectForKey("location") as String)
             
+            currentUsers.text = ""
+            var currentUserList = (self.session?.objectForKey("active_users") as [String])
+            for userId in currentUserList {
+                var query = PFUser.query();
+                query.whereKey("userID", equalTo: userId)
+                var user = query.getFirstObject()
+                //var user = query.getObjectWithId(userId) as PFObject
+                var userName = user.objectForKey("username") as String
+                if currentUsers.text == "" {
+                    currentUsers.text = userName
+                } else {
+                    currentUsers.text = currentUsers.text! + "\n" + userName
+                }
+            }
+            
+            currentUsers.numberOfLines = 0
+            currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
             desciptLabel.sizeToFit()
         }

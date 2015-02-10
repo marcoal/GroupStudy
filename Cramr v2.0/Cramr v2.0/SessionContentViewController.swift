@@ -30,6 +30,8 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var locationLabel: UILabel!
     
+    @IBOutlet weak var currentUsersLabel: UILabel!
+    
     var dataObject: PFObject? {
         didSet {
             
@@ -47,6 +49,23 @@ class SessionContentViewController: UIViewController {
         descript.text = (self.dataObject?.objectForKey("description") as String)
         locationLabel.text = (self.dataObject?.objectForKey("location") as String)
         
+        currentUsersLabel.text = ""
+        var currentUsersList = (self.dataObject?.objectForKey("active_users") as [String])
+        for userId in currentUsersList {
+            var query = PFUser.query();
+            query.whereKey("userID", equalTo: userId)
+            var user = query.getFirstObject()
+            //var user = query.getObjectWithId(userId) as PFObject
+            var userName = user.objectForKey("username") as String
+            if currentUsersLabel.text == "" {
+                currentUsersLabel.text = userName
+            } else {
+                currentUsersLabel.text = currentUsersLabel.text! + "\n" + userName
+            }
+        }
+        
+        currentUsersLabel.numberOfLines = 0
+        currentUsersLabel.sizeToFit()
         descript.numberOfLines = 0
         descript.sizeToFit()
         currentSessionID = self.dataObject?.objectId
