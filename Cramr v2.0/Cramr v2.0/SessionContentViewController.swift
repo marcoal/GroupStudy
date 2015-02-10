@@ -12,12 +12,11 @@ class SessionContentViewController: UIViewController {
 
     @IBOutlet weak var joinButton: UIButton!
     
-    @IBOutlet weak var descriptionTitel: UILabel!
-    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var descript: UILabel!
     
-    @IBOutlet weak var descriptString: UITextView!
+    @IBOutlet weak var locationLabel: UILabel!
     
-    var dataObject: String? {
+    var dataObject: PFObject? {
         didSet {
             
         }
@@ -28,7 +27,9 @@ class SessionContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        stupidLabel.text = self.dataObject
+        stupidLabel.text = (self.dataObject?.objectForKey("course") as String)
+        descript.text = (self.dataObject?.objectForKey("description") as String)
+        locationLabel.text = (self.dataObject?.objectForKey("location") as String)
     }
     
     

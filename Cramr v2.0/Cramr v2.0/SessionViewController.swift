@@ -10,7 +10,7 @@ import UIKit
 
 class SessionViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    var sessions: [String] = []
+    var sessions: [PFObject] = []
     var pageController: UIPageViewController?
     
 
@@ -38,7 +38,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     
     
     func indexOfViewController(viewController: SessionContentViewController) -> Int {
-        if let dataObject: String = viewController.dataObject {
+        if let dataObject: PFObject = viewController.dataObject {
             return find(sessions, dataObject)!
         } else {
             return NSNotFound
@@ -117,23 +117,19 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     func configureView() {
-        var sessionQuery = PFQuery(className: "activeSessions")
-        sessionQuery.whereKey("courseName", equalTo: self.detailItem)
-        var session = sessionQuery.getFirstObject()
-        if session == nil {
-            self.sessions = [self.detailItem!]
-            //create new session
-        } else {
-            var currentSessionArray = session["currentSessions"] as [String] //I think we will want to convert this to an object, because it will have information associated with it
-            for currentSession in currentSessionArray {
-                self.sessions.append(currentSession)
+        var sessionQuery = PFQuery(className: "Sessions")
+        sessionQuery.whereKey("course", equalTo: self.detailItem)
+        //var sessionArray = sessionQuery.findObjects()
+        //for session in sessionArray {
+            //self.sessions.append(session as PFObject)
+        //}
+        
+        sessionQuery.findObjectsInBackgroundWithBlock {
+            (sessionArray: [AnyObject]!, error: NSError!) -> Void in
+            for session in sessionArray {
+                self.sessions.append(session as PFObject)
             }
-            //self.sessions = [self.detailItem!, self.detailItem! + " SECOND"]
         }
-        
-
-        
-        
     }
 
 }
