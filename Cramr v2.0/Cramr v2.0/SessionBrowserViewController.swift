@@ -19,11 +19,21 @@ class SessionBrowserViewController : UIViewController {
     }
     
     func addSession(location: String, description: String) {
-//        var curr_user = currentUserInfo.userID
-//        var query = PFQuery(className: "Sessions")
-//        if curr_user != nil {
-//            query.whereKey("userID"
-//        }
+    
+        var curr_user = currentUserInfo.userID
+        if curr_user != "" {
+            var session = PFObject(className: "Sessions")
+            session["active_users"] = [curr_user]
+            session["description"] = description
+            session["location"] = location
+            session["course"] = self.courseName
+            session["start_time"] = NSDate()
+            session.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+                if (success) {
+                    // YAAY
+                }
+            }
+        }
     }
     
     @IBAction func newSesh(sender: AnyObject) {
