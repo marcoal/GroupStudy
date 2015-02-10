@@ -59,6 +59,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
         
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.view.backgroundColor = .lightGrayColor()
+        
     }
     
     override func viewDidLoad() {
@@ -83,6 +87,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("CourseCell") as UITableViewCell
         cell.textLabel?.text = self.coursesIn[indexPath.row] as String
+        cell.contentView.backgroundColor = .grayColor()
+        cell.textLabel?.textColor = .whiteColor()
         return cell
     }
     

@@ -44,6 +44,7 @@ class SessionContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .grayColor()
         
         stupidLabel.text = (self.dataObject?.objectForKey("course") as String)
         descript.text = (self.dataObject?.objectForKey("description") as String)

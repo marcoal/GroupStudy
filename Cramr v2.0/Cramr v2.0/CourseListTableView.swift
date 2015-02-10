@@ -71,6 +71,10 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         self.setupSearch()
         self.courseTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.getParseData()
+        
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        view.backgroundColor = .darkGrayColor()
     }
     
     // TABLE VIEW FUNCTIONS
@@ -82,6 +86,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
         cell.textLabel?.text = self.courses[indexPath.row]["title"] as? String
+        cell.contentView.backgroundColor = .grayColor()
+        cell.textLabel?.textColor = .whiteColor()
         return cell
     }
     

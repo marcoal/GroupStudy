@@ -45,6 +45,8 @@ class SessionLockedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .darkGrayColor()
+        
         navigationItem.hidesBackButton = true
         if self.session != nil {
             className.text = (self.session?.objectForKey("course") as String)
