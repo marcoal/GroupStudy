@@ -21,7 +21,8 @@ class SessionContentViewController: UIViewController {
         activeUsers.append(currentUserInfo.userID)
         curr_session["active_users"] = activeUsers
         curr_session.saveInBackground()
-        self.performSegueWithIdentifier("joinLocked", sender: self)
+        currentUserInfo.sessionID = currentSessionID!
+        self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
     
@@ -34,6 +35,8 @@ class SessionContentViewController: UIViewController {
             
         }
     }
+    
+
     
     @IBOutlet weak var stupidLabel: UILabel!
     
@@ -50,7 +53,7 @@ class SessionContentViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "joinLocked" {
+        if segue.identifier == "pushToLockedFromJoin" {
             (segue.destinationViewController as SessionLockedViewController).session = self.curr_session
         }
     }

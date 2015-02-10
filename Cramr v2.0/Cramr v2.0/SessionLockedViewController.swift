@@ -13,6 +13,10 @@ class SessionLockedViewController: UIViewController {
     
     @IBOutlet weak var className: UILabel!
     
+    @IBOutlet weak var desciptLabel: UILabel!
+    
+    @IBOutlet weak var locationLabel: UILabel!
+    
     var session: PFObject? {
         didSet {
             
@@ -38,7 +42,16 @@ class SessionLockedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        className.text = (self.session?.objectForKey("course") as String)
+        navigationItem.hidesBackButton = true
+        if self.session != nil {
+            className.text = (self.session?.objectForKey("course") as String)
+            desciptLabel.text = (self.session?.objectForKey("description") as String)
+            locationLabel.text = (self.session?.objectForKey("location") as String)
+            
+            desciptLabel.numberOfLines = 0
+            desciptLabel.sizeToFit()
+        }
+
     }
     
 }

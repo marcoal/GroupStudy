@@ -14,7 +14,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     var pageController: UIPageViewController?
     
 
-
+    @IBAction func popToSessionView(segue: UIStoryboardSegue) {
+        performSegueWithIdentifier("popToBrowser", sender: self)
+    }
 
 
     required init(coder aDecoder: NSCoder) {
@@ -112,7 +114,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if sessions.count != 0 {
+        if sessions.count != 0 && currentUserInfo.sessionID == "" {
             self.organizeChildren()
         }
         

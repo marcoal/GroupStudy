@@ -24,6 +24,10 @@ class SessionBrowserViewController : UIViewController {
         }
     }
     
+    @IBAction func popToLockedClass(segue:UIStoryboardSegue) {
+        self.performSegueWithIdentifier("lockSessionView", sender: self)
+    }
+    
     func addSession(location: String, description: String) {
     
         var curr_user = currentUserInfo.userID
@@ -36,7 +40,7 @@ class SessionBrowserViewController : UIViewController {
             new_session["start_time"] = NSDate()
             new_session.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                 if (success) {
-                    // YAAY
+
                 }
             }
         }

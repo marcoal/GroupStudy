@@ -81,7 +81,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="5MX-FO-oJb" kind="modal" identifier="showDetail" id="64M-o5-Q3C"/>
+                                    <segue destination="5MX-FO-oJb" kind="push" identifier="showDetail" id="64M-o5-Q3C"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -177,13 +177,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" id="zlX-4b-KnN">
-                                <rect key="frame" x="0.0" y="63" width="320" height="420"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
-                                <connections>
-                                    <segue destination="mrd-yf-uef" kind="embed" identifier="sessionSwiper" id="vg5-zj-sAr"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uQv-tu-rY4">
                                 <rect key="frame" x="85" y="518" width="151" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -194,11 +187,19 @@
                                     <action selector="newSesh:" destination="5MX-FO-oJb" eventType="touchUpInside" id="ayD-m1-YLn"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" id="zlX-4b-KnN">
+                                <rect key="frame" x="0.0" y="63" width="320" height="420"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                                <connections>
+                                    <segue destination="mrd-yf-uef" kind="embed" identifier="sessionSwiper" id="vg5-zj-sAr"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="SVg-aE-6ev"/>
                     <connections>
-                        <segue destination="ixg-FD-sK0" kind="modal" identifier="lockSessionView" id="HFG-mq-ZZL"/>
+                        <segue destination="ixg-FD-sK0" kind="push" identifier="lockSessionView" id="HFG-mq-ZZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdn-xL-ynS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,8 +215,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASI MESMO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UbZ-yT-dG8">
-                                <rect key="frame" x="107" y="20" width="106" height="76"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASI MESMO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UbZ-yT-dG8">
+                                <rect key="frame" x="16" y="20" width="288" height="76"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -250,14 +251,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="80m-vO-tIQ">
-                                <rect key="frame" x="98" y="219" width="115" height="75"/>
+                                <rect key="frame" x="98" y="281" width="115" height="75"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Join now!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="joinButton:" destination="NhR-eP-N76" eventType="touchUpInside" id="P78-Fm-b7e"/>
-                                    <segue destination="ixg-FD-sK0" kind="modal" identifier="joinLocked" id="DOw-Q8-nY1"/>
+                                    <action selector="joinButton:" destination="NhR-eP-N76" eventType="touchUpInside" id="7Z6-Af-VK1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -267,11 +267,12 @@
                         <outlet property="descript" destination="1AT-3q-nZF" id="wIs-4q-lEL"/>
                         <outlet property="locationLabel" destination="YeO-KK-7hY" id="hgD-eH-Zfx"/>
                         <outlet property="stupidLabel" destination="UbZ-yT-dG8" id="G17-Fm-14l"/>
+                        <segue destination="ixg-FD-sK0" kind="push" identifier="pushToLockedFromJoin" id="zql-Sy-5Bc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0a-ef-yam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="60"/>
+            <point key="canvasLocation" x="1979" y="42"/>
         </scene>
         <!--Session Locked View Controller-->
         <scene sceneID="zwl-B6-gHS">
@@ -281,35 +282,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zfo-ec-Bqv">
-                                <rect key="frame" x="139" y="226" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4mI-4D-88E">
-                                <rect key="frame" x="101" y="391" width="134" height="30"/>
+                                <rect key="frame" x="87" y="434" width="126" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="LEAVE THIS BITCH">
+                                <state key="normal" title="Leave this session">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="leaveSession:" destination="ixg-FD-sK0" eventType="touchUpInside" id="o0c-3t-QDV"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are currently in a study session for:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L2J-Vd-UYX">
+                                <rect key="frame" x="10" y="74" width="301" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zfo-ec-Bqv">
+                                <rect key="frame" x="16" y="103" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UJH-dq-8Aw">
+                                <rect key="frame" x="16" y="143" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="09y-Tn-jir">
+                                <rect key="frame" x="16" y="235" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3AU-N8-ayh">
+                                <rect key="frame" x="127" y="235" width="67" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desciption" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qj8-Qa-Hik">
+                                <rect key="frame" x="121" y="143" width="183" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aSr-6J-oCN"/>
                     <connections>
                         <outlet property="className" destination="Zfo-ec-Bqv" id="FZB-2B-Uk5"/>
-                        <segue destination="pGg-6v-bdr" kind="modal" identifier="popToCourseView" id="jiO-gg-T5e"/>
+                        <outlet property="desciptLabel" destination="Qj8-Qa-Hik" id="Zcm-h3-VWb"/>
+                        <outlet property="locationLabel" destination="3AU-N8-ayh" id="tYX-ci-73X"/>
+                        <segue destination="pGg-6v-bdr" kind="push" identifier="popToCourseView" id="jiO-gg-T5e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeA-uA-pcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1206" y="806"/>
+            <point key="canvasLocation" x="1656" y="690"/>
         </scene>
         <!--Session View Controller-->
         <scene sceneID="nci-ZD-Cst">
@@ -319,7 +357,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8x-uu-vN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1563" y="60"/>
+            <point key="canvasLocation" x="1564" y="60"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -329,6 +367,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="jiO-gg-T5e"/>
-        <segue reference="HFG-mq-ZZL"/>
+        <segue reference="zql-Sy-5Bc"/>
     </inferredMetricsTieBreakers>
 </document>

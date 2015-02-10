@@ -10,6 +10,7 @@ import Foundation
 
 struct currentUserInfo {
     static var userID = ""
+    static var sessionID = ""
 }
 let notificationKey = "com.cramr.notificationKey"
 

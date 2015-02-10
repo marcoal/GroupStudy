@@ -15,6 +15,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var coursesIn: [String] = []
     
+    
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         refreshCourseList()
         self.tableView.reloadData()
@@ -43,6 +44,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidAppear(animated)
         refreshCourseList()
         self.tableView.reloadData()
+        designLayout()
     }
     
 
@@ -56,8 +58,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        
-        //        navigationController?.n<#rgbValue: UInt#>avigationBar.barTintColor = UIColorFromRGB()
         
     }
     
