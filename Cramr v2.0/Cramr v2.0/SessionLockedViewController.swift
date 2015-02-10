@@ -25,6 +25,7 @@ class SessionLockedViewController: UIViewController {
     
     @IBAction func leaveSession(sender: AnyObject) {
         var query = PFQuery(className: "Sessions")
+        self.session = query.getObjectWithId(self.session?.objectId)
         var users = session?.objectForKey("active_users") as [String]
         users.removeAtIndex(find(users, currentUserInfo.userID)!)
         session?["active_users"] = users
