@@ -200,19 +200,19 @@
 			children = (
 				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */,
-				7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */,
 				7B33AFD31A772A570043841E /* SessionViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD51A772A570043841E /* Main.storyboard */,
+				7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */,
 				7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */,
+				7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */,
 				7B9B54AE1A7B066500064762 /* CourseListTableView.swift */,
 				7B33AFD81A772A570043841E /* Images.xcassets */,
 				7B33AFDA1A772A570043841E /* LaunchScreen.xib */,
 				7B33AFCE1A772A570043841E /* Cramr_v2_0.xcdatamodeld */,
 				7B33AFCA1A772A570043841E /* Supporting Files */,
 				62BC8C801A7AD83000864C72 /* Cramr v2.0-Bridging-Header.h */,
-				7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */,
 			);
 			path = "Cramr v2.0";
 			sourceTree = "<group>";

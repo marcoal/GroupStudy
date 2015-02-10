@@ -28,9 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
         
         PFFacebookUtils.initializeFacebook()
-        
         FBLoginView.self
-        
         return true
     }
     
@@ -41,10 +39,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return wasHandled
     }
     
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     func applicationDidBecomeActive(application: UIApplication) {
         FBAppEvents.activateApp()
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
-//        self.window?.tintColor = UIColor.grayColor()
+        self.window?.tintColor = UIColorFromRGB(UInt(9616127))
     }
     
 
