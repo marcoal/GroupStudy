@@ -36,6 +36,7 @@
 		7B33AFD91A772A570043841E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFD81A772A570043841E /* Images.xcassets */; };
 		7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFDA1A772A570043841E /* LaunchScreen.xib */; };
 		7B33AFE81A772A570043841E /* Cramr_v2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */; };
+		7B9642B01A969EA800331CA7 /* StringManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642AF1A969EA800331CA7 /* StringManipulator.swift */; };
 		7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B54AE1A7B066500064762 /* CourseListTableView.swift */; };
 		7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */; };
 		7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */; };
@@ -92,6 +93,7 @@
 		7B33AFE11A772A570043841E /* Cramr v2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cramr v2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B33AFE61A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cramr_v2_0Tests.swift; sourceTree = "<group>"; };
+		7B9642AF1A969EA800331CA7 /* StringManipulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringManipulator.swift; sourceTree = "<group>"; };
 		7B9B54AE1A7B066500064762 /* CourseListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTableView.swift; sourceTree = "<group>"; };
 		7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLockedViewController.swift; sourceTree = "<group>"; };
 		7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionBrowserViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
+				7B9642AF1A969EA800331CA7 /* StringManipulator.swift */,
 				FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */,
 				7B33AFD31A772A570043841E /* SessionViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
@@ -352,6 +355,7 @@
 				7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
 				7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */,
+				7B9642B01A969EA800331CA7 /* StringManipulator.swift in Sources */,
 				7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */,
 				7B33AFD41A772A570043841E /* SessionViewController.swift in Sources */,
 			);

@@ -38,17 +38,10 @@ class SessionContentViewController: UIViewController {
         }
     }
     
-
-    
-    @IBOutlet weak var stupidLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .grayColor()
-        
-        stupidLabel.text = (self.dataObject?.objectForKey("course") as String)
-        descript.text = (self.dataObject?.objectForKey("description") as String)
-        locationLabel.text = (self.dataObject?.objectForKey("location") as String)
+    func setLabels() {
+        descript.text = "We're working on: " + (self.dataObject?.objectForKey("description") as String)
+        locationLabel.text = "We're working at: " + (self.dataObject?.objectForKey("location") as String)
+        locationLabel.sizeToFit()
         
         currentUsersLabel.text = ""
         var currentUsersList = (self.dataObject?.objectForKey("active_users") as [String])
@@ -69,6 +62,14 @@ class SessionContentViewController: UIViewController {
         currentUsersLabel.sizeToFit()
         descript.numberOfLines = 0
         descript.sizeToFit()
+    }
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .grayColor()
+        self.setLabels()
+
         currentSessionID = self.dataObject?.objectId
     }
     

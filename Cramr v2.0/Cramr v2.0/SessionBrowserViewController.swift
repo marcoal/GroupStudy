@@ -99,6 +99,7 @@ class SessionBrowserViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGrayColor()
+        self.title = getCourseID(self.courseName!)
     }
     
     
