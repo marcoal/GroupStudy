@@ -11,6 +11,7 @@
 		625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */; };
 		625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */; };
 		625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625806871A7DA2A7002AAD26 /* LoginViewController.swift */; };
+		62B246941A97F385006D23D8 /* CustomCourseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */; };
 		62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C5D1A7AD64800864C72 /* Accounts.framework */; };
 		62BC8C601A7AD65000864C72 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C5F1A7AD65000864C72 /* AdSupport.framework */; };
 		62BC8C621A7AD65500864C72 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C611A7AD65500864C72 /* Social.framework */; };
@@ -64,6 +65,7 @@
 		625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		625806871A7DA2A7002AAD26 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCourseTableCell.swift; sourceTree = "<group>"; };
 		62BC8C5D1A7AD64800864C72 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		62BC8C5F1A7AD65000864C72 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		62BC8C611A7AD65500864C72 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -209,6 +211,7 @@
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD51A772A570043841E /* Main.storyboard */,
+				62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */,
 				7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */,
 				7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */,
 				7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */,
@@ -357,6 +360,7 @@
 				7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */,
 				7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */,
 				7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */,
+				62B246941A97F385006D23D8 /* CustomCourseTableCell.swift in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
 				7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */,
 				7B9642B01A969EA800331CA7 /* Util.swift in Sources */,

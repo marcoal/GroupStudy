@@ -69,7 +69,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
         refreshCourseList()
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CourseCell")
+        self.tableView.registerClass(CustomCourseTableCell.self, forCellReuseIdentifier: "CourseCell")
         
         // Do any additional setup after loading the view, typically from a nib.
         designLayout()
@@ -85,11 +85,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("CourseCell") as UITableViewCell
-        cell.textLabel?.text = self.coursesIn[indexPath.row] as String
+        
+        var cell: CustomCourseTableCell = self.tableView.dequeueReusableCellWithIdentifier("CustomCourseCell") as CustomCourseTableCell
+        
+        var fullCourseName = self.coursesIn[indexPath.row] as String
+        cell.courseNameLabel?.text = getCourseID(fullCourseName)
+        cell.numPeopleLabel?.text = "45"
+        cell.numSessionsLabel?.text = "3"
+        //cell.textLabel?.text = self.coursesIn[indexPath.row] as String
         cell.contentView.backgroundColor = .grayColor()
-        cell.textLabel?.textColor = .whiteColor()
+        //cell.textLabel?.textColor = .whiteColor()
         return cell
+
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
