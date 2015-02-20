@@ -28,7 +28,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func refreshCourseList() {
         var query_courses = PFQuery(className: "EnrolledCourses")
-        query_courses.whereKey("userID", equalTo: currentUserInfo.userID)
+        query_courses.whereKey("userID", equalTo: localData.getUserID())
         var courses = query_courses.getFirstObject()
         
         if courses != nil {
@@ -100,7 +100,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if editingStyle == .Delete {
             var course_name = self.coursesIn[indexPath.row] as String
             var query_courses = PFQuery(className: "EnrolledCourses")
-            query_courses.whereKey("userID", equalTo: currentUserInfo.userID)
+            query_courses.whereKey("userID", equalTo: localData.getUserID())
             var courses = query_courses.getFirstObject()
             courses["enrolled_courses"].removeObject(course_name)
             courses.save()

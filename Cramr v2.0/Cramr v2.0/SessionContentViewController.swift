@@ -18,10 +18,12 @@ class SessionContentViewController: UIViewController {
         var findSession = PFQuery(className: "Sessions")
         curr_session = findSession.getObjectWithId(currentSessionID)
         var activeUsers = curr_session["active_users"] as [String]
-        activeUsers.append(currentUserInfo.userID)
-        curr_session["active_users"] = activeUsers
-        curr_session.saveInBackground()
-        currentUserInfo.sessionID = currentSessionID!
+        if find(activeUsers, localData.getUserID()) == nil {
+            activeUsers.append(localData.getUserID())
+            curr_session["active_users"] = activeUsers
+            curr_session.saveInBackground()
+        }
+        localData.setSession(currentSessionID!)
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
@@ -38,17 +40,10 @@ class SessionContentViewController: UIViewController {
         }
     }
     
-
-    
-    @IBOutlet weak var stupidLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .grayColor()
-        
-        stupidLabel.text = (self.dataObject?.objectForKey("course") as String)
-        descript.text = (self.dataObject?.objectForKey("description") as String)
-        locationLabel.text = (self.dataObject?.objectForKey("location") as String)
+    func setLabels() {
+        descript.text = "We're working on: " + (self.dataObject?.objectForKey("description") as String)
+        locationLabel.text = "We're working at: " + (self.dataObject?.objectForKey("location") as String)
+        locationLabel.sizeToFit()
         
         currentUsersLabel.text = ""
         var currentUsersList = (self.dataObject?.objectForKey("active_users") as [String])
@@ -69,6 +64,14 @@ class SessionContentViewController: UIViewController {
         currentUsersLabel.sizeToFit()
         descript.numberOfLines = 0
         descript.sizeToFit()
+    }
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .grayColor()
+        self.setLabels()
+
         currentSessionID = self.dataObject?.objectId
     }
     

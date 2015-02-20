@@ -36,7 +36,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         var query = PFQuery(className: "Sessions")
         self.session = query.getObjectWithId(self.session?.objectId)
         var users = session?.objectForKey("active_users") as [String]
-        users.removeAtIndex(find(users, currentUserInfo.userID)!)
+        users.removeAtIndex(find(users, localData.getUserID())!)
         session?["active_users"] = users
         session?.saveInBackground()
         self.checkIfSessionIsEmpty()
@@ -115,9 +115,13 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         navigationItem.hidesBackButton = true
         if self.session != nil {
-            className.text = (self.session?.objectForKey("course") as String)
-            desciptLabel.text = (self.session?.objectForKey("description") as String)
-            locationLabel.text = (self.session?.objectForKey("location") as String)
+            var fullCourseName = (self.session?.objectForKey("course") as String)
+            className.text = getCourseID(fullCourseName)
+            desciptLabel.text = "We're working on: " + (self.session?.objectForKey("description") as String)
+            locationLabel.text = "We're working at: " + (self.session?.objectForKey("location") as String)
+            
+            desciptLabel.sizeToFit()
+            locationLabel.sizeToFit()
             
             currentUsers.text = ""
             var currentUserList = (self.session?.objectForKey("active_users") as [String])

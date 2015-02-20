@@ -94,7 +94,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var courseName = self.courses[indexPath.row]["title"] as String
       
-        var curr_user = currentUserInfo.userID
+        var curr_user = localData.getUserID()
         var query = PFQuery(className: "EnrolledCourses")
         if curr_user != "" {
 

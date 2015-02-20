@@ -118,7 +118,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
 //        query.whereKey("course", equalTo: self.detailItem)
 //        self.sessions = query.findObjects() as [PFObject]
 //        
-        if sessions.count != 0 && currentUserInfo.sessionID == "" {
+        if sessions.count != 0 {
             self.organizeChildren()
         }
         

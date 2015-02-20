@@ -8,10 +8,8 @@
 
 import Foundation
 
-struct currentUserInfo {
-    static var userID = ""
-    static var sessionID = ""
-}
+var localData = LocalDatastore()
+
 let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
@@ -66,7 +64,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
-                currentUserInfo.userID = resultdict["id"] as String
+                localData.setUser(resultdict["id"] as String)
             }
         }
     }
@@ -115,7 +113,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             }
         }
     
-        currentUserInfo.userID = user.objectID
+        localData.setUser(user.objectID)
         self.performSegueWithIdentifier("toMaster", sender: self)
         
     }
