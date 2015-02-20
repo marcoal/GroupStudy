@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
-class SessionLockedViewController: UIViewController {
+class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
+    
+    var friendPickerController: FBFriendPickerViewController!
+    
+    
+    @IBOutlet weak var selectedFriendsView: UITextView!
     
     @IBOutlet weak var className: UILabel!
     
@@ -25,6 +30,8 @@ class SessionLockedViewController: UIViewController {
         }
     }
     
+    
+    
     @IBAction func leaveSession(sender: AnyObject) {
         var query = PFQuery(className: "Sessions")
         self.session = query.getObjectWithId(self.session?.objectId)
@@ -35,6 +42,65 @@ class SessionLockedViewController: UIViewController {
         self.checkIfSessionIsEmpty()
         self.performSegueWithIdentifier("popToCourseView", sender: self)
     }
+    
+    @IBAction func inviteFriends(sender: AnyObject) {
+        if(!FBSession.activeSession().isOpen){
+            let permission = ["public_profile", "user_friends"]
+            FBSession.openActiveSessionWithReadPermissions(
+                permission,
+                allowLoginUI: true,
+                completionHandler: { (session:FBSession!, state:FBSessionState, error:NSError!) in
+                    
+                    if(error == nil){
+                        var alertView = UIAlertController(title: "Error Fetching Friends", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                        self.presentViewController(alertView, animated: true, completion: nil)
+                    }
+                    else if(session.isOpen){
+                        self.inviteFriends(sender)
+                    }
+                }
+
+            );
+            return;
+        }
+        
+        if(self.friendPickerController == nil){
+            self.friendPickerController = FBFriendPickerViewController()
+            self.friendPickerController.title = "Invite friends to Cramr"
+            self.friendPickerController.delegate = self
+        }
+        
+        self.friendPickerController.loadData()
+        self.friendPickerController.clearSelection()
+        self.presentViewController(self.friendPickerController, animated: true, completion: nil)
+        
+    }
+    
+     func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
+        var text = NSMutableString()
+        let picker = sender as FBFriendPickerViewController
+        
+        for friend in picker.selection {
+            println( "TypeName0 = \(_stdlib_getTypeName(friend))")
+            if (text.length > 0){
+                text.appendString(", ")
+            }
+            text.appendString(friend.name)
+        }
+        self.fillTextBoxAndDismiss(text)
+        
+    }
+    
+    
+    func facebookViewControllerCancelWasPressed(sender: AnyObject!) {
+        self.fillTextBoxAndDismiss("Canceled")
+    }
+    
+    func fillTextBoxAndDismiss(text: String){
+        self.selectedFriendsView.text = text
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     func checkIfSessionIsEmpty() {
         var users = session?["active_users"] as [String]
