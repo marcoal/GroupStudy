@@ -25,7 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let controller = navigationController.topViewController as LoginViewController
         
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
+        
+        
+        
         
         PFFacebookUtils.initializeFacebook()
         FBLoginView.self

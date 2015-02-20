@@ -30,7 +30,7 @@ class SessionBrowserViewController : UIViewController {
     
     func addSession(location: String, description: String) {
     
-        var curr_user = currentUserInfo.userID
+        var curr_user = localData.getUserID()
         if curr_user != "" {
             new_session = PFObject(className: "Sessions")
             new_session["active_users"] = [curr_user]

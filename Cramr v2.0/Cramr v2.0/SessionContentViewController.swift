@@ -18,10 +18,12 @@ class SessionContentViewController: UIViewController {
         var findSession = PFQuery(className: "Sessions")
         curr_session = findSession.getObjectWithId(currentSessionID)
         var activeUsers = curr_session["active_users"] as [String]
-        activeUsers.append(currentUserInfo.userID)
-        curr_session["active_users"] = activeUsers
-        curr_session.saveInBackground()
-        currentUserInfo.sessionID = currentSessionID!
+        if find(activeUsers, localData.getUserID()) == nil {
+            activeUsers.append(localData.getUserID())
+            curr_session["active_users"] = activeUsers
+            curr_session.saveInBackground()
+        }
+        localData.setSession(currentSessionID!)
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
