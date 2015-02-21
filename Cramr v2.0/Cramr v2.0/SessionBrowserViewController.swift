@@ -40,7 +40,7 @@ class SessionBrowserViewController : UIViewController {
             new_session["start_time"] = NSDate()
             new_session.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
                 if (success) {
-
+                    localData.setSession(self.new_session.objectId)
                 }
             }
         }

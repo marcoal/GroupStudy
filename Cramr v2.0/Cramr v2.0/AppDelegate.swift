@@ -14,6 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func setupParse() {
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,10 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let controller = navigationController.topViewController as MasterViewController
         //controller.managedObjectContext = self.managedObjectContext
 
-        let controller = navigationController.topViewController as LoginViewController
+        self.setupParse()
+
+
+//        if localData.getSessionID() != "" {
+//            let controller = navigationController.topViewController as SessionLockedViewController
+//        } else {
+            let controller = navigationController.topViewController as LoginViewController
+//        }
         
-        Parse.enableLocalDatastore()
-        Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
+    
+        
+
         let userNotificationTypes = (UIUserNotificationType.Alert |
             UIUserNotificationType.Badge |
             UIUserNotificationType.Sound);
@@ -34,10 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
-        
-        
-        
-        
         
         
         PFFacebookUtils.initializeFacebook()
