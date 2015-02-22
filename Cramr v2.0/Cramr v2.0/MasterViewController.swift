@@ -65,6 +65,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
     }
     
+    func updateCells() {
+        self.refreshCourseList()
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    func setupReload() {
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("updateCells"), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshCourseList()
@@ -73,6 +85,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Do any additional setup after loading the view, typically from a nib.
         designLayout()
+        setupReload()
     }
 
     override func didReceiveMemoryWarning() {

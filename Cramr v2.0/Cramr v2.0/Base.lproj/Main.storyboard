@@ -146,6 +146,10 @@
                                     <outlet property="delegate" destination="CWX-q6-Ru7" id="lr1-Ia-H9c"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifying_glass" id="eu9-Y9-67k">
+                                <rect key="frame" x="0.0" y="209" width="320" height="150"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" id="Cg0-tR-0JY">
                                 <rect key="frame" x="0.0" y="19" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
@@ -394,6 +398,7 @@
     </scenes>
     <resources>
         <image name="Google Map" width="1277" height="494"/>
+        <image name="magnifying_glass" width="512" height="512"/>
         <image name="white_book_icon" width="512" height="512"/>
         <image name="white_people_icon" width="512" height="512"/>
     </resources>

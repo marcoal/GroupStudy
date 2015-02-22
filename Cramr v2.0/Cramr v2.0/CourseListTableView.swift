@@ -46,18 +46,21 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
-        var query = PFQuery(className: "Course")
-        query.limit = 15
-        
-        var regex = self.getRegexSearchTerm(searchText)
-        NSLog(regex)
-
-        query.whereKey("title", matchesRegex: regex, modifiers: "i")
-        
-        query.findObjectsInBackgroundWithBlock {
-            (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
-            self.courses = coursesFromQuery
+        if searchText == "" {
+            self.courses = []
             self.courseTable.reloadData()
+        } else {
+            var query = PFQuery(className: "Course")
+            query.limit = 15
+            
+            var regex = self.getRegexSearchTerm(searchText)
+            query.whereKey("title", matchesRegex: regex, modifiers: "i")
+            
+            query.findObjectsInBackgroundWithBlock {
+                (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
+                self.courses = coursesFromQuery
+                self.courseTable.reloadData()
+            }
         }
     }
     
@@ -70,7 +73,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         self.setupSearch()
         self.courseTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        self.getParseData()
+        // self.getParseData()
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
