@@ -89,12 +89,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         var cell: CustomCourseTableCell = self.tableView.dequeueReusableCellWithIdentifier("CustomCourseCell") as CustomCourseTableCell
         
         var fullCourseName = self.coursesIn[indexPath.row] as String
-        cell.courseNameLabel?.text = getCourseID(fullCourseName)
-        cell.numPeopleLabel?.text = "45"
-        cell.numSessionsLabel?.text = "3"
-        //cell.textLabel?.text = self.coursesIn[indexPath.row] as String
-        cell.contentView.backgroundColor = .grayColor()
-        //cell.textLabel?.textColor = .whiteColor()
+        cell.updateCell(fullCourseName)
+
         return cell
 
     }
