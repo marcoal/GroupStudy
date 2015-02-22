@@ -48,9 +48,11 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
             self.courses = []
+//            self.courseTable.alpha = 0.0
             self.courseTable.reloadData()
         } else {
             var query = PFQuery(className: "Course")
+//            self.courseTable.alpha = 1.0
             query.limit = 15
             
             var regex = self.getRegexSearchTerm(searchText)
@@ -78,6 +80,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         view.backgroundColor = .darkGrayColor()
+        self.courseTable.alpha = 0.7
     }
     
     // TABLE VIEW FUNCTIONS

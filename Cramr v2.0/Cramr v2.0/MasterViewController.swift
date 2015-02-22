@@ -63,6 +63,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.view.backgroundColor = .lightGrayColor()
         
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = true;
     }
     
     func updateCells() {
