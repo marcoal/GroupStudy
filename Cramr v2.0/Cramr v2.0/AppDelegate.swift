@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
 //        self.window!.rootViewController = navController
 //        self.window!.makeKeyAndVisible()
+        UIBarButtonItem.appearance().tintColor = cramrBlue
         return true
     }
     

@@ -14,7 +14,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     var friendPickerController: FBFriendPickerViewController!
     
     
-    @IBOutlet weak var selectedFriendsView: UITextView!
+    @IBOutlet weak var selectedFriendsView: UILabel!
     
     @IBOutlet weak var className: UILabel!
     
