@@ -114,7 +114,11 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         self.view.backgroundColor = .darkGrayColor()
         
         navigationItem.hidesBackButton = true
-        if self.session != nil {
+        if self.session == nil {
+            self.session == localData.getSessionID() as String
+        }
+        
+        if self.session != nil && self.session != "" {
             var fullCourseName = (self.session?.objectForKey("course") as String)
             className.text = getCourseID(fullCourseName)
             desciptLabel.text = "We're working on: " + (self.session?.objectForKey("description") as String)
@@ -142,6 +146,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
             desciptLabel.sizeToFit()
+        } else {
+//            desciptLabel.text = "NO SESSION"
         }
 
     }

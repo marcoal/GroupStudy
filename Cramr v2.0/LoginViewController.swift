@@ -22,6 +22,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fbLoginView.delegate = self
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
+        self.view.bringSubviewToFront(self.fbLoginView)
+        
         self.view.backgroundColor = .lightGrayColor()
     }
     
@@ -40,10 +45,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         self.view.layer.addSublayer(layer)
         self.avplayer.play()
         // Do any additional setup for FB
-        nameLabel.text = ""
-        self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
-        self.view.bringSubviewToFront(self.fbLoginView)
     }
     
     /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
