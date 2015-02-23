@@ -93,7 +93,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             // Send a notification to all devices subscribed to the "Giants" channel.
             let push = PFPush()
             push.setChannel("a"+id)
-            push.setMessage(localData.getUserID() + "Invited you to a session")
+            push.setMessage(localData.getUserName()() + " Invited you to a session")
             push.sendPushInBackground()
             
             

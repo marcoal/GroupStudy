@@ -40,9 +40,15 @@ class LocalDatastore {
         
     }
     
-    func setUser(userID: String) {
+    func setUserID(userID: String) {
         var loggedUser = self.getUser()
         loggedUser["userID"] = userID
+        loggedUser.pinInBackground()
+    }
+    
+    func setUserName(username: String){
+        var loggedUser = self.getUser()
+        loggedUser["username"] = username
         loggedUser.pinInBackground()
     }
     
@@ -58,6 +64,13 @@ class LocalDatastore {
             return ""
         }
         return self.getUser()["userID"] as String
+    }
+    
+    func getUserName() -> String{
+        if self.user == nil{
+            return ""
+        }
+        return self.getUserName() as String
     }
     
     func getSessionID() -> String {
@@ -76,6 +89,7 @@ class LocalDatastore {
                 self.user = PFObject(className: "LoggedUsers")
                 self.user["userID"] = ""
                 self.user["sessionID"] = ""
+                self.user["username"] = ""
             }
         }
         self.printInfo()
