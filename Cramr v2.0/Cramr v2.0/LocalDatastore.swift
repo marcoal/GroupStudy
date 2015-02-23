@@ -74,6 +74,8 @@ class LocalDatastore {
             self.user = query.getFirstObject()
             if self.user == nil {
                 self.user = PFObject(className: "LoggedUsers")
+                self.user["userID"] = ""
+                self.user["sessionID"] = ""
             }
         }
         self.printInfo()
