@@ -85,6 +85,18 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             if (text.length > 0){
                 text.appendString(", ")
             }
+            var innerquery = PFQuery(className: "User")
+            innerquery.whereKey("username", equalTo: friend.name)
+                
+            var query = PFInstallation.query()
+            query.whereKey("user", matchesQuery: innerquery)
+            
+            //Send Push
+            var push = PFPush()
+            push.setQuery(query)
+            push.setMessage("You're invited to a session, thanks to Roberto and his provisioning profile")
+            push.sendPushInBackground()
+            
             text.appendString(friend.name)
         }
         self.fillTextBoxAndDismiss(text)
