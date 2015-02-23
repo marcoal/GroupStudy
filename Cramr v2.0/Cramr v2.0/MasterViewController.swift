@@ -63,8 +63,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.view.backgroundColor = .lightGrayColor()
         
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.hidesBackButton = true;
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
     }
     
     func updateCells() {
@@ -77,6 +77,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         var refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector("updateCells"), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
+        self.refreshControl!.tintColor = cramrBlue as UIColor
     }
     
     override func viewDidLoad() {

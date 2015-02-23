@@ -21,21 +21,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let navigationController = self.window!.rootViewController as UINavigationController
+        //let navigationController = self.window!.rootViewController as UINavigationController
         
         //To get the other view to work
         //let controller = navigationController.topViewController as MasterViewController
         //controller.managedObjectContext = self.managedObjectContext
 
         self.setupParse()
-
-
+//        
+        var navController = UIViewController?()
 //        if localData.getSessionID() != "" {
-//            let controller = navigationController.topViewController as SessionLockedViewController
-//        } else {
-            let controller = navigationController.topViewController as LoginViewController
+//            var seshView = SessionLockedViewController()
+//            navController = UINavigationController(rootViewController: seshView)
+//        } else if localData.getUserID() != ""{
+//            var masterview = MasterViewController()
+//            navController = UINavigationController(rootViewController: masterview)
+//        }else{
+//            var loginView = LoginViewController()
+//            navController = UINavigationController(rootViewController: loginView)
 //        }
+    
         
+    
     
         
 
@@ -50,6 +57,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebook()
         FBLoginView.self
+//        self.window!.rootViewController = navController
+//        self.window!.makeKeyAndVisible()
         return true
     }
     
@@ -64,14 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return wasHandled
     }
     
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
     
     func applicationDidBecomeActive(application: UIApplication) {
         FBAppEvents.activateApp()
