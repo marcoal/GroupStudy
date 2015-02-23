@@ -65,6 +65,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true
+        self.tableView?.tableFooterView = UIView()
     }
     
     func updateCells() {
@@ -133,7 +134,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
-                (segue.destinationViewController as SessionBrowserViewController).courseName = courseName
+                var s = (segue.destinationViewController as SessionBrowserViewController)
+                s.courseName = courseName
             }
         }
     }

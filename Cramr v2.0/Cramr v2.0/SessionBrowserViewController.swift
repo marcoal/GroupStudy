@@ -53,6 +53,10 @@ class SessionBrowserViewController : UIViewController {
 
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            if self.sessions.count == 0 {
+                self.performSegueWithIdentifier("unwindBack", sender: self)
+
+            }
             // DO STUFF
         }
         
@@ -83,6 +87,7 @@ class SessionBrowserViewController : UIViewController {
 
     }
     
+    @IBOutlet weak var createButton: UIButton!
     
     var sessions: [PFObject] = []
     
@@ -98,8 +103,21 @@ class SessionBrowserViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getSessions()
+        
+        if sessions.count == 0 {
+            self.newSesh(0)
+            self.createButton.hidden = true
+        }
+        
         self.view.backgroundColor = .lightGrayColor()
         self.title = getCourseID(self.courseName!)
+        self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
+        self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
+        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
+
+        
+        
     }
     
     
