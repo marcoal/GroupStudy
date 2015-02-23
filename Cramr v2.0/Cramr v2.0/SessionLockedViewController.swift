@@ -81,21 +81,27 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         let picker = sender as FBFriendPickerViewController
         
         for friend in picker.selection {
-            println( "TypeName0 = \(_stdlib_getTypeName(friend))")
-            if (text.length > 0){
-                text.appendString(", ")
-            }
+            var fdict = friend as NSDictionary
+            var id = fdict.objectForKey("id") as String
+            println(id)
             var innerquery = PFQuery(className: "User")
-            innerquery.whereKey("username", equalTo: friend.name)
+            innerquery.whereKey("userID", equalTo: id)
                 
             var query = PFInstallation.query()
             query.whereKey("user", matchesQuery: innerquery)
             
-            //Send Push
-            var push = PFPush()
-            push.setQuery(query)
-            push.setMessage("You're invited to a session, thanks to Roberto and his provisioning profile")
+            // Send a notification to all devices subscribed to the "Giants" channel.
+            let push = PFPush()
+            push.setChannel("a"+id)
+            push.setMessage(localData.getUserID() + "Invited you to a session")
             push.sendPushInBackground()
+            
+            
+//            //Send Push
+//            var push = PFPush()
+//            push.setQuery(query)
+//            push.setMessage(localData.getUserID() + "Invited you to a session")
+//            push.sendPushInBackground()
             
             text.appendString(friend.name)
         }

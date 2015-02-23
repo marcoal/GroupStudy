@@ -74,7 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackground()  // Maybe try save in Background will try to do this tomorrow -Marco?
+        installation.addUniqueObject("a"+localData.getUserID(), forKey: "channels")
+        installation.saveInBackground()
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: NSString?, annotation: AnyObject) -> Bool {
