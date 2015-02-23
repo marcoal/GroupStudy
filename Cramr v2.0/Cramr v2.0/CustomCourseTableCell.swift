@@ -13,7 +13,7 @@ class CustomCourseTableCell: UITableViewCell {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.contentView.backgroundColor = .grayColor()
+        self.contentView.backgroundColor = .lightGrayColor()
     }
     
     
@@ -24,6 +24,10 @@ class CustomCourseTableCell: UITableViewCell {
 
     @IBOutlet weak var numSessionsLabel: UILabel!
     
+    
+    @IBOutlet weak var plusIcon: UIImageView!
+    @IBOutlet weak var peopleIcon: UIImageView!
+    @IBOutlet weak var bookIcon: UIImageView!
     
     func updateCell(courseName : String) {
         
@@ -44,6 +48,13 @@ class CustomCourseTableCell: UITableViewCell {
                     numPeople += s["active_users"].count
                 }
                 self.numPeopleLabel.text = String(numPeople)
+                
+                self.numPeopleLabel.hidden = sessions.count == 0
+                self.numSessionsLabel.hidden = sessions.count == 0
+                self.bookIcon.hidden = sessions.count == 0
+                self.peopleIcon.hidden = sessions.count == 0
+                 self.plusIcon.hidden = !(sessions.count == 0)
+                
             }
         }
     }
