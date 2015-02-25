@@ -18,46 +18,31 @@ class CustomCourseTableCell: UITableViewCell {
     
     
     @IBOutlet weak var courseNameLabel: UILabel!
-    
-
     @IBOutlet weak var numPeopleLabel: UILabel!
-
     @IBOutlet weak var numSessionsLabel: UILabel!
-    
     
     @IBOutlet weak var plusIcon: UIImageView!
     @IBOutlet weak var peopleIcon: UIImageView!
     @IBOutlet weak var bookIcon: UIImageView!
     
     func updateCell(courseName : String) {
-        
+//        self.courseNameLabel?.text = getCourseID(courseName)
+//        internalUpdate(courseName)
+    }
+    
+    func updateCellName(courseName: String) {
         self.courseNameLabel?.text = getCourseID(courseName)
-        internalUpdate(courseName)
     }
     
-    private func internalUpdate(courseName : String) {
-        var query = PFQuery(className: "Sessions")
-        query.whereKey("course", equalTo: courseName)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                var sessions = objects as [PFObject]
-                self.numSessionsLabel.text = String(sessions.count)
-                var numPeople = 0
-                for s in sessions {
-                    numPeople += s["active_users"].count
-                }
-                self.numPeopleLabel.text = String(numPeople)
-                
-                self.numPeopleLabel.hidden = sessions.count == 0
-                self.numSessionsLabel.hidden = sessions.count == 0
-                self.bookIcon.hidden = sessions.count == 0
-                self.peopleIcon.hidden = sessions.count == 0
-                 self.plusIcon.hidden = !(sessions.count == 0)
-                
-            }
-        }
+    func updateCellContents(numPeople: Int, numSessions: Int) {
+        self.numSessionsLabel.text = String(numSessions)
+        self.numPeopleLabel.text = String(numPeople)
+        
+        self.numPeopleLabel.hidden = numSessions == 0
+        self.numSessionsLabel.hidden = numSessions == 0
+        self.bookIcon.hidden = numSessions == 0
+        self.peopleIcon.hidden = numSessions == 0
+        self.plusIcon.hidden = numSessions != 0
     }
-    
     
 }

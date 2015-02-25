@@ -37,6 +37,7 @@
 		7B33AFD91A772A570043841E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFD81A772A570043841E /* Images.xcassets */; };
 		7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFDA1A772A570043841E /* LaunchScreen.xib */; };
 		7B33AFE81A772A570043841E /* Cramr_v2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */; };
+		7B85596D1A9D35BF00387783 /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */; };
 		7B9642B01A969EA800331CA7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642AF1A969EA800331CA7 /* Util.swift */; };
 		7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */; };
 		7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B54AE1A7B066500064762 /* CourseListTableView.swift */; };
@@ -96,6 +97,7 @@
 		7B33AFE11A772A570043841E /* Cramr v2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cramr v2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B33AFE61A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cramr_v2_0Tests.swift; sourceTree = "<group>"; };
+		7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
 		7B9642AF1A969EA800331CA7 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDatastore.swift; sourceTree = "<group>"; };
 		7B9B54AE1A7B066500064762 /* CourseListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTableView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		7B33AFC91A772A570043841E /* Cramr v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */,
 				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				7B9642AF1A969EA800331CA7 /* Util.swift */,
 				FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */,
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B85596D1A9D35BF00387783 /* DatabaseAccess.swift in Sources */,
 				625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */,
 				7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */,
 				7BCFFFF01A82CFC700CD0C40 /* SessionContentViewController.swift in Sources */,

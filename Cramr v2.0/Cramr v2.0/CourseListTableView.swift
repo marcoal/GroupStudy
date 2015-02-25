@@ -17,53 +17,14 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     
     var courses = []
     
-    func getParseData() {
-        var query = PFQuery(className: "Course")
-        query.limit = 15
-        
-        query.findObjectsInBackgroundWithBlock {
-            (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
-                self.courses = coursesFromQuery
-                self.courseTable.reloadData()
-        }
+    func courseListCallback(courses: [String]) {
+        self.courses = courses
+        self.courseTable.reloadData()
     }
-    
-    func getRegexSearchTerm(text: String) -> String {
 
-        
-        var searchText = text.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        if searchText == "" {
-            return text
-        }
-        
-        var regex = ""
-        var spacer = "(?: )?"
-        for ch in searchText {
-            regex = regex + String(ch) + spacer
-        }
-        return regex
-    }
     
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" {
-            self.courses = []
-//            self.courseTable.alpha = 0.0
-            self.courseTable.reloadData()
-        } else {
-            var query = PFQuery(className: "Course")
-//            self.courseTable.alpha = 1.0
-            query.limit = 15
-            
-            var regex = self.getRegexSearchTerm(searchText)
-            query.whereKey("title", matchesRegex: regex, modifiers: "i")
-            
-            query.findObjectsInBackgroundWithBlock {
-                (coursesFromQuery: [AnyObject]!, error: NSError!) -> Void in
-                self.courses = coursesFromQuery
-                self.courseTable.reloadData()
-            }
-        }
+        (UIApplication.sharedApplication().delegate as AppDelegate).getCourseListFromAD(searchText, cb: courseListCallback)
     }
     
     func setupSearch() {
@@ -92,40 +53,18 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        cell.textLabel?.text = self.courses[indexPath.row]["title"] as? String
+        cell.textLabel?.text = self.courses[indexPath.row] as? String
         cell.contentView.backgroundColor = .grayColor()
         cell.textLabel?.textColor = .whiteColor()
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var courseName = self.courses[indexPath.row]["title"] as String
-      
-        var curr_user = localData.getUserID()
-        var query = PFQuery(className: "EnrolledCourses")
-        if curr_user != "" {
-
-            query.whereKey("userID", equalTo: curr_user)
-            var object_user = query.getFirstObject()
-            
-            if object_user != nil {
-                var course_array = object_user["enrolled_courses"] as [String]
-                if !contains(course_array, courseName) {
-                    course_array += [courseName]
-                    object_user["enrolled_courses"] = course_array
-                    object_user.saveInBackground()
-                }
-            } else {
-                var new_object_user = PFObject(className: "EnrolledCourses")
-                new_object_user["userID"] = curr_user
-                new_object_user["enrolled_courses"] = [courseName]
-                new_object_user.saveInBackground()
-            }
-            
-        } else {
-            // Make the user sign in again?
-        }
-        
+    func selectedRowCallBack() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD(localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
+    }
+
 }

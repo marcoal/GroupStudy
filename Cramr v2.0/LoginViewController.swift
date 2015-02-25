@@ -8,8 +8,6 @@
 
 import Foundation
 
-var localData = LocalDatastore()
-
 let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
@@ -39,11 +37,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         var height = UIScreen.mainScreen().bounds.size.height
         var width = height*1.77
 
-        var layer = AVPlayerLayer(player: self.avplayer)
-        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-        layer.frame = CGRectMake(0,0,width, height)
-        self.view.layer.addSublayer(layer)
-        self.avplayer.play()
+//        var layer = AVPlayerLayer(player: self.avplayer)
+//        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+//        layer.frame = CGRectMake(0,0,width, height)
+//        self.view.layer.addSublayer(layer)
+//        self.avplayer.play()
         // Do any additional setup for FB
     }
     

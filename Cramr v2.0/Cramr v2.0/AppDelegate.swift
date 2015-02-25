@@ -9,16 +9,44 @@
 import UIKit
 import CoreData
 
+var localData = LocalDatastore()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var DBAccess: DatabaseAccess?
 
     func setupParse() {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
     }
+    
+    func setupDBAccess() {
+        self.DBAccess = DatabaseAccess()
+    }
+    
+    func getCoursesFromAD(userID: String, tableReload: Bool, cb: ([String], Bool) -> ()) {
+        self.DBAccess!.getCourses(userID, tableReload: tableReload, callback: cb)
+    }
+    
+    func getCourseListFromAD(searchText: String, cb: ([String]) -> ()) {
+        self.DBAccess!.getCourseList(searchText, callback: cb)
+    }
+    
+    func addCourseToUserAD(userID: String, courseName: String, cb: () -> ()) {
+        self.DBAccess!.addCourseToUser(userID, courseName: courseName, callback: cb)
+    }
 
+    func deleteCourseFromUserAD(userID: String, courseName: String, index: NSIndexPath, cb: (NSIndexPath) -> ()) {
+        self.DBAccess!.deleteCourseFromUser(userID, courseName: courseName, index: index, callback: cb)
+    }
+    
+    func updateCellAD(courseName: String, cell: UITableViewCell, cb:(Int, Int, UITableViewCell) -> ()) {
+        self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //let navigationController = self.window!.rootViewController as UINavigationController
@@ -28,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //controller.managedObjectContext = self.managedObjectContext
 
         self.setupParse()
+        self.setupDBAccess()
 //        
         var navController = UIViewController?()
 //        if localData.getSessionID() != "" {
@@ -57,9 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebook()
         FBLoginView.self
-//        self.window!.rootViewController = navController
-//        self.window!.makeKeyAndVisible()
         UIBarButtonItem.appearance().tintColor = cramrBlue
+        
         return true
     }
     
