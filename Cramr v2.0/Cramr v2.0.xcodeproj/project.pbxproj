@@ -206,16 +206,16 @@
 		7B33AFC91A772A570043841E /* Cramr v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */,
-				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				7B9642AF1A969EA800331CA7 /* Util.swift */,
+				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */,
 				7B33AFD31A772A570043841E /* SessionViewController.swift */,
-				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
+				7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */,
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD51A772A570043841E /* Main.storyboard */,
 				62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */,
-				7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */,
 				7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */,
 				7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */,
 				7B9B54AE1A7B066500064762 /* CourseListTableView.swift */,

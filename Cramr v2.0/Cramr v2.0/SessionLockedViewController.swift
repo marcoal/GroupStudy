@@ -13,7 +13,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
-    
     @IBOutlet weak var selectedFriendsView: UILabel!
     
     @IBOutlet weak var className: UILabel!
@@ -24,23 +23,18 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var currentUsers: UILabel!
     
-    var session: PFObject? {
+    var session: [String: String]! {
         didSet {
             
         }
     }
     
-    
+    func leaveSessionCallback() {
+        self.performSegueWithIdentifier("popToCourseView", sender: self)
+    }
     
     @IBAction func leaveSession(sender: AnyObject) {
-        var query = PFQuery(className: "Sessions")
-        self.session = query.getObjectWithId(self.session?.objectId)
-        var users = session?.objectForKey("active_users") as [String]
-        users.removeAtIndex(find(users, localData.getUserID())!)
-        session?["active_users"] = users
-        session?.saveInBackground()
-        self.checkIfSessionIsEmpty()
-        self.performSegueWithIdentifier("popToCourseView", sender: self)
+        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD(localData.getUserID(), sessionID: self.session["sessionID"]!, cb: leaveSessionCallback)
     }
     
     @IBAction func inviteFriends(sender: AnyObject) {
@@ -94,7 +88,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             let push = PFPush()
             push.setChannel("a"+id)
 
-            var course = self.session?.objectForKey("course") as String
+            var course = self.session["course"]! as String
             push.setMessage(localData.getUserName() + " invited you to work on " + course)
 
             push.sendPushInBackground()
@@ -122,51 +116,44 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    func checkIfSessionIsEmpty() {
-        var users = session?["active_users"] as [String]
-        if users.isEmpty {
-            session?.deleteInBackground()
+    func currentUsersCallback(userNamesAndIds: [(String, String)]) {
+        for elem in userNamesAndIds {
+            var userName = elem.0
+            var userID = elem.1
+            if currentUsers.text == "" {
+                currentUsers.text = userName
+            } else {
+                currentUsers.text = currentUsers.text! + "\n" + userName
+            }
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .darkGrayColor()
         
         navigationItem.hidesBackButton = true
-        if self.session == nil {
-            self.session == localData.getSessionID() as String
-        }
+
+//        if self.session == nil {
+//            self.session == localData.getSessionID() as String
+//        }
         
-        if self.session != nil && self.session != "" {
-            var fullCourseName = (self.session?.objectForKey("course") as String)
+        if self.session != nil {
+            var fullCourseName = (self.session["course"]! as String)
             className.text = getCourseID(fullCourseName)
-            desciptLabel.text = "We're working on: " + (self.session?.objectForKey("description") as String)
-            locationLabel.text = "We're working at: " + (self.session?.objectForKey("location") as String)
+            desciptLabel.text = "We're working on: " + (self.session["description"]! as String)
+            locationLabel.text = "We're working at: " + (self.session["location"]! as String)
             
             desciptLabel.sizeToFit()
             locationLabel.sizeToFit()
             
             currentUsers.text = ""
-            var currentUserList = (self.session?.objectForKey("active_users") as [String])
-            for userId in currentUserList {
-                var query = PFUser.query();
-                query.whereKey("userID", equalTo: userId)
-                var user = query.getFirstObject()
-                //var user = query.getObjectWithId(userId) as PFObject
-                var userName = user.objectForKey("username") as String
-                if currentUsers.text == "" {
-                    currentUsers.text = userName
-                } else {
-                    currentUsers.text = currentUsers.text! + "\n" + userName
-                }
-            }
-            
             currentUsers.numberOfLines = 0
             currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
             desciptLabel.sizeToFit()
+            (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
 //            desciptLabel.text = "NO SESSION"
         }

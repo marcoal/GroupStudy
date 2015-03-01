@@ -10,23 +10,7 @@ import Foundation
 
 class SessionContentViewController: UIViewController {
     
-    var currentSessionID : String?
-    
-    var curr_session: PFObject!
-
-    @IBAction func joinButton(sender: AnyObject) {
-        var findSession = PFQuery(className: "Sessions")
-        curr_session = findSession.getObjectWithId(currentSessionID)
-        var activeUsers = curr_session["active_users"] as [String]
-        if find(activeUsers, localData.getUserID()) == nil {
-            activeUsers.append(localData.getUserID())
-            curr_session["active_users"] = activeUsers
-            curr_session.saveInBackground()
-        }
-        localData.setSession(currentSessionID!)
-        self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
-    }
-    
+    var session: [String: String]!
     
     @IBOutlet weak var descript: UILabel!
     
@@ -34,36 +18,38 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var currentUsersLabel: UILabel!
     
-    var dataObject: PFObject? {
-        didSet {
-            
-        }
+    func joinSessionCallback() {
+        self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
-    func setLabels() {
-        descript.text = "We're working on: " + (self.dataObject?.objectForKey("description") as String)
-        locationLabel.text = "We're working at: " + (self.dataObject?.objectForKey("location") as String)
-        locationLabel.sizeToFit()
-        
-        currentUsersLabel.text = ""
-        var currentUsersList = (self.dataObject?.objectForKey("active_users") as [String])
-        for userId in currentUsersList {
-            var query = PFUser.query();
-            query.whereKey("userID", equalTo: userId)
-            var user = query.getFirstObject()
-            //var user = query.getObjectWithId(userId) as PFObject
-            var userName = user.objectForKey("username") as String
+
+    @IBAction func joinButton(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: localData.getUserID(), cb: joinSessionCallback)
+    }
+
+    func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {
+        for elem in userNamesAndIds {
+            var userName = elem.0
+            var userID = elem.1
+            
             if currentUsersLabel.text == "" {
                 currentUsersLabel.text = userName
             } else {
                 currentUsersLabel.text = currentUsersLabel.text! + "\n" + userName
             }
+            currentUsersLabel.numberOfLines = 0
+            currentUsersLabel.sizeToFit()
         }
-        
-        currentUsersLabel.numberOfLines = 0
-        currentUsersLabel.sizeToFit()
+    }
+    
+    func setLabels() {
+        descript.text = "We're working on: " + (session["description"]! as String)
+        locationLabel.text = "We're working at: " + (session["location"]! as String)
+        locationLabel.sizeToFit()
+        currentUsersLabel.text = ""
         descript.numberOfLines = 0
         descript.sizeToFit()
+        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
     }
     
 
@@ -71,13 +57,11 @@ class SessionContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .grayColor()
         self.setLabels()
-
-        currentSessionID = self.dataObject?.objectId
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pushToLockedFromJoin" {
-            (segue.destinationViewController as SessionLockedViewController).session = self.curr_session
+            (segue.destinationViewController as SessionLockedViewController).session = self.session
         }
     }
     

@@ -42,8 +42,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         designLayout()
     }
     
-
-    
     func designLayout() {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
@@ -108,8 +106,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    var sessionsForSelectedRow = [[String: String]]()
+    
+    func getSessionsCallback(sessions: [[String: String]]) {
+        self.sessionsForSelectedRow = sessions
         self.performSegueWithIdentifier("showDetail", sender: nil)
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
     }
     
     func deleteCourseCallback(indexPath: NSIndexPath) {
@@ -131,6 +136,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 var courseName = self.coursesIn[indexPath.row] as String
                 var s = (segue.destinationViewController as SessionBrowserViewController)
                 s.courseName = courseName
+                s.sessions = self.sessionsForSelectedRow
             }
         }
     }

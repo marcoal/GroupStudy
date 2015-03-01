@@ -10,9 +10,8 @@ import UIKit
 
 class SessionViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    var sessions: [PFObject] = []
+    var sessions: [[String: String]]!
     var pageController: UIPageViewController?
-    
 
     @IBAction func popToSessionView(segue: UIStoryboardSegue) {
         performSegueWithIdentifier("popToBrowser", sender: self)
@@ -25,14 +24,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
 
-    var detailItem: String? {
-        didSet {
-           
-        }
-    }
-
-
-    func sendSessionData(controller: SessionBrowserViewController, arr: [PFObject]) {
+    func sendSessionData(controller: SessionBrowserViewController, arr: [[String: String]]) {
         self.sessions = arr
     }
     
@@ -43,17 +35,22 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let dataViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionContent") as SessionContentViewController
-        dataViewController.dataObject = self.sessions[index]
+        dataViewController.session = self.sessions[index]
         return dataViewController
     }
     
     
+    
     func indexOfViewController(viewController: SessionContentViewController) -> Int {
-        if let dataObject: PFObject = viewController.dataObject {
-            return find(sessions, dataObject)!
-        } else {
-            return NSNotFound
+        
+        if let currentSession: [String: String] = viewController.session {
+            var count = 0
+            for session in sessions {
+                if areEqualSessions(session, currentSession) { return count }
+                count += 1
+            }
         }
+        return NSNotFound
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -114,17 +111,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        var query = PFQuery(className: "Sessions")
-//        query.whereKey("course", equalTo: self.detailItem)
-//        self.sessions = query.findObjects() as [PFObject]
-//        
         if sessions.count != 0 {
             self.organizeChildren()
-        }
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        }   
     }
 
     override func didReceiveMemoryWarning() {

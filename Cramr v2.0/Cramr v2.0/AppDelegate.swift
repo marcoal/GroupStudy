@@ -46,6 +46,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func updateCellAD(courseName: String, cell: UITableViewCell, cb:(Int, Int, UITableViewCell) -> ()) {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
+
+    func joinSessionAD(sessionID: String, userID: String, cb: () -> ()) {
+        self.DBAccess!.joinSession(sessionID, userID: userID, callback: cb)
+    }
+    
+    func addSessionAD(userID: String, courseName: String, description: String, location:String, cb: ([String: String]) -> ()) {
+        self.DBAccess!.addSession(userID, courseName: courseName, description: description, location: location, callback: cb)
+    }
+    
+    func getSessionsAD(courseName: String, cb: ([[String: String]]) -> ()) {
+        self.DBAccess!.getSessions(courseName, callback: cb)
+    }
+    
+    func leaveSessionAD(userID: String, sessionID: String, cb: () -> ()) {
+        self.DBAccess!.leaveSession(userID, sessionID: sessionID, callback: cb)
+    }
+    
+    func getSessionUsersAD(sessionID: String, cb: ([(String, String)]) -> ()) {
+        self.DBAccess!.getSessionUsers(sessionID, callback: cb)
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

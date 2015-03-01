@@ -28,3 +28,12 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
+
+func convertToSessionDict(sessionID: String, description: String, location: String, courseName: String) -> [String: String] {
+    return ["sessionID": sessionID, "description": description, "location": location, "course": courseName]
+}
+
+func areEqualSessions(first: [String: String], second: [String: String]) -> Bool {
+    return first["description"] == second["description"] && first["sessionID"] == second["sessionID"] && first["course"] == second["course"]
+}
+
