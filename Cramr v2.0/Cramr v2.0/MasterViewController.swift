@@ -110,7 +110,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func getSessionsCallback(sessions: [[String: String]]) {
         self.sessionsForSelectedRow = sessions
-        self.performSegueWithIdentifier("showDetail", sender: nil)
+        if sessions.count != 0 {
+            self.performSegueWithIdentifier("showDetail", sender: nil)
+        } else {
+            self.performSegueWithIdentifier("createSession", sender: nil)
+        }
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -138,8 +142,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 s.courseName = courseName
                 s.sessions = self.sessionsForSelectedRow
             }
+        } else if segue.identifier == "createSession" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                var courseName = self.coursesIn[indexPath.row] as String
+                (segue.destinationViewController as SessionCreationViewController).courseName = courseName
+            }
         }
     }
-
 }
 
