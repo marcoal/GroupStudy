@@ -53,11 +53,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
 
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toMaster" {
-        }
-    }
-    
     func setCurrUser() {
         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
@@ -73,7 +68,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         NSLog("User Logged In")
-//        setCurrUser()
+        self.performSegueWithIdentifier("toMaster", sender: self)
+
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
@@ -114,8 +110,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     
         localData.setUserID(user.objectID)
-        self.performSegueWithIdentifier("toMaster", sender: self)
-        
+        localData.setUserName(user.name)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {

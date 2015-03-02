@@ -70,7 +70,7 @@ class LocalDatastore {
         if self.user == nil{
             return ""
         }
-        return self.getUserName() as String
+        return self.getUser()["username"] as String
     }
     
     func getSessionID() -> String {
