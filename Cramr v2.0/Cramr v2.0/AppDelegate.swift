@@ -77,19 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.setupParse()
         self.setupDBAccess()
-//        
         var navController = UIViewController?()
-//        if localData.getSessionID() != "" {
-//            var seshView = SessionLockedViewController()
-//            navController = UINavigationController(rootViewController: seshView)
-//        } else if localData.getUserID() != ""{
-//            var masterview = MasterViewController()
-//            navController = UINavigationController(rootViewController: masterview)
-//        }else{
-//            var loginView = LoginViewController()
-//            navController = UINavigationController(rootViewController: loginView)
-//        }
-    
+
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector("registerUserNotificationSettings:") {
             
@@ -107,6 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebook()
         FBLoginView.self
         UIBarButtonItem.appearance().tintColor = cramrBlue
+        
+
+        GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
         
         return true
     }

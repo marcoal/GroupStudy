@@ -7,15 +7,24 @@
 //
 
 import Foundation
+import MapKit
 
 
-class SessionCreationViewController : UIViewController {
+class SessionCreationViewController : UIViewController, CLLocationManagerDelegate {
+    
+
     
     var courseName: String?  {
         didSet {
             
         }
     }
+    
+    let locationManager = CLLocationManager()
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    @IBOutlet weak var pin: UIImageView!
     
     var newSession: [String: String]!
     
@@ -62,6 +71,34 @@ class SessionCreationViewController : UIViewController {
         }
     }
     
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+            mapView.myLocationEnabled = true
+            mapView.settings.myLocationButton = true
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        if let location = locations.first as? CLLocation {
+            mapView.camera = GMSCameraPosition(target : location.coordinate, zoom: 17, bearing: 0, viewingAngle: 0)
+            locationManager.stopUpdatingLocation()
+        }
+    }
+
+    func setupMap() {
+        
+
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        
+        
+        var centered: CGPoint = mapView.center
+        centered.y -= self.pin.frame.height / 2.0
+        pin.center = centered
+
+    }
+    
     override func viewDidLoad() {
         // It breaks here
         self.view.backgroundColor = .lightGrayColor()
@@ -70,43 +107,7 @@ class SessionCreationViewController : UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
         self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
+        setupMap()
     }
-
-    //    @IBAction func newSesh(sender: AnyObject) {
-    //        let alert = UIAlertController(title: "New session", message: "Fill out all fields to make a new session!", preferredStyle: .Alert)
-    //
-    //        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
-    //            if self.sessions?.count == 0 {
-    //                self.performSegueWithIdentifier("unwindBack", sender: self)
-    //            }
-    //        }
-    //
-    //        alert.addTextFieldWithConfigurationHandler { (textField) in
-    //            textField.placeholder = "Location"
-    //        }
-    //
-    //        alert.addTextFieldWithConfigurationHandler { (textField) in
-    //            textField.placeholder = "Description"
-    //        }
-    //
-    //
-    //        let createAction = UIAlertAction(title: "Create", style: .Default) { (action) in
-    //                let locText = alert.textFields![0] as UITextField
-    //                let desText = alert.textFields![1] as UITextField
-    //
-    //            if locText.text != "" && desText.text != "" {
-    //                self.addSession(locText.text, description: desText.text)
-    //            }
-    //        }
-    //
-    //
-    //        alert.addAction(createAction)
-    //        alert.addAction(cancelAction)
-    //        
-    //        self.presentViewController(alert, animated: true, completion: nil)
-    //
-    //    }
-    //    
-
     
 }

@@ -20,7 +20,6 @@
 		62BC8C681A7AD67600864C72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C671A7AD67600864C72 /* CoreGraphics.framework */; };
 		62BC8C6A1A7AD67E00864C72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C691A7AD67E00864C72 /* CoreLocation.framework */; };
 		62BC8C6C1A7AD68600864C72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C6B1A7AD68600864C72 /* Foundation.framework */; };
-		62BC8C6F1A7AD6D500864C72 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C6D1A7AD6D500864C72 /* Bolts.framework */; };
 		62BC8C701A7AD6D500864C72 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C6E1A7AD6D500864C72 /* Parse.framework */; };
 		62BC8C731A7AD72400864C72 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C721A7AD72400864C72 /* libz.dylib */; };
 		62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C741A7AD73300864C72 /* libsqlite3.dylib */; };
@@ -37,6 +36,7 @@
 		7B33AFD91A772A570043841E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFD81A772A570043841E /* Images.xcassets */; };
 		7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFDA1A772A570043841E /* LaunchScreen.xib */; };
 		7B33AFE81A772A570043841E /* Cramr_v2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */; };
+		7B4FA77A1AA51C3500CABAC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4CC1AA518CF00CD015D /* CoreData.framework */; };
 		7B85596D1A9D35BF00387783 /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */; };
 		7B9642B01A969EA800331CA7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642AF1A969EA800331CA7 /* Util.swift */; };
 		7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */; };
@@ -44,6 +44,15 @@
 		7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */; };
 		7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */; };
 		7BCFFFF01A82CFC700CD0C40 /* SessionContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */; };
+		7BE9B4C31AA50C9000CD015D /* SessionCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9B4C21AA50C9000CD015D /* SessionCreationViewController.swift */; };
+		7BE9B4C91AA5181900CD015D /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4C81AA5181900CD015D /* GoogleMaps.framework */; };
+		7BE9B4CB1AA5186A00CD015D /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BE9B4CA1AA5186A00CD015D /* GoogleMaps.bundle */; };
+		7BE9B4CF1AA518E800CD015D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4CE1AA518E800CD015D /* CoreText.framework */; };
+		7BE9B4D11AA518F400CD015D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D01AA518F400CD015D /* GLKit.framework */; };
+		7BE9B4D31AA518FF00CD015D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D21AA518FF00CD015D /* ImageIO.framework */; };
+		7BE9B4D51AA5190C00CD015D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D41AA5190C00CD015D /* libc++.dylib */; };
+		7BE9B4D71AA5191E00CD015D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D61AA5191E00CD015D /* libicucore.dylib */; };
+		7BE9B4D91AA5192C00CD015D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */; };
 		FA3C1AF11A844CE300DB86AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */; };
 		FA3C1AF31A844CEC00DB86AC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */; };
 		FA3C1AF51A844D0400DB86AC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3C1AF41A844D0400DB86AC /* CoreMedia.framework */; };
@@ -104,6 +113,16 @@
 		7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLockedViewController.swift; sourceTree = "<group>"; };
 		7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionBrowserViewController.swift; sourceTree = "<group>"; };
 		7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionContentViewController.swift; sourceTree = "<group>"; };
+		7BE9B4C21AA50C9000CD015D /* SessionCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCreationViewController.swift; sourceTree = "<group>"; };
+		7BE9B4C81AA5181900CD015D /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		7BE9B4CA1AA5186A00CD015D /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		7BE9B4CC1AA518CF00CD015D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7BE9B4CE1AA518E800CD015D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		7BE9B4D01AA518F400CD015D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		7BE9B4D21AA518FF00CD015D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		7BE9B4D41AA5190C00CD015D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		7BE9B4D61AA5191E00CD015D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestsPlayground.playground; sourceTree = "<group>"; };
 		FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -117,6 +136,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B4FA77A1AA51C3500CABAC4 /* CoreData.framework in Frameworks */,
+				7BE9B4D91AA5192C00CD015D /* OpenGLES.framework in Frameworks */,
+				7BE9B4D71AA5191E00CD015D /* libicucore.dylib in Frameworks */,
+				7BE9B4D51AA5190C00CD015D /* libc++.dylib in Frameworks */,
+				7BE9B4D31AA518FF00CD015D /* ImageIO.framework in Frameworks */,
+				7BE9B4D11AA518F400CD015D /* GLKit.framework in Frameworks */,
+				7BE9B4CF1AA518E800CD015D /* CoreText.framework in Frameworks */,
 				FA3C1AF51A844D0400DB86AC /* CoreMedia.framework in Frameworks */,
 				FA3C1AF31A844CEC00DB86AC /* MediaPlayer.framework in Frameworks */,
 				FA3C1AF11A844CE300DB86AC /* AVFoundation.framework in Frameworks */,
@@ -134,11 +160,11 @@
 				62BC8C6C1A7AD68600864C72 /* Foundation.framework in Frameworks */,
 				62BC8C701A7AD6D500864C72 /* Parse.framework in Frameworks */,
 				62BC8C621A7AD65500864C72 /* Social.framework in Frameworks */,
-				62BC8C6F1A7AD6D500864C72 /* Bolts.framework in Frameworks */,
 				62BC8C601A7AD65000864C72 /* AdSupport.framework in Frameworks */,
 				62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */,
 				62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */,
 				62BC8C731A7AD72400864C72 /* libz.dylib in Frameworks */,
+				7BE9B4C91AA5181900CD015D /* GoogleMaps.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +181,15 @@
 		62BC8C711A7AD6EE00864C72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */,
+				7BE9B4D61AA5191E00CD015D /* libicucore.dylib */,
+				7BE9B4D41AA5190C00CD015D /* libc++.dylib */,
+				7BE9B4D21AA518FF00CD015D /* ImageIO.framework */,
+				7BE9B4D01AA518F400CD015D /* GLKit.framework */,
+				7BE9B4CE1AA518E800CD015D /* CoreText.framework */,
+				7BE9B4CC1AA518CF00CD015D /* CoreData.framework */,
+				7BE9B4CA1AA5186A00CD015D /* GoogleMaps.bundle */,
+				7BE9B4C81AA5181900CD015D /* GoogleMaps.framework */,
 				FA3C1AF41A844D0400DB86AC /* CoreMedia.framework */,
 				FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */,
 				FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */,
@@ -216,6 +251,7 @@
 				7B33AFD11A772A570043841E /* MasterViewController.swift */,
 				7B33AFD51A772A570043841E /* Main.storyboard */,
 				62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */,
+				7BE9B4C21AA50C9000CD015D /* SessionCreationViewController.swift */,
 				7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */,
 				7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */,
 				7B9B54AE1A7B066500064762 /* CourseListTableView.swift */,
@@ -342,6 +378,7 @@
 				7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */,
 				7B33AFD91A772A570043841E /* Images.xcassets in Resources */,
 				FA3C1AF71A84536500DB86AC /* entrance.mp4 in Resources */,
+				7BE9B4CB1AA5186A00CD015D /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +400,7 @@
 				625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */,
 				7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */,
 				7BCFFFF01A82CFC700CD0C40 /* SessionContentViewController.swift in Sources */,
+				7BE9B4C31AA50C9000CD015D /* SessionCreationViewController.swift in Sources */,
 				7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */,
 				7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */,
 				7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */,
@@ -451,6 +489,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PROVISIONING_PROFILE = "a6e93baf-67c2-4afa-8493-268d2f09a052";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -488,6 +527,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PROVISIONING_PROFILE = "a6e93baf-67c2-4afa-8493-268d2f09a052";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -499,8 +539,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Roberto Alvarez (QETN35QQ9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roberto Alvarez (QETN35QQ9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -508,7 +548,7 @@
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6e93baf-67c2-4afa-8493-268d2f09a052";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cramr v2.0/Cramr v2.0-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -519,8 +559,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Roberto Alvarez (QETN35QQ9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roberto Alvarez (QETN35QQ9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -528,7 +568,7 @@
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6e93baf-67c2-4afa-8493-268d2f09a052";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cramr v2.0/Cramr v2.0-Bridging-Header.h";
 			};
 			name = Release;
