@@ -58,13 +58,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     }
     
-    func setCurrUser() {
-        if (FBSession.activeSession().isOpen){
+    func setCurrUser() {         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
                 localData.setUserID(resultdict["id"] as String)
-                
+//                localData.setUserName()
             }
         }
     }
@@ -114,6 +113,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     
         localData.setUserID(user.objectID)
+        localData.setUserName(user.name)
         self.performSegueWithIdentifier("toMaster", sender: self)
         
     }
