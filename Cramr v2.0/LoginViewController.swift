@@ -52,14 +52,13 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         p.play()
     }
 
-    
     func setCurrUser() {
         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
                 localData.setUserID(resultdict["id"] as String)
-                
+//                localData.setUserName()
             }
         }
     }
