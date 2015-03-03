@@ -23,6 +23,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var currentUsers: UILabel!
     
+    @IBOutlet weak var lockedMapView: GMSMapView!
+    
     var session: [String: String]! {
         didSet {
             
@@ -125,7 +127,16 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             } else {
                 currentUsers.text = currentUsers.text! + "\n" + userName
             }
+            setupMap()
         }
+    }
+    
+    func setupMap() {
+        var loc = CLLocationCoordinate2DMake((self.session["latitude"]! as NSString).doubleValue as CLLocationDegrees, (self.session["longitude"]! as NSString).doubleValue as CLLocationDegrees)
+        var camera = GMSCameraPosition.cameraWithTarget(loc, zoom: 17)
+        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        mapView.myLocationEnabled = true
+        self.lockedMapView = mapView
     }
     
     
@@ -153,6 +164,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
             desciptLabel.sizeToFit()
+            
+            
+            
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
 //            desciptLabel.text = "NO SESSION"

@@ -375,6 +375,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="m2o-eT-Crv" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="319" width="320" height="152"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -384,6 +389,7 @@
                         <outlet property="currentUsers" destination="rzg-eL-DvA" id="UjL-go-cMa"/>
                         <outlet property="desciptLabel" destination="Qj8-Qa-Hik" id="Zcm-h3-VWb"/>
                         <outlet property="locationLabel" destination="3AU-N8-ayh" id="tYX-ci-73X"/>
+                        <outlet property="lockedMapView" destination="m2o-eT-Crv" id="qlx-PV-AcL"/>
                         <outlet property="selectedFriendsView" destination="rk5-Jd-lEJ" id="0CF-eM-Adl"/>
                         <segue destination="pGg-6v-bdr" kind="push" identifier="popToCourseView" id="jiO-gg-T5e"/>
                     </connections>

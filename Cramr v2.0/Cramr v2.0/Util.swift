@@ -29,8 +29,8 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     )
 }
 
-func convertToSessionDict(sessionID: String, description: String, location: String, courseName: String) -> [String: String] {
-    return ["sessionID": sessionID, "description": description, "location": location, "course": courseName]
+func convertToSessionDict(sessionID: String, description: String, location: String, courseName: String, latitude: String, longitude: String ) -> [String: String] {
+    return ["sessionID": sessionID, "description": description, "location": location, "course": courseName, "latitude": latitude, "longitude": longitude]
 }
 
 func areEqualSessions(first: [String: String], second: [String: String]) -> Bool {

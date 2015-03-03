@@ -77,7 +77,7 @@ class DatabaseAccess {
                 var sessions = [[String: String]]()
                 var parseSessions = objects as [PFObject]
                 for object in parseSessions {
-                    sessions.append(convertToSessionDict(object.objectId, object["description"] as String, object["location"] as String, object["course"] as String))
+                    sessions.append(convertToSessionDict(object.objectId, object["description"] as String, object["location"] as String, object["course"] as String, object["latitude"] as String, object["longitude"] as String))
                 }
                 callback(sessions)
             } else {
@@ -89,7 +89,7 @@ class DatabaseAccess {
     
     
     
-    func addSession(userID: String, courseName: String, description: String, location: String, callback: ([String: String]) -> ()) {
+    func addSession(userID: String, courseName: String, description: String, location: String, geoTag: CLLocationCoordinate2D, callback: ([String: String]) -> ()) {
         if userID != "" {
             var new_session = PFObject(className: "Sessions")
             new_session["active_users"] = [userID]
@@ -97,11 +97,14 @@ class DatabaseAccess {
             new_session["location"] = location
             new_session["course"] = courseName
             new_session["start_time"] = NSDate()
+        
+            new_session["latitude"] = "\(geoTag.latitude)"
+            new_session["longitude"] = "\(geoTag.longitude)"
             new_session.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError!) -> Void in
                 if success {
                     localData.setSession(new_session.objectId)
-                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName)
+                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as String, new_session["longitude"] as String)
                     callback(sessionDict)
 
                 }

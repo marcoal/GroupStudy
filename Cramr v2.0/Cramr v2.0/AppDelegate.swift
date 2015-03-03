@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.joinSession(sessionID, userID: userID, callback: cb)
     }
     
-    func addSessionAD(userID: String, courseName: String, description: String, location:String, cb: ([String: String]) -> ()) {
-        self.DBAccess!.addSession(userID, courseName: courseName, description: description, location: location, callback: cb)
+    func addSessionAD(userID: String, courseName: String, description: String, location:String, geoTag: CLLocationCoordinate2D, cb: ([String: String]) -> ()) {
+        self.DBAccess!.addSession(userID, courseName: courseName, description: description, location: location, geoTag: geoTag, callback: cb)
     }
     
     func getSessionsAD(courseName: String, cb: ([[String: String]]) -> ()) {

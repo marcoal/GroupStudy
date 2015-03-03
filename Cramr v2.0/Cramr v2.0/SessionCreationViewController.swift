@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 
-class SessionCreationViewController : UIViewController, CLLocationManagerDelegate {
+class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
 
     
@@ -43,7 +43,9 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         } else if locationText == "" {
             errorAlert("Please fill in a location!")
         } else {
-            addSession(locationText, description: descriptionText)
+            var center: CGPoint = mapView.center
+            var loc: CLLocationCoordinate2D = mapView.camera.target
+            addSession(locationText, description: descriptionText, geoTag: loc)
         }
     }
     
@@ -60,8 +62,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         self.performSegueWithIdentifier("lockSessionView", sender: self)
     }
     
-    func addSession(location: String, description: String) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD(localData.getUserID(), courseName: self.courseName!, description: description, location: location, cb: addSessionCallback)
+    func addSession(location: String, description: String, geoTag: CLLocationCoordinate2D) {
+        (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD(localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -86,6 +88,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         }
     }
 
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
+    
     func setupMap() {
         
 
@@ -100,6 +107,10 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     override func viewDidLoad() {
+        
+        descriptionField.delegate = self
+        locationField.delegate = self
+        
         // It breaks here
         self.view.backgroundColor = .lightGrayColor()
         NSLog("couseName: " + self.courseName!)
