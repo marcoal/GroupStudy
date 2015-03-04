@@ -129,9 +129,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             }
             
         }
-        
-        // WHERE DO WE PUT THIS?
-        setupMap()
 
     }
     
@@ -145,8 +142,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         var position = CLLocationCoordinate2DMake(latitude, longitude)
         var marker = GMSMarker(position: position)
+        marker.icon = UIImage(named: "blue_map_marker")
+        marker.map = self.lockedMapView
         
-//        Failed attempt to resize image
+//        Failed attempt to resize marker icon
 //        var originalImage = UIImage(named: "blue_map_icon")
 //        var size = originalImage?.size
 //        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
@@ -154,17 +153,14 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
 //        originalImage?.drawInRect(markerContainer)
 //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
 //        UIGraphicsEndImageContext()
+//        marker.icon = UIImage(named: "blue_map_icon")
 
-        
-        //marker.icon = UIImage(named: "blue_map_icon")
-        marker.map = self.lockedMapView
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .darkGrayColor()
-        
         navigationItem.hidesBackButton = true
 
 //        if self.session == nil {
@@ -186,7 +182,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             desciptLabel.numberOfLines = 0
             desciptLabel.sizeToFit()
             
-            
+            // WHERE DO WE PUT THIS?
+            setupMap()
             
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {

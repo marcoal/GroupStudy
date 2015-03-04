@@ -43,8 +43,6 @@ class SessionContentViewController: UIViewController {
             currentUsersLabel.numberOfLines = 0
             currentUsersLabel.sizeToFit()
         }
-        //WHERE DO WE PUT THIS???
-        setupMap()
     }
     
     func setLabels() {
@@ -76,9 +74,8 @@ class SessionContentViewController: UIViewController {
         //        originalImage?.drawInRect(markerContainer)
         //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
         //        UIGraphicsEndImageContext()
-        
-        
-        //marker.icon = UIImage(named: "blue_map_icon")
+        //        marker.icon = UIImage(named: "blue_map_icon")
+        marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.sessionMapView
         
     }
@@ -87,6 +84,8 @@ class SessionContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .grayColor()
         self.setLabels()
+        //WHERE DO WE PUT THIS???
+        setupMap()
         
     }
     
