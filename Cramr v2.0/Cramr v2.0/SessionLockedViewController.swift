@@ -127,16 +127,37 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             } else {
                 currentUsers.text = currentUsers.text! + "\n" + userName
             }
-            setupMap()
+            
         }
+        
+        // WHERE DO WE PUT THIS?
+        setupMap()
+
     }
     
     func setupMap() {
-        var loc = CLLocationCoordinate2DMake((self.session["latitude"]! as NSString).doubleValue as CLLocationDegrees, (self.session["longitude"]! as NSString).doubleValue as CLLocationDegrees)
-        var camera = GMSCameraPosition.cameraWithTarget(loc, zoom: 17)
-        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        mapView.myLocationEnabled = true
-        self.lockedMapView = mapView
+        var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
+        var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
+
+        var camera = GMSCameraPosition.cameraWithLatitude(latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees, zoom: 17.0)
+        self.lockedMapView.camera = camera
+        self.lockedMapView.myLocationEnabled = true
+        
+        var position = CLLocationCoordinate2DMake(latitude, longitude)
+        var marker = GMSMarker(position: position)
+        
+//        Failed attempt to resize image
+//        var originalImage = UIImage(named: "blue_map_icon")
+//        var size = originalImage?.size
+//        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
+//        var markerContainer = CGRectMake(0, 0, 30, 30)
+//        originalImage?.drawInRect(markerContainer)
+//        var newImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext()
+
+        
+        //marker.icon = UIImage(named: "blue_map_icon")
+        marker.map = self.lockedMapView
     }
     
     

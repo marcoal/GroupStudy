@@ -18,6 +18,9 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var currentUsersLabel: UILabel!
     
+    @IBOutlet weak var sessionMapView: GMSMapView!
+    
+    
     func joinSessionCallback() {
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
@@ -40,6 +43,8 @@ class SessionContentViewController: UIViewController {
             currentUsersLabel.numberOfLines = 0
             currentUsersLabel.sizeToFit()
         }
+        //WHERE DO WE PUT THIS???
+        setupMap()
     }
     
     func setLabels() {
@@ -52,11 +57,37 @@ class SessionContentViewController: UIViewController {
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
     }
     
-
+    func setupMap() {
+        var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
+        var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
+        
+        var camera = GMSCameraPosition.cameraWithLatitude(latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees, zoom: 17.0)
+        self.sessionMapView.camera = camera
+        self.sessionMapView.myLocationEnabled = true
+        
+        var position = CLLocationCoordinate2DMake(latitude, longitude)
+        var marker = GMSMarker(position: position)
+        
+        //        Failed attempt to resize image
+        //        var originalImage = UIImage(named: "blue_map_icon")
+        //        var size = originalImage?.size
+        //        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
+        //        var markerContainer = CGRectMake(0, 0, 30, 30)
+        //        originalImage?.drawInRect(markerContainer)
+        //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
+        //        UIGraphicsEndImageContext()
+        
+        
+        //marker.icon = UIImage(named: "blue_map_icon")
+        marker.map = self.sessionMapView
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .grayColor()
         self.setLabels()
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
