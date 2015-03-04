@@ -37,3 +37,62 @@ func areEqualSessions(first: [String: String], second: [String: String]) -> Bool
     return first["description"] == second["description"] && first["sessionID"] == second["sessionID"] && first["course"] == second["course"]
 }
 
+
+func addBlur(superView : UIView, subViews : [UIView]) {
+    
+    var frame = CGRect()
+    var center = CGPoint(x: 0.0, y: 0.0)
+    var width = CGFloat(0.0)
+    var height = CGFloat(0.0)
+    
+    for var i = 0; i < subViews.count; i++ {
+        NSLog("here")
+        
+        width = subViews[i].frame.width
+        var temp = CGFloat(subViews[i].frame.height)
+        height += temp
+        
+        center.x += subViews[i].center.x
+        center.y += subViews[i].center.y
+    }
+
+    frame = CGRectMake(0, 0, width, height)
+    
+    center.x = center.x / CGFloat(subViews.count)
+    center.y = center.y / CGFloat(subViews.count)
+    
+    // Blur Effect
+    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+    var blurEffectView = UIVisualEffectView(effect: blurEffect)
+    blurEffectView.frame = frame
+    blurEffectView.center = center
+    
+    // Tint Effect
+    var tintView = UIView()
+    tintView.frame = frame
+    tintView.center = center
+    tintView.backgroundColor = cramrBlue
+    tintView.alpha = 0.35
+    
+    // Vibrancy effect
+    // var vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+    // var vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+    // vibrancyEffectView.frame = frame
+    
+    
+    
+    // Todo
+    superView.addSubview(tintView)
+    superView.addSubview(blurEffectView)
+    
+    for subView in subViews {
+        //For Vibrancy
+        //vibrancyEffectView.contentView.addSubview(subView)
+        
+        superView.bringSubviewToFront(subView)
+    }
+    
+    //For Vibrancy
+    //blurEffectView.contentView.addSubview(vibrancyEffectView)
+    //superView.addSubview(blurEffectView)
+}

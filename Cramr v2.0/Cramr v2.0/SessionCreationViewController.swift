@@ -19,6 +19,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             
         }
     }
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     let locationManager = CLLocationManager()
     
@@ -119,6 +121,13 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
         setupMap()
+        
+        addBlur(self.view, [self.descriptionLabel, self.locationLabel])
+        self.view.bringSubviewToFront(self.descriptionField)
+        self.view.bringSubviewToFront(self.locationField)
+        
+      
+        
     }
     
 }

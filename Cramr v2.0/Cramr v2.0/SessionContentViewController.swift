@@ -41,17 +41,18 @@ class SessionContentViewController: UIViewController {
                 currentUsersLabel.text = currentUsersLabel.text! + "\n" + userName
             }
             currentUsersLabel.numberOfLines = 0
-            currentUsersLabel.sizeToFit()
+            //currentUsersLabel.sizeToFit()
+            addBlur(self.view, [self.currentUsersLabel])
         }
     }
     
     func setLabels() {
-        descript.text = "We're working on: " + (session["description"]! as String)
-        locationLabel.text = "We're working at: " + (session["location"]! as String)
-        locationLabel.sizeToFit()
+        descript.text = "  We're working on: " + (session["description"]! as String)
+        locationLabel.text = "  We're working at: " + (session["location"]! as String)
+        //locationLabel.sizeToFit()
         currentUsersLabel.text = ""
         descript.numberOfLines = 0
-        descript.sizeToFit()
+        //descript.sizeToFit()
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
     }
     
@@ -86,6 +87,7 @@ class SessionContentViewController: UIViewController {
         self.setLabels()
         //WHERE DO WE PUT THIS???
         setupMap()
+        addBlur(self.view, [self.descript, self.locationLabel])
         
     }
     

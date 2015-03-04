@@ -116,6 +116,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     func fillTextBoxAndDismiss(text: String){
         self.selectedFriendsView.text = text
         self.dismissViewControllerAnimated(true, completion: nil)
+        //addBlur(self.view, [self.selectedFriendsView, self.locationLabel, self.desciptLabel, self.className])
     }
     
     func currentUsersCallback(userNamesAndIds: [(String, String)]) {
@@ -170,21 +171,21 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         if self.session != nil {
             var fullCourseName = (self.session["course"]! as String)
             className.text = getCourseID(fullCourseName)
-            desciptLabel.text = "We're working on: " + (self.session["description"]! as String)
-            locationLabel.text = "We're working at: " + (self.session["location"]! as String)
+            desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
+            locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
             
-            desciptLabel.sizeToFit()
-            locationLabel.sizeToFit()
+            //desciptLabel.sizeToFit()
+            //locationLabel.sizeToFit()
             
             currentUsers.text = ""
             currentUsers.numberOfLines = 0
-            currentUsers.sizeToFit()
+            //currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
-            desciptLabel.sizeToFit()
+            //desciptLabel.sizeToFit()
             
             // WHERE DO WE PUT THIS?
             setupMap()
-            
+            addBlur(self.view, [self.className, self.desciptLabel, self.locationLabel])
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
 //            desciptLabel.text = "NO SESSION"
