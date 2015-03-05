@@ -17,22 +17,11 @@ class SessionBrowserViewController : UIViewController {
     
     var courseName: String? {
         didSet {
-            // Update the view.
-            //            self.configureView()
         }
     }
     
-    @IBOutlet weak var createButton: UIButton!
     
-    
-    
-//    @IBAction func popToLockedClass(segue:UIStoryboardSegue) {
-//        self.performSegueWithIdentifier("lockSessionView", sender: self)
-//    }
-    
-
-    
-    @IBAction func newSesh(sender: AnyObject) {
+    func newSesh() {
         self.performSegueWithIdentifier("createSessionView", sender: self)
     }
 
@@ -41,17 +30,18 @@ class SessionBrowserViewController : UIViewController {
         super.viewDidLoad()
 
         if sessions?.count == 0 {
-            self.newSesh(0)
-            self.createButton.hidden = true
-            
+            self.newSesh()
         }
         
         self.view.backgroundColor = .lightGrayColor()
         self.title = getCourseID(self.courseName!)
-        self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
-        self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
-        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "newSesh")
     }
+    
+    
     
     
     

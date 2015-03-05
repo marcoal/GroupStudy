@@ -45,9 +45,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func designLayout() {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        let logo = UIImage(named: "Cramr Logo")
-        let imageView = UIImageView(image:logo)
-        self.navigationItem.titleView = imageView
+//        let logo = UIImage(named: "white_cramr_logo")
+//        let imageView = UIImageView(image:logo)
+//        self.navigationItem.titleView = imageView
+        self.title = "Cramr"
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
@@ -56,7 +57,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationController?.navigationBar.tintColor = .whiteColor()
         self.navigationController?.navigationBar.barTintColor = cramrBlue
         self.view.backgroundColor = .clearColor()
-        self.tableView.backgroundView = UIImageView(image: UIImage(named: "test_background"))
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "HelveticaNeue-Medium", size: 21.0)!]
+        self.tableView.backgroundColor = UIColor.whiteColor()
+//        self.tableView.backgroundView = UIImageView(image: UIImage(named: "test_background"))
         
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.hidesBackButton = true

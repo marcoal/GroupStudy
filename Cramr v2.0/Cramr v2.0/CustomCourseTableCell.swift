@@ -14,7 +14,10 @@ class CustomCourseTableCell: UITableViewCell {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.contentView.backgroundColor = .clearColor()
+        
     }
+    
+    var blurAdded: Bool = false
     
     
     @IBOutlet weak var courseNameLabel: UILabel!
@@ -30,6 +33,14 @@ class CustomCourseTableCell: UITableViewCell {
 //        internalUpdate(courseName)
     }
     
+    func addCellBlur() {
+        addBlur(self.contentView, [self.contentView])
+        for subView in [self.courseNameLabel, self.numPeopleLabel, self.numSessionsLabel, self.plusIcon, self.peopleIcon, self.bookIcon] {
+            self.contentView.bringSubviewToFront(subView)
+        }
+        self.blurAdded = true
+    }
+    
     func updateCellName(courseName: String) {
         self.courseNameLabel?.text = getCourseID(courseName)
     }
@@ -43,6 +54,10 @@ class CustomCourseTableCell: UITableViewCell {
         self.bookIcon.hidden = numSessions == 0
         self.peopleIcon.hidden = numSessions == 0
         self.plusIcon.hidden = numSessions != 0
+        
+        if !blurAdded {
+            addCellBlur()
+        }
     }
     
 }

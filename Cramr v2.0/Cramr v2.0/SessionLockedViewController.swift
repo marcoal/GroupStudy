@@ -15,8 +15,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var selectedFriendsView: UILabel!
     
-    @IBOutlet weak var className: UILabel!
-    
     @IBOutlet weak var desciptLabel: UILabel!
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -165,6 +163,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .darkGrayColor()
         navigationItem.hidesBackButton = true
+//        self.navigationController?.navigationBarHidden = true
 
 //        if self.session == nil {
 //            self.session == localData.getSessionID() as String
@@ -172,7 +171,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         if self.session != nil {
             var fullCourseName = (self.session["course"]! as String)
-            className.text = getCourseID(fullCourseName)
+//            className.text = getCourseID(fullCourseName)
             desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
             locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
             
@@ -185,9 +184,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             desciptLabel.numberOfLines = 0
             //desciptLabel.sizeToFit()
             
-            // WHERE DO WE PUT THIS?
+            self.title = getCourseID(fullCourseName)
             setupMap()
-            addBlur(self.view, [self.className, self.desciptLabel, self.locationLabel])
+            addBlur(self.view, [self.desciptLabel, self.locationLabel])
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
 //            desciptLabel.text = "NO SESSION"
