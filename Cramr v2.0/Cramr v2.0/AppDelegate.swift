@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFFacebookUtils.initializeFacebook()
         FBLoginView.self
-        UIBarButtonItem.appearance().tintColor = cramrBlue
+        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         
 
         GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")

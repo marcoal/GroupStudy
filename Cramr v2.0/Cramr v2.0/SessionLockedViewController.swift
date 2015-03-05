@@ -130,6 +130,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             }
             
         }
+        
+        addBlur(self.view, [self.currentUsers])
 
     }
     
