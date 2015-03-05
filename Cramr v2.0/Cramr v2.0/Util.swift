@@ -10,6 +10,12 @@ import Foundation
 
 var cramrBlue = UIColorFromRGB(UInt(9550335))
 
+var cramrEggshell = UIColorFromRGB(UInt(14543615))
+
+var cramrPurple = UIColorFromRGB(UInt(10061055))
+
+var cramrAqua = UIColorFromRGB(UInt(8712703))
+
 func getCourseID(item: String) -> String {
     var arr = split(item) {$0 == ":"}
     return arr[0]
@@ -62,7 +68,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     center.y = center.y / CGFloat(subViews.count)
     
     // Blur Effect
-    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
     var blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = frame
     blurEffectView.center = center
@@ -71,7 +77,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     var tintView = UIView()
     tintView.frame = frame
     tintView.center = center
-    tintView.backgroundColor = cramrBlue
+    tintView.backgroundColor = cramrAqua
     tintView.alpha = 0.35
     
     // Vibrancy effect
@@ -82,7 +88,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     
     
     // Todo
-    superView.addSubview(tintView)
+    //superView.addSubview(tintView)
     superView.addSubview(blurEffectView)
     
     for subView in subViews {

@@ -13,7 +13,7 @@ class CustomCourseTableCell: UITableViewCell {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.contentView.backgroundColor = .lightGrayColor()
+        self.contentView.backgroundColor = .clearColor()
     }
     
     
