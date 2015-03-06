@@ -31,6 +31,10 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         classSearch.delegate = self
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +44,13 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        view.backgroundColor = .darkGrayColor()
-        self.courseTable.alpha = 0.7
+        view.backgroundColor = .whiteColor()
+        self.courseTable.alpha = 0.9
         self.courseTable.tableFooterView = UIView()
+        
+        self.classSearch.layer.borderWidth = 1
+        self.classSearch.layer.borderColor = cramrBlue.CGColor
+
     }
     
     // TABLE VIEW FUNCTIONS
@@ -54,8 +62,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
         cell.textLabel?.text = self.courses[indexPath.row] as? String
-        cell.contentView.backgroundColor = .grayColor()
-        cell.textLabel?.textColor = .whiteColor()
+        cell.contentView.backgroundColor = .whiteColor()
+        cell.textLabel?.textColor = cramrBlue
         return cell
     }
     

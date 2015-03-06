@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
         

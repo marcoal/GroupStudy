@@ -13,6 +13,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
+    @IBOutlet weak var inviteFriendsButton: UIButton!
+    
+    @IBOutlet weak var leaveButton: UIButton!
+    
     @IBOutlet weak var selectedFriendsView: UILabel!
     
     @IBOutlet weak var desciptLabel: UILabel!
@@ -130,7 +134,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
         
         addBlur(self.view, [self.currentUsers])
-
     }
     
     func setupMap() {

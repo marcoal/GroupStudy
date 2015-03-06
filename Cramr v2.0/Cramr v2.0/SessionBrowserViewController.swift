@@ -28,7 +28,6 @@ class SessionBrowserViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         if sessions?.count == 0 {
             self.newSesh()
         }
@@ -47,8 +46,7 @@ class SessionBrowserViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sessionSwiper" {
-            var destController = segue.destinationViewController as SessionViewController
-            destController.sessions = self.sessions!
+            (segue.destinationViewController as SessionViewController).sessions = self.sessions!
         } else if segue.identifier == "createSessionView" {
             (segue.destinationViewController as SessionCreationViewController).courseName = self.courseName
         }

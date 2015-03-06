@@ -84,9 +84,10 @@ class SessionContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .grayColor()
-        self.setLabels()
+        
         //WHERE DO WE PUT THIS???
         setupMap()
+        self.setLabels()
         addBlur(self.view, [self.descript, self.locationLabel])
         
     }

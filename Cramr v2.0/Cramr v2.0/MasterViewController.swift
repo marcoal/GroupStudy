@@ -15,10 +15,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var coursesIn: [String] = []
     
+
     
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
+
         refreshCourseList()
         self.tableView.reloadData()
+
     }
     
     override func awakeFromNib() {
@@ -138,6 +141,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             (UIApplication.sharedApplication().delegate as AppDelegate).deleteCourseFromUserAD(localData.getUserID(), courseName: (self.coursesIn[indexPath.row] as String), index: indexPath, cb: deleteCourseCallback)
         }
     }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {

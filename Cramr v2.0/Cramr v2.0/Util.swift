@@ -89,6 +89,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     
     // Todo
     //superView.addSubview(tintView)
+    
     superView.addSubview(blurEffectView)
     
     for subView in subViews {
