@@ -27,6 +27,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var lockedMapView: GMSMapView!
     
+    @IBOutlet weak var currentMembersScrollView: UIScrollView!
+    
+    
+    
     var session: [String: String]! {
         didSet {
             
@@ -121,6 +125,45 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         //addBlur(self.view, [self.selectedFriendsView, self.locationLabel, self.desciptLabel, self.className])
     }
     
+    func displayCurrentUsers() {
+        self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
+        
+        self.currentMembersScrollView.canCancelContentTouches = false
+        self.currentMembersScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
+        self.currentMembersScrollView.clipsToBounds = false
+        self.currentMembersScrollView.scrollEnabled = true
+        //self.currentMembersScrollView.pagingEnabled = true
+        
+        
+        var cx = CGFloat(5)
+        var cy = CGFloat(25)
+        
+        for var i = 0; i < 10; i++ {
+            var im = UIImage(named: "test_background")
+            
+            var imView = UIImageView(image: im)
+            
+            var rect = imView.frame
+            rect.size.height = 50.0
+            rect.size.width = 50.0
+            rect.origin.x = cx
+            rect.origin.y = cy
+            
+            imView.frame = rect
+            imView.layer.cornerRadius = imView.frame.size.width / 2
+            imView.clipsToBounds = true
+            
+            self.currentMembersScrollView.addSubview(imView)
+            
+            cx += imView.frame.size.width + 10
+        
+        }
+        
+        self.currentMembersScrollView.contentSize = CGSizeMake(cx, self.currentMembersScrollView.bounds.size.height)
+        
+        addBlur(self.view, [self.currentMembersScrollView])
+    }
+    
     func currentUsersCallback(userNamesAndIds: [(String, String)]) {
         for elem in userNamesAndIds {
             var userName = elem.0
@@ -134,6 +177,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
         
         addBlur(self.view, [self.currentUsers])
+        displayCurrentUsers()
     }
     
     func setupMap() {
