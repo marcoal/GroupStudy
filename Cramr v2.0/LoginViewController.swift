@@ -17,10 +17,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     
     var avplayer: AVPlayer = AVPlayer()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         self.view.bringSubviewToFront(self.fbLoginView)
@@ -36,12 +35,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
         var height = UIScreen.mainScreen().bounds.size.height
         var width = height*1.77
-
-//        var layer = AVPlayerLayer(player: self.avplayer)
-//        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-//        layer.frame = CGRectMake(0,0,width, height)
-//        self.view.layer.addSublayer(layer)
-//        self.avplayer.play()
+        
+        //        var layer = AVPlayerLayer(player: self.avplayer)
+        //        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+        //        layer.frame = CGRectMake(0,0,width, height)
+        //        self.view.layer.addSublayer(layer)
+        //        self.avplayer.play()
         // Do any additional setup for FB
     }
     
@@ -51,14 +50,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         p.seekToTime(kCMTimeZero)
         p.play()
     }
-
+    
     func setCurrUser() {
         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
                 localData.setUserID(resultdict["id"] as String)
-//                localData.setUserName()
+                //                localData.setUserName()
             }
         }
     }
@@ -66,27 +65,48 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     // Facebook Delegate Methods
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-        NSLog("User Logged In")
+        // NSLog("User Logged In")
         self.performSegueWithIdentifier("toMaster", sender: self)
-
-    }
-    
-    func loginViewSignupUserCallback() {
-    
+        
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        
-        NSLog("loginViewFetchedUserInfo")
-        
-        NSLog("User: \(user)")
-        NSLog("User ID: \(user.objectID)")
-        NSLog("User Name: \(user.name)")
+        //        NSLog("User: \(user)")
+        //        NSLog("User ID: \(user.objectID)")
+        //        NSLog("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as String
-        NSLog("User Email: \(userEmail)")
+        //        NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
         
-        (UIApplication.sharedApplication().delegate as AppDelegate).signupUserAD(user, cb: loginViewSignupUserCallback)
+        //        setCurrUser()
+        
+        var query = PFUser.query();
+        query.whereKey("userID", containsString: user.objectID)
+        query.findObjectsInBackgroundWithBlock {
+            (users: [AnyObject]!, error: NSError!) -> Void in
+            if users.count == 0 {
+                var parse_user = PFUser()
+                parse_user.username = user.name
+                parse_user.password = ""
+                parse_user.email = userEmail
+                parse_user["userID"] = user.objectID
+                
+                var imageData : UIImage!
+                let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+                if let data = NSData(contentsOfURL: url!) {
+                    imageData = UIImage(data: data)
+                }
+                let image = UIImagePNGRepresentation(imageData)
+                let imageFile = PFFile(name:"profilepic.png", data:image)
+                var userPhoto = PFObject(className:"UserPhoto")
+                userPhoto["imageName"] = "Profile pic of \(user.objectID)"
+                userPhoto["imageFile"] = imageFile
+                parse_user["image"] = userPhoto
+                
+                parse_user.signUp()
+            }
+        }
+        
         localData.setUserID(user.objectID)
         localData.setUserName(user.name)
     }

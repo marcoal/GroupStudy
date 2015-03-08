@@ -52,7 +52,6 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     var height = CGFloat(0.0)
     
     for var i = 0; i < subViews.count; i++ {
-        NSLog("here")
         
         width = subViews[i].frame.width
         var temp = CGFloat(subViews[i].frame.height)
@@ -61,7 +60,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
         center.x += subViews[i].center.x
         center.y += subViews[i].center.y
     }
-
+    
     frame = CGRectMake(0, 0, width, height)
     
     center.x = center.x / CGFloat(subViews.count)

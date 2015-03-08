@@ -13,11 +13,12 @@ var localData = LocalDatastore()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     var DBAccess: DatabaseAccess?
-
+    var session = [String: String]()
+    
     func setupParse() {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
@@ -38,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func addCourseToUserAD(userID: String, courseName: String, cb: () -> ()) {
         self.DBAccess!.addCourseToUser(userID, courseName: courseName, callback: cb)
     }
-
+    
     func deleteCourseFromUserAD(userID: String, courseName: String, index: NSIndexPath, cb: (NSIndexPath) -> ()) {
         self.DBAccess!.deleteCourseFromUser(userID, courseName: courseName, index: index, callback: cb)
     }
@@ -46,13 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func updateCellAD(courseName: String, cell: UITableViewCell, cb:(Int, Int, UITableViewCell) -> ()) {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
-
+    
     func joinSessionAD(sessionID: String, userID: String, cb: () -> ()) {
         self.DBAccess!.joinSession(sessionID, userID: userID, callback: cb)
     }
     
     func addSessionAD(userID: String, courseName: String, description: String, location:String, geoTag: CLLocationCoordinate2D, cb: ([String: String]) -> ()) {
         self.DBAccess!.addSession(userID, courseName: courseName, description: description, location: location, geoTag: geoTag, callback: cb)
+    }
+    
+    func getSessionInfoAD(fromID: String, cb:([[String: String]]) -> ()){
+        self.DBAccess!.getSessionInfo(fromID, callback: cb)
     }
     
     func getSessionsAD(courseName: String, cb: ([[String: String]]) -> ()) {
@@ -67,22 +72,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.getSessionUsers(sessionID, callback: cb)
     }
     
-    func signupUserAD(user: FBGraphUser, cb: () -> ()) {
-        self.DBAccess!.signupUser(user, callback: cb)
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        self.setupParse()       // Set Parse Application keys and enable local datastore
+        self.setupDBAccess()    // Setup local datastore
+        
+        // Set up Facebook
+        PFFacebookUtils.initializeFacebook()
+        
+        
+        // Set up Google Maps Services Key
+        GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
+        
+        
+        // Register for Push Notitications
+        self.registerPushNotifications(application)
+        
+        // Navigation Controler Logic
+        /* IMPOSSIBLE TO DEBUG
+        let options = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as NSDictionary
+        if launchOptions != nil {
+        let notificationPayload = options
+        var message = notificationPayload["message"] as String
+        var seshid = notificationPayload["seshid"] as String
+        var courseName = notificationPayload["courseName"] as String
+        var userid = localData.getUserID()
+        self.promptToJoin(userid, seshid: seshid, courseName: courseName, message: message)
+        
+        } else if localData.getSessionID() != ""{
+        */
+        if localData.getSessionID() != ""{
+            self.go_to_locked()
+            return true
+        } // Else if the user has already signed in before
+        else if localData.getUserID() != ""{
+            self.go_to_masterview()
+            return true
+        } // If none of above apply, log in through facebook
+        else{
+            UIBarButtonItem.appearance().tintColor = cramrBlue
+            let navController = self.window!.rootViewController as UINavigationController
+            self.window?.makeKeyAndVisible()
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as LoginViewController
+            navController.pushViewController(vc, animated: false)
+        }
+        return true
     }
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        //let navigationController = self.window!.rootViewController as UINavigationController
-        
-        //To get the other view to work
-        //let controller = navigationController.topViewController as MasterViewController
-        //controller.managedObjectContext = self.managedObjectContext
-
-        self.setupParse()
-        self.setupDBAccess()
-        var navController = UIViewController?()
-
+    func go_to_locked_from_push(seshid: String){
+        self.getSessionInfoAD(seshid, cb: self.getSessionInfoCallback)
+    }
+    
+    func getSessionInfoCallback(session: [[String: String]]) {
+        self.session = session[0]
+        self.window?.makeKeyAndVisible()
+        let navController = self.window!.rootViewController as UINavigationController
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("sessionLockedStoryBoardID") as SessionLockedViewController
+        vc.session = self.session
+        navController.pushViewController(vc, animated: false)
+    }
+    
+    func go_to_locked(){
+        self.getSessionInfoAD(localData.getSessionID(), cb: self.getSessionInfoCallback)
+    }
+    
+    func go_to_masterview(){
+        self.window?.makeKeyAndVisible()
+        let navController = self.window!.rootViewController as UINavigationController
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("masterViewStoryBoardID") as MasterViewController
+        navController.pushViewController(vc, animated: false)
+    }
+    
+    func registerPushNotifications(application: UIApplication){
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector("registerUserNotificationSettings:") {
             
@@ -96,24 +159,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Register for Push Notifications before iOS 8
             application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
         }
-        
-        PFFacebookUtils.initializeFacebook()
-        FBLoginView.self
-        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
-        
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-
-        GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
-        
-        return true
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println("We Fucked Up on registering remote notifications (error)")
     }
     
+    func promptToJoin(userid: String, seshid: String, courseName: String, message: String){
+        let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
+        let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
+            self.addCourseToUserAD(userid, courseName: courseName, cb: {})
+            self.joinSessionAD(seshid, userID: userid, cb: {})
+            self.go_to_locked_from_push(seshid)
+        }
+        alert.addAction(joinAction)
+        let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+        }
+        alert.addAction(closeAction)
+        let navController = self.window!.rootViewController as UINavigationController
+        navController.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
+        var message = userInfo["message"] as String
+        var seshid = userInfo["seshid"] as String
+        var courseName = userInfo["courseName"] as String
+        var userid = localData.getUserID()
+        self.promptToJoin(userid, seshid: seshid, courseName: courseName, message: message)
+        
     }
     
     
@@ -137,44 +210,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, isable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
-
-
+    
+    
+    
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
+        
         FBSession.activeSession().close()
     }
     
-
+    
     // MARK: - Core Data stack
-
+    
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "Casa.Cramr_v2_0" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] as NSURL
-    }()
-
+        }()
+    
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("Cramr_v2_0", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
-
+        }()
+    
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
@@ -197,8 +270,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return coordinator
-    }()
-
+        }()
+    
     lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
@@ -208,10 +281,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
-    }()
-
+        }()
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
@@ -223,6 +296,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
 }
 

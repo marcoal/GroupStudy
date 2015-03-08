@@ -71,7 +71,7 @@ class DatabaseAccess {
                             var tup = (userName, userID)
                             usersTupleArray.append(tup)
                         }
-                    callback(usersTupleArray)
+                        callback(usersTupleArray)
                     }
                 }
                 
@@ -97,10 +97,30 @@ class DatabaseAccess {
                 } else {
                     session.deleteInBackground()
                 }
+                localData.deleteSession()
                 callback()
             } else {
                 // Log details of the failure
                 NSLog("Error in leaveSession: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+    
+    func getSessionInfo(fromID: String, callback:([[String: String]]) -> ()){
+        var sessionQuery = PFQuery(className: "Sessions")
+        sessionQuery.whereKey("objectId", equalTo: fromID)
+        sessionQuery.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                var sessions = [[String: String]]()
+                var parseSessions = objects as [PFObject]
+                for object in parseSessions {
+                    sessions.append(convertToSessionDict(object.objectId, object["description"] as String, object["location"] as String, object["course"] as String, object["latitude"] as String, object["longitude"] as String))
+                }
+                callback(sessions)
+            } else {
+                // Log details of the failure
+                NSLog("Error in getSessions: %@ %@", error, error.userInfo!)
             }
         }
     }
@@ -135,7 +155,7 @@ class DatabaseAccess {
             new_session["location"] = location
             new_session["course"] = courseName
             new_session["start_time"] = NSDate()
-        
+            
             new_session["latitude"] = "\(geoTag.latitude)"
             new_session["longitude"] = "\(geoTag.longitude)"
             new_session.saveInBackgroundWithBlock {
@@ -144,7 +164,7 @@ class DatabaseAccess {
                     localData.setSession(new_session.objectId)
                     var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as String, new_session["longitude"] as String)
                     callback(sessionDict)
-
+                    
                 }
             }
         }
@@ -246,7 +266,7 @@ class DatabaseAccess {
         }
     }
     
-
+    
     func getCourses(userID: String, tableReload: Bool, callback: ([String], Bool) -> ()) {
         var query_courses = PFQuery(className: "EnrolledCourses")
         query_courses.whereKey("userID", equalTo: userID)
@@ -300,7 +320,7 @@ class DatabaseAccess {
                     // Log details of the failure
                     NSLog("Error in getCourseList: %@ %@", error, error.userInfo!)
                 }
-
+                
             }
         }
     }
