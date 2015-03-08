@@ -38,7 +38,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     @IBAction func leaveSession(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD(localData.getUserID(), sessionID: self.session["sessionID"]!, cb: leaveSessionCallback)
+        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD(localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
     }
     
     @IBAction func inviteFriends(sender: AnyObject) {
@@ -49,7 +49,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
                 allowLoginUI: true,
                 completionHandler: { (session:FBSession!, state:FBSessionState, error:NSError!) in
                     
-                    if(error == nil){
+                    if(error != nil){
                         var alertView = UIAlertController(title: "Error Fetching Friends", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                         self.presentViewController(alertView, animated: true, completion: nil)
                     }
@@ -57,7 +57,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
                         self.inviteFriends(sender)
                     }
                 }
-
+                
             );
             return;
         }
@@ -74,7 +74,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
     }
     
-     func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
+    func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
         var text = NSMutableString()
         let picker = sender as FBFriendPickerViewController
         
@@ -84,25 +84,30 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             println(id)
             var innerquery = PFQuery(className: "User")
             innerquery.whereKey("userID", equalTo: id)
-                
+            
             var query = PFInstallation.query()
             query.whereKey("user", matchesQuery: innerquery)
             
             // Send a notification to all devices subscribed to the "Giants" channel.
             let push = PFPush()
             push.setChannel("a"+id)
-
+            
             var course = self.session["course"]! as String
-            push.setMessage(localData.getUserName() + " invited you to work on " + course)
-
+            let data = [
+                "alert" : localData.getUserName() + " invited you to work on " + course,
+                "seshid" : localData.getSessionID(),
+                "courseName" : course,
+                "message" :localData.getUserName() + " invited you to work on " + course
+            ]
+            push.setData(data)
             push.sendPushInBackground()
             
             
-//            //Send Push
-//            var push = PFPush()
-//            push.setQuery(query)
-//            push.setMessage(localData.getUserID() + "Invited you to a session")
-//            push.sendPushInBackground()
+            //            //Send Push
+            //            var push = PFPush()
+            //            push.setQuery(query)
+            //            push.setMessage(localData.getUserID() + "Invited you to a session")
+            //            push.sendPushInBackground()
             
             text.appendString(friend.name)
         }
@@ -139,7 +144,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     func setupMap() {
         var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
         var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
-
+        
         var camera = GMSCameraPosition.cameraWithLatitude(latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees, zoom: 17.0)
         self.lockedMapView.camera = camera
         self.lockedMapView.myLocationEnabled = true
@@ -149,16 +154,16 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.lockedMapView
         
-//        Failed attempt to resize marker icon
-//        var originalImage = UIImage(named: "blue_map_icon")
-//        var size = originalImage?.size
-//        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
-//        var markerContainer = CGRectMake(0, 0, 30, 30)
-//        originalImage?.drawInRect(markerContainer)
-//        var newImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext()
-//        marker.icon = UIImage(named: "blue_map_icon")
-
+        //        Failed attempt to resize marker icon
+        //        var originalImage = UIImage(named: "blue_map_icon")
+        //        var size = originalImage?.size
+        //        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
+        //        var markerContainer = CGRectMake(0, 0, 30, 30)
+        //        originalImage?.drawInRect(markerContainer)
+        //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
+        //        UIGraphicsEndImageContext()
+        //        marker.icon = UIImage(named: "blue_map_icon")
+        
     }
     
     
@@ -166,15 +171,14 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .darkGrayColor()
         navigationItem.hidesBackButton = true
-//        self.navigationController?.navigationBarHidden = true
-
-//        if self.session == nil {
-//            self.session == localData.getSessionID() as String
-//        }
+        //        self.navigationController?.navigationBarHidden = true
+        
+        //        if self.session == nil {
+        //            self.session == localData.getSessionID() as String
+        //        }
         
         if self.session != nil {
             var fullCourseName = (self.session["course"]! as String)
-//            className.text = getCourseID(fullCourseName)
             desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
             locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
             
@@ -192,9 +196,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             addBlur(self.view, [self.desciptLabel, self.locationLabel])
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
-//            desciptLabel.text = "NO SESSION"
+            //            desciptLabel.text = "NO SESSION"
         }
-
+        
     }
     
 }

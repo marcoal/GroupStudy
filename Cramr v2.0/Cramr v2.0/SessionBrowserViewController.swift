@@ -24,10 +24,11 @@ class SessionBrowserViewController : UIViewController {
     func newSesh() {
         self.performSegueWithIdentifier("createSessionView", sender: self)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if sessions?.count == 0 {
             self.newSesh()
         }
@@ -51,5 +52,5 @@ class SessionBrowserViewController : UIViewController {
             (segue.destinationViewController as SessionCreationViewController).courseName = self.courseName
         }
     }
-
+    
 }

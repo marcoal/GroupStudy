@@ -12,7 +12,7 @@ import MapKit
 
 class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
-
+    
     
     var courseName: String?  {
         didSet {
@@ -89,7 +89,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             locationManager.stopUpdatingLocation()
         }
     }
-
+    
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         textField.resignFirstResponder()
         return true;
@@ -97,7 +97,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     
     func setupMap() {
         
-
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -105,7 +105,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         var centered: CGPoint = mapView.center
         centered.y -= self.pin.frame.height / 2.0
         pin.center = centered
-
+        
     }
     
     override func viewDidLoad() {
@@ -115,7 +115,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         
         // It breaks here
         self.view.backgroundColor = .lightGrayColor()
-        NSLog("couseName: " + self.courseName!)
+        //NSLog("couseName: " + self.courseName!)
         self.title = getCourseID(self.courseName!)
         self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
         self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
@@ -126,7 +126,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         self.view.bringSubviewToFront(self.descriptionField)
         self.view.bringSubviewToFront(self.locationField)
         
-      
+        
         
     }
     

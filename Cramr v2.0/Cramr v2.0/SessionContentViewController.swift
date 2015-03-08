@@ -25,11 +25,11 @@ class SessionContentViewController: UIViewController {
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
-
+    
     @IBAction func joinButton(sender: AnyObject) {
         (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: localData.getUserID(), cb: joinSessionCallback)
     }
-
+    
     func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {
         for elem in userNamesAndIds {
             var userName = elem.0
