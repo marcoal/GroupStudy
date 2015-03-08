@@ -109,7 +109,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
             endingLineNumber = "69"
-            landmarkName = "setCurrUser()"
+            landmarkName = "loginViewShowingLoggedInUser(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/AppDelegate.swift"
-            timestampString = "447028299.698786"
+            timestampString = "447543588.544806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "AppDelegate"
             landmarkType = "3">
          </BreakpointContent>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/DatabaseAccess.swift"
-            timestampString = "447032737.059433"
+            timestampString = "447543588.544806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "joinSession(_:userID:callback:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/DatabaseAccess.swift"
-            timestampString = "447032737.059433"
+            timestampString = "447543588.544806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "joinSession(_:userID:callback:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -532,11 +532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/DatabaseAccess.swift"
-            timestampString = "446944934.599864"
+            timestampString = "447543588.544806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "getSessionUsers(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -548,11 +548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Cramr v2.0/DatabaseAccess.swift"
-            timestampString = "446944934.599864"
+            timestampString = "447543588.544806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "getSessionUsers(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>

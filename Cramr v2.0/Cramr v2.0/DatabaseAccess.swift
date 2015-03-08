@@ -11,6 +11,44 @@ import CoreData
 
 class DatabaseAccess {
     
+    func signupUser(user: FBGraphUser, callback: () -> ()) {
+        var query = PFUser.query();
+        query.whereKey("userID", containsString: user.objectID)
+        query.findObjectsInBackgroundWithBlock {
+            (users: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                if users.count == 0 {
+                    NSLog("Grabbing picture!")
+                    var parse_user = PFUser()
+                    parse_user.username = user.name
+                    parse_user.password = ""
+                    parse_user.email = user.objectForKey("email") as String
+                    parse_user["userID"] = user.objectID
+                    
+                    var imageData : UIImage!
+                    let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+                    if let data = NSData(contentsOfURL: url!) {
+                        imageData = UIImage(data: data)
+                    }
+                    let image = UIImagePNGRepresentation(imageData)
+                    let imageFile = PFFile(name:"profilepic.png", data:image)
+                    var userPhoto = PFObject(className:"UserPhoto")
+                    userPhoto["imageName"] = "Profile pic of \(user.objectID)"
+                    userPhoto["imageFile"] = imageFile
+                    parse_user["image"] = userPhoto
+                    
+                    parse_user.signUpInBackground()
+                }
+            } else {
+                NSLog("Error in signupUser: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+    
+    
+    
+    
+    
     func getSessionUsers(sessionID: String, callback: ([(String, String)]) -> ()) {
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {

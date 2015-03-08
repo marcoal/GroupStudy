@@ -71,7 +71,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
 
     }
     
+    func loginViewSignupUserCallback() {
+    
+    }
+    
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        
+        NSLog("loginViewFetchedUserInfo")
+        
         NSLog("User: \(user)")
         NSLog("User ID: \(user.objectID)")
         NSLog("User Name: \(user.name)")
@@ -79,35 +86,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         NSLog("User Email: \(userEmail)")
         nameLabel.text = user.name
         
-        //        setCurrUser()
-        
-        var query = PFUser.query();
-        query.whereKey("userID", containsString: user.objectID)
-        query.findObjectsInBackgroundWithBlock {
-            (users: [AnyObject]!, error: NSError!) -> Void in
-            if users.count == 0 {
-                var parse_user = PFUser()
-                parse_user.username = user.name
-                parse_user.password = ""
-                parse_user.email = userEmail
-                parse_user["userID"] = user.objectID
-                
-                var imageData : UIImage!
-                let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
-                if let data = NSData(contentsOfURL: url!) {
-                    imageData = UIImage(data: data)
-                }
-                let image = UIImagePNGRepresentation(imageData)
-                let imageFile = PFFile(name:"profilepic.png", data:image)
-                var userPhoto = PFObject(className:"UserPhoto")
-                userPhoto["imageName"] = "Profile pic of \(user.objectID)"
-                userPhoto["imageFile"] = imageFile
-                parse_user["image"] = userPhoto
-                
-                parse_user.signUp()
-            }
-        }
-    
+        (UIApplication.sharedApplication().delegate as AppDelegate).signupUserAD(user, cb: loginViewSignupUserCallback)
         localData.setUserID(user.objectID)
         localData.setUserName(user.name)
     }

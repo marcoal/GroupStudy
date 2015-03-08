@@ -67,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.getSessionUsers(sessionID, callback: cb)
     }
     
+    func signupUserAD(user: FBGraphUser, cb: () -> ()) {
+        self.DBAccess!.signupUser(user, callback: cb)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //let navigationController = self.window!.rootViewController as UINavigationController
