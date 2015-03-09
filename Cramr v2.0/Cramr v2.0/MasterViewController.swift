@@ -92,9 +92,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             dispatch_async(dispatch_get_main_queue()) {
-                if !isConnectedToNetwork() {
+                if !self.appDelegate.isConnectedToNetwork() {
                     var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }

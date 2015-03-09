@@ -16,9 +16,10 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     
     var courseName: String?  {
         didSet {
-            
+            self.title = getCourseID(self.courseName!)
         }
     }
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
@@ -116,7 +117,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         // It breaks here
         self.view.backgroundColor = .lightGrayColor()
         //NSLog("couseName: " + self.courseName!)
-        self.title = getCourseID(self.courseName!)
+        
         self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
         self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue

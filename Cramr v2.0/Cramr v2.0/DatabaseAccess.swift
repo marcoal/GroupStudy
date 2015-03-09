@@ -82,37 +82,65 @@ class DatabaseAccess {
         }
         
     }
-    
+
     func getSessionUsersPictures(userIDs: [String], callback: ([String: UIImage]) -> ()) {
         NSLog("querying photo")
         var userImages = [String: UIImage]()
-        var counter = 0
         for userID in userIDs {
-            var query = PFQuery(className: "UserPhoto")
-            query.whereKey("imageName", containsString: userID)
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
-                if error == nil {
-                    let userPhoto = objects[0] as PFObject
-                    let userImageFile = userPhoto["imageFile"] as PFFile
-                    userImageFile.getDataInBackgroundWithBlock {
-                        (imageData: NSData!, error: NSError!) -> Void in
-                            if error == nil {
-                            let image = UIImage(data:imageData)
-                            userImages[userID] = image
-                            } else  {
-                                NSLog("Error in inner getSessionUsersPictures: %@ %@", error, error.userInfo!)
+            var local_query = PFQuery(className: "UserPictures")
+            local_query.fromLocalDatastore()
+            local_query.whereKey("userID", equalTo: userID)
+            local_query.getFirstObjectInBackgroundWithBlock {
+                (object: AnyObject!, error: NSError!) -> Void in
+                if object != nil { // Saved locally
+                    var obj = object as PFObject
+                    let userImage = UIImage(data: obj["imageData"] as NSData)
+                    userImages[userID] = userImage
+                    if userImages.count == userIDs.count {
+                        callback(userImages)
+                    }
+                    
+                } else { // Query from Database
+                    var query = PFQuery(className: "UserPhoto")
+                    query.whereKey("imageName", containsString: userID)
+                    query.findObjectsInBackgroundWithBlock {
+                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        if error == nil {
+                            let userPhoto = objects[0] as PFObject
+                            let userImageFile = userPhoto["imageFile"] as PFFile
+                            userImageFile.getDataInBackgroundWithBlock {
+                                (imageData: NSData!, error: NSError!) -> Void in
+                                if error == nil {
+                                    let image = UIImage(data:imageData)
+                                    userImages[userID] = image
+                                    self.pinImageInBackground(userID, imageData: imageData)
+                                    if userImages.count == userIDs.count {
+                                        callback(userImages)
+                                    }
+                                    
+                                } else  {
+                                    NSLog("Error in inner getSessionUsersPictures: %@ %@", error, error.userInfo!)
+                                }
                             }
-                        counter += 1
-                        if counter == userIDs.count {
-                            callback(userImages)
+                        } else  {
+                            NSLog("Error in outer getSessionUsersPictures: %@ %@", error, error.userInfo!)
                         }
                     }
-                } else  {
-                    NSLog("Error in outer getSessionUsersPictures: %@ %@", error, error.userInfo!)
                 }
             }
         }
+    }
+    
+    func pinImageInBackground(userID: String, imageData: NSData) {
+//        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+//        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+//            dispatch_async(dispatch_get_main_queue()) {
+                var pfObj = PFObject(className: "UserPictures") // Pin the object to the background
+                pfObj["userID"] = userID
+                pfObj["imageData"] = imageData
+                pfObj.pin()
+//            }
+//        }
     }
     
     func leaveSession(userID: String, sessionID: String, callback: () -> ()) {

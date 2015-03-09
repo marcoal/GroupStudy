@@ -75,6 +75,9 @@ class SessionContentViewController: UIViewController {
             imView.layer.cornerRadius = imView.frame.size.width / 2
             imView.clipsToBounds = true
             
+            imView.layer.borderWidth = 1.0
+            imView.layer.borderColor = cramrBlue.CGColor
+            
             self.currentMembersScrollView.addSubview(imView)
             
             cx += imView.frame.size.width + 10
@@ -119,6 +122,8 @@ class SessionContentViewController: UIViewController {
         marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.sessionMapView
         
+        self.sessionMapView.layer.borderWidth = 1.0
+        self.sessionMapView.layer.borderColor = cramrBlue.CGColor
     }
     
     override func viewDidLoad() {

@@ -148,6 +148,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             imView.layer.cornerRadius = imView.frame.size.width / 2
             imView.clipsToBounds = true
             
+            imView.layer.borderWidth = 1.0
+            imView.layer.borderColor = cramrBlue.CGColor
+            
             self.currentMembersScrollView.addSubview(imView)
             
             cx += imView.frame.size.width + 10
@@ -221,13 +224,22 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.lockedMapView
         
+        
+        self.lockedMapView.layer.borderWidth = 1.0
+        self.lockedMapView.layer.borderColor = cramrBlue.CGColor
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .darkGrayColor()
+        
+        
         navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = cramrBlue
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+
         //        self.navigationController?.navigationBarHidden = true
         
         //        if self.session == nil {
