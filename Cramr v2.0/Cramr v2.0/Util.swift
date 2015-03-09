@@ -21,6 +21,19 @@ func getCourseID(item: String) -> String {
     return arr[0]
 }
 
+func getShortName(longName: String) -> String{
+    var name = ""
+    if longName != "" {
+        var arr = split(longName) {$0 == " "}
+        name = arr[0]
+        if arr.count > 1 {
+            var firstCharLastName = Array(arr[arr.count-1])[0]
+            name += " " + [firstCharLastName] + "."
+        }
+    }
+    return name
+}
+
 func getCourseName(item: String) -> String {
     var arr = split(item) {$0 == ":"}
     return arr[1]

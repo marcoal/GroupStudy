@@ -165,7 +165,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         for user in pictDict.keys {
             var label = UILabel()
-            label.text = currentMembersDict[user]
+            //label.text = currentMembersDict[user]
+            label.text = getShortName(currentMembersDict[user]!)
             label.font = UIFont(name: label.font.fontName, size: 10)
             label.textColor = cramrBlue
             var labelRect = CGRect()
