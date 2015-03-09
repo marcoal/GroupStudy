@@ -22,6 +22,8 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var currentMembersScrollView: UIScrollView!
     
+    var currentMembersDict = [String : String]()
+    
     func joinSessionCallback() {
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
@@ -42,39 +44,42 @@ class SessionContentViewController: UIViewController {
                 currentUsersLabel.text = currentUsersLabel.text! + "\n" + userName
             }
             currentUsersLabel.numberOfLines = 0
-            //currentUsersLabel.sizeToFit()
             
         }
-        displayCurrentUsers()
         addBlur(self.view, [self.currentUsersLabel])
+        
+        var userIDs = [String]()
+        for elem in userNamesAndIds {
+            userIDs.append(elem.1)
+            self.currentMembersDict[elem.1] = elem.0
+        }
+        
+        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
+        
     }
     
     func setLabels() {
         descript.text = "  We're working on: " + (session["description"]! as String)
         locationLabel.text = "  We're working at: " + (session["location"]! as String)
-        //locationLabel.sizeToFit()
         currentUsersLabel.text = ""
         descript.numberOfLines = 0
-        //descript.sizeToFit()
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
+        
     }
     
-    func displayCurrentUsers() {
+    func displayCurrentUsers(pictDict : [String: UIImage]) {
         self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
         
         self.currentMembersScrollView.canCancelContentTouches = false
         self.currentMembersScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
         self.currentMembersScrollView.clipsToBounds = true
         self.currentMembersScrollView.scrollEnabled = true
-        //self.currentMembersScrollView.pagingEnabled = true
         
         
         var cx = CGFloat(5)
         var cy = CGFloat(25)
         
-        for var i = 0; i < 10; i++ {
-            var im = UIImage(named: "test_background")
-            
+        for im in pictDict.values {
             var imView = UIImageView(image: im)
             
             var rect = imView.frame
@@ -90,12 +95,30 @@ class SessionContentViewController: UIViewController {
             self.currentMembersScrollView.addSubview(imView)
             
             cx += imView.frame.size.width + 10
+        }
+        
+        var lx = CGFloat(5)
+        var ly = CGFloat(0)
+        
+        for user in pictDict.keys {
+            var label = UILabel()
+            label.text = currentMembersDict[user]
+            label.font = UIFont(name: label.font.fontName, size: 10)
+            label.textColor = cramrBlue
+            var labelRect = CGRect()
+            labelRect.size.height = 25.0
+            labelRect.size.width = 50.0
+            labelRect.origin.x = lx
+            labelRect.origin.y = ly
             
+            label.frame = labelRect
+            self.currentMembersScrollView.addSubview(label)
+            
+            lx += label.frame.size.width + 10
         }
         
         self.currentMembersScrollView.contentSize = CGSizeMake(cx, self.currentMembersScrollView.bounds.size.height)
         
-        //addBlur(self.view, [self.currentMembersScrollView])
     }
     
     
@@ -109,16 +132,6 @@ class SessionContentViewController: UIViewController {
         
         var position = CLLocationCoordinate2DMake(latitude, longitude)
         var marker = GMSMarker(position: position)
-        
-        //        Failed attempt to resize image
-        //        var originalImage = UIImage(named: "blue_map_icon")
-        //        var size = originalImage?.size
-        //        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
-        //        var markerContainer = CGRectMake(0, 0, 30, 30)
-        //        originalImage?.drawInRect(markerContainer)
-        //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
-        //        UIGraphicsEndImageContext()
-        //        marker.icon = UIImage(named: "blue_map_icon")
         marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.sessionMapView
         
@@ -128,7 +141,6 @@ class SessionContentViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .grayColor()
         
-        //WHERE DO WE PUT THIS???
         setupMap()
         self.setLabels()
         addBlur(self.view, [self.descript, self.locationLabel, self.currentMembersScrollView])

@@ -29,7 +29,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var currentMembersScrollView: UIScrollView!
     
-    
+    var currentMembersDict = [String : String]()
     
     var session: [String: String]! {
         didSet {
@@ -130,22 +130,19 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         //addBlur(self.view, [self.selectedFriendsView, self.locationLabel, self.desciptLabel, self.className])
     }
     
-    func displayCurrentUsers() {
+    func displayCurrentUsers(pictDict : [String: UIImage]) {
         self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
         
         self.currentMembersScrollView.canCancelContentTouches = false
         self.currentMembersScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
         self.currentMembersScrollView.clipsToBounds = true
         self.currentMembersScrollView.scrollEnabled = true
-        //self.currentMembersScrollView.pagingEnabled = true
         
         
         var cx = CGFloat(5)
         var cy = CGFloat(25)
         
-        for var i = 0; i < 10; i++ {
-            var im = UIImage(named: "test_background")
-            
+        for im in pictDict.values {
             var imView = UIImageView(image: im)
             
             var rect = imView.frame
@@ -161,13 +158,32 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             self.currentMembersScrollView.addSubview(imView)
             
             cx += imView.frame.size.width + 10
+        }
         
+        var lx = CGFloat(5)
+        var ly = CGFloat(0)
+        
+        for user in pictDict.keys {
+            var label = UILabel()
+            label.text = currentMembersDict[user]
+            label.font = UIFont(name: label.font.fontName, size: 10)
+            label.textColor = cramrBlue
+            var labelRect = CGRect()
+            labelRect.size.height = 25.0
+            labelRect.size.width = 50.0
+            labelRect.origin.x = lx
+            labelRect.origin.y = ly
+            
+            label.frame = labelRect
+            self.currentMembersScrollView.addSubview(label)
+            
+            lx += label.frame.size.width + 10
         }
         
         self.currentMembersScrollView.contentSize = CGSizeMake(cx, self.currentMembersScrollView.bounds.size.height)
         
-        addBlur(self.view, [self.currentMembersScrollView])
     }
+    
     
     func currentUsersCallback(userNamesAndIds: [(String, String)]) {
         for elem in userNamesAndIds {
@@ -181,8 +197,14 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             
         }
         
+        var userIDs = [String]()
+        for elem in userNamesAndIds {
+            userIDs.append(elem.1)
+            self.currentMembersDict[elem.1] = elem.0
+        }
+        
         addBlur(self.view, [self.currentUsers])
-        displayCurrentUsers()
+        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
     }
     
     func setupMap() {
@@ -197,16 +219,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         var marker = GMSMarker(position: position)
         marker.icon = UIImage(named: "blue_map_marker")
         marker.map = self.lockedMapView
-        
-        //        Failed attempt to resize marker icon
-        //        var originalImage = UIImage(named: "blue_map_icon")
-        //        var size = originalImage?.size
-        //        UIGraphicsBeginImageContextWithOptions(size!, false, 0.0)
-        //        var markerContainer = CGRectMake(0, 0, 30, 30)
-        //        originalImage?.drawInRect(markerContainer)
-        //        var newImage = UIGraphicsGetImageFromCurrentImageContext();
-        //        UIGraphicsEndImageContext()
-        //        marker.icon = UIImage(named: "blue_map_icon")
         
     }
     
@@ -226,18 +238,14 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
             locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
             
-            //desciptLabel.sizeToFit()
-            //locationLabel.sizeToFit()
             
             currentUsers.text = ""
             currentUsers.numberOfLines = 0
-            //currentUsers.sizeToFit()
             desciptLabel.numberOfLines = 0
-            //desciptLabel.sizeToFit()
             
             self.title = getCourseID(fullCourseName)
             setupMap()
-            addBlur(self.view, [self.desciptLabel, self.locationLabel])
+            addBlur(self.view, [self.desciptLabel, self.locationLabel, self.currentMembersScrollView])
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
         } else {
             //            desciptLabel.text = "NO SESSION"

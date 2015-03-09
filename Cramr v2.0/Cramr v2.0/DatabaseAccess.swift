@@ -86,6 +86,7 @@ class DatabaseAccess {
     func getSessionUsersPictures(userIDs: [String], callback: ([String: UIImage]) -> ()) {
         NSLog("querying photo")
         var userImages = [String: UIImage]()
+        var counter = 0
         for userID in userIDs {
             var query = PFQuery(className: "UserPhoto")
             query.whereKey("imageName", containsString: userID)
@@ -99,12 +100,19 @@ class DatabaseAccess {
                             if error == nil {
                             let image = UIImage(data:imageData)
                             userImages[userID] = image
+                            } else  {
+                                NSLog("Error in inner getSessionUsersPictures: %@ %@", error, error.userInfo!)
                             }
+                        counter += 1
+                        if counter == userIDs.count {
+                            callback(userImages)
+                        }
                     }
+                } else  {
+                    NSLog("Error in outer getSessionUsersPictures: %@ %@", error, error.userInfo!)
                 }
             }
         }
-        callback(userImages)
     }
     
     func leaveSession(userID: String, sessionID: String, callback: () -> ()) {
