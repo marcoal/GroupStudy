@@ -279,29 +279,22 @@ class DatabaseAccess {
             query.whereKey("userID", equalTo: userID)
             query.getFirstObjectInBackgroundWithBlock {
                 (object: AnyObject!, error: NSError!) -> Void in
-                if error == nil {
-                    if object != nil {
-                        var object_user = object as PFObject
-                        var course_array = object_user["enrolled_courses"] as [String]
-                        if !contains(course_array, courseName) {
-                            course_array += [courseName]
-                            object_user["enrolled_courses"] = course_array
-                            object_user.saveInBackground()
-                        }
-                    } else {
-                        var new_object_user = PFObject(className: "EnrolledCourses")
-                        new_object_user["userID"] = userID
-                        new_object_user["enrolled_courses"] = [courseName]
-                        new_object_user.saveInBackground()
+                if object != nil {
+                    var object_user = object as PFObject
+                    var course_array = object_user["enrolled_courses"] as [String]
+                    if !contains(course_array, courseName) {
+                        course_array += [courseName]
+                        object_user["enrolled_courses"] = course_array
+                        object_user.saveInBackground()
                     }
-                    callback()
                 } else {
-                    // Log details of the failure
-                    NSLog("Error in addCourseToUser: %@ %@", error, error.userInfo!)
+                    var new_object_user = PFObject(className: "EnrolledCourses")
+                    new_object_user["userID"] = userID
+                    new_object_user["enrolled_courses"] = [courseName]
+                    new_object_user.saveInBackground()
                 }
+                callback()
             }
-            
-            
         }
     }
     
