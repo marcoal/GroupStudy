@@ -39,11 +39,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//        self.refreshCourseList()
-//        designLayout()
-//    }
+    override func viewDidAppear(animated: Bool) {
+        self.view.userInteractionEnabled = false
+        super.viewDidAppear(animated)
+        self.refreshCourseList()
+        designLayout()
+        self.view.userInteractionEnabled = true
+    }
     
     func designLayout() {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
