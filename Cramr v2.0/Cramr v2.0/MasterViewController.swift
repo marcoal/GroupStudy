@@ -17,6 +17,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var refreshingCourseList: Bool = false
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         refreshCourseList()
         self.tableView.reloadData()
@@ -36,7 +38,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func refreshCourseList(tableReload: Bool = true) {
         self.refreshingCourseList = true
-        (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
+        appDelegate.getCoursesFromAD(appDelegate.localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
     }
     
 //    override func viewDidAppear(animated: Bool) {
@@ -73,6 +75,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.refreshCourseList()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
+        checkForNetwork()
     }
     
     func setupReload() {
@@ -80,6 +83,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         refreshControl.addTarget(self, action: Selector("updateCells"), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         self.refreshControl!.tintColor = cramrBlue
+
+    }
+    
+    func checkForNetwork() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            dispatch_async(dispatch_get_main_queue()) {
+                if !isConnectedToNetwork() {
+                    var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -90,7 +107,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Do any additional setup after loading the view, typically from a nib.
         designLayout()
-        setupReload()
+        self.setupReload()
+        self.checkForNetwork()
     }
     
     override func didReceiveMemoryWarning() {

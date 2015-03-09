@@ -11,15 +11,37 @@ import Foundation
 class LocalDatastore {
     
     var user: PFObject!
-    var enrolledCourses: [(String, String)]!
     
-    // The courses list will be a tuple of (CourseName, CourseID)
-    func setEnrolledCourses(courses: [(String, String)]) {
-        self.enrolledCourses = courses
+    var enrolledCourses: [String]!
+    
+    func resetEnrolledCoursesCallback(courseList: [String], tableReload: Bool) {
+        self.enrolledCourses = courseList
     }
     
+    func setEnrolledCourses(courseList: [String]) {
+        self.enrolledCourses = courseList
+    }
     
+    func resetEnrolledCourses() {
+        (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), tableReload: false, cb: resetEnrolledCoursesCallback)
+    }
+
+    func getCourseList() -> [String] {
+        return self.enrolledCourses
+    }
     
+    func addCourse(course: String) {
+        getCourseList()
+        self.enrolledCourses.append(course)
+    }
+    
+    func deleteCourse(course: String) {
+        var index = find(getCourseList(), course)
+        if index != nil {
+            self.enrolledCourses.removeAtIndex(index!)
+        }
+    }
+
     init() {
         self.user = nil
         self.enrolledCourses = nil
