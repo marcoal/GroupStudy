@@ -16,8 +16,6 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var locationLabel: UILabel!
     
-    @IBOutlet weak var currentUsersLabel: UILabel!
-    
     @IBOutlet weak var sessionMapView: GMSMapView!
     
     @IBOutlet weak var currentMembersScrollView: UIScrollView!
@@ -34,20 +32,6 @@ class SessionContentViewController: UIViewController {
     }
     
     func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {
-        for elem in userNamesAndIds {
-            var userName = elem.0
-            var userID = elem.1
-            
-            if currentUsersLabel.text == "" {
-                currentUsersLabel.text = userName
-            } else {
-                currentUsersLabel.text = currentUsersLabel.text! + "\n" + userName
-            }
-            currentUsersLabel.numberOfLines = 0
-            
-        }
-        addBlur(self.view, [self.currentUsersLabel])
-        
         var userIDs = [String]()
         for elem in userNamesAndIds {
             userIDs.append(elem.1)
@@ -61,7 +45,6 @@ class SessionContentViewController: UIViewController {
     func setLabels() {
         descript.text = "  We're working on: " + (session["description"]! as String)
         locationLabel.text = "  We're working at: " + (session["location"]! as String)
-        currentUsersLabel.text = ""
         descript.numberOfLines = 0
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
         

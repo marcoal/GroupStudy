@@ -23,8 +23,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     @IBOutlet weak var locationLabel: UILabel!
     
-    @IBOutlet weak var currentUsers: UILabel!
-    
     @IBOutlet weak var lockedMapView: GMSMapView!
     
     @IBOutlet weak var currentMembersScrollView: UIScrollView!
@@ -138,7 +136,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         self.currentMembersScrollView.clipsToBounds = true
         self.currentMembersScrollView.scrollEnabled = true
         
-        
         var cx = CGFloat(5)
         var cy = CGFloat(25)
         
@@ -165,8 +162,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         for user in pictDict.keys {
             var label = UILabel()
-            //label.text = currentMembersDict[user]
             label.text = getShortName(currentMembersDict[user]!)
+            label.textAlignment = NSTextAlignment.Center
             label.font = UIFont(name: label.font.fontName, size: 10)
             label.textColor = cramrBlue
             var labelRect = CGRect()
@@ -181,22 +178,30 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             lx += label.frame.size.width + 10
         }
         
+        var addButton = UIButton() //.buttonWithType(UIButtonType.ContactAdd) as UIButton
+        addButton.setImage(UIImage(named: "blue_plus_icon"), forState: UIControlState.Normal)
+        var buttonRect = CGRect()
+        buttonRect.size.height = 50.0
+        buttonRect.size.width = 50.0
+        buttonRect.origin.x = cx
+        buttonRect.origin.y = cy
+        
+        addButton.frame = buttonRect
+        addButton.tintColor = cramrBlue
+        addButton.layer.cornerRadius = addButton.frame.size.width / 2
+        addButton.addTarget(self, action: "inviteFriends:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        addButton.layer.borderWidth = 1.0
+        addButton.layer.borderColor = cramrBlue.CGColor
+        cx += addButton.frame.size.width + 10
+        self.currentMembersScrollView.addSubview(addButton)
+        
         self.currentMembersScrollView.contentSize = CGSizeMake(cx, self.currentMembersScrollView.bounds.size.height)
         
     }
     
     
     func currentUsersCallback(userNamesAndIds: [(String, String)]) {
-        for elem in userNamesAndIds {
-            var userName = elem.0
-            var userID = elem.1
-            if currentUsers.text == "" {
-                currentUsers.text = userName
-            } else {
-                currentUsers.text = currentUsers.text! + "\n" + userName
-            }
-            
-        }
         
         var userIDs = [String]()
         for elem in userNamesAndIds {
@@ -204,7 +209,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             self.currentMembersDict[elem.1] = elem.0
         }
         
-        addBlur(self.view, [self.currentUsers])
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
     }
     
@@ -239,9 +243,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
             locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
             
-            
-            currentUsers.text = ""
-            currentUsers.numberOfLines = 0
             desciptLabel.numberOfLines = 0
             
             self.title = getCourseID(fullCourseName)
