@@ -127,6 +127,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.view.userInteractionEnabled = false
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
     }
     
@@ -143,26 +144,31 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
+    // May not be necessary if we don't see the concurrency issue any longer.
     func waitForCompleteUpdate() {
+        self.view.userInteractionEnabled = false
         while (self.refreshingCourseList) {
             sleep(10)
         }
+        self.view.userInteractionEnabled = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            waitForCompleteUpdate()
+            //waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 var s = (segue.destinationViewController as SessionBrowserViewController)
                 s.courseName = courseName
                 s.sessions = self.sessionsForSelectedRow
+                self.view.userInteractionEnabled = true
             }
         } else if segue.identifier == "createSession" {
-            waitForCompleteUpdate()
+            //waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 (segue.destinationViewController as SessionCreationViewController).courseName = courseName
+                self.view.userInteractionEnabled = true
             }
         }
     }
