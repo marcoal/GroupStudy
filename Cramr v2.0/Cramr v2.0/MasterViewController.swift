@@ -15,6 +15,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var coursesIn: [String] = []
     
+    var refreshingCourseList: Bool = false
+    
     
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         refreshCourseList()
@@ -30,17 +32,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if tableReload {
             self.tableView.reloadData()
         }
+        self.refreshingCourseList = false
     }
     
     func refreshCourseList(tableReload: Bool = true) {
+        self.refreshingCourseList = true
         (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD(localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.refreshCourseList()
-        designLayout()
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        self.refreshCourseList()
+//        designLayout()
+//    }
     
     func designLayout() {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -139,8 +143,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
+    func waitForCompleteUpdate() {
+        while (self.refreshingCourseList) {
+            sleep(10)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
+            waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 var s = (segue.destinationViewController as SessionBrowserViewController)
@@ -148,6 +159,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 s.sessions = self.sessionsForSelectedRow
             }
         } else if segue.identifier == "createSession" {
+            waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 (segue.destinationViewController as SessionCreationViewController).courseName = courseName
