@@ -56,7 +56,7 @@ class CustomCourseTableCell: UITableViewCell {
         self.plusIcon.hidden = numSessions != 0
         
         if !blurAdded {
-            addCellBlur()
+//            addCellBlur()
         }
     }
     

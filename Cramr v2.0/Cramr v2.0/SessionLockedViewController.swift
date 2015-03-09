@@ -13,12 +13,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
-    @IBOutlet weak var inviteFriendsButton: UIButton!
-    
+
     @IBOutlet weak var leaveButton: UIButton!
-    
-    @IBOutlet weak var selectedFriendsView: UILabel!
-    
+
     @IBOutlet weak var desciptLabel: UILabel!
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -123,7 +120,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     func fillTextBoxAndDismiss(text: String){
-        self.selectedFriendsView.text = text
         self.dismissViewControllerAnimated(true, completion: nil)
         //addBlur(self.view, [self.selectedFriendsView, self.locationLabel, self.desciptLabel, self.className])
     }
