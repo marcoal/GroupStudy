@@ -76,29 +76,29 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_people_icon" id="jWf-nL-DZD">
-                                            <rect key="frame" x="286" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="319" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_book_icon" id="eiq-ox-ju8">
-                                            <rect key="frame" x="286" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="319" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="359-jd-6C4">
-                                            <rect key="frame" x="254" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="287" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.56862745100000001" green="0.72549019609999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fnh-He-GJP">
-                                            <rect key="frame" x="254" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="287" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.56862745100000001" green="0.72549019609999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_plus_icon" id="pG8-gP-W2p">
-                                            <rect key="frame" x="266" y="35" width="48" height="50"/>
+                                            <rect key="frame" x="299" y="35" width="48" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <color key="backgroundColor" red="0.56862745100000001" green="0.72549019609999998" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -348,7 +348,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4mI-4D-88E">
-                                <rect key="frame" x="164.00000058201201" y="515" width="140" height="45"/>
+                                <rect key="frame" x="164.00000066713994" y="515" width="140" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -395,12 +395,12 @@
                         <outlet property="locationLabel" destination="3AU-N8-ayh" id="tYX-ci-73X"/>
                         <outlet property="lockedMapView" destination="m2o-eT-Crv" id="qlx-PV-AcL"/>
                         <outlet property="selectedFriendsView" destination="lGx-2G-GSH" id="CwY-0d-B23"/>
-                        <segue destination="pGg-6v-bdr" kind="push" identifier="popToCourseView" id="jiO-gg-T5e"/>
+                        <segue destination="pGg-6v-bdr" kind="push" identifier="popToCourseView" id="p5k-FG-nF6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeA-uA-pcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1979" y="858"/>
+            <point key="canvasLocation" x="1829" y="1017"/>
         </scene>
         <!--Session Creation View Controller-->
         <scene sceneID="uEw-hT-nMr">
@@ -516,7 +516,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jiO-gg-T5e"/>
+        <segue reference="p5k-FG-nF6"/>
         <segue reference="zql-Sy-5Bc"/>
         <segue reference="wg3-Jn-cuq"/>
     </inferredMetricsTieBreakers>
