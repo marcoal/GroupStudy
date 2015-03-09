@@ -72,6 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.getSessionUsers(sessionID, callback: cb)
     }
     
+    func getSessionUsersPicturesAD(userIDs: [String], cb: ([String: UIImage]) -> ()) {
+        self.DBAccess!.getSessionUsersPictures(userIDs, callback:cb)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.setupParse()       // Set Parse Application keys and enable local datastore
         self.setupDBAccess()    // Setup local datastore

@@ -83,6 +83,30 @@ class DatabaseAccess {
         
     }
     
+    func getSessionUsersPictures(userIDs: [String], callback: ([String: UIImage]) -> ()) {
+        NSLog("querying photo")
+        var userImages = [String: UIImage]()
+        for userID in userIDs {
+            var query = PFQuery(className: "UserPhoto")
+            query.whereKey("imageName", containsString: userID)
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    let userPhoto = objects[0] as PFObject
+                    let userImageFile = userPhoto["imageFile"] as PFFile
+                    userImageFile.getDataInBackgroundWithBlock {
+                        (imageData: NSData!, error: NSError!) -> Void in
+                            if error == nil {
+                            let image = UIImage(data:imageData)
+                            userImages[userID] = image
+                            }
+                    }
+                }
+            }
+        }
+        callback(userImages)
+    }
+    
     func leaveSession(userID: String, sessionID: String, callback: () -> ()) {
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
