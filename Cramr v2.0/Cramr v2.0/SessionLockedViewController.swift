@@ -230,22 +230,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .darkGrayColor()
-        
-        
-        navigationItem.hidesBackButton = true
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.barTintColor = cramrBlue
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-
-        //        self.navigationController?.navigationBarHidden = true
-        
-        //        if self.session == nil {
-        //            self.session == localData.getSessionID() as String
-        //        }
-        
+    func refreshView() {
         if self.session != nil {
             var fullCourseName = (self.session["course"]! as String)
             desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
@@ -257,9 +242,24 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             setupMap()
             addBlur(self.view, [self.desciptLabel, self.locationLabel, self.currentMembersScrollView])
             (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
-        } else {
-            //            desciptLabel.text = "NO SESSION"
+            
+            
         }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .darkGrayColor()
+        
+        
+        navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = cramrBlue
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        
+        self.refreshView()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
         
     }
     
