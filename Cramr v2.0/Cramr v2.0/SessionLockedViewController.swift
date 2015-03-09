@@ -135,7 +135,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         self.currentMembersScrollView.canCancelContentTouches = false
         self.currentMembersScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
-        self.currentMembersScrollView.clipsToBounds = false
+        self.currentMembersScrollView.clipsToBounds = true
         self.currentMembersScrollView.scrollEnabled = true
         //self.currentMembersScrollView.pagingEnabled = true
         

@@ -20,6 +20,7 @@ class SessionContentViewController: UIViewController {
     
     @IBOutlet weak var sessionMapView: GMSMapView!
     
+    @IBOutlet weak var currentMembersScrollView: UIScrollView!
     
     func joinSessionCallback() {
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
@@ -42,8 +43,10 @@ class SessionContentViewController: UIViewController {
             }
             currentUsersLabel.numberOfLines = 0
             //currentUsersLabel.sizeToFit()
-            addBlur(self.view, [self.currentUsersLabel])
+            
         }
+        displayCurrentUsers()
+        addBlur(self.view, [self.currentUsersLabel])
     }
     
     func setLabels() {
@@ -55,6 +58,46 @@ class SessionContentViewController: UIViewController {
         //descript.sizeToFit()
         (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
     }
+    
+    func displayCurrentUsers() {
+        self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
+        
+        self.currentMembersScrollView.canCancelContentTouches = false
+        self.currentMembersScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
+        self.currentMembersScrollView.clipsToBounds = true
+        self.currentMembersScrollView.scrollEnabled = true
+        //self.currentMembersScrollView.pagingEnabled = true
+        
+        
+        var cx = CGFloat(5)
+        var cy = CGFloat(25)
+        
+        for var i = 0; i < 10; i++ {
+            var im = UIImage(named: "test_background")
+            
+            var imView = UIImageView(image: im)
+            
+            var rect = imView.frame
+            rect.size.height = 50.0
+            rect.size.width = 50.0
+            rect.origin.x = cx
+            rect.origin.y = cy
+            
+            imView.frame = rect
+            imView.layer.cornerRadius = imView.frame.size.width / 2
+            imView.clipsToBounds = true
+            
+            self.currentMembersScrollView.addSubview(imView)
+            
+            cx += imView.frame.size.width + 10
+            
+        }
+        
+        self.currentMembersScrollView.contentSize = CGSizeMake(cx, self.currentMembersScrollView.bounds.size.height)
+        
+        //addBlur(self.view, [self.currentMembersScrollView])
+    }
+    
     
     func setupMap() {
         var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
@@ -88,7 +131,7 @@ class SessionContentViewController: UIViewController {
         //WHERE DO WE PUT THIS???
         setupMap()
         self.setLabels()
-        addBlur(self.view, [self.descript, self.locationLabel])
+        addBlur(self.view, [self.descript, self.locationLabel, self.currentMembersScrollView])
         
     }
     

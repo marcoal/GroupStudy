@@ -67,7 +67,7 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     center.y = center.y / CGFloat(subViews.count)
     
     // Blur Effect
-    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+    var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.ExtraLight)
     var blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = frame
     blurEffectView.center = center
