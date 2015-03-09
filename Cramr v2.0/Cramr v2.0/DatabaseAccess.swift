@@ -129,7 +129,7 @@ class DatabaseAccess {
                 } else {
                     session.deleteInBackground()
                 }
-                localData.deleteSession()
+                (UIApplication.sharedApplication().delegate as AppDelegate).localData.deleteSession()
                 callback()
             } else {
                 // Log details of the failure
@@ -193,7 +193,7 @@ class DatabaseAccess {
             new_session.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError!) -> Void in
                 if success {
-                    localData.setSession(new_session.objectId)
+                    (UIApplication.sharedApplication().delegate as AppDelegate).localData.setSession(new_session.objectId)
                     var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as String, new_session["longitude"] as String)
                     callback(sessionDict)
                     
@@ -216,7 +216,7 @@ class DatabaseAccess {
                 } else {
                     // NSLog("User already in the session he/she is joining.")
                 }
-                localData.setSession(sessionID)
+                (UIApplication.sharedApplication().delegate as AppDelegate).localData.setSession(sessionID)
                 callback()
             } else {
                 // Log details of the failure

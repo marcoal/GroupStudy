@@ -56,7 +56,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
-                localData.setUserID(resultdict["id"] as String)
+                (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserID(resultdict["id"] as String)
                 //                localData.setUserName()
             }
         }
@@ -107,8 +107,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             }
         }
         
-        localData.setUserID(user.objectID)
-        localData.setUserName(user.name)
+        (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserID(user.objectID)
+        (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserName(user.name)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {

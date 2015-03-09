@@ -72,7 +72,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD(localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
+        (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
     }
 
 }

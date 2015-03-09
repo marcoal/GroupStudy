@@ -11,9 +11,18 @@ import Foundation
 class LocalDatastore {
     
     var user: PFObject!
+    var enrolledCourses: [(String, String)]!
+    
+    // The courses list will be a tuple of (CourseName, CourseID)
+    func setEnrolledCourses(courses: [(String, String)]) {
+        self.enrolledCourses = courses
+    }
+    
+    
     
     init() {
         self.user = nil
+        self.enrolledCourses = nil
     }
     
     func printInfo() {

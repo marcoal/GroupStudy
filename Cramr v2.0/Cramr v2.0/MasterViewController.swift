@@ -17,7 +17,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var refreshingCourseList: Bool = false
     
-    
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         refreshCourseList()
         self.tableView.reloadData()
@@ -37,7 +36,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func refreshCourseList(tableReload: Bool = true) {
         self.refreshingCourseList = true
-        (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD(localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
+        (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), tableReload: tableReload, cb: refreshCourseListCallback)
     }
     
 //    override func viewDidAppear(animated: Bool) {
@@ -140,7 +139,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            (UIApplication.sharedApplication().delegate as AppDelegate).deleteCourseFromUserAD(localData.getUserID(), courseName: (self.coursesIn[indexPath.row] as String), index: indexPath, cb: deleteCourseCallback)
+            (UIApplication.sharedApplication().delegate as AppDelegate).deleteCourseFromUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: (self.coursesIn[indexPath.row] as String), index: indexPath, cb: deleteCourseCallback)
         }
     }
     

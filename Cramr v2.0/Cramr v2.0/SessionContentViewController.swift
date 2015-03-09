@@ -30,7 +30,7 @@ class SessionContentViewController: UIViewController {
     
     
     @IBAction func joinButton(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: localData.getUserID(), cb: joinSessionCallback)
+        (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), cb: joinSessionCallback)
     }
     
     func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {

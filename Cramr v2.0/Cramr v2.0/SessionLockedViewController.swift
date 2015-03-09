@@ -42,7 +42,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     @IBAction func leaveSession(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD(localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
+        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
     }
     
     @IBAction func inviteFriends(sender: AnyObject) {
@@ -98,10 +98,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             
             var course = self.session["course"]! as String
             let data = [
-                "alert" : localData.getUserName() + " invited you to work on " + course,
-                "seshid" : localData.getSessionID(),
+                "alert" : (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserName() + " invited you to work on " + course,
+                "seshid" : (UIApplication.sharedApplication().delegate as AppDelegate).localData.getSessionID(),
                 "courseName" : course,
-                "message" :localData.getUserName() + " invited you to work on " + course
+                "message" :(UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserName() + " invited you to work on " + course
             ]
             push.setData(data)
             push.sendPushInBackground()

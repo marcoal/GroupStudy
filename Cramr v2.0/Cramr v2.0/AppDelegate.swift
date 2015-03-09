@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-var localData = LocalDatastore()
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var DBAccess: DatabaseAccess?
+    
     var session = [String: String]()
+    
+    var localData = LocalDatastore()
     
     func setupParse() {
         Parse.enableLocalDatastore()

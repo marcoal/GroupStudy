@@ -65,7 +65,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     func addSession(location: String, description: String, geoTag: CLLocationCoordinate2D) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD(localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
+        (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
