@@ -103,6 +103,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         locationManager.requestWhenInUseAuthorization()
         
         
+        self.mapView.padding = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
+        
         var centered: CGPoint = mapView.center
         centered.y -= self.pin.frame.height / 2.0
         pin.center = centered

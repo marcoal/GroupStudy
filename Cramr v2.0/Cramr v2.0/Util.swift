@@ -9,15 +9,13 @@
 import Foundation
 import SystemConfiguration
 
-var cramrBlue = UIColorFromRGB(UInt(9550335))
+var cramrBlue = UIColorFromRGB(UInt(3363506))
 
 var cramrEggshell = UIColorFromRGB(UInt(14543615))
 
 var cramrPurple = UIColorFromRGB(UInt(10061055))
 
 var cramrAqua = UIColorFromRGB(UInt(8712703))
-
-
 
 
 func getCourseID(item: String) -> String {
