@@ -25,13 +25,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label One" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vIT-Oh-zeo">
-                                <rect key="frame" x="121" y="123" width="79" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" id="oJp-dl-ea2" customClass="FBLoginView">
                                 <rect key="frame" x="16" y="234" width="288" height="100"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -43,7 +36,6 @@
                     <navigationItem key="navigationItem" id="rbZ-IP-6eU"/>
                     <connections>
                         <outlet property="fbLoginView" destination="oJp-dl-ea2" id="gGy-8H-68g"/>
-                        <outlet property="nameLabel" destination="vIT-Oh-zeo" id="xSN-Ad-Tem"/>
                         <segue destination="pGg-6v-bdr" kind="push" identifier="toMaster" id="41q-4q-0As"/>
                     </connections>
                 </viewController>
@@ -479,8 +471,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="p5k-FG-nF6"/>
-        <segue reference="zql-Sy-5Bc"/>
         <segue reference="wg3-Jn-cuq"/>
+        <segue reference="41q-4q-0As"/>
+        <segue reference="zql-Sy-5Bc"/>
     </inferredMetricsTieBreakers>
 </document>

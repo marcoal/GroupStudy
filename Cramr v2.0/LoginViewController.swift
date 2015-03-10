@@ -11,8 +11,7 @@ import Foundation
 let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
-    
-    @IBOutlet weak var nameLabel: UILabel!
+
     @IBOutlet weak var fbLoginView: FBLoginView!
     
     
@@ -76,8 +75,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         //        NSLog("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as String
         //        NSLog("User Email: \(userEmail)")
-        nameLabel.text = user.name
-        
+
         //        setCurrUser()
         
         var query = PFUser.query();

@@ -180,16 +180,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 var s = (segue.destinationViewController as SessionBrowserViewController)
                 s.courseName = courseName
                 s.sessions = self.sessionsForSelectedRow
-                self.view.userInteractionEnabled = true
             }
         } else if segue.identifier == "createSession" {
             //waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 (segue.destinationViewController as SessionCreationViewController).courseName = courseName
-                self.view.userInteractionEnabled = true
+                
             }
         }
+        self.view.userInteractionEnabled = true
     }
 }
 

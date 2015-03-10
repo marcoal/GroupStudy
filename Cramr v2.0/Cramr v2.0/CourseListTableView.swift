@@ -42,7 +42,6 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         self.courseTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         // self.getParseData()
         
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         view.backgroundColor = .whiteColor()
         self.courseTable.alpha = 0.9
