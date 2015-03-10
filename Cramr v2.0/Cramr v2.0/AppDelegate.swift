@@ -48,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
     
+    func isUserInSessionAD(userID: String, seshID: String, cb: (Bool) -> ()) {
+        self.DBAccess!.isUserInSession(userID, seshID)
+    }
+    
     func joinSessionAD(sessionID: String, userID: String, cb: () -> ()) {
         self.DBAccess!.joinSession(sessionID, userID: userID, callback: cb)
     }
@@ -166,6 +170,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func promptToJoin(userid: String, seshid: String, courseName: String, message: String){
+//        localData.getSessionID() != "" {
+//            
+//        }
         let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
         let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
             self.addCourseToUserAD(userid, courseName: courseName, cb: {})

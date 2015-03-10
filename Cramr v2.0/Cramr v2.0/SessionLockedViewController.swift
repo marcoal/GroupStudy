@@ -82,39 +82,27 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             var fdict = friend as NSDictionary
             var id = fdict.objectForKey("id") as String
             println(id)
-            var innerquery = PFQuery(className: "User")
-            innerquery.whereKey("userID", equalTo: id)
+            (UIApplication.sharedApplication().delegate as AppDelegate).isUserInSessionAD(id, seshID: localData.getSessionID(), cb: self.sendPushCallback)
             
-            var query = PFInstallation.query()
-            query.whereKey("user", matchesQuery: innerquery)
-            
-            // Send a notification to all devices subscribed to the "Giants" channel.
-            let push = PFPush()
-            push.setChannel("a"+id)
-            
-            var course = self.session["course"]! as String
-            let data = [
-                "alert" : localData.getUserName() + " invited you to work on " + course,
-                "seshid" : localData.getSessionID(),
-                "courseName" : course,
-                "message" :localData.getUserName() + " invited you to work on " + course
-            ]
-            push.setData(data)
-            push.sendPushInBackground()
-            
-            
-            //            //Send Push
-            //            var push = PFPush()
-            //            push.setQuery(query)
-            //            push.setMessage(localData.getUserID() + "Invited you to a session")
-            //            push.sendPushInBackground()
-            
-            text.appendString(friend.name)
         }
-        self.fillTextBoxAndDismiss(text)
         
     }
-    
+
+    func sendPushCallback(userid: String) {
+        let push = PFPush()
+        push.setChannel("a"+userid)
+        
+        
+        var course = self.session["course"]! as String
+        let data = [
+            "alert" : localData.getUserName() + " invited you to work on " + getCourseName(course),
+            "seshid" : localData.getSessionID(),
+            "courseName" : course,
+            "message" :localData.getUserName() + " invited you to work on " + getCourseName(course)
+        ]
+        push.setData(data)
+        push.sendPushInBackground()
+    }
     
     func facebookViewControllerCancelWasPressed(sender: AnyObject!) {
         self.fillTextBoxAndDismiss("Canceled")

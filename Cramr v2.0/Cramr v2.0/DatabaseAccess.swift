@@ -45,9 +45,41 @@ class DatabaseAccess {
         }
     }
     
-    
-    
-    
+    // Only performs callback funciton if userID in sessionID
+    func isUserInSession(userID: String, sessionID: String, cb: (String) -> ()) {
+        var query = PFQuery(className: "Sessions")
+        query.getObjectInBackgroundWithId(sessionID) {
+            (object: AnyObject!, error: NSError!) -> Void in
+            if error == nil {
+                var session = object as PFObject
+                var users = session.objectForKey("active_users") as [String]
+                var userQuery : PFQuery = PFUser.query()
+                userQuery.whereKey("userID", containedIn: users)
+                userQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        var found = false
+                        var users = objects as [PFObject]
+                        var usersTupleArray = [(String, String)]()
+                        for user in users {
+                            var other_user_id = user["userID"] as String
+                            if userID == other_user_id{
+                                found == true
+                            }
+                        }
+                        if found == false{
+                            cb(userID)
+                        }
+                    }
+                }
+                
+            } else {
+                // Log details of the failure
+                NSLog("Error in getSessionUser: %@ %@", error, error.userInfo!)
+            }
+        }
+
+    }
     
     func getSessionUsers(sessionID: String, callback: ([(String, String)]) -> ()) {
         var query = PFQuery(className: "Sessions")
