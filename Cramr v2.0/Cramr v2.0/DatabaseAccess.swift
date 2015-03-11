@@ -45,10 +45,57 @@ class DatabaseAccess {
         }
     }
     
-    
-    
-    
-    
+    // Only performs callback funciton if userID in sessionID
+    func isUserInSession(userID: String, sessionID: String, cb: (String) -> ()) {
+        var query = PFQuery(className: "Sessions")
+        query.getObjectInBackgroundWithId(sessionID) {
+            (object: AnyObject!, error: NSError!) -> Void in
+            if error == nil {
+                var session = object as PFObject
+                var users = session.objectForKey("active_users") as [String]
+                var userQuery : PFQuery = PFUser.query()
+                userQuery.whereKey("userID", containedIn: users)
+                userQuery.findObjectsInBackgroundWithBlock {
+                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil {
+                        var found = false
+                        var users = objects as [PFObject]
+                        var usersTupleArray = [(String, String)]()
+                        for user in users {
+                            var other_user_id = user["userID"] as String
+                            if userID == other_user_id{
+                                found = true
+                            }
+                        }
+                        if found == false{
+                            cb(userID)
+                        }
+                    }
+                }
+                
+            } else {
+                // Log details of the failure
+                NSLog("Error in isUserInSesssion: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+
+    func sessionExists(userid: String, sessionID: String, courseName: String, message: String, cb: (String, String, String, String, Bool) -> ()){
+        var query = PFQuery(className: "Sessions")
+        query.getObjectInBackgroundWithId(sessionID) {
+            (object: AnyObject!, error: NSError!) -> Void in
+            if error == nil {
+                cb(userid, sessionID, courseName, message, true)
+            }
+            else {
+                if error.code == kPFErrorObjectNotFound {
+                     cb(userid, sessionID, courseName, message, false)
+                }
+                println("Ignore the Parse error in the log above, we handle no results matched the query")
+            }
+        }
+    }
+
     func getSessionUsers(sessionID: String, callback: ([(String, String)]) -> ()) {
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
@@ -77,7 +124,8 @@ class DatabaseAccess {
                 
             } else {
                 // Log details of the failure
-                NSLog("Error in getSessionUser: %@ %@", error, error.userInfo!)
+                println("what the fuck")
+                NSLog("Error in getSessionUsers: %@ %@", error, error.userInfo!)
             }
         }
         
@@ -180,7 +228,7 @@ class DatabaseAccess {
                 callback(sessions)
             } else {
                 // Log details of the failure
-                NSLog("Error in getSessions: %@ %@", error, error.userInfo!)
+                NSLog("Error in getSessionInfo: %@ %@", error, error.userInfo!)
             }
         }
     }
