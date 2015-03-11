@@ -104,10 +104,10 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     
     func addMapButton() {
         var cx = CGFloat(5)
-        var cy = CGFloat(200)
+        var cy = CGFloat(105)
         
         var myLocationButton = UIButton()
-        myLocationButton.setImage(UIImage(named: "blue_map_icon"), forState: UIControlState.Normal)
+        myLocationButton.setImage(UIImage(named: "blue_2d_marker"), forState: UIControlState.Normal)
         var buttonRect = CGRect()
         buttonRect.size.height = 40.0
         buttonRect.size.width = 40.0
@@ -118,14 +118,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         myLocationButton.tintColor = cramrBlue
         myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
         myLocationButton.addTarget(self, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
-        //self.mapView.delegate.didTapMyLocationButtonForMapView!(self.mapView)
         
         myLocationButton.layer.borderWidth = 1.0
         myLocationButton.layer.borderColor = cramrBlue.CGColor
         self.view.addSubview(myLocationButton)
-
         
-        //self.mapView.delegate.didTapMyLocationButtonForMapView!(self.mapView)
         
     }
     
@@ -141,18 +138,16 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     func setupMap() {
-        
-        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        
-        
-        self.mapView.padding = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
+        self.mapView.padding = UIEdgeInsets(top: 100, left: 0, bottom: 70, right: 0)
         
         var centered: CGPoint = mapView.center
-        centered.y -= self.pin.frame.height / 2.0
+        var markerCenter = ((self.mapView.frame.height - 70) - (self.locationLabel.frame.origin.y + self.locationLabel.frame.height))/2.0
+        markerCenter -= self.pin.frame.height / 2.0
+        markerCenter += 64 //height of status plus nav bar, i think
+        centered.y = markerCenter
         pin.center = centered
-        
     }
     
     override func viewDidLoad() {

@@ -10,13 +10,10 @@ import Foundation
 import SystemConfiguration
 
 //var cramrBlue = UIColorFromRGB(UInt(9550335)) //Original Cramr Blue
-
 //var cramrBlue = UIColorFromRGB(UInt(10972979)) //Light Brown
 //var cramrBlue = UIColorFromRGB(UInt(6242857)) //Dark Brown
-
 //var cramrBlue = UIColorFromRGB(UInt(6291576)) //Dark Purple
 //var cramrBlue = UIColorFromRGB(UInt(9109677)) //Light Purple
-
 //var cramrBlue = UIColorFromRGB(UInt(543419)) //Dark Blue
 //var cramrBlue = UIColorFromRGB(UInt(24079)) //Green
 
@@ -105,16 +102,10 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     tintView.backgroundColor = cramrAqua
     tintView.alpha = 0.35
     
-    // Vibrancy effect
-    // var vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
-    // var vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-    // vibrancyEffectView.frame = frame
-    
     
     blurEffectView.layer.borderWidth = 1.0
     blurEffectView.layer.borderColor = cramrBlue.CGColor
-    // Todo
-    //superView.addSubview(tintView)
+
     
     superView.addSubview(blurEffectView)
     

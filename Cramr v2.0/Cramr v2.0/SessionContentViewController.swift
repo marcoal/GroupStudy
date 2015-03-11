@@ -100,7 +100,6 @@ class SessionContentViewController: UIViewController {
         
         for user in pictDict.keys {
             var label = UILabel()
-            //label.text = currentMembersDict[user]
             label.text = getShortName(currentMembersDict[user]!)
             label.font = UIFont(name: label.font.fontName, size: 10)
             label.textColor = cramrBlue
@@ -124,6 +123,8 @@ class SessionContentViewController: UIViewController {
     func setupMap() {
         var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
         var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
+        self.sessionMapView.padding = UIEdgeInsets(top: 150, left: 0, bottom: 70, right: 0)
+
         
         var camera = GMSCameraPosition.cameraWithLatitude(latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees, zoom: 17.0)
         self.sessionMapView.camera = camera

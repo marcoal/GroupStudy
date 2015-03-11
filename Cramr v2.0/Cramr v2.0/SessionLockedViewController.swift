@@ -223,6 +223,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         self.lockedMapView.layer.borderWidth = 1.0
         self.lockedMapView.layer.borderColor = cramrBlue.CGColor
+        self.lockedMapView.padding = UIEdgeInsets(top: 150, left: 0, bottom: 70, right: 0)
+
     }
     
     
