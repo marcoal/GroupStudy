@@ -38,7 +38,7 @@ func getShortName(longName: String) -> String{
         name = arr[0]
         if arr.count > 1 {
             var firstCharLastName = Array(arr[arr.count-1])[0]
-            name += " " + [firstCharLastName] + "."
+            name += " " + [firstCharLastName] + ""
         }
     }
     return name

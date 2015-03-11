@@ -45,6 +45,11 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         // self.getParseData()
         
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        
         view.backgroundColor = .whiteColor()
         self.courseTable.alpha = 0.9
         self.courseTable.tableFooterView = UIView()

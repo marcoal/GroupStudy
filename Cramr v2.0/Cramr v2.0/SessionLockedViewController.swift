@@ -69,12 +69,17 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             
             if(self.friendPickerController == nil){
                 self.friendPickerController = FBFriendPickerViewController()
-                self.friendPickerController.title = "Invite friends to Cramr"
+                self.friendPickerController.title = "Invite Friends"
                 self.friendPickerController.delegate = self
             }
             
             self.friendPickerController.loadData()
             self.friendPickerController.clearSelection()
+            
+            var newFrame = self.friendPickerController.view.bounds
+            newFrame.size.height = newFrame.size.height + 1
+            self.friendPickerController.tableView.frame = newFrame
+            
             self.presentViewController(self.friendPickerController, animated: true, completion: nil)
         } else {
             displayNotConnectedAlert()
@@ -256,7 +261,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .darkGrayColor()
+        self.navigationController?.navigationBarHidden = false
+        self.view.backgroundColor = cramrBlue
         
         
         navigationItem.hidesBackButton = true

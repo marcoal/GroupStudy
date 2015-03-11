@@ -101,6 +101,7 @@ class SessionContentViewController: UIViewController {
         for user in pictDict.keys {
             var label = UILabel()
             label.text = getShortName(currentMembersDict[user]!)
+            label.textAlignment = NSTextAlignment.Center
             label.font = UIFont(name: label.font.fontName, size: 10)
             label.textColor = cramrBlue
             var labelRect = CGRect()

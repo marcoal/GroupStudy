@@ -50,11 +50,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     func designLayout() {
+        self.navigationController?.navigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
-        //        let logo = UIImage(named: "white_cramr_logo")
-        //        let imageView = UIImageView(image:logo)
-        //        self.navigationItem.titleView = imageView
+
         self.title = "Cramr"
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -62,7 +60,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        self.navigationController?.navigationBar.tintColor = .whiteColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.barTintColor = cramrBlue
         self.view.backgroundColor = .clearColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "HelveticaNeue-Medium", size: 21.0)!]
@@ -105,7 +103,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshCourseList()
-        
+        appDelegate.registerPushNotifications(UIApplication.sharedApplication())
         self.tableView.registerClass(CustomCourseTableCell.self, forCellReuseIdentifier: "CourseCell")
         
         // Do any additional setup after loading the view, typically from a nib.

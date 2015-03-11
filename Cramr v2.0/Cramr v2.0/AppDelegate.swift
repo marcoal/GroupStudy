@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Register for Push Notitications
-        self.registerPushNotifications(application)
+        //ßself.ç
         
         // Navigation Controler Logic
         /* IMPOSSIBLE TO DEBUG
@@ -110,26 +110,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         } else if localData.getSessionID() != ""{
         */
-        if self.istFirstRun(){
-            //TODO got to slideshow
-        }
-        else if localData.getSessionID() != ""{
-            self.go_to_locked()
+
+//        if localData.getSessionID() != ""{
+//            self.go_to_locked()
+//            return true
+//        } // Else if the user has already signed in before
+//        else if localData.getUserID() != ""{
+//            self.go_to_masterview()
+//            return true
+//        } // If none of above apply, log in through facebook
+//        else{
+            self.go_to_login()
             return true
-        } // Else if the user has already signed in before
-        else if localData.getUserID() != ""{
-            self.go_to_masterview()
-            return true
-        } // If none of above apply, log in through facebook
-        else{
-            UIBarButtonItem.appearance().tintColor = cramrBlue
-            let navController = self.window!.rootViewController as UINavigationController
-            self.window?.makeKeyAndVisible()
-            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as LoginViewController
-            navController.pushViewController(vc, animated: false)
-        }
-        return true
+//        }
+    }
+    
+    func go_to_login(animated: Bool = false) {
+        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        var firstRun = true //isFirstRun()
+        let navController = self.window!.rootViewController as UINavigationController
+        self.window?.makeKeyAndVisible()
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as LoginViewController
+        vc.isFirstRun = firstRun
+        navController.pushViewController(vc, animated: animated)
+    }
+    
+    func go_to_onboarding(animated: Bool = false) {
+        self.window?.makeKeyAndVisible()
+        let navController = self.window!.rootViewController as UINavigationController
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController") as OnboardingViewController
+        navController.pushViewController(vc, animated: true)
     }
     
     func go_to_locked_from_push(seshid: String){
@@ -150,12 +162,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.getSessionInfoAD(localData.getSessionID(), cb: self.getSessionInfoCallback)
     }
     
-    func go_to_masterview(){
+    func go_to_masterview(animated: Bool = false){
         self.window?.makeKeyAndVisible()
         let navController = self.window!.rootViewController as UINavigationController
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = storyboard.instantiateViewControllerWithIdentifier("masterViewStoryBoardID") as MasterViewController
-        navController.pushViewController(vc, animated: false)
+        navController.pushViewController(vc, animated: animated)
     }
     
     func go_to_create_from_push(courseName: String){
@@ -380,7 +392,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return (isReachable && !needsConnection)
     }
     
-    func istFirstRun() -> Bool {
+    func isFirstRun() -> Bool {
         var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if (defaults.objectForKey("isFirstRun" ) != nil) {
             return false

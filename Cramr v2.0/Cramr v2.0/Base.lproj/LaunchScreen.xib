@@ -15,7 +15,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) Casa, Inc. All rights reserved." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="KGu-NI-R3R">
-                    <rect key="frame" x="46" y="677" width="327" height="21"/>
+                    <rect key="frame" x="46" y="677.00000065387701" width="327" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -23,10 +23,12 @@
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.20000000000000001" green="0.32156862749999998" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-            <point key="canvasLocation" x="535" y="435"/>
+            <point key="canvasLocation" x="532" y="436"/>
         </view>
     </objects>
     <resources>

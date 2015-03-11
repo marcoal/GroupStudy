@@ -158,9 +158,9 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         self.view.backgroundColor = .lightGrayColor()
         //NSLog("couseName: " + self.courseName!)
         
-        self.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
-        self.navigationItem.backBarButtonItem?.tintColor = cramrBlue
-        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = cramrBlue
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         setupMap()
         
         addBlur(self.view, [self.descriptionLabel, self.locationLabel])

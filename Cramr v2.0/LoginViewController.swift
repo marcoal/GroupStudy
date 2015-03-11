@@ -12,16 +12,19 @@ let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
 
-    @IBOutlet weak var fbLoginView: FBLoginView!
-    
+    @IBOutlet weak var fbLoginView = FBLoginView();
     
     var avplayer: AVPlayer = AVPlayer()
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
+    var isFirstRun: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
-        self.view.bringSubviewToFront(self.fbLoginView)
+        self.fbLoginView!.delegate = self
+        self.fbLoginView!.readPermissions = ["public_profile", "email", "user_friends"]
+        self.view.bringSubviewToFront(self.fbLoginView!)
         
         self.view.backgroundColor = .lightGrayColor()
     }
@@ -65,8 +68,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         // NSLog("User Logged In")
-        self.performSegueWithIdentifier("toMaster", sender: self)
-        
+        if self.isFirstRun {
+            appDelegate.go_to_onboarding(animated: false)
+        } else {
+            self.performSegueWithIdentifier("toMaster", sender: self)
+        }
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
