@@ -14,6 +14,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
+    
     var courseName: String?  {
         didSet {
             self.title = getCourseID(self.courseName!)
@@ -110,6 +111,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
+        
+        self.mapView.padding = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         
         var centered: CGPoint = mapView.center
         centered.y -= self.pin.frame.height / 2.0
