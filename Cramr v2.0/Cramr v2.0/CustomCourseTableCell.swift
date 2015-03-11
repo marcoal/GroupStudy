@@ -42,10 +42,12 @@ class CustomCourseTableCell: UITableViewCell {
     }
     
     func updateCellName(courseName: String) {
+        self.courseNameLabel?.adjustsFontSizeToFitWidth = true
         self.courseNameLabel?.text = getCourseID(courseName)
     }
     
     func updateCellContents(numPeople: Int, numSessions: Int) {
+        self.courseNameLabel?.adjustsFontSizeToFitWidth = true
         self.numSessionsLabel.text = String(numSessions)
         self.numPeopleLabel.text = String(numPeople)
         
