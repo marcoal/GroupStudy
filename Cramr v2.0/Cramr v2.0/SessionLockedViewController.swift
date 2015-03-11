@@ -13,6 +13,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     @IBOutlet weak var leaveButton: UIButton!
 
@@ -37,40 +38,47 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     @IBAction func leaveSession(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
+        if appDelegate.isConnectedToNetwork() {
+            (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
+        } else {
+            displayNotConnectedAlert()
+        }
     }
     
     @IBAction func inviteFriends(sender: AnyObject) {
-        if(!FBSession.activeSession().isOpen){
-            let permission = ["public_profile", "user_friends"]
-            FBSession.openActiveSessionWithReadPermissions(
-                permission,
-                allowLoginUI: true,
-                completionHandler: { (session:FBSession!, state:FBSessionState, error:NSError!) in
+        if appDelegate.isConnectedToNetwork() {
+            if(!FBSession.activeSession().isOpen){
+                let permission = ["public_profile", "user_friends"]
+                FBSession.openActiveSessionWithReadPermissions(
+                    permission,
+                    allowLoginUI: true,
+                    completionHandler: { (session:FBSession!, state:FBSessionState, error:NSError!) in
+                        
+                        if(error != nil){
+                            var alertView = UIAlertController(title: "Error Fetching Friends", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                            self.presentViewController(alertView, animated: true, completion: nil)
+                        }
+                        else if(session.isOpen){
+                            self.inviteFriends(sender)
+                        }
+                    }
                     
-                    if(error != nil){
-                        var alertView = UIAlertController(title: "Error Fetching Friends", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                        self.presentViewController(alertView, animated: true, completion: nil)
-                    }
-                    else if(session.isOpen){
-                        self.inviteFriends(sender)
-                    }
-                }
-                
-            );
-            return;
+                );
+                return;
+            }
+            
+            if(self.friendPickerController == nil){
+                self.friendPickerController = FBFriendPickerViewController()
+                self.friendPickerController.title = "Invite friends to Cramr"
+                self.friendPickerController.delegate = self
+            }
+            
+            self.friendPickerController.loadData()
+            self.friendPickerController.clearSelection()
+            self.presentViewController(self.friendPickerController, animated: true, completion: nil)
+        } else {
+            displayNotConnectedAlert()
         }
-        
-        if(self.friendPickerController == nil){
-            self.friendPickerController = FBFriendPickerViewController()
-            self.friendPickerController.title = "Invite friends to Cramr"
-            self.friendPickerController.delegate = self
-        }
-        
-        self.friendPickerController.loadData()
-        self.friendPickerController.clearSelection()
-        self.presentViewController(self.friendPickerController, animated: true, completion: nil)
-        
     }
     
     func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
@@ -231,20 +239,28 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     
     func refreshView() {
-        if self.session != nil {
-            var fullCourseName = (self.session["course"]! as String)
-            desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
-            locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
-            
-            desciptLabel.numberOfLines = 0
-            
-            self.title = getCourseID(fullCourseName)
-            setupMap()
-            addBlur(self.view, [self.desciptLabel, self.locationLabel, self.currentMembersScrollView])
-            (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
-            
-            
+        if appDelegate.isConnectedToNetwork() {
+            if self.session != nil {
+                var fullCourseName = (self.session["course"]! as String)
+                desciptLabel.text = "  We're working on: " + (self.session["description"]! as String)
+                locationLabel.text = "  We're working at: " + (self.session["location"]! as String)
+                
+                desciptLabel.numberOfLines = 0
+                
+                self.title = getCourseID(fullCourseName)
+                setupMap()
+                addBlur(self.view, [self.desciptLabel, self.locationLabel, self.currentMembersScrollView])
+                (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
+            }
+        } else {
+            displayNotConnectedAlert()
         }
+    }
+    
+    func displayNotConnectedAlert() {
+        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     
