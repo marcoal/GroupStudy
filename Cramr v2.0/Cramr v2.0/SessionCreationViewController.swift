@@ -107,7 +107,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         var cy = CGFloat(105)
         
         var myLocationButton = UIButton()
-        myLocationButton.setImage(UIImage(named: "blue_2d_marker"), forState: UIControlState.Normal)
+        myLocationButton.setImage(UIImage(named: "blue_3d_marker"), forState: UIControlState.Normal)
         var buttonRect = CGRect()
         buttonRect.size.height = 40.0
         buttonRect.size.width = 40.0
@@ -119,8 +119,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
         myLocationButton.addTarget(self, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        myLocationButton.layer.borderWidth = 1.0
-        myLocationButton.layer.borderColor = cramrBlue.CGColor
+        //myLocationButton.layer.borderWidth = 1.0
+        //myLocationButton.layer.borderColor = cramrBlue.CGColor
         self.view.addSubview(myLocationButton)
         
         
