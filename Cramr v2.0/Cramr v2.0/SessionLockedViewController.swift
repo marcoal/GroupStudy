@@ -85,7 +85,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             (UIApplication.sharedApplication().delegate as AppDelegate).isUserInSessionAD(id, seshID: localData.getSessionID(), cb: self.sendPushCallback)
             
         }
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func sendPushCallback(userid: String) {

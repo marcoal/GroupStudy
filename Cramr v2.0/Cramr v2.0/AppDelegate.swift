@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
     
-    func isUserInSessionAD(userID: String, seshID: String, cb: (Bool) -> ()) {
-        self.DBAccess!.isUserInSession(userID, seshID)
+    func isUserInSessionAD(userID: String, seshID: String, cb: (String) -> ()) {
+        self.DBAccess!.isUserInSession(userID, sessionID: seshID, cb)
     }
     
     func joinSessionAD(sessionID: String, userID: String, cb: () -> ()) {
@@ -149,6 +149,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.pushViewController(vc, animated: false)
     }
     
+    func go_to_create_from_push(courseName: String){
+        self.window?.makeKeyAndVisible()
+        let navController = self.window!.rootViewController as UINavigationController
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("createViewStoryBoardID") as SessionCreationViewController
+        vc.courseName = courseName
+        navController.pushViewController(vc, animated: false)
+    }
+    
     func registerPushNotifications(application: UIApplication){
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector("registerUserNotificationSettings:") {
@@ -169,17 +178,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("We Fucked Up on registering remote notifications (error)")
     }
     
-    func promptToJoin(userid: String, seshid: String, courseName: String, message: String){
-//        localData.getSessionID() != "" {
-//            
-//        }
-        let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
-        let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
-            self.addCourseToUserAD(userid, courseName: courseName, cb: {})
+    func handleClickedJoin_AfterEmptySession(userid: String, seshid: String, courseName: String, message: String, seshStillExists: Bool){
+        if seshStillExists {
             self.joinSessionAD(seshid, userID: userid, cb: {})
             self.go_to_locked_from_push(seshid)
         }
-        alert.addAction(joinAction)
+        else{
+            self.alertSessionNoLonger(courseName)
+        }
+        
+    }
+    
+    func alertSessionNoLonger(courseName: String){
+        let alert = UIAlertController(title: "Sorry", message: "Session no longer exists, create one and invite your friends", preferredStyle: .Alert)
+        let createAction = UIAlertAction(title: "Create", style: .Default) { action -> Void in
+            self.go_to_create_from_push(courseName)
+        }
+        alert.addAction(createAction)
         let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
         }
         alert.addAction(closeAction)
@@ -187,15 +202,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func handlePushInviteCallback(userid: String, seshid: String, courseName: String, message: String, seshStillExists: Bool) {
+        // If session still exists prompt to join or dismiss
+        if seshStillExists {
+            let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
+            let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
+                self.addCourseToUserAD(userid, courseName: courseName, cb: {})
+                if localData.getSessionID() != "" {   // User already in a session, remove him/her before joining new
+                    self.leaveSessionAD(localData.getUserID(), sessionID: localData.getSessionID(), cb: {() -> Void in})
+                }
+                self.sessionExists_afterPromptAD(userid, seshid: seshid, courseName: courseName, message: "")
+            }
+            alert.addAction(joinAction)
+            let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+            }
+            alert.addAction(closeAction)
+            let navController = self.window!.rootViewController as UINavigationController
+            navController.presentViewController(alert, animated: true, completion: nil)
+        } else{
+            self.alertSessionNoLonger(courseName)
+        }
+        
+    }
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         var message = userInfo["message"] as String
         var seshid = userInfo["seshid"] as String
         var courseName = userInfo["courseName"] as String
         var userid = localData.getUserID()
-        self.promptToJoin(userid, seshid: seshid, courseName: courseName, message: message)
+        //self.promptToJoin(userid, seshid: seshid, courseName: courseName, message: message)
+        self.sessionExists_beforePromptAD(userid, seshid: seshid, courseName: courseName, message: message)
         
     }
     
+    func sessionExists_beforePromptAD(userid: String, seshid: String, courseName: String, message: String){
+        self.DBAccess!.sessionExists(userid, sessionID: seshid, courseName: courseName, message: message, self.handlePushInviteCallback)
+    }
+    
+    func sessionExists_afterPromptAD(userid: String, seshid: String, courseName: String, message: String){
+        self.DBAccess!.sessionExists(userid, sessionID: seshid,  courseName: courseName, message: message, cb: self.handleClickedJoin_AfterEmptySession)
+    }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
