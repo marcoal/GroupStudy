@@ -12,6 +12,7 @@ import MapKit
 
 class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     
     var courseName: String?  {
@@ -45,10 +46,12 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             errorAlert("Please fill in a description!")
         } else if locationText == "" {
             errorAlert("Please fill in a location!")
-        } else {
+        } else if appDelegate.isConnectedToNetwork() {
             var center: CGPoint = mapView.center
             var loc: CLLocationCoordinate2D = mapView.camera.target
             addSession(locationText, description: descriptionText, geoTag: loc)
+        } else {
+            displayNotConnectedAlert()
         }
     }
     
@@ -81,6 +84,17 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             locationManager.startUpdatingLocation()
             mapView.myLocationEnabled = true
             mapView.settings.myLocationButton = true
+            
+//            for subView in self.mapView.subviews {
+//                if (subView.description == "GMSUISettingsView") {
+//                    var center = subView.center
+//                    center.y -= 100.0
+//                    subView.center = center
+//                }
+//            }
+            //var locationButton = self.mapView.subviews.last as UIButton
+            //var frame = locationButton.frame
+            //frame.origin.y = 150
         }
     }
     
@@ -96,12 +110,20 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         return true;
     }
     
+    func displayNotConnectedAlert() {
+        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func setupMap() {
         
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
+        
+        self.mapView.padding = UIEdgeInsets(top: 100, left: 0, bottom: 0, right: 0)
         
         var centered: CGPoint = mapView.center
         centered.y -= self.pin.frame.height / 2.0
@@ -110,7 +132,6 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     override func viewDidLoad() {
-        
         descriptionField.delegate = self
         locationField.delegate = self
         
@@ -126,9 +147,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         addBlur(self.view, [self.descriptionLabel, self.locationLabel])
         self.view.bringSubviewToFront(self.descriptionField)
         self.view.bringSubviewToFront(self.locationField)
-        
-        
-        
+  
     }
     
 }

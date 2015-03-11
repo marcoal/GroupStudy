@@ -15,6 +15,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var classSearch: UISearchBar!
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     var courses = []
     
     func courseListCallback(courses: [String]) {
@@ -71,7 +73,11 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
+        if appDelegate.isConnectedToNetwork() {
+            (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
+        } else {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
     }
 
 }

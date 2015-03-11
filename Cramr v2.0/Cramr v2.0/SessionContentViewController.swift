@@ -12,6 +12,8 @@ class SessionContentViewController: UIViewController {
     
     var session: [String: String]!
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     @IBOutlet weak var descript: UILabel!
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -28,7 +30,17 @@ class SessionContentViewController: UIViewController {
     
     
     @IBAction func joinButton(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), cb: joinSessionCallback)
+        if appDelegate.isConnectedToNetwork() {
+            (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), cb: joinSessionCallback)
+        } else {
+            displayNotConnectedAlert()
+        }
+    }
+    
+    func displayNotConnectedAlert() {
+        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {

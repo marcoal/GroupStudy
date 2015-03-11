@@ -34,6 +34,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             self.tableView.reloadData()
         }
         self.refreshingCourseList = false
+        self.view.userInteractionEnabled = true
     }
     
     func refreshCourseList(tableReload: Bool = true) {
@@ -44,9 +45,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidAppear(animated: Bool) {
         self.view.userInteractionEnabled = false
         super.viewDidAppear(animated)
-        self.refreshCourseList()
         designLayout()
-        self.view.userInteractionEnabled = true
+        self.refreshCourseList()
     }
     
     func designLayout() {
@@ -58,7 +58,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.title = "Cramr"
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.translucent = false
+
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         self.navigationController?.navigationBar.tintColor = .whiteColor()
@@ -138,16 +139,22 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func getSessionsCallback(sessions: [[String: String]]) {
         self.sessionsForSelectedRow = sessions
-        if sessions.count != 0 {
-            self.performSegueWithIdentifier("showDetail", sender: nil)
+        if self.appDelegate.isConnectedToNetwork() {
+            if sessions.count != 0 {
+                self.performSegueWithIdentifier("showDetail", sender: nil)
+            } else {
+                self.performSegueWithIdentifier("createSession", sender: nil)
+            }
         } else {
-            self.performSegueWithIdentifier("createSession", sender: nil)
+            self.view.userInteractionEnabled = true
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.view.userInteractionEnabled = false
-        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
+        if self.appDelegate.isConnectedToNetwork() {
+            self.view.userInteractionEnabled = false
+            (UIApplication.sharedApplication().delegate as AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
+        }
     }
     
     func deleteCourseCallback(indexPath: NSIndexPath) {
@@ -174,7 +181,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            //waitForCompleteUpdate()
+            waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 var s = (segue.destinationViewController as SessionBrowserViewController)
@@ -182,7 +189,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 s.sessions = self.sessionsForSelectedRow
             }
         } else if segue.identifier == "createSession" {
-            //waitForCompleteUpdate()
+            waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
                 (segue.destinationViewController as SessionCreationViewController).courseName = courseName
