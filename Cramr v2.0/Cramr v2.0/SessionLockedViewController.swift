@@ -89,39 +89,27 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             var fdict = friend as NSDictionary
             var id = fdict.objectForKey("id") as String
             println(id)
-            var innerquery = PFQuery(className: "User")
-            innerquery.whereKey("userID", equalTo: id)
+            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
             
-            var query = PFInstallation.query()
-            query.whereKey("user", matchesQuery: innerquery)
-            
-            // Send a notification to all devices subscribed to the "Giants" channel.
-            let push = PFPush()
-            push.setChannel("a"+id)
-            
-            var course = self.session["course"]! as String
-            let data = [
-                "alert" : (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserName() + " invited you to work on " + course,
-                "seshid" : (UIApplication.sharedApplication().delegate as AppDelegate).localData.getSessionID(),
-                "courseName" : course,
-                "message" :(UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserName() + " invited you to work on " + course
-            ]
-            push.setData(data)
-            push.sendPushInBackground()
-            
-            
-            //            //Send Push
-            //            var push = PFPush()
-            //            push.setQuery(query)
-            //            push.setMessage(localData.getUserID() + "Invited you to a session")
-            //            push.sendPushInBackground()
-            
-            text.appendString(friend.name)
         }
-        self.fillTextBoxAndDismiss(text)
-        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+    func sendPushCallback(userid: String) {
+        let push = PFPush()
+        push.setChannel("a"+userid)
+        
+        
+        var course = self.session["course"]! as String
+        let data = [
+            "alert" : appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course),
+            "seshid" : appDelegate.localData.getSessionID(),
+            "courseName" : course,
+            "message" :appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course)
+        ]
+        push.setData(data)
+        push.sendPushInBackground()
+    }
     
     func facebookViewControllerCancelWasPressed(sender: AnyObject!) {
         self.fillTextBoxAndDismiss("Canceled")
@@ -186,7 +174,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
         
         var addButton = UIButton() //.buttonWithType(UIButtonType.ContactAdd) as UIButton
-        addButton.setImage(UIImage(named: "blue_plus_icon"), forState: UIControlState.Normal)
+        addButton.setImage(UIImage(named: "thin_blue_plus_icon"), forState: UIControlState.Normal)
         var buttonRect = CGRect()
         buttonRect.size.height = 50.0
         buttonRect.size.width = 50.0
