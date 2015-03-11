@@ -83,18 +83,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         if status == .AuthorizedWhenInUse {
             locationManager.startUpdatingLocation()
             mapView.myLocationEnabled = true
-            mapView.settings.myLocationButton = true
-            
-//            for subView in self.mapView.subviews {
-//                if (subView.description == "GMSUISettingsView") {
-//                    var center = subView.center
-//                    center.y -= 100.0
-//                    subView.center = center
-//                }
-//            }
-            //var locationButton = self.mapView.subviews.last as UIButton
-            //var frame = locationButton.frame
-            //frame.origin.y = 150
+            mapView.settings.myLocationButton = false
+            addMapButton()
         }
     }
     
@@ -103,6 +93,40 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             mapView.camera = GMSCameraPosition(target : location.coordinate, zoom: 17, bearing: 0, viewingAngle: 0)
             locationManager.stopUpdatingLocation()
         }
+    }
+  
+    @IBAction func tappedLocationButton(sender: AnyObject) {
+        if (self.mapView.myLocation != nil) {
+            self.mapView.animateToCameraPosition(GMSCameraPosition(target: self.mapView.myLocation.coordinate, zoom: 18, bearing: 0, viewingAngle: 0))
+        }
+    }
+    
+    
+    func addMapButton() {
+        var cx = CGFloat(5)
+        var cy = CGFloat(200)
+        
+        var myLocationButton = UIButton()
+        myLocationButton.setImage(UIImage(named: "blue_map_icon"), forState: UIControlState.Normal)
+        var buttonRect = CGRect()
+        buttonRect.size.height = 40.0
+        buttonRect.size.width = 40.0
+        buttonRect.origin.x = cx
+        buttonRect.origin.y = cy
+        
+        myLocationButton.frame = buttonRect
+        myLocationButton.tintColor = cramrBlue
+        myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
+        myLocationButton.addTarget(self, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
+        //self.mapView.delegate.didTapMyLocationButtonForMapView!(self.mapView)
+        
+        myLocationButton.layer.borderWidth = 1.0
+        myLocationButton.layer.borderColor = cramrBlue.CGColor
+        self.view.addSubview(myLocationButton)
+
+        
+        //self.mapView.delegate.didTapMyLocationButtonForMapView!(self.mapView)
+        
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
