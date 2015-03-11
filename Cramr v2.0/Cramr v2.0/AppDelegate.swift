@@ -111,18 +111,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if localData.getSessionID() != ""{
         */
 
-//        if localData.getSessionID() != ""{
-//            self.go_to_locked()
-//            return true
-//        } // Else if the user has already signed in before
-//        else if localData.getUserID() != ""{
-//            self.go_to_masterview()
-//            return true
-//        } // If none of above apply, log in through facebook
-//        else{
+        if localData.getSessionID() != ""{
+            self.go_to_locked()
+            return true
+        } // Else if the user has already signed in before
+        else if localData.getUserID() != ""{
+            self.go_to_masterview()
+            return true
+        } // If none of above apply, log in through facebook
+        else{
             self.go_to_login()
             return true
-//        }
+        }
     }
     
     func go_to_login(animated: Bool = false) {

@@ -42,6 +42,8 @@
 		7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */; };
 		7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B54AE1A7B066500064762 /* CourseListTableView.swift */; };
 		7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */; };
+		7BC138FF1AB05636004DD044 /* OnboardingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */; };
+		7BC139001AB05636004DD044 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */; };
 		7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */; };
 		7BCFFFF01A82CFC700CD0C40 /* SessionContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */; };
 		7BE9B4C31AA50C9000CD015D /* SessionCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE9B4C21AA50C9000CD015D /* SessionCreationViewController.swift */; };
@@ -111,6 +113,8 @@
 		7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDatastore.swift; sourceTree = "<group>"; };
 		7B9B54AE1A7B066500064762 /* CourseListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTableView.swift; sourceTree = "<group>"; };
 		7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLockedViewController.swift; sourceTree = "<group>"; };
+		7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingContentViewController.swift; sourceTree = "<group>"; };
+		7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		7BCF00271A832F1E00CD0C40 /* SessionBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionBrowserViewController.swift; sourceTree = "<group>"; };
 		7BCFFFEF1A82CFC700CD0C40 /* SessionContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionContentViewController.swift; sourceTree = "<group>"; };
 		7BE9B4C21AA50C9000CD015D /* SessionCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCreationViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 		7B33AFC91A772A570043841E /* Cramr v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */,
+				7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */,
 				7B9642AF1A969EA800331CA7 /* Util.swift */,
@@ -406,6 +412,8 @@
 				7BCF00281A832F1E00CD0C40 /* SessionBrowserViewController.swift in Sources */,
 				62B246941A97F385006D23D8 /* CustomCourseTableCell.swift in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
+				7BC138FF1AB05636004DD044 /* OnboardingContentViewController.swift in Sources */,
+				7BC139001AB05636004DD044 /* OnboardingViewController.swift in Sources */,
 				7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */,
 				7B9642B01A969EA800331CA7 /* Util.swift in Sources */,
 				7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */,
