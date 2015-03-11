@@ -214,8 +214,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
             let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
                 self.addCourseToUserAD(userid, courseName: courseName, cb: {})
-                if localData.getSessionID() != "" {   // User already in a session, remove him/her before joining new
-                    self.leaveSessionAD(localData.getUserID(), sessionID: localData.getSessionID(), cb: {() -> Void in})
+                if self.localData.getSessionID() != "" {   // User already in a session, remove him/her before joining new
+                    self.leaveSessionAD(self.localData.getUserID(), sessionID: self.localData.getSessionID(), cb: {() -> Void in})
                 }
                 self.sessionExists_afterPromptAD(userid, seshid: seshid, courseName: courseName, message: "")
             }

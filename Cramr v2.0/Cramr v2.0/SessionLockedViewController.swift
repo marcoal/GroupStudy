@@ -89,7 +89,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             var fdict = friend as NSDictionary
             var id = fdict.objectForKey("id") as String
             println(id)
-            (UIApplication.sharedApplication().delegate as AppDelegate).isUserInSessionAD(id, seshID: localData.getSessionID(), cb: self.sendPushCallback)
+            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
             
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -102,10 +102,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         var course = self.session["course"]! as String
         let data = [
-            "alert" : localData.getUserName() + " invited you to work on " + getCourseName(course),
-            "seshid" : localData.getSessionID(),
+            "alert" : appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course),
+            "seshid" : appDelegate.localData.getSessionID(),
             "courseName" : course,
-            "message" :localData.getUserName() + " invited you to work on " + getCourseName(course)
+            "message" :appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course)
         ]
         push.setData(data)
         push.sendPushInBackground()
