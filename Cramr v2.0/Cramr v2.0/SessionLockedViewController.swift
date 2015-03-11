@@ -186,7 +186,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
         
         var addButton = UIButton() //.buttonWithType(UIButtonType.ContactAdd) as UIButton
-        addButton.setImage(UIImage(named: "blue_plus_icon"), forState: UIControlState.Normal)
+        addButton.setImage(UIImage(named: "thin_blue_plus_icon"), forState: UIControlState.Normal)
         var buttonRect = CGRect()
         buttonRect.size.height = 50.0
         buttonRect.size.width = 50.0
