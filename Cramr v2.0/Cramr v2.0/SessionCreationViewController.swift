@@ -12,7 +12,7 @@ import MapKit
 
 class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
-    
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     var courseName: String?  {
         didSet {
@@ -45,10 +45,12 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             errorAlert("Please fill in a description!")
         } else if locationText == "" {
             errorAlert("Please fill in a location!")
-        } else {
+        } else if appDelegate.isConnectedToNetwork() {
             var center: CGPoint = mapView.center
             var loc: CLLocationCoordinate2D = mapView.camera.target
             addSession(locationText, description: descriptionText, geoTag: loc)
+        } else {
+            displayNotConnectedAlert()
         }
     }
     
@@ -96,6 +98,12 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         return true;
     }
     
+    func displayNotConnectedAlert() {
+        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func setupMap() {
         
         
@@ -110,7 +118,6 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     override func viewDidLoad() {
-        
         descriptionField.delegate = self
         locationField.delegate = self
         
@@ -126,9 +133,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         addBlur(self.view, [self.descriptionLabel, self.locationLabel])
         self.view.bringSubviewToFront(self.descriptionField)
         self.view.bringSubviewToFront(self.locationField)
-        
-        
-        
+  
     }
     
 }
