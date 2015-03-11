@@ -106,7 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         } else if localData.getSessionID() != ""{
         */
-        if localData.getSessionID() != ""{
+        if self.istFirstRun(){
+            //TODO got to slideshow
+        }
+        else if localData.getSessionID() != ""{
             self.go_to_locked()
             return true
         } // Else if the user has already signed in before
@@ -323,6 +326,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection)
+    }
+    
+    func istFirstRun() -> Bool {
+        var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if (defaults.objectForKey("isFirstRun" ) != nil) {
+            return false
+        }
+        defaults.setObject(NSDate(), forKey: "isFirstRun")
+        defaults.synchronize()
+        return true
     }
     
 }
