@@ -81,6 +81,17 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             locationManager.startUpdatingLocation()
             mapView.myLocationEnabled = true
             mapView.settings.myLocationButton = true
+            
+//            for subView in self.mapView.subviews {
+//                if (subView.description == "GMSUISettingsView") {
+//                    var center = subView.center
+//                    center.y -= 100.0
+//                    subView.center = center
+//                }
+//            }
+            //var locationButton = self.mapView.subviews.last as UIButton
+            //var frame = locationButton.frame
+            //frame.origin.y = 150
         }
     }
     
