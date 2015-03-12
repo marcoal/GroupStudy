@@ -28,6 +28,7 @@ class SessionBrowserViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //addMapButton(self.view, self)
         
         if sessions?.count == 0 {
             self.newSesh()

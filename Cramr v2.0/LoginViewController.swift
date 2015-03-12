@@ -31,18 +31,18 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-        var height = UIScreen.mainScreen().bounds.size.height
+        var height = UIScreen.mainScreen().bounds.size.height + 4.0
         var width = UIScreen.mainScreen().bounds.width
         
         var layer = AVPlayerLayer(player: self.avplayer)
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
         var rect = CGRectMake(50, 200, width, height)
         rect.origin.x = (self.view.frame.width - width) / 2.0
-        rect.origin.y = self.view.frame.height - height
+        rect.origin.y = self.view.frame.height - height + 3.0
         layer.frame = rect
         
-        layer.borderColor = UIColor.whiteColor().CGColor
-        layer.borderWidth = 1.0
+        //layer.borderColor = UIColor.whiteColor().CGColor
+        //layer.borderWidth = 1.0
         
         self.view.layer.addSublayer(layer)
         self.avplayer.play()

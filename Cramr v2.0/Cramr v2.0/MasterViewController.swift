@@ -20,8 +20,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
-        refreshCourseList()
-        self.tableView.reloadData()
+        if appDelegate.isConnectedToNetwork(){
+            refreshCourseList()
+            self.tableView.reloadData()
+        } else {
+            checkForNetwork(self, self.appDelegate, message: "Cannot add courses with no internet connection.")
+        }
     }
     
     override func awakeFromNib() {
@@ -44,9 +48,23 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     override func viewDidAppear(animated: Bool) {
         self.view.userInteractionEnabled = false
-        super.viewDidAppear(animated)
-        designLayout()
-        self.refreshCourseList()
+        if appDelegate.isConnectedToNetwork(){
+            super.viewDidAppear(animated)
+            designLayout()
+            self.refreshCourseList()
+        }
+        
+    }
+    
+    func addButtonPressed(){
+        if appDelegate.isConnectedToNetwork(){
+            if appDelegate.isConnectedToNetwork(){
+                self.performSegueWithIdentifier("toAddCourse", sender: nil)
+            } else{
+                checkForNetwork(self, self.appDelegate, message: "Cannot add courses with no internet connection.")
+            }
+        }
+        checkForNetwork(self, self.appDelegate, message: "Cannot add courses with no internet connection.")
     }
     
     func designLayout() {
@@ -73,10 +91,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     func updateCells() {
+        checkForNetwork(self, self.appDelegate)
         self.refreshCourseList()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-        checkForNetwork()
+       
     }
     
     func setupReload() {
@@ -87,18 +106,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     }
     
-    func checkForNetwork() {
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            dispatch_async(dispatch_get_main_queue()) {
-                if !self.appDelegate.isConnectedToNetwork() {
-                    var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +116,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Do any additional setup after loading the view, typically from a nib.
         designLayout()
         self.setupReload()
-        self.checkForNetwork()
+        checkForNetwork(self, self.appDelegate)
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addButtonPressed")
+        
+        self.navigationItem.rightBarButtonItem = addButton
     }
     
     override func didReceiveMemoryWarning() {

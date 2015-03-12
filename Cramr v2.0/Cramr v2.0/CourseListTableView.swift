@@ -81,6 +81,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         if appDelegate.isConnectedToNetwork() {
             (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
         } else {
+            checkForNetwork(self, self.appDelegate, message: "")
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
