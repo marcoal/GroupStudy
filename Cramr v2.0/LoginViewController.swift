@@ -11,7 +11,7 @@ import Foundation
 let notificationKey = "com.cramr.notificationKey"
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
-
+    
     @IBOutlet weak var fbLoginView = FBLoginView();
     
     var avplayer: AVPlayer = AVPlayer()
@@ -24,27 +24,47 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         super.viewDidLoad()
         self.fbLoginView!.delegate = self
         self.fbLoginView!.readPermissions = ["public_profile", "email", "user_friends"]
-        self.view.bringSubviewToFront(self.fbLoginView!)
         
-        self.view.backgroundColor = .lightGrayColor()
-    }
-    
-    /* ---------THIS IMPLEMENTATION USES AVPLayer (also did MPMovie Player stashed) ------------- */
-    override func viewDidAppear(animated: Bool) {
-        let filepath = NSBundle.mainBundle().pathForResource("entrance", ofType: "mp4")
+        
+        let filepath = NSBundle.mainBundle().pathForResource("cramr_intro_video", ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)
         self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
+        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
         var height = UIScreen.mainScreen().bounds.size.height
-        var width = height*1.77
+        var width = UIScreen.mainScreen().bounds.width
         
-        //        var layer = AVPlayerLayer(player: self.avplayer)
-        //        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-        //        layer.frame = CGRectMake(0,0,width, height)
-        //        self.view.layer.addSublayer(layer)
-        //        self.avplayer.play()
-        // Do any additional setup for FB
+        var layer = AVPlayerLayer(player: self.avplayer)
+        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+        var rect = CGRectMake(50, 200, width, height)
+        rect.origin.x = (self.view.frame.width - width) / 2.0
+        rect.origin.y = self.view.frame.height - height
+        layer.frame = rect
+        
+        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.borderWidth = 1.0
+        
+        self.view.layer.addSublayer(layer)
+        self.avplayer.play()
+        self.view.bringSubviewToFront(self.fbLoginView!)
     }
+    
+    //    /* ---------THIS IMPLEMENTATION USES AVPLayer (also did MPMovie Player stashed) ------------- */
+    //    override func viewDidAppear(animated: Bool) {
+    //        let filepath = NSBundle.mainBundle().pathForResource("entrance", ofType: "mp4")
+    //        let fileURL = NSURL.fileURLWithPath(filepath!)
+    //        self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
+    //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
+    //        var height = UIScreen.mainScreen().bounds.size.height
+    //        var width = height*1.77
+    //
+    //        //        var layer = AVPlayerLayer(player: self.avplayer)
+    //        //        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+    //        //        layer.frame = CGRectMake(0,0,width, height)
+    //        //        self.view.layer.addSublayer(layer)
+    //        //        self.avplayer.play()
+    //        // Do any additional setup for FB
+    //    }
     
     /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
     func playerItemDidReachEnd(notif: NSNotification){
@@ -81,7 +101,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         //        NSLog("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as String
         //        NSLog("User Email: \(userEmail)")
-
+        
         //        setCurrUser()
         
         var query = PFUser.query();

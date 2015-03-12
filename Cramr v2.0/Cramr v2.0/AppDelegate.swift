@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func go_to_login(animated: Bool = false) {
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
-        var firstRun = true //isFirstRun()
+        var firstRun = isFirstRun()
         let navController = self.window!.rootViewController as UINavigationController
         self.window?.makeKeyAndVisible()
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
