@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="rS3-R9-Ivy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Page View Controller-->
@@ -53,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jr9-9l-vUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="39"/>
+            <point key="canvasLocation" x="311" y="60"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="RLG-jN-gqc">
@@ -167,29 +167,29 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_people_icon" id="jWf-nL-DZD">
-                                            <rect key="frame" x="242" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="275" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_book_icon" id="eiq-ox-ju8">
-                                            <rect key="frame" x="242" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="275" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="359-jd-6C4">
-                                            <rect key="frame" x="205" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="238" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.32156862749999998" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fnh-He-GJP">
-                                            <rect key="frame" x="205" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="238" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.32156862749999998" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_plus_icon" id="pG8-gP-W2p">
-                                            <rect key="frame" x="222" y="35" width="48" height="50"/>
+                                            <rect key="frame" x="255" y="35" width="48" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <color key="backgroundColor" red="0.56862745100000001" green="0.72549019609999998" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -214,17 +214,11 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" id="9Fp-fn-Ty4"/>
-                    <navigationItem key="navigationItem" title="Cramr" id="tQt-TN-PWz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="99d-gP-fIg">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="CWX-q6-Ru7" kind="modal" id="Pv4-xh-9Xq"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Cramr" id="tQt-TN-PWz"/>
                     <connections>
                         <segue destination="5MX-FO-oJb" kind="push" identifier="showDetail" id="eg5-0W-qPv"/>
                         <segue destination="clT-VE-6om" kind="push" identifier="createSession" id="wg3-Jn-cuq"/>
+                        <segue destination="CWX-q6-Ru7" kind="modal" identifier="toAddCourse" id="GEU-UC-uEh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cn-md-YlS" sceneMemberID="firstResponder"/>
