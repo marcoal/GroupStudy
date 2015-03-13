@@ -97,7 +97,13 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
             
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
+        let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alert.addAction(closeAction)
+        picker.presentViewController(alert, animated: true, completion: nil)
+
     }
 
     func sendPushCallback(userid: String) {

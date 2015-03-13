@@ -49,23 +49,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         self.view.bringSubviewToFront(self.fbLoginView!)
     }
     
-    //    /* ---------THIS IMPLEMENTATION USES AVPLayer (also did MPMovie Player stashed) ------------- */
-    //    override func viewDidAppear(animated: Bool) {
-    //        let filepath = NSBundle.mainBundle().pathForResource("entrance", ofType: "mp4")
-    //        let fileURL = NSURL.fileURLWithPath(filepath!)
-    //        self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
-    //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
-    //        var height = UIScreen.mainScreen().bounds.size.height
-    //        var width = height*1.77
-    //
-    //        //        var layer = AVPlayerLayer(player: self.avplayer)
-    //        //        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-    //        //        layer.frame = CGRectMake(0,0,width, height)
-    //        //        self.view.layer.addSublayer(layer)
-    //        //        self.avplayer.play()
-    //        // Do any additional setup for FB
-    //    }
-    
     /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
     func playerItemDidReachEnd(notif: NSNotification){
         var p:  AVPlayer = notif.object as AVPlayer
