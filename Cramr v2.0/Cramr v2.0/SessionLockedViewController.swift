@@ -132,6 +132,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     func displayCurrentUsers(pictDict : [String: UIImage]) {
+        for view in self.currentMembersScrollView.subviews {
+            view.removeFromSuperview()
+        }
         self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
         
         self.currentMembersScrollView.canCancelContentTouches = false

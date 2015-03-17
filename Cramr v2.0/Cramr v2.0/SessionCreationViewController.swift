@@ -126,7 +126,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         locationField.delegate = self
         
         // It breaks here
-        self.view.backgroundColor = .lightGrayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         //NSLog("couseName: " + self.courseName!)
         
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()

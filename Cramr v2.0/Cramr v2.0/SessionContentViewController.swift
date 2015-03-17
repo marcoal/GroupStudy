@@ -137,7 +137,7 @@ class SessionContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .grayColor()
+        view.backgroundColor = UIColor.whiteColor()
         
         setupMap()
         self.setLabels()

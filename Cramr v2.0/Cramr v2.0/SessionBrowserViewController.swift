@@ -34,7 +34,7 @@ class SessionBrowserViewController : UIViewController {
             self.newSesh()
         }
         
-        self.view.backgroundColor = .lightGrayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         self.title = getCourseID(self.courseName!)
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()

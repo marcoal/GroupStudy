@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6231EA251AB1571100AB19CC /* cramr_intro_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6231EA211AB1571100AB19CC /* cramr_intro_video.mov */; };
 		625806821A7D994C002AAD26 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806811A7D994C002AAD26 /* FacebookSDK.framework */; };
 		625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */; };
 		625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */; };
@@ -28,6 +29,9 @@
 		62BC8C7B1A7AD78000864C72 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C7A1A7AD78000864C72 /* MobileCoreServices.framework */; };
 		62BC8C7D1A7AD7B400864C72 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C7C1A7AD7B400864C72 /* Security.framework */; };
 		62BC8C7F1A7AD7BF00864C72 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C7E1A7AD7BF00864C72 /* StoreKit.framework */; };
+		62F2E13E1AB4EB190083ACB3 /* AddCourseCS106A.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13B1AB4EB190083ACB3 /* AddCourseCS106A.mov */; };
+		62F2E13F1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */; };
+		62F2E1401AB4EB190083ACB3 /* CreateSession221.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */; };
 		7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCC1A772A570043841E /* AppDelegate.swift */; };
 		7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCE1A772A570043841E /* Cramr_v2_0.xcdatamodeld */; };
 		7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFD11A772A570043841E /* MasterViewController.swift */; };
@@ -73,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6231EA211AB1571100AB19CC /* cramr_intro_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = cramr_intro_video.mov; sourceTree = "<group>"; };
 		625806811A7D994C002AAD26 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -96,6 +101,9 @@
 		62BC8C7C1A7AD7B400864C72 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		62BC8C7E1A7AD7BF00864C72 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		62BC8C801A7AD83000864C72 /* Cramr v2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cramr v2.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		62F2E13B1AB4EB190083ACB3 /* AddCourseCS106A.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AddCourseCS106A.mov; sourceTree = "<group>"; };
+		62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = BrowseSessionsCS106A.mov; sourceTree = "<group>"; };
+		62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = CreateSession221.mov; sourceTree = "<group>"; };
 		7B33AFC71A772A570043841E /* Cramr v2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cramr v2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B33AFCB1A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFCC1A772A570043841E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +232,10 @@
 		7B33AFBE1A772A570043841E = {
 			isa = PBXGroup;
 			children = (
+				6231EA211AB1571100AB19CC /* cramr_intro_video.mov */,
+				62F2E13B1AB4EB190083ACB3 /* AddCourseCS106A.mov */,
+				62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */,
+				62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */,
 				FA3C1AF81A8464D100DB86AC /* register.mp4 */,
 				FA3C1AF61A84536500DB86AC /* entrance.mp4 */,
 				62BC8C711A7AD6EE00864C72 /* Frameworks */,
@@ -378,13 +390,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6231EA251AB1571100AB19CC /* cramr_intro_video.mov in Resources */,
 				FA3C1AF91A8464D200DB86AC /* register.mp4 in Resources */,
 				625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */,
 				7B33AFD71A772A570043841E /* Main.storyboard in Resources */,
+				62F2E1401AB4EB190083ACB3 /* CreateSession221.mov in Resources */,
 				7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */,
 				7B33AFD91A772A570043841E /* Images.xcassets in Resources */,
 				FA3C1AF71A84536500DB86AC /* entrance.mp4 in Resources */,
 				7BE9B4CB1AA5186A00CD015D /* GoogleMaps.bundle in Resources */,
+				62F2E13E1AB4EB190083ACB3 /* AddCourseCS106A.mov in Resources */,
+				62F2E13F1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
