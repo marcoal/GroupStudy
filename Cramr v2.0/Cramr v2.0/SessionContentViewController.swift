@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+ 
 class SessionContentViewController: UIViewController {
     
     var session: [String: String]!

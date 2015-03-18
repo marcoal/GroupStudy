@@ -3,3 +3,4 @@ CourseListTableView.swift
 LocalDataStore.swift
 LoginviewController.swift
 SessionCreationViewController.swift
+SessionBrowserViewController.swift

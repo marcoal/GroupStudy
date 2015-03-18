@@ -164,6 +164,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         
         
     }
+
     /**
     This function specifies the navigation items, the colors of the view and what is loaded immidately.
     */
