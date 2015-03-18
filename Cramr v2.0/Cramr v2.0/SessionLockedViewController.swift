@@ -1,14 +1,20 @@
-//
-//  SessionLockedViewController.swift
-//  Cramr v2.0
-//
-//  Created by Anton Apostolatos on 2/9/15.
-//  Copyright (c) 2015 Casa, Inc. All rights reserved.
-//
 
 import Foundation
 import UIKit
 
+/**
+    View conroller for a locked session. It shows the active session and allows the user to leave the session or to invite friends by sending a push notification.
+
+    - friendPickerController:   developed by Facebook, viewController for choosing friends
+    - appDelegate:              AppDelegate for access to server side database
+    - leaveButton:              IBOutlet to leave button in view
+    - desciptLabel:             Label for session description
+    - locationLabel:            Label for location
+    - lockedMapView:            GoogleMapServices mapView
+    - currentMembersScrollView: Scroll view of profile pictures of current users in session
+    - currentMembersDict:       Dictionary of currentmember is session <username> - > <userID>
+    - session:                  Dicitonary with all the information of this session.
+*/
 class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
@@ -35,19 +41,28 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
     }
     
+    /**
+        Call backback function to be called by appDelegate after we leave the session.
+    */
     func leaveSessionCallback() {
         self.performSegueWithIdentifier("popToCourseView", sender: self)
     }
     
+    /**
+        IBAction to perform when the user clicks leaveSession button. If the app is connected to the network, we leave the Session and call leaveSessionCallback to segue to CoursesView. Else we alert the user that there is no internet connection.
+    */
     @IBAction func leaveSession(sender: AnyObject) {
         self.wasClosed = true
         if appDelegate.isConnectedToNetwork() {
-            (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
+            appDelegate.leaveSessionAD(appDelegate.localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
         } else {
              checkForNetwork(self, self.appDelegate)
         }
     }
     
+    /**
+        IBAction when the plus icon is pressed in the currentMembersScrollView. Fetches user friends and presents the friendPickerController. If the app is not connected to the internet, it pops an alert informing the user.
+    */
     @IBAction func inviteFriends(sender: AnyObject) {
         if appDelegate.isConnectedToNetwork() {
             if(!FBSession.activeSession().isOpen){
@@ -69,7 +84,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
                 );
                 return;
             }
-            
+            // If friendPicker is nil, initialize it and set title
             if(self.friendPickerController == nil){
                 self.friendPickerController = FBFriendPickerViewController()
                 self.friendPickerController.title = "Invite Friends"
@@ -79,27 +94,39 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             self.friendPickerController.loadData()
             self.friendPickerController.clearSelection()
             
+            //Set a new Frame to the friendPicker for aesthetics
             var newFrame = self.friendPickerController.view.bounds
             newFrame.size.height = newFrame.size.height + 1
             self.friendPickerController.tableView.frame = newFrame
             
             self.presentViewController(self.friendPickerController, animated: true, completion: nil)
-        } else {
+        }
+        // If there is not network, alert the user
+        else {
              checkForNetwork(self, self.appDelegate)
         }
     }
     
+    /**
+        Conforms to FBFriendPickerDelegate. This function is called when the user clicks done in the friendPickerController, for each user selected we send a push notification in the background and alert the user that the invites were sent.
+        :param: sender  - FBFriendPickerViewController
+    */
     func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
         var text = NSMutableString()
         let picker = sender as FBFriendPickerViewController
         
+        // For each friend that the user selected,  if the user is not already in the session,
+        // send a push in background (form this view's perspective, handled by AppDelegate)
         for friend in picker.selection {
             var fdict = friend as NSDictionary
             var id = fdict.objectForKey("id") as String
             println(id)
-            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
+            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: appDelegate.sendPushCallback)
             
         }
+        
+        //Alert the user that the invites where sent, when the user dismisses alert, take us back
+        //to SessionLocked
         let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
         let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -108,32 +135,19 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         picker.presentViewController(alert, animated: true, completion: nil)
 
     }
-
-    func sendPushCallback(userid: String) {
-        let push = PFPush()
-        push.setChannel("a"+userid)
-        
-        
-        var course = self.session["course"]! as String
-        let data = [
-            "alert" : appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course),
-            "seshid" : appDelegate.localData.getSessionID(),
-            "courseName" : course,
-            "message" :appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course)
-        ]
-        push.setData(data)
-        push.sendPushInBackground()
-    }
     
+    /**
+        Conforms to FBFriendPickerDelegate. When cancle is pressed, dismiss the pickerController
+        :param: sender - FBFriendPickerViewController
+    */
     func facebookViewControllerCancelWasPressed(sender: AnyObject!) {
-        self.fillTextBoxAndDismiss("Canceled")
-    }
-    
-    func fillTextBoxAndDismiss(text: String){
         self.dismissViewControllerAnimated(true, completion: nil)
-        //addBlur(self.view, [self.selectedFriendsView, self.locationLabel, self.desciptLabel, self.className])
     }
     
+    /**
+        Callback after appDelegate calls getSessionUsersPicturesAD. Once we have fetched the pictures of the users in the session this callback is called to set the scroll view to show the profile pictues.
+        :param: pictDict    - Dictionary maps usernames to images
+    */
     func displayCurrentUsers(pictDict : [String: UIImage]) {
         for view in self.currentMembersScrollView.subviews {
             view.removeFromSuperview()
@@ -148,6 +162,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         var cx = CGFloat(5)
         var cy = CGFloat(25)
         
+        // for each image, set the image to be a circle with blue border and add it to 
+        // currentMembersScrollView
         for im in pictDict.values {
             var imView = UIImageView(image: im)
             
@@ -172,6 +188,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         var lx = CGFloat(5)
         var ly = CGFloat(0)
         
+        // for each user, add a label with the shortened name of the user to currentMembersScrollView
         for user in pictDict.keys {
             var label = UILabel()
             label.text = getShortName(currentMembersDict[user]!)
@@ -190,6 +207,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             lx += label.frame.size.width + 10
         }
         
+        // Add the little plus button with action inviteFriends
         var addButton = UIButton() //.buttonWithType(UIButtonType.ContactAdd) as UIButton
         addButton.setImage(UIImage(named: "thin_blue_plus_icon"), forState: UIControlState.Normal)
         var buttonRect = CGRect()
@@ -212,7 +230,10 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
     }
     
-    
+    /**
+        Callback for getSessionUsersAD from AppDelegate. After we get all the current members in the session, we pass a calback to getSessionUsersPicturesAD.
+        :param: userNamesAndIds     -   dictionary of usernames and ids
+    */
     func currentUsersCallback(userNamesAndIds: [(String, String)]) {
         
         var userIDs = [String]()
@@ -221,9 +242,12 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             self.currentMembersDict[elem.1] = elem.0
         }
         
-        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
+        appDelegate.getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
     }
     
+    /**
+        Sets up the GoogleMapServices mapView and adds a blue map marker
+    */
     func setupMap() {
         var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
         var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
@@ -244,7 +268,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
 
     }
     
-    
+    /**
+        Called on viewDidLoad or when user clicks refresh button on the top left corner. If the app is connected to the network, set the description and location label as well as set up the map and display the session users (fetched by appDelegate). If there is not conneciton, we alert the users.
+    */
     func refreshView() {
         if appDelegate.isConnectedToNetwork() {
             if self.session != nil {
@@ -257,7 +283,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
                 self.title = getCourseID(fullCourseName)
                 setupMap()
                 addBlur(self.view, [self.desciptLabel, self.locationLabel, self.currentMembersScrollView])
-                (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
+                appDelegate.getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
             }
         } else {
             checkForNetwork(self, self.appDelegate)
@@ -279,6 +305,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         }
     }
     
+    /**
+        Set parameters of the navigation bar, add a refresh buttton to the navigationBar and call refreshView
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false
@@ -295,8 +324,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         self.refreshView()
         self.refreshThread()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
-        
-        //addMapButton(self.view, self)
         
     }
     
