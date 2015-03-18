@@ -1,14 +1,8 @@
-//
-//  LoginViewController.swift
-//  Cramr v2.0
-//
-//  Created by Roberto Alvarez on 1/31/15.
-//  Copyright (c) 2015 Casa, Inc. All rights reserved.
-//
 
 import Foundation
 
 let notificationKey = "com.cramr.notificationKey"
+
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
@@ -20,20 +14,26 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     var isFirstRun: Bool = false
     
+    /**
+        Initializes fbLoginView, reads the facebook permissions, and starts the video player
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fbLoginView!.delegate = self
         self.fbLoginView!.readPermissions = ["public_profile", "email", "user_friends"]
         
-        
+        // Get the intro video frome the bundle and instantiate the player
         let filepath = NSBundle.mainBundle().pathForResource("cramr_intro_video", ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)
         self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
+        
+        //Set notification when player reaches the end of the vidoe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
         var height = UIScreen.mainScreen().bounds.size.height + 4.0
         var width = UIScreen.mainScreen().bounds.width
         
+        //Instantiate the layer and set appropriate size
         var layer = AVPlayerLayer(player: self.avplayer)
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
         var rect = CGRectMake(50, 200, width, height)
@@ -41,36 +41,44 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         rect.origin.y = self.view.frame.height - height + 3.0
         layer.frame = rect
         
-        //layer.borderColor = UIColor.whiteColor().CGColor
-        //layer.borderWidth = 1.0
-        
         self.view.layer.addSublayer(layer)
         self.avplayer.play()
         self.view.bringSubviewToFront(self.fbLoginView!)
     }
     
-    /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
+    /**
+        Resets player to video start when the nofification is received
+        :param: notif NSNotification
+    */
     func playerItemDidReachEnd(notif: NSNotification){
         var p:  AVPlayer = notif.object as AVPlayer
         p.seekToTime(kCMTimeZero)
         p.play()
     }
     
+    
+    /**
+        If a Facebook session is open, cached the user id in local storage.
+    */
     func setCurrUser() {
         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
                 (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserID(resultdict["id"] as String)
-                //                localData.setUserName()
             }
         }
     }
     
-    // Facebook Delegate Methods
     
+    /* ---------------------------- Facebook Delegate Methods ---------------------------- */
+    
+    /**
+        Satisfies FBLoginViewDelegate. These are the actions performed when the user is logged in, if it is the user's
+        first time loging in show onbording, else go to view showing courses.
+        :param: loginView FBLoginView!
+    */
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-        // NSLog("User Logged In")
         if self.isFirstRun {
             appDelegate.go_to_onboarding(animated: false)
         } else {
@@ -78,15 +86,16 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     }
     
+    /**
+        Satisfies FBLoginViewDelegate. Called when the user's information was fetched.
+        :param: loginView FBLoginView!
+        :param: user FBGraphUser
+    */
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        //        NSLog("User: \(user)")
-        //        NSLog("User ID: \(user.objectID)")
-        //        NSLog("User Name: \(user.name)")
         var userEmail = user.objectForKey("email") as String
-        //        NSLog("User Email: \(userEmail)")
         
-        //        setCurrUser()
-        
+        // Query parse for user with userid, and fetch data in background, if the user
+        // is not already in parse, sign him/her up with parse and cached the userid and username
         var query = PFUser.query();
         query.whereKey("userID", containsString: user.objectID)
         query.findObjectsInBackgroundWithBlock {
@@ -118,19 +127,23 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserName(user.name)
     }
     
+    /**
+        Satisfies FBLoginViewDelegate. Called when the user's information was fetched.
+        :param: loginView FBLoginView!
+        :param: user FBGraphUser
+    */
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         NSLog("User Logged Out")
     }
     
+    /**
+        Satisfies FBLoginViewDelegate. Called when fb login had an error
+        :param: loginView FBLoginView!
+        :param: handleError NSError
+    */
     func loginView(loginView : FBLoginView!, handleError:NSError) {
         NSLog("Error: \(handleError.localizedDescription)")
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     
 }
