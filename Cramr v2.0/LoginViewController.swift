@@ -4,6 +4,14 @@ import Foundation
 let notificationKey = "com.cramr.notificationKey"
 
 
+/**
+View conroller for logging in. Conforms to FBLoginViewDelegate. It presents and FBLoginView and handles signing in the user through parse.
+
+- fbLoginView:              developed by Facebook, facebook login view button
+- avplayer:                 the video player that handles playing the login intro video
+- appDelegate:              AppDelegate
+- isFirstRun:               Bool true if it is the first time opening the app (for onboarding)
+*/
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBOutlet weak var fbLoginView = FBLoginView();
@@ -65,7 +73,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
-                (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserID(resultdict["id"] as String)
+                appDelegate.localData.setUserID(resultdict["id"] as String)
             }
         }
     }
@@ -123,8 +131,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             }
         }
         
-        (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserID(user.objectID)
-        (UIApplication.sharedApplication().delegate as AppDelegate).localData.setUserName(user.name)
+        appDelegate.localData.setUserID(user.objectID)
+        appDelegate.localData.setUserName(user.name)
     }
     
     /**
