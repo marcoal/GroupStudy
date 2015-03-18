@@ -1,21 +1,20 @@
-//
-//  StringManipulator.swift
-//  Cramr v2.0
-//
-//  Created by Anton Apostolatos on 2/19/15.
-//  Copyright (c) 2015 Casa, Inc. All rights reserved.
-//
+
+/* ----------- Functions that are used throught the entire project  ----------- */
 
 import Foundation
 import SystemConfiguration
 
-//var cramrBlue = UIColorFromRGB(UInt(9550335)) //Original Cramr Blue
-//var cramrBlue = UIColorFromRGB(UInt(10972979)) //Light Brown
-//var cramrBlue = UIColorFromRGB(UInt(6242857)) //Dark Brown
-//var cramrBlue = UIColorFromRGB(UInt(6291576)) //Dark Purple
-//var cramrBlue = UIColorFromRGB(UInt(9109677)) //Light Purple
-//var cramrBlue = UIColorFromRGB(UInt(543419)) //Dark Blue
-//var cramrBlue = UIColorFromRGB(UInt(24079)) //Green
+/* ----------- Color Variations ----------- */
+/*
+var cramrBlue = UIColorFromRGB(UInt(9550335)) //Original Cramr Blue
+var cramrBlue = UIColorFromRGB(UInt(10972979)) //Light Brown
+var cramrBlue = UIColorFromRGB(UInt(6242857)) //Dark Brown
+var cramrBlue = UIColorFromRGB(UInt(6291576)) //Dark Purple
+var cramrBlue = UIColorFromRGB(UInt(9109677)) //Light Purple
+var cramrBlue = UIColorFromRGB(UInt(543419)) //Dark Blue
+var cramrBlue = UIColorFromRGB(UInt(24079)) //Green
+*/
+
 
 var cramrBlue = UIColorFromRGB(UInt(3363506))
 
@@ -25,12 +24,19 @@ var cramrPurple = UIColorFromRGB(UInt(10061055))
 
 var cramrAqua = UIColorFromRGB(UInt(8712703))
 
-
+/**
+    Given a String splits on ':' and returns first element. That is given s1 of the form "CS 228: Probabilistic Graphical Models" returns "CS 228"
+    :param: item - the string to parse at symbol ":"
+*/
 func getCourseID(item: String) -> String {
     var arr = split(item) {$0 == ":"}
     return arr[0]
 }
 
+/**
+    Given a string of the form "Marco Alban Hidalgo" returns "Marco A."
+    :param: longName
+*/
 func getShortName(longName: String) -> String{
     var name = ""
     if longName != "" {
@@ -44,11 +50,18 @@ func getShortName(longName: String) -> String{
     return name
 }
 
+/**
+    Given a String splits on ':' and returns second element. That is, given s1 of the form "CS 228: Probabilistic Graphical Models" returns "Probabilistic Graphical Models"
+    :param: item - the string to parse at symbol ":"
+*/
 func getCourseName(item: String) -> String {
     var arr = split(item) {$0 == ":"}
     return arr[1]
 }
 
+/**
+    TODO
+*/
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     return UIColor(
         red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
@@ -58,14 +71,27 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     )
 }
 
+/**
+    Returns dictionary with all the passed in key, value pairs
+*/
 func convertToSessionDict(sessionID: String, description: String, location: String, courseName: String, latitude: String, longitude: String ) -> [String: String] {
     return ["sessionID": sessionID, "description": description, "location": location, "course": courseName, "latitude": latitude, "longitude": longitude]
 }
 
+/**
+    Checks to see if sessions are equal
+    :param: first  - dictionary, the first session
+    :param: second - dictionary, the other session
+*/
 func areEqualSessions(first: [String: String], second: [String: String]) -> Bool {
     return first["description"] == second["description"] && first["sessionID"] == second["sessionID"] && first["course"] == second["course"]
 }
 
+/**
+    Adds a little blue marker on the top left of the mapView. If the button is pressed, the mapView refocuses on the actual location.
+    :param: view        - mapView where button will be overlayed
+    :param: controller  - the viewController that has the mapView
+*/
 func addMapButton(view: UIView, controller: UIViewController) {
     var cx = CGFloat(5)
     var cy = CGFloat(105)
@@ -82,12 +108,15 @@ func addMapButton(view: UIView, controller: UIViewController) {
     myLocationButton.tintColor = cramrBlue
     myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
     myLocationButton.addTarget(controller, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
-    
-    //myLocationButton.layer.borderWidth = 1.0
-    //myLocationButton.layer.borderColor = cramrBlue.CGColor
     view.addSubview(myLocationButton)
 }
 
+/**
+    Checks to see if the application is connected to the internet, if not it pops an alert with the specified message informing the user.
+    :param: controller  - the viewController where the alert will be shown
+    :param: app         - the AppDelegate
+    :param: message     - the message that will be displayed in the alert, default to ""You are not connected to a network."
+*/
 func checkForNetwork(controller: UIViewController, app: AppDelegate, message: String = "You are not connected to a network.") {
     let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
     dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -101,6 +130,13 @@ func checkForNetwork(controller: UIViewController, app: AppDelegate, message: St
     }
 }
 
+
+
+/**
+    Adds a blur background to the array of subviews 
+    :param: superView   - the UIView that contains the array of subViews
+    :param: subView     - array of views where blur will be set
+*/
 func addBlur(superView : UIView, subViews : [UIView]) {
     
     var frame = CGRect()

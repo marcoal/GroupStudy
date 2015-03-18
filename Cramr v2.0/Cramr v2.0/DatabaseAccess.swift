@@ -11,6 +11,8 @@ import CoreData
 
 class DatabaseAccess {
     
+    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     func signupUser(user: FBGraphUser, callback: () -> ()) {
         var query = PFUser.query();
         query.whereKey("userID", containsString: user.objectID)
@@ -46,13 +48,14 @@ class DatabaseAccess {
     }
     
     // Only performs callback funciton if userID in sessionID
-    func isUserInSession(userID: String, sessionID: String, cb: (String) -> ()) {
+    func isUserInSession(userID: String, sessionID: String, cb: (String, String) -> ()) {
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 var session = object as PFObject
                 var users = session.objectForKey("active_users") as [String]
+                var courseName = session.objectForKey("course") as String
                 var userQuery : PFQuery = PFUser.query()
                 userQuery.whereKey("userID", containedIn: users)
                 userQuery.findObjectsInBackgroundWithBlock {
@@ -68,7 +71,7 @@ class DatabaseAccess {
                             }
                         }
                         if found == false{
-                            cb(userID)
+                            cb(userID, courseName)
                         }
                     }
                 }
@@ -253,6 +256,19 @@ class DatabaseAccess {
         }
     }
     
+    func sendPushCallback(userid: String, course: String) {
+        let push = PFPush()
+        push.setChannel("a"+userid)
+        
+        let data = [
+            "alert" : self.appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course),
+            "seshid" : self.appDelegate.localData.getSessionID(),
+            "courseName" : course,
+            "message" :self.appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course)
+        ]
+        push.setData(data)
+        push.sendPushInBackground()
+    }
     
     
     func addSession(userID: String, courseName: String, description: String, location: String, geoTag: CLLocationCoordinate2D, callback: ([String: String]) -> ()) {
