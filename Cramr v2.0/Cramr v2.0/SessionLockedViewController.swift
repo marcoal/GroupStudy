@@ -127,12 +127,16 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         //Alert the user that the invites where sent, when the user dismisses alert, take us back
         //to SessionLocked
-        let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
-        let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+        if picker.selection.count > 0 {
+            let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
+            let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            alert.addAction(closeAction)
+            picker.presentViewController(alert, animated: true, completion: nil)
+        } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        alert.addAction(closeAction)
-        picker.presentViewController(alert, animated: true, completion: nil)
 
     }
     
