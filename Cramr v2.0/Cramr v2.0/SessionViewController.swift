@@ -8,11 +8,16 @@
 
 import UIKit
 
+/** 
+This class sits between the SessionBrowserViewController and the SessionContentViewController
+It is the container within the SessionBrowserViewController, which contains all the SessionContentViewControllers, which display the sessions
+*/
 class SessionViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var sessions: [[String: String]]!
     var pageController: UIPageViewController?
 
+    //This function is called if the user presses the back button. It returns to the view of all enrolled classes in the MasterViewController
     @IBAction func popToSessionView(segue: UIStoryboardSegue) {
         performSegueWithIdentifier("popToBrowser", sender: self)
     }
