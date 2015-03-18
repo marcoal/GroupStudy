@@ -121,7 +121,6 @@ class SessionContentViewController: UIViewController {
         var longitude: Double = (self.session["longitude"]! as NSString).doubleValue
         self.sessionMapView.padding = UIEdgeInsets(top: 150, left: 0, bottom: 70, right: 0)
 
-        
         var camera = GMSCameraPosition.cameraWithLatitude(latitude as CLLocationDegrees, longitude: longitude as CLLocationDegrees, zoom: 17.0)
         self.sessionMapView.camera = camera
         self.sessionMapView.myLocationEnabled = true

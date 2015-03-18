@@ -41,11 +41,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         var locationText = locationField.text
         
         if descriptionText == "" && locationText == "" {
-            errorAlert("Please fill in a description and a location!")
+            errorAlert("Please fill in a description and a room!")
         } else if descriptionText == "" {
             errorAlert("Please fill in a description!")
         } else if locationText == "" {
-            errorAlert("Please fill in a location!")
+            errorAlert("Please fill in a room!")
         } else if appDelegate.isConnectedToNetwork() {
             var center: CGPoint = mapView.center
             var loc: CLLocationCoordinate2D = mapView.camera.target
@@ -121,11 +121,6 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         pin.center = centered
     }
     
-    func shouldChangeTextInRange(range: UITextRange, replacementText: String) {
-
-        
-        
-    }
     
     override func viewDidLoad() {
         descriptionField.delegate = self
