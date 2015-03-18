@@ -94,7 +94,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             var fdict = friend as NSDictionary
             var id = fdict.objectForKey("id") as String
             println(id)
-            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
+            appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: appDelegate.sendPushCallback)
             
         }
         let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
@@ -104,22 +104,6 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         alert.addAction(closeAction)
         picker.presentViewController(alert, animated: true, completion: nil)
 
-    }
-
-    func sendPushCallback(userid: String) {
-        let push = PFPush()
-        push.setChannel("a"+userid)
-        
-        
-        var course = self.session["course"]! as String
-        let data = [
-            "alert" : appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course),
-            "seshid" : appDelegate.localData.getSessionID(),
-            "courseName" : course,
-            "message" :appDelegate.localData.getUserName() + " invited you to work on " + getCourseName(course)
-        ]
-        push.setData(data)
-        push.sendPushInBackground()
     }
     
     func facebookViewControllerCancelWasPressed(sender: AnyObject!) {

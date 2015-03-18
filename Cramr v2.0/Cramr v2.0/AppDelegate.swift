@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
     
-    func isUserInSessionAD(userID: String, seshID: String, cb: (String) -> ()) {
+    func isUserInSessionAD(userID: String, seshID: String, cb: (String, String) -> ()) {
         self.DBAccess!.isUserInSession(userID, sessionID: seshID, cb)
     }
     
@@ -263,6 +263,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess!.sessionExists(userid, sessionID: seshid,  courseName: courseName, message: message, cb: self.handleClickedJoin_AfterEmptySession)
     }
     
+    func sendPushCallback(userid: String, course: String) {
+        self.DBAccess!.sendPushCallback(userid, course: course)
+    }
+
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
