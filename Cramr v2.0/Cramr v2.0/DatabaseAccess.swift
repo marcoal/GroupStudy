@@ -361,7 +361,7 @@ class DatabaseAccess {
     :param:  description  the description of the session
     :param:  location  the location written by the user
     :param:  geoTag  the geoLocation from the map
-*/
+    */
     func addSession(userID: String, courseName: String, description: String, location: String, geoTag: CLLocationCoordinate2D, callback: ([String: String]) -> ()) {
         if userID != "" {
             var new_session = PFObject(className: "Sessions")
@@ -550,7 +550,7 @@ class DatabaseAccess {
     }
     
     /**
-    THis function gets all the courses, as the user is typing, and displays them for him to enroll in a new course
+    This function gets all the courses, as the user is typing, and displays them for him to enroll in a new course
     * the callback function displays the list of the courses that are to be displayed
     
     :param:  searchText  the text of the users query
