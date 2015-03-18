@@ -71,7 +71,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationController?.navigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        self.title = "Cramr"
+        self.title = "My Classes"
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = false

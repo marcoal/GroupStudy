@@ -19,6 +19,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
+    var wasClosed = false
+    
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     @IBOutlet weak var leaveButton: UIButton!
@@ -50,6 +52,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         IBAction to perform when the user clicks leaveSession button. If the app is connected to the network, we leave the Session and call leaveSessionCallback to segue to CoursesView. Else we alert the user that there is no internet connection.
     */
     @IBAction func leaveSession(sender: AnyObject) {
+        self.wasClosed = true
         if appDelegate.isConnectedToNetwork() {
             appDelegate.leaveSessionAD(appDelegate.localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
         } else {
@@ -124,12 +127,16 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         //Alert the user that the invites where sent, when the user dismisses alert, take us back
         //to SessionLocked
-        let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
-        let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+        if picker.selection.count > 0 {
+            let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
+            let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            alert.addAction(closeAction)
+            picker.presentViewController(alert, animated: true, completion: nil)
+        } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        alert.addAction(closeAction)
-        picker.presentViewController(alert, animated: true, completion: nil)
 
     }
     
@@ -146,6 +153,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         :param: pictDict    - Dictionary maps usernames to images
     */
     func displayCurrentUsers(pictDict : [String: UIImage]) {
+        for view in self.currentMembersScrollView.subviews {
+            view.removeFromSuperview()
+        }
         self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
         
         self.currentMembersScrollView.canCancelContentTouches = false
@@ -285,6 +295,20 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     
+    func refreshThread() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            
+            while (!self.wasClosed) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(self.session["sessionID"]!, cb: self.currentUsersCallback)
+                }
+                sleep(5)
+            }
+            
+        }
+    }
+    
     /**
         Set parameters of the navigation bar, add a refresh buttton to the navigationBar and call refreshView
     */
@@ -302,6 +326,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
 
         
         self.refreshView()
+        self.refreshThread()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
         
     }

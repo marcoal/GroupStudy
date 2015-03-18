@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.setupParse()       // Set Parse Application keys and enable local datastore
         self.setupDBAccess()    // Setup local datastore
-        
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error: nil)
         // Set up Facebook
         PFFacebookUtils.initializeFacebook()
         
@@ -110,19 +110,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         } else if localData.getSessionID() != ""{
         */
-
-        if localData.getSessionID() != ""{
-            self.go_to_locked()
-            return true
-        } // Else if the user has already signed in before
-        else if localData.getUserID() != ""{
-            self.go_to_masterview()
-            return true
-        } // If none of above apply, log in through facebook
-        else{
+//
+//        if localData.getSessionID() != ""{
+//            self.go_to_locked()
+//            return true
+//        } // Else if the user has already signed in before
+//        else if localData.getUserID() != ""{
+//            self.go_to_masterview()
+//            return true
+//        } // If none of above apply, log in through facebook
+//        else{
             self.go_to_login()
             return true
-        }
+//        }
     }
     
     func go_to_login(animated: Bool = false) {

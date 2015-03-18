@@ -159,6 +159,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         pin.center = centered
     }
     
+    func shouldChangeTextInRange(range: UITextRange, replacementText: String) {
+
+        
+        
+    }
     /**
     This function specifies the navigation items, the colors of the view and what is loaded immidately.
     */
@@ -167,9 +172,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         locationField.delegate = self
         
         // It breaks here
-        self.view.backgroundColor = .lightGrayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         //NSLog("couseName: " + self.courseName!)
-        
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()

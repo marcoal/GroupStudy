@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
                 var resultdict = result as NSDictionary
-                appDelegate.localData.setUserID(resultdict["id"] as String)
+                self.appDelegate.localData.setUserID(resultdict["id"] as String)
             }
         }
     }
