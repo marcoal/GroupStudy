@@ -121,6 +121,12 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         pin.center = centered
     }
     
+    func shouldChangeTextInRange(range: UITextRange, replacementText: String) {
+
+        
+        
+    }
+    
     override func viewDidLoad() {
         descriptionField.delegate = self
         locationField.delegate = self
@@ -128,7 +134,6 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         // It breaks here
         self.view.backgroundColor = UIColor.whiteColor()
         //NSLog("couseName: " + self.courseName!)
-        
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()

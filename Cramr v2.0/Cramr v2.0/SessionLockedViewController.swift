@@ -13,6 +13,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var friendPickerController: FBFriendPickerViewController!
     
+    var wasClosed = false
+    
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     @IBOutlet weak var leaveButton: UIButton!
@@ -38,6 +40,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     @IBAction func leaveSession(sender: AnyObject) {
+        self.wasClosed = true
         if appDelegate.isConnectedToNetwork() {
             (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
         } else {
@@ -262,6 +265,20 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     
+    func refreshThread() {
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            
+            while (!self.wasClosed) {
+                dispatch_async(dispatch_get_main_queue()) {
+                    (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(self.session["sessionID"]!, cb: self.currentUsersCallback)
+                }
+                sleep(5)
+            }
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false
@@ -276,6 +293,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
 
         
         self.refreshView()
+        self.refreshThread()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
         
         //addMapButton(self.view, self)

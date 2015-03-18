@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         self.setupParse()       // Set Parse Application keys and enable local datastore
         self.setupDBAccess()    // Setup local datastore
-        
+        AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient, error: nil)
         // Set up Facebook
         PFFacebookUtils.initializeFacebook()
         
