@@ -60,7 +60,7 @@ func getCourseName(item: String) -> String {
 }
 
 /**
-    TODO
+    Takes a colour as an unsigned integer and returns a UIColor
 */
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     return UIColor(
