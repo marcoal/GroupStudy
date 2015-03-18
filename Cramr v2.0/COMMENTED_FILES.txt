@@ -6,4 +6,4 @@ SessionCreationViewController.swift
 SessionBrowserViewController.swift
 MasterViewController.swift
 SessionContentViewController.swift
-
+DatabaseAccess.swift (apart from isUserinSession)
