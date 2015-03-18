@@ -61,7 +61,9 @@ class DatabaseAccess {
     /**
     This function checks if a user is in a session. 
     * This has to happen when a user reopns the app after he closed it
-    * Only performs callback funciton if userID in sessionID
+    * Only performs callback funciton if user corresponding to userID is not in session
+    * It is used to handle edge cases such as only sending a push notification to a user
+    * if he/she is not in the session
 
     :param:  userID  the userID of the currentUser
     :param:  sessionID  the session that is to be checked
@@ -73,7 +75,7 @@ class DatabaseAccess {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 var session = object as PFObject
-                //gets the active users form that session
+                //gets the active users from that session
                 var users = session.objectForKey("active_users") as [String]
                 var courseName = session.objectForKey("course") as String
                 //queries for the user by userID
@@ -85,12 +87,14 @@ class DatabaseAccess {
                         var found = false
                         var users = objects as [PFObject]
                         var usersTupleArray = [(String, String)]()
+                        // For each user in the session's users, check that our userID is not there
                         for user in users {
                             var other_user_id = user["userID"] as String
                             if userID == other_user_id{
                                 found = true
                             }
                         }
+                        // If we did not find a userID, then call the callback function
                         if found == false{
                             cb(userID, courseName)
                         }
