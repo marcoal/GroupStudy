@@ -41,7 +41,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         if appDelegate.isConnectedToNetwork() {
             (UIApplication.sharedApplication().delegate as AppDelegate).leaveSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), sessionID: self.session["sessionID"]!, cb: self.leaveSessionCallback)
         } else {
-            displayNotConnectedAlert()
+             checkForNetwork(self, self.appDelegate)
         }
     }
     
@@ -82,7 +82,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             
             self.presentViewController(self.friendPickerController, animated: true, completion: nil)
         } else {
-            displayNotConnectedAlert()
+             checkForNetwork(self, self.appDelegate)
         }
     }
     
@@ -97,7 +97,13 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: self.sendPushCallback)
             
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let alert = UIAlertController(title: "Invites Sent", message: "", preferredStyle: .Alert)
+        let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alert.addAction(closeAction)
+        picker.presentViewController(alert, animated: true, completion: nil)
+
     }
 
     func sendPushCallback(userid: String) {
@@ -248,14 +254,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
                 (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: currentUsersCallback)
             }
         } else {
-            displayNotConnectedAlert()
+            checkForNetwork(self, self.appDelegate)
         }
-    }
-    
-    func displayNotConnectedAlert() {
-        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     
@@ -274,6 +274,8 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
         
         self.refreshView()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
+        
+        //addMapButton(self.view, self)
         
     }
     

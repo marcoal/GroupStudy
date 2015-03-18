@@ -66,6 +66,40 @@ func areEqualSessions(first: [String: String], second: [String: String]) -> Bool
     return first["description"] == second["description"] && first["sessionID"] == second["sessionID"] && first["course"] == second["course"]
 }
 
+func addMapButton(view: UIView, controller: UIViewController) {
+    var cx = CGFloat(5)
+    var cy = CGFloat(105)
+    
+    var myLocationButton = UIButton()
+    myLocationButton.setImage(UIImage(named: "blue_3d_marker"), forState: UIControlState.Normal)
+    var buttonRect = CGRect()
+    buttonRect.size.height = 40.0
+    buttonRect.size.width = 40.0
+    buttonRect.origin.x = cx
+    buttonRect.origin.y = cy
+    
+    myLocationButton.frame = buttonRect
+    myLocationButton.tintColor = cramrBlue
+    myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
+    myLocationButton.addTarget(controller, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
+    
+    //myLocationButton.layer.borderWidth = 1.0
+    //myLocationButton.layer.borderColor = cramrBlue.CGColor
+    view.addSubview(myLocationButton)
+}
+
+func checkForNetwork(controller: UIViewController, app: AppDelegate, message: String = "You are not connected to a network.") {
+    let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+    dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if !app.isConnectedToNetwork() {
+                var alert = UIAlertController(title: "No Internet Connection", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+                controller.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+    }
+}
 
 func addBlur(superView : UIView, subViews : [UIView]) {
     

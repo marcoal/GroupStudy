@@ -51,7 +51,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             var loc: CLLocationCoordinate2D = mapView.camera.target
             addSession(locationText, description: descriptionText, geoTag: loc)
         } else {
-            displayNotConnectedAlert()
+            checkForNetwork(self, self.appDelegate)
         }
     }
     
@@ -84,7 +84,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             locationManager.startUpdatingLocation()
             mapView.myLocationEnabled = true
             mapView.settings.myLocationButton = false
-            addMapButton()
+            addMapButton(self.view, self)
         }
     }
     
@@ -102,40 +102,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     
-    func addMapButton() {
-        var cx = CGFloat(5)
-        var cy = CGFloat(105)
-        
-        var myLocationButton = UIButton()
-        myLocationButton.setImage(UIImage(named: "blue_3d_marker"), forState: UIControlState.Normal)
-        var buttonRect = CGRect()
-        buttonRect.size.height = 40.0
-        buttonRect.size.width = 40.0
-        buttonRect.origin.x = cx
-        buttonRect.origin.y = cy
-        
-        myLocationButton.frame = buttonRect
-        myLocationButton.tintColor = cramrBlue
-        myLocationButton.layer.cornerRadius = myLocationButton.frame.size.width / 2
-        myLocationButton.addTarget(self, action: "tappedLocationButton:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        //myLocationButton.layer.borderWidth = 1.0
-        //myLocationButton.layer.borderColor = cramrBlue.CGColor
-        self.view.addSubview(myLocationButton)
-        
-        
-    }
-    
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         textField.resignFirstResponder()
         return true;
     }
     
-    func displayNotConnectedAlert() {
-        var alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to a network.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
     
     func setupMap() {
         locationManager.delegate = self

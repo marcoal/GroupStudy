@@ -1,22 +1,13 @@
-
-//
-//  LoginViewController.swift
-//  Cramr v2.0
-//
-//  Created by Roberto Alvarez on 1/31/15.
-//  Copyright (c) 2015 Casa, Inc. All rights reserved.
-//
-
 import Foundation
 
 let notificationKey = "com.cramr.notificationKey"
 
+
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
-    @IBOutlet weak var fbLoginView = FBLoginView()
+    @IBOutlet weak var fbLoginView = FBLoginView();
     
     var avplayer: AVPlayer = AVPlayer()
-    var moviePlayer: MPMoviePlayerController?
     
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
@@ -24,109 +15,39 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        let filepath = NSBundle.mainBundle().pathForResource("introduction", ofType: "mp4")
+        self.fbLoginView!.delegate = self
+        self.fbLoginView!.readPermissions = ["public_profile", "email", "user_friends"]
+        
+        
+        let filepath = NSBundle.mainBundle().pathForResource("cramr_intro_video", ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)
         self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
-        var height = UIScreen.mainScreen().bounds.size.height
-        var width = UIScreen.mainScreen().bounds.size.width
+        self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
+        var height = UIScreen.mainScreen().bounds.size.height + 4.0
+        var width = UIScreen.mainScreen().bounds.width
         
         var layer = AVPlayerLayer(player: self.avplayer)
-        layer.videoGravity = AVLayerVideoGravityResizeAspect;
         self.avplayer.actionAtItemEnd = AVPlayerActionAtItemEnd(rawValue: 2)!
-        layer.frame = CGRectMake(0,0,width, height)
+        var rect = CGRectMake(50, 200, width, height)
+        rect.origin.x = (self.view.frame.width - width) / 2.0
+        rect.origin.y = self.view.frame.height - height + 3.0
+        layer.frame = rect
+        
+        //layer.borderColor = UIColor.whiteColor().CGColor
+        //layer.borderWidth = 1.0
+        
         self.view.layer.addSublayer(layer)
         self.avplayer.play()
-        */
-        let filepath = NSBundle.mainBundle().pathForResource("cramr_intro_video", ofType: "mov")
-        let fileURL = NSURL.fileURLWithPath(filepath!)
-        self.moviePlayer = MPMoviePlayerController(contentURL: fileURL)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoFinished", name: notificationKey, object: self.moviePlayer)
-        self.moviePlayer!.controlStyle = MPMovieControlStyle(rawValue: 0)!
-        self.moviePlayer!.prepareToPlay()
-        var height = UIScreen.mainScreen().bounds.size.height
-        
-        var x = CGFloat(UIScreen.mainScreen().bounds.size.width)
-        
-        
-        let r = CGRectMake(x,0,1024,height)
-        self.moviePlayer!.view.frame = r
-        self.view.addSubview(self.moviePlayer!.view)
-        self.moviePlayer!.play()
-        self.fbLoginView!.delegate = self
-        self.fbLoginView!.readPermissions = ["public_profile", "email", "user_friends"]
         self.view.bringSubviewToFront(self.fbLoginView!)
-        self.navigationController?.navigationBarHidden = true
-        
-        self.view.backgroundColor = .lightGrayColor()
     }
     
-    
     /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
-    
     func playerItemDidReachEnd(notif: NSNotification){
         var p:  AVPlayer = notif.object as AVPlayer
         p.seekToTime(kCMTimeZero)
         p.play()
     }
-    
-    func videoFinished(notification: NSNotification){
-        println("Video finished")
-        let reason =
-        notification.userInfo![MPMoviePlayerPlaybackDidFinishReasonUserInfoKey]
-            as NSNumber?
-        
-        if let theReason = reason{
-            
-            let reasonValue = MPMovieFinishReason(rawValue: theReason.integerValue)
-            
-            switch reasonValue!{
-            case .PlaybackEnded:
-                /* The movie ended normally */
-                println("Playback Ended")
-            case .PlaybackError:
-                /* An error happened and the movie ended */
-                println("Error happened")
-            case .UserExited:
-                /* The user exited the player */
-                println("User exited")
-            default:
-                println("Another event happened")
-            }
-            
-            println("Finish Reason = \(theReason)")
-            stopPlayingVideo()
-        }
-    }
-    
-    func stopPlayingVideo() {
-        
-        if let player = self.moviePlayer{
-            NSNotificationCenter.defaultCenter().removeObserver(self)
-            player.stop()
-            player.view.removeFromSuperview()
-        }
-        
-    }
-    /*
-    // Obtain the reason why the movie playback finished
-    NSNumber *finishReason = [[aNotification userInfo] objectForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey];
-    
-    // Dismiss the view controller ONLY when the reason is not "playback ended"
-    if ([finishReason intValue] != MPMovieFinishReasonPlaybackEnded)
-    {
-    MPMoviePlayerController *moviePlayer = [aNotification object];
-    
-    // Remove this class from the observers
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-    name:MPMoviePlayerPlaybackDidFinishNotification
-    object:moviePlayer];
-    
-    // Dismiss the view controller
-    [self dismissModalViewControllerAnimated:YES];
-    }
-    */
     
     func setCurrUser() {
         if (FBSession.activeSession().isOpen){
@@ -143,12 +64,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         // NSLog("User Logged In")
-        if !self.isFirstRun {
-            self.performSegueWithIdentifier("toMaster", sender: self)
-        } else {
+        if self.isFirstRun {
             appDelegate.go_to_onboarding(animated: false)
+        } else {
+            self.performSegueWithIdentifier("toMaster", sender: self)
         }
-        
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
