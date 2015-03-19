@@ -107,6 +107,7 @@ class DatabaseAccess {
                 NSLog("Error in isUserInSesssion: %@ %@", error, error.userInfo!)
             }
         }
+        
     }
 
     /**
