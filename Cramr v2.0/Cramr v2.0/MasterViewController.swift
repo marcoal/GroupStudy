@@ -10,8 +10,8 @@ import UIKit
 import CoreData
 
 /**
-This class is the view controller for the master list on classes that the user is enrolled in.
-It is the first view that the user sees when he opens the app and is NOT currently enrolled in a session.
+    This class is the view controller for the master list on classes that the user is enrolled in.
+    It is the first view that the user sees when he opens the app and is NOT currently enrolled in a session.
 */
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
@@ -24,8 +24,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     /**
-    This function is called after the user adds a new class from the CourseListTableView in order to display the new aded course.
-    * Checks to see if there is network connection, if not, throws an error
+        This function is called after the user adds a new class from the CourseListTableView in order to display the new aded course.
+        * Checks to see if there is network connection, if not, throws an error
     */
     @IBAction func popToPrevView(segue:UIStoryboardSegue) {
         if appDelegate.isConnectedToNetwork(){
@@ -41,9 +41,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     /**
-    This function is called after the database request is complete.
-    * The courses that were returned from the query are set as the user courses
-    * And the table is reloaded to show the new data
+        This function is called after the database request is complete.
+        * The courses that were returned from the query are set as the user courses
+        * And the table is reloaded to show the new data
     */
     func refreshCourseListCallback(courses: [String], tableReload: Bool) {
         self.coursesIn = courses
@@ -51,14 +51,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             self.tableView.reloadData()
         }
         self.refreshingCourseList = false
-        //the user is allowed to interact with the app again.
+        // the user is allowed to interact with the app again.
         self.view.userInteractionEnabled = true
     }
 
     /**
-    After the user added a new course to his enrolled courses, the new course is displayed with this function.
-    * The app delegate is called in order to get all the courses that the user is now enrolled in (incl new course)
-    * With callback function that handles the tableView once the data is recieved.
+        After the user added a new course to his enrolled courses, the new course is displayed with this function.
+        * The app delegate is called in order to get all the courses that the user is now enrolled in (incl new course)
+        * With callback function that handles the tableView once the data is recieved.
     */
     func refreshCourseList(tableReload: Bool = true) {
         self.refreshingCourseList = true
@@ -66,8 +66,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     /**
-    After the view is loaded, we stop the interacton and make sure that the network connection is alive.
-    If it is, then the course list is loaded, which is where the interaction is enabled again.
+        After the view is loaded, we stop the interacton and make sure that the network connection is alive.
+        If it is, then the course list is loaded, which is where the interaction is enabled again.
     */
     override func viewDidAppear(animated: Bool) {
         self.view.userInteractionEnabled = false
@@ -80,8 +80,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     /**
-    This function is called when the user wants to add new classes to his enrolled classes. It preforms the segue to the CourseListTableView. 
-    * Potential network errors are handled
+        This function is called when the user wants to add new classes to his enrolled classes. It preforms the segue to the CourseListTableView.
+        * Potential network errors are handled
     */
     func addButtonPressed(){
         if appDelegate.isConnectedToNetwork(){
@@ -94,7 +94,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         checkForNetwork(self, self.appDelegate, message: "Cannot add courses with no internet connection.")
     }
     
-    //This function specifies the design layout for the entire page and for
+    /**
+        This function specifies the design layout for the entire page and for
+    */
     func designLayout() {
         self.navigationController?.navigationBarHidden = false
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -118,6 +120,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.tableView?.tableFooterView = UIView()
     }
     
+    /**
+    This function specifies the design layout for the entire page and for
+    */
     func updateCells() {
         checkForNetwork(self, self.appDelegate)
         self.refreshCourseList()
