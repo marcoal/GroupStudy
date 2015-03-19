@@ -123,8 +123,6 @@ func checkForNetwork(controller: UIViewController, app: AppDelegate, message: St
     }
 }
 
-
-
 /**
     Adds a blur background to the array of subviews 
     :param: superView   - the UIView that contains the array of subViews

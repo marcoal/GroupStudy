@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-This class regulates the information that is shown at each step of the onboarding walkthrough.
+    This class regulates the information that is shown at each step of the onboarding walkthrough.
 */
 class OnboardingContentViewController: UIViewController {
     
@@ -33,7 +33,7 @@ class OnboardingContentViewController: UIViewController {
     var imageName : String!
     
     /**
-    This function ensures that the walkthrough video begins playing as soon as the user gets to the view.
+        This function ensures that the walkthrough video begins playing as soon as the user gets to the view.
     */
     override func viewDidAppear(animated: Bool) {
         if self.imageName != "" {
@@ -42,9 +42,9 @@ class OnboardingContentViewController: UIViewController {
     }
     
     /**
-    This function is currently not in use but it will be used to display the user's profile picture on the final page of the onboarding walkthrough.
+        This function is currently not in use but it will be used to display the user's profile picture on the final page of the onboarding walkthrough.
     
-    :param:  pictDict  Dictionary maps usernames to images
+        :param:  pictDict  Dictionary maps usernames to images
     */
     func displayProfilePicture(pictDict : [String: UIImage]) {
         for im in pictDict.values {
@@ -68,7 +68,7 @@ class OnboardingContentViewController: UIViewController {
     }
     
     /**
-    Set parameters of the navigation bar, background, and other pieces of text, before adding the video.
+        Set parameters of the navigation bar, background, and other pieces of text, before adding the video.
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,16 +84,12 @@ class OnboardingContentViewController: UIViewController {
         if self.imageName != "" {
             self.addVideo()
         }
-        
-        // Used to display user's profile picture on the final page.
-        // Functionality not fully implemented.
-        //appDelegate.getSessionUsersPicturesAD([appDelegate.localData.getUserID()], cb: displayProfilePicture)
-        
-        
     }
+    
     /**
-    This function uses an AVPlaver to add the video to the page.
-    * The video does not begin playing until the view appears (see viewDidAppear above)
+        This function uses an AVPlaver to add the video to the page.
+    
+        The video does not begin playing until the view appears (see viewDidAppear above)
     */
     func addVideo() {
         let filepath = NSBundle.mainBundle().pathForResource(self.imageName, ofType: "mov")
@@ -116,13 +112,5 @@ class OnboardingContentViewController: UIViewController {
         
         self.view.layer.addSublayer(layer)
 
-        // Do any additional setup for FB
-    }
-    
-    /* Currently notification at end of video not working, but in either case, every discusion online states that there is no way to re-start video after end without hicups (with AVPlayer) */
-    func playerItemDidReachEnd(notif: NSNotification){
-        var p:  AVPlayer = notif.object as AVPlayer
-        p.seekToTime(kCMTimeZero)
-        p.play()
     }
 }

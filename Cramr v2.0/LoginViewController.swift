@@ -4,12 +4,12 @@ import Foundation
 let notificationKey = "com.cramr.notificationKey"
 
 /**
-View conroller for logging in. Conforms to FBLoginViewDelegate. It presents and FBLoginView and handles signing in the user through parse.
+    View conroller for logging in. Conforms to FBLoginViewDelegate. It presents and FBLoginView and handles signing in the user through parse.
 
-- fbLoginView:              developed by Facebook, facebook login view button
-- avplayer:                 the video player that handles playing the login intro video
-- appDelegate:              AppDelegate
-- isFirstRun:               Bool true if it is the first time opening the app (for onboarding)
+    - fbLoginView:              developed by Facebook, facebook login view button
+    - avplayer:                 the video player that handles playing the login intro video
+    - appDelegate:              AppDelegate
+    - isFirstRun:               Bool true if it is the first time opening the app (for onboarding)
 */
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {

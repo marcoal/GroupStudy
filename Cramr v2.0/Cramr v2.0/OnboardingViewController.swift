@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 /**
-This class is used during a user's first visit to the app. It takes them through an onboarding walkthrough on how to use the app.
+    This class is used during a user's first visit to the app. It takes them through an onboarding walkthrough on how to use the app.
 */
 class OnboardingViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
@@ -23,18 +23,18 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     var pageViewController : UIPageViewController!
     
     /**
-    This function is used for debugging purposes.
+        This function is used for debugging purposes.
     
-    :param:  sender  the sender of the action
+        :param:  sender  the sender of the action
     */
     @IBAction func swipeLeft(sender: AnyObject) {
         println("Swipe left")
     }
     
     /**
-    This function is used for swiping through the view controllers in the page view.
+        This function is used for swiping through the view controllers in the page view.
     
-    :param:  sender  the sender of the action
+        :param:  sender  the sender of the action
     */
     @IBAction func swiped(sender: AnyObject) {
         
@@ -44,14 +44,14 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function is used to have the navigation and status bars display white text instead of the black default.
+        This function is used to have the navigation and status bars display white text instead of the black default.
     */
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
     }
     
     /**
-    This function resets the page view controller for the onboarding walkthrough.
+        This function resets the page view controller for the onboarding walkthrough.
     */
     func reset() {
         self.navigationController?.navigationBarHidden = true
@@ -75,7 +75,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function starts the onboarding walkthrough.
+        This function starts the onboarding walkthrough.
     */
     @IBAction func start(sender: AnyObject) {
         let pageContentViewController = self.viewControllerAtIndex(0)
@@ -83,7 +83,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function initializes the onboarding page view controller by calling the reset function.
+        This function initializes the onboarding page view controller by calling the reset function.
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function is used for debugging purposes when a memory warning is received.
+        This function is used for debugging purposes when a memory warning is received.
     */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,10 +99,10 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function returns the onboarding content view controller for the bordering onboarding content view controller after the one the user is looking at.
-    
-    :param:  pageViewController  the entire page view controller
-    :param:  viewControllerBeforeViewController  the view controller the user is looking at
+        This function returns the onboarding content view controller for the bordering onboarding content view controller after the one the user is looking at.
+        
+        :param:  pageViewController  the entire page view controller
+        :param:  viewControllerBeforeViewController  the view controller the user is looking at
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
@@ -116,10 +116,11 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function returns the onboarding content view controller for the bordering onboarding content view controller before the one the user is looking at.
-    
-    :param:  pageViewController  the entire page view controller
-    :param:  viewControllerBeforeViewController  the view controller the user is looking at
+        This function returns the onboarding content view controller for the bordering onboarding content view 
+        controller before the one the user is looking at.
+        
+        :param:  pageViewController  the entire page view controller
+        :param:  viewControllerBeforeViewController  the view controller the user is looking at
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
@@ -133,9 +134,9 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function returns the onboarding content view controller for the chosen index of the page view controller.
-    
-    :param:  index  index of the view controller being returned
+        This function returns the onboarding content view controller for the chosen index of the page view controller.
+        
+        :param:  index  index of the view controller being returned
     */
     func viewControllerAtIndex(index : Int) -> UIViewController? {
         if((self.pageTitles.count == 0) || (index >= self.pageTitles.count)) {
@@ -151,14 +152,14 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     }
     
     /**
-    This function is used for the onscreen indicator of what page of the walkthrough the user is on.
+        This function is used for the onscreen indicator of what page of the walkthrough the user is on.
     */
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return pageTitles.count
     }
     
     /**
-    This function is used for the onscreen indicator of what page of the walkthrough the user is on.
+        This function is used for the onscreen indicator of what page of the walkthrough the user is on.
     */
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return 0

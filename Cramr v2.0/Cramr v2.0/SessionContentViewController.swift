@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-This class regulates the information that is shown about each session, when the user browses through the currently active session.
+    This class regulates the information that is shown about each session, when the user browses through the currently active session.
 */
 class SessionContentViewController: UIViewController {
     
@@ -28,17 +28,17 @@ class SessionContentViewController: UIViewController {
     var currentMembersDict = [String : String]()
     
     /**
-    This functions specifies the callback after the user joins a new session
-    * It segues the locked screen session of that session
+        This functions specifies the callback after the user joins a new session
+        * It segues the locked screen session of that session
     */
     func joinSessionCallback() {
         self.performSegueWithIdentifier("pushToLockedFromJoin", sender: self)
     }
     
     /**
-    This function is called when the user joins a current session.
-    * It calls the database to add the session to the user information and add the user to the session information
-    * It has a callback function that regulates the segue
+        This function is called when the user joins a current session.
+        * It calls the database to add the session to the user information and add the user to the session information
+        * It has a callback function that regulates the segue
     */
     @IBAction func joinButton(sender: AnyObject) {
         if appDelegate.isConnectedToNetwork() {
@@ -49,12 +49,12 @@ class SessionContentViewController: UIViewController {
     }
     
     /**
-    This is the callback function after the users are called for the session that is currently viewed
-    * It saves the users in the session to a list
-    * It then calls the database with the list of userIDs in order to get the user pictures that are saved seperately in the database
-    * It has a callback function in order to display the pictures
-    
-    :param:  userNamesAndIds a list of tuples (username, userID)
+        This is the callback function after the users are called for the session that is currently viewed
+        * It saves the users in the session to a list
+        * It then calls the database with the list of userIDs in order to get the user pictures that are saved seperately in the database
+        * It has a callback function in order to display the pictures
+        
+        :param:  userNamesAndIds a list of tuples (username, userID)
     */
     func setUsersLabelCallback(userNamesAndIds: [(String, String)]) {
         var userIDs = [String]()
@@ -67,10 +67,10 @@ class SessionContentViewController: UIViewController {
         
     }
     /**
-    This function sets the labels about every session
-    * It specifies the description and the location of the sessions in their field. This information was taken already when the user clicked on the class the to view the sessions
-    * It calls the database to get the users of this session
-    * It has a callback function that specifies what user information should be displayed
+        This function sets the labels about every session
+        * It specifies the description and the location of the sessions in their field. This information was taken already when the user clicked on the class the to view the sessions
+        * It calls the database to get the users of this session
+        * It has a callback function that specifies what user information should be displayed
     */
     func setLabels() {
         descript.text = "  We're working on: " + (session["description"]! as String)
@@ -80,11 +80,11 @@ class SessionContentViewController: UIViewController {
         
     }
     /**
-    This function displays the pictures and the names of the users in each session
-    * First it places the images
-    * Then it places the strings
+        This function displays the pictures and the names of the users in each session
+        * First it places the images
+        * Then it places the strings
 
-    :param:  pictDict  a dictionary of user names to their pictures
+        :param:  pictDict  a dictionary of user names to their pictures
     */
     func displayCurrentUsers(pictDict : [String: UIImage]) {
         self.currentMembersScrollView.backgroundColor = UIColor.clearColor()
@@ -145,9 +145,9 @@ class SessionContentViewController: UIViewController {
     }
     
     /**
-    This functions sets up the map that shows the location.
-    * It gets the lat and long positions of the study group and sets the camera there
-    * It also displays the user
+        This functions sets up the map that shows the location.
+        * It gets the lat and long positions of the study group and sets the camera there
+        * It also displays the user
     */
     func setupMap() {
         var latitude: Double = (self.session["latitude"]! as NSString).doubleValue
@@ -167,7 +167,10 @@ class SessionContentViewController: UIViewController {
         self.sessionMapView.layer.borderColor = cramrBlue.CGColor
     }
     
-    //This function sets up the entire page included the map and the labels
+    
+    /**
+        This function sets up the entire page included the map and the labels.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
@@ -179,13 +182,11 @@ class SessionContentViewController: UIViewController {
     }
     
     /**
-    This function preforms the segue to the locked screen if the user decides to join a session
+        This function preforms the segue to the locked screen if the user decides to join a session
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pushToLockedFromJoin" {
             (segue.destinationViewController as SessionLockedViewController).session = self.session
         }
     }
-    
-    
 }

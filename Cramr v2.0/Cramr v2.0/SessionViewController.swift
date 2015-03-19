@@ -16,14 +16,18 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     
     var sessions: [[String: String]]!
     var pageController: UIPageViewController?
-
-    //This function is called if the user presses the back button. It returns to the view of all enrolled classes in the MasterViewController
+    
+    
+    /**
+        This function is called if the user presses the back button. It returns to the view of all 
+        enrolled classes in the MasterViewController
+    */
     @IBAction func popToSessionView(segue: UIStoryboardSegue) {
         performSegueWithIdentifier("popToBrowser", sender: self)
     }
 
     /**
-    This function is the required init function/.
+        This function is the required init function/.
     */
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,19 +35,19 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     /**
-    This function adds all of the session data to this controller's session array.
-    
-    :param:  controller  the session browser view controller that contains the sessionview
-    :param:  arr  the array includin the session data
+        This function adds all of the session data to this controller's session array.
+        
+        :param:  controller  the session browser view controller that contains the sessionview
+        :param:  arr  the array includin the session data
     */
     func sendSessionData(controller: SessionBrowserViewController, arr: [[String: String]]) {
         self.sessions = arr
     }
     
     /**
-    This function returns the session content view controller for the chosen index of the page view controller.
+        This function returns the session content view controller for the chosen index of the page view controller.
 
-    :param:  index  index of the view controller being returned
+        :param:  index  index of the view controller being returned
     */
     func viewControllerAtIndex(index: Int) -> SessionContentViewController? {
         if (sessions.count == 0 || index >= sessions.count) {
@@ -57,9 +61,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     
     
     /**
-    This function returns the index of session content view controller that is passed in.
-    
-    :param:  viewController  view controller whose index is desired
+        This function returns the index of session content view controller that is passed in.
+        
+        :param:  viewController  view controller whose index is desired
     */
     func indexOfViewController(viewController: SessionContentViewController) -> Int {
         
@@ -74,10 +78,10 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     /**
-    This function returns the session content view controller for the bordering session content view controller before the one the user is looking at.
-    
-    :param:  pageViewController  the entire page view controller
-    :param:  viewControllerBeforeViewController  the view controller the user is looking at
+        This function returns the session content view controller for the bordering session content view controller before the one the user is looking at.
+        
+        :param:  pageViewController  the entire page view controller
+        :param:  viewControllerBeforeViewController  the view controller the user is looking at
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
@@ -93,10 +97,10 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     /**
-    This function returns the session content view controller for the bordering session content view controller after the one the user is looking at.
-    
-    :param:  pageViewController  the entire page view controller
-    :param:  viewControllerAfterViewController  the view controller the user is looking at
+        This function returns the session content view controller for the bordering session content view controller after the one the user is looking at.
+        
+        :param:  pageViewController  the entire page view controller
+        :param:  viewControllerAfterViewController  the view controller the user is looking at
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
@@ -115,7 +119,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     /**
-    This function organizes all of the view controllers in the page view controller.
+        This function organizes all of the view controllers in the page view controller.
     */
     func organizeChildren() {
         pageController = UIPageViewController(
@@ -144,7 +148,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     /**
-    This function creates calls the function to create the page view controller as long as there are active sessions.
+        This function creates calls the function to create the page view controller as long as there are active sessions.
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +158,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
 
     /**
-    This function is called when a memory warning is received.
+        This function is called when a memory warning is received.
     */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
