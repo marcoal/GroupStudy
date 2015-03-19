@@ -48,11 +48,11 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         
         //error checking, making sure that the user input a desciption and a location
         if descriptionText == "" && locationText == "" {
-            errorAlert("Please fill in a description and a location!")
+            errorAlert("Please fill in a description and a room!")
         } else if descriptionText == "" {
             errorAlert("Please fill in a description!")
         } else if locationText == "" {
-            errorAlert("Please fill in a location!")
+            errorAlert("Please fill in a room!")
         } else if appDelegate.isConnectedToNetwork() {
             var center: CGPoint = mapView.center
             var loc: CLLocationCoordinate2D = mapView.camera.target
@@ -159,11 +159,6 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         pin.center = centered
     }
     
-    func shouldChangeTextInRange(range: UITextRange, replacementText: String) {
-
-        
-        
-    }
 
     /**
     This function specifies the navigation items, the colors of the view and what is loaded immidately.

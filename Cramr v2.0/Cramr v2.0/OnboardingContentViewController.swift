@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+This class regulates the information that is shown at each step of the onboarding walkthrough.
+*/
 class OnboardingContentViewController: UIViewController {
     
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -29,12 +32,20 @@ class OnboardingContentViewController: UIViewController {
     var subtitleText : String!
     var imageName : String!
     
+    /**
+    This function ensures that the walkthrough video begins playing as soon as the user gets to the view.
+    */
     override func viewDidAppear(animated: Bool) {
         if self.imageName != "" {
             self.avplayer.play()
         }
     }
     
+    /**
+    This function is currently not in use but it will be used to display the user's profile picture on the final page of the onboarding walkthrough.
+    
+    :param:  pictDict  Dictionary maps usernames to images
+    */
     func displayProfilePicture(pictDict : [String: UIImage]) {
         for im in pictDict.values {
             var imView = UIImageView(image: im)
@@ -56,6 +67,9 @@ class OnboardingContentViewController: UIViewController {
         }
     }
     
+    /**
+    Set parameters of the navigation bar, background, and other pieces of text, before adding the video.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,14 +85,16 @@ class OnboardingContentViewController: UIViewController {
             self.addVideo()
         }
         
-//        UIView.animateWithDuration(2.0, animations: { () -> Void in
-//            self.heading.alpha = 1.0
-//        })
+        // Used to display user's profile picture on the final page.
+        // Functionality not fully implemented.
         //appDelegate.getSessionUsersPicturesAD([appDelegate.localData.getUserID()], cb: displayProfilePicture)
         
         
     }
-    
+    /**
+    This function uses an AVPlaver to add the video to the page.
+    * The video does not begin playing until the view appears (see viewDidAppear above)
+    */
     func addVideo() {
         let filepath = NSBundle.mainBundle().pathForResource(self.imageName, ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)

@@ -14,15 +14,8 @@ var cramrBlue = UIColorFromRGB(UInt(9109677)) //Light Purple
 var cramrBlue = UIColorFromRGB(UInt(543419)) //Dark Blue
 var cramrBlue = UIColorFromRGB(UInt(24079)) //Green
 */
-
-
 var cramrBlue = UIColorFromRGB(UInt(3363506))
 
-var cramrEggshell = UIColorFromRGB(UInt(14543615))
-
-var cramrPurple = UIColorFromRGB(UInt(10061055))
-
-var cramrAqua = UIColorFromRGB(UInt(8712703))
 
 /**
     Given a String splits on ':' and returns first element. That is given s1 of the form "CS 228: Probabilistic Graphical Models" returns "CS 228"
@@ -60,7 +53,7 @@ func getCourseName(item: String) -> String {
 }
 
 /**
-    TODO
+    Takes a colour as an unsigned integer and returns a UIColor
 */
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     return UIColor(
@@ -164,15 +157,6 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     var blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = frame
     blurEffectView.center = center
-    
-    // Tint Effect
-    var tintView = UIView()
-    tintView.frame = frame
-    tintView.center = center
-    tintView.backgroundColor = cramrAqua
-    tintView.alpha = 0.35
-    
-    
     blurEffectView.layer.borderWidth = 1.0
     blurEffectView.layer.borderColor = cramrBlue.CGColor
 
@@ -180,13 +164,6 @@ func addBlur(superView : UIView, subViews : [UIView]) {
     superView.addSubview(blurEffectView)
     
     for subView in subViews {
-        //For Vibrancy
-        //vibrancyEffectView.contentView.addSubview(subView)
-        
         superView.bringSubviewToFront(subView)
     }
-    
-    //For Vibrancy
-    //blurEffectView.contentView.addSubview(vibrancyEffectView)
-    //superView.addSubview(blurEffectView)
 }

@@ -11,6 +11,10 @@ import CoreData
 import SystemConfiguration
 
 @UIApplicationMain
+/**
+This class handles all app delegation (haha)
+Mostly communication with the database and network checking
+*/
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
@@ -21,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var localData = LocalDatastore()
     
+    //This function sets up parse
     func setupParse() {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("sXNki6noKC9lOuG9b7HK0pAoruewMqICh8mgDUtw", clientKey: "Gh80MLplqjiOUFdmOP2TonDTcdmgevXbGaEhpGZR")
@@ -30,54 +35,147 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.DBAccess = DatabaseAccess()
     }
     
+    /**
+    This function gets the courses the user is in to display on the course TableView
+    * It has a callback that sends the courses that the user is enrolled in and information whether the courselist should be reloaded or not
+    
+    :param:  userID  the userID of the current user
+    :param:  tableReload  a boolean specifiying whether or not the table should be reloaded after the update
+    */
     func getCoursesFromAD(userID: String, tableReload: Bool, cb: ([String], Bool) -> ()) {
         self.DBAccess!.getCourses(userID, tableReload: tableReload, callback: cb)
     }
     
+    /**
+    This function gets all the courses, as the user is typing, and displays them for him to enroll in a new course
+    * the callback function displays the list of the courses that are to be displayed
+    
+    :param:  searchText  the text of the users query
+    */
     func getCourseListFromAD(searchText: String, cb: ([String]) -> ()) {
         self.DBAccess!.getCourseList(searchText, callback: cb)
     }
     
+    /**
+    This function is called when the user adds a new class to his current classes
+    
+    :param:  userID  the userID of the current user
+    :param:  courseName  the name of the course that the user is adding
+    */
     func addCourseToUserAD(userID: String, courseName: String, cb: () -> ()) {
         self.DBAccess!.addCourseToUser(userID, courseName: courseName, callback: cb)
     }
     
+    /**
+    This function is called if the user disenrolls from a class
+    * It has a callback function that makes sure that the class is deleted from the tableViewCell
+    
+    :param:  userID  the userID of the current user
+    :param:  courseName  the name of the course he wishes to disenroll from
+    :param:  index  the indexPath of that course on the TableView
+    */
     func deleteCourseFromUserAD(userID: String, courseName: String, index: NSIndexPath, cb: (NSIndexPath) -> ()) {
         self.DBAccess!.deleteCourseFromUser(userID, courseName: courseName, index: index, callback: cb)
     }
     
+    /**
+    This function updates the cell information of the class
+    * It takes a courseName and returns the number of sessions and the total amount of people in all sessions for that class
+    * The callback sets the information on the cell
+    
+    :param:  courseName  the name of the course whose information should be found
+    :param:  cell  the cell that should be updated
+    */
     func updateCellAD(courseName: String, cell: UITableViewCell, cb:(Int, Int, UITableViewCell) -> ()) {
         self.DBAccess!.updateCell(courseName, cell: cell, callback: cb)
     }
     
+    /**
+    This function checks if a user is in a session.
+    * This has to happen when a user reopns the app after he closed it
+    * Only performs callback funciton if user corresponding to userID is not in session
+    * It is used to handle edge cases such as only sending a push notification to a user
+    * if he/she is not in the session
+    
+    :param:  userID  the userID of the currentUser
+    :param:  sessionID  the session that is to be checked
+    */
     func isUserInSessionAD(userID: String, seshID: String, cb: (String, String) -> ()) {
         self.DBAccess!.isUserInSession(userID, sessionID: seshID, cb)
     }
     
+    /**
+    This function handles the session joining by a user
+    
+    :param:  sessionID  the session that will be joined
+    :param:  userID  the userID of the current user
+    */
     func joinSessionAD(sessionID: String, userID: String, cb: () -> ()) {
         self.DBAccess!.joinSession(sessionID, userID: userID, callback: cb)
     }
     
+    /**
+    This function adds a session, when the user creates a new session
+    * It returns a callback with the session information as a dictionary
+    
+    :param:  userID  the userID of the user creating the session
+    :param:  courseName  the name of the course that the user is creating the session for
+    :param:  description  the description of the session
+    :param:  location  the location written by the user
+    :param:  geoTag  the geoLocation from the map
+    */
     func addSessionAD(userID: String, courseName: String, description: String, location:String, geoTag: CLLocationCoordinate2D, cb: ([String: String]) -> ()) {
         self.DBAccess!.addSession(userID, courseName: courseName, description: description, location: location, geoTag: geoTag, callback: cb)
     }
     
+    /**
+    This functions takes a classID and returns the information about all the sessions
+    * It converts the object information to a list of dictionaries about the sessions
+    * It has a callback that takes a list of dictionaries. One dictionary for every session
+    
+    :param: fromID  the classID
+    */
     func getSessionInfoAD(fromID: String, cb:([[String: String]]) -> ()){
         self.DBAccess!.getSessionInfo(fromID, callback: cb)
     }
     
+    /**
+    This functions takes courseName and returns the information about all the sessions
+    * It converts the object information to a list of dictionaries about the sessions
+    * It has a callback that takes a list of dictionaries. One dictionary for every session
+    
+    :param: courseName  the courseName
+    */
     func getSessionsAD(courseName: String, cb: ([[String: String]]) -> ()) {
         self.DBAccess!.getSessions(courseName, callback: cb)
     }
     
+    /**
+    This function makes the user leave the session when he hits the leave button
+    
+    :param:  userID  the userId of the current user
+    :param:  sessionID  the session to be left
+    */
     func leaveSessionAD(userID: String, sessionID: String, cb: () -> ()) {
         self.DBAccess!.leaveSession(userID, sessionID: sessionID, callback: cb)
     }
     
+    /**
+    Ths function takes a session and returns the users in the callback
+    * It returns a list of tuples (username, userID)
+    
+    :param: sessionID the sessionID of the session to be checked
+    */
     func getSessionUsersAD(sessionID: String, cb: ([(String, String)]) -> ()) {
         self.DBAccess!.getSessionUsers(sessionID, callback: cb)
     }
     
+    /**
+    This function queries the database for the pictures of the users that were initially stored
+    * It has a callback function that returns a dictionary of (userID: image)
+    
+    :param:  userIDs  a list of userIDs
+    */
     func getSessionUsersPicturesAD(userIDs: [String], cb: ([String: UIImage]) -> ()) {
         self.DBAccess!.getSessionUsersPictures(userIDs, callback:cb)
     }
@@ -95,10 +193,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Register for Push Notitications
-        //ßself.ç
+        // Temporary placeholder for future code.
         
-        // Navigation Controler Logic
-        /* IMPOSSIBLE TO DEBUG
+        // Navigation Controller Logic
+        /* Code that has yet to be fully integrated.
         let options = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as NSDictionary
         if launchOptions != nil {
         let notificationPayload = options
@@ -110,32 +208,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         } else if localData.getSessionID() != ""{
         */
-//
-//        if localData.getSessionID() != ""{
-//            self.go_to_locked()
-//            return true
-//        } // Else if the user has already signed in before
-//        else if localData.getUserID() != ""{
-//            self.go_to_masterview()
-//            return true
-//        } // If none of above apply, log in through facebook
-//        else{
+
+        if localData.getSessionID() != ""{
+            self.go_to_locked()
+            return true
+        } // Else if the user has already signed in before
+        else if localData.getUserID() != ""{
+            self.go_to_masterview()
+            return true
+        } // If none of above apply, log in through facebook
+        else{
             self.go_to_login()
             return true
-//        }
+        }
     }
     
+    
+    //This function runs the setup if the user has to login
     func go_to_login(animated: Bool = false) {
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        //checks if this is the first time the user ever launches, if it is, then we have to run the onboarding
         var firstRun = true //isFirstRun()
         let navController = self.window!.rootViewController as UINavigationController
         self.window?.makeKeyAndVisible()
+        //specify the storyboard and the location of teh storyboard to start
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as LoginViewController
         vc.isFirstRun = firstRun
         navController.pushViewController(vc, animated: animated)
     }
     
+    //This function is run if we have to run the onboarding
     func go_to_onboarding(animated: Bool = false) {
         self.window?.makeKeyAndVisible()
         let navController = self.window!.rootViewController as UINavigationController
@@ -144,10 +247,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.pushViewController(vc, animated: true)
     }
     
+    /*
+    If the user is invited into a session, we check that the session is still there, if it is this is executed.
+    * It has a callback that is executed once the session information is gotten out of the database
+    
+    :param:  seshid  the id the session he is in 
+    */
     func go_to_locked_from_push(seshid: String){
         self.getSessionInfoAD(seshid, cb: self.getSessionInfoCallback)
     }
     
+    /*
+    The callback that is the run once the session information is extracted. He is pushed to the right view controller
+    */
     func getSessionInfoCallback(session: [[String: String]]) {
         self.session = session[0]
         self.window?.makeKeyAndVisible()
@@ -158,10 +270,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.pushViewController(vc, animated: false)
     }
     
+    /*
+    If the user opens and is already in a session then we have to push him automatically to that locked session
+    * This is the same as the function above, except that we have to get the sessionID from local data
+    * It has a callback that is executed once the session information is gotten out of the database
+    
+    :param:  seshid  the id the session he is in
+    */
     func go_to_locked(){
         self.getSessionInfoAD(localData.getSessionID(), cb: self.getSessionInfoCallback)
     }
     
+    /**
+    This function is called if the app is opened and the user has already logged in and is not currently in a session. 
+    * It displays the classes he is enrolled in
+    */
     func go_to_masterview(animated: Bool = false){
         self.window?.makeKeyAndVisible()
         let navController = self.window!.rootViewController as UINavigationController
@@ -170,6 +293,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.pushViewController(vc, animated: animated)
     }
     
+    /* If the user is invited to a session but the session no longer exists (everyone else left) we ask the user if he wants to create a new session.
+    * If he presses create, he is automatically segued to the createView
+    */
     func go_to_create_from_push(courseName: String){
         self.window?.makeKeyAndVisible()
         let navController = self.window!.rootViewController as UINavigationController
@@ -179,6 +305,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.pushViewController(vc, animated: false)
     }
     
+    /* 
+    This function handles registering push notifications
+    */
     func registerPushNotifications(application: UIApplication){
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector("registerUserNotificationSettings:") {
@@ -199,6 +328,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("We Fucked Up on registering remote notifications (error)")
     }
     
+    /*
+    If the user clicked to join a session that no longer exists (if he was invited) then this function handles it.
+    * If the session still exists he is simply pushed to the session
+    * If the session doesn't exist an alert is triggered
+
+    :param:  userid  the userID of the current user
+    :param:  seshid  the id of the session he was invited to
+    :param:  courseName  the name of the course he was invited to
+    :param:  message  the message to be displayed
+    :param:  seshStillExists  a boolean specifying whether or not the session still exists in the database
+    */
     func handleClickedJoin_AfterEmptySession(userid: String, seshid: String, courseName: String, message: String, seshStillExists: Bool){
         if seshStillExists {
             self.joinSessionAD(seshid, userID: userid, cb: {})
@@ -210,6 +350,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    /*
+    This function tirggers the alert if the session that the user was invited to and accepted no longer exists
+    
+    :param:  courseName  the name of the course
+    */
     func alertSessionNoLonger(courseName: String){
         let alert = UIAlertController(title: "Sorry", message: "Session no longer exists, create one and invite your friends", preferredStyle: .Alert)
         let createAction = UIAlertAction(title: "Create", style: .Default) { action -> Void in
@@ -223,13 +368,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController.presentViewController(alert, animated: true, completion: nil)
     }
     
+    /**
+    This function handles everything if the user is invited to join a new session
+    
+    :param:  userid  the userID of the current user
+    :param:  seshid  the id of the session he was invited to
+    :param:  courseName  the name of the course he was invited to
+    :param:  message  the message to be displayed
+    :param:  seshStillExists  a boolean specifying whether or not the session still exists in the database
+    */
     func handlePushInviteCallback(userid: String, seshid: String, courseName: String, message: String, seshStillExists: Bool) {
         // If session still exists prompt to join or dismiss
         if seshStillExists {
             let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .Alert)
             let joinAction = UIAlertAction(title: "Join", style: .Default) { action -> Void in
+                //we enroll the user in the class for the session
                 self.addCourseToUserAD(userid, courseName: courseName, cb: {})
-                if self.localData.getSessionID() != "" {   // User already in a session, remove him/her before joining new
+                if self.localData.getSessionID() != "" {   // if user already in a session, remove him/her before joining new session
                     self.leaveSessionAD(self.localData.getUserID(), sessionID: self.localData.getSessionID(), cb: {() -> Void in})
                 }
                 self.sessionExists_afterPromptAD(userid, seshid: seshid, courseName: courseName, message: "")
