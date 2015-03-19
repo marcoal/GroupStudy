@@ -167,29 +167,29 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_people_icon" id="jWf-nL-DZD">
-                                            <rect key="frame" x="240" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="247" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_book_icon" id="eiq-ox-ju8">
-                                            <rect key="frame" x="240" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="247" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="359-jd-6C4">
-                                            <rect key="frame" x="203" y="22" width="28" height="30"/>
+                                            <rect key="frame" x="210" y="22" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.32156862749999998" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fnh-He-GJP">
-                                            <rect key="frame" x="203" y="68" width="28" height="30"/>
+                                            <rect key="frame" x="210" y="68" width="28" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.32156862749999998" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_plus_icon" id="pG8-gP-W2p">
-                                            <rect key="frame" x="220" y="35" width="48" height="50"/>
+                                            <rect key="frame" x="227" y="35" width="48" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                             <color key="backgroundColor" red="0.56862745100000001" green="0.72549019609999998" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         </imageView>

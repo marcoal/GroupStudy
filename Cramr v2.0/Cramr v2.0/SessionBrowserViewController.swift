@@ -11,7 +11,7 @@ import UIKit
 
 
 /**
-This class creates the container that allows the user to view and swipe between the different sessions that are active. It controlls the browser view.
+This class creates the container that allows the user to view and swipe between the different sessions that are active. It controls the browser view.
 */
 class SessionBrowserViewController : UIViewController {
     

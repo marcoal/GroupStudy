@@ -22,18 +22,29 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         performSegueWithIdentifier("popToBrowser", sender: self)
     }
 
-
+    /**
+    This function is the required init function/.
+    */
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        fatalError("init(coder:) has not been implemented")
+        //fatalError("init(coder:) has not been implemented")
     }
 
-
+    /**
+    This function adds all of the session data to this controller's session array.
+    
+    :param:  controller  the session browser view controller that contains the sessionview
+    :param:  arr  the array includin the session data
+    */
     func sendSessionData(controller: SessionBrowserViewController, arr: [[String: String]]) {
         self.sessions = arr
     }
     
-    
+    /**
+    This function returns the session content view controller for the chosen index of the page view controller.
+
+    :param:  index  index of the view controller being returned
+    */
     func viewControllerAtIndex(index: Int) -> SessionContentViewController? {
         if (sessions.count == 0 || index >= sessions.count) {
             return nil
@@ -45,7 +56,11 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     
+    /**
+    This function returns the index of session content view controller that is passed in.
     
+    :param:  viewController  view controller whose index is desired
+    */
     func indexOfViewController(viewController: SessionContentViewController) -> Int {
         
         if let currentSession: [String: String] = viewController.session {
@@ -58,6 +73,12 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         return NSNotFound
     }
     
+    /**
+    This function returns the session content view controller for the bordering session content view controller before the one the user is looking at.
+    
+    :param:  pageViewController  the entire page view controller
+    :param:  viewControllerBeforeViewController  the view controller the user is looking at
+    */
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
@@ -71,6 +92,12 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         return viewControllerAtIndex(index)
     }
     
+    /**
+    This function returns the session content view controller for the bordering session content view controller after the one the user is looking at.
+    
+    :param:  pageViewController  the entire page view controller
+    :param:  viewControllerAfterViewController  the view controller the user is looking at
+    */
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
@@ -87,6 +114,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         return viewControllerAtIndex(index)
     }
 
+    /**
+    This function organizes all of the view controllers in the page view controller.
+    */
     func organizeChildren() {
         pageController = UIPageViewController(
             transitionStyle: .Scroll,
@@ -113,7 +143,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         pageController!.didMoveToParentViewController(self)
     }
 
-
+    /**
+    This function creates calls the function to create the page view controller as long as there are active sessions.
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         if sessions.count != 0 {
@@ -121,6 +153,9 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         }   
     }
 
+    /**
+    This function is called when a memory warning is received.
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

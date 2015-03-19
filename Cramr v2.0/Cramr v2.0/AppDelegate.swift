@@ -193,10 +193,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // Register for Push Notitications
-        //ßself.ç
+        // Temporary placeholder for future code.
         
-        // Navigation Controler Logic
-        /* IMPOSSIBLE TO DEBUG
+        // Navigation Controller Logic
+        /* Code that has yet to be fully integrated.
         let options = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as NSDictionary
         if launchOptions != nil {
         let notificationPayload = options
@@ -208,19 +208,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         } else if localData.getSessionID() != ""{
         */
-//
-//        if localData.getSessionID() != ""{
-//            self.go_to_locked()
-//            return true
-//        } // Else if the user has already signed in before
-//        else if localData.getUserID() != ""{
-//            self.go_to_masterview()
-//            return true
-//        } // If none of above apply, log in through facebook
-//        else{
+
+        if localData.getSessionID() != ""{
+            self.go_to_locked()
+            return true
+        } // Else if the user has already signed in before
+        else if localData.getUserID() != ""{
+            self.go_to_masterview()
+            return true
+        } // If none of above apply, log in through facebook
+        else{
             self.go_to_login()
             return true
-//        }
+        }
     }
     
     
