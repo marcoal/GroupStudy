@@ -273,7 +273,9 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     }
     
     /**
-        Called on viewDidLoad or when user clicks refresh button on the top left corner. If the app is connected to the network, set the description and location label as well as set up the map and display the session users (fetched by appDelegate). If there is not conneciton, we alert the users.
+        Called on viewDidLoad or when user clicks refresh button on the top left corner. 
+        * If the app is connected to the network, set the description and location label as well as set up the map and display the session users (fetched by appDelegate). 
+        * If there is not conneciton, we alert the users.
     */
     func refreshView() {
         if appDelegate.isConnectedToNetwork() {

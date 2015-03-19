@@ -11,7 +11,7 @@ import UIKit
 
 
 /**
-This class creates the container that allows the user to view and swipe between the different sessions that are active. It controls the browser view.
+    This class creates the container that allows the user to view and swipe between the different sessions that are active. It controls the browser view.
 */
 class SessionBrowserViewController : UIViewController {
     
@@ -28,7 +28,7 @@ class SessionBrowserViewController : UIViewController {
     }
     
     /**
-    This function sets up the view and the naviation bar and all the colours
+        This function sets up the view and the naviation bar and all the colours
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +48,9 @@ class SessionBrowserViewController : UIViewController {
     }
     
     /**
-    This function controls the two possible segues:
-    * If there are no active sessions, then the user is automatically directed to the createSessionView
-    * If there are active sessions, then the user is segued to the SessionViewController, which is the container that houses the different active sessions
+        This function controls the two possible segues:
+        * If there are no active sessions, then the user is automatically directed to the createSessionView
+        * If there are active sessions, then the user is segued to the SessionViewController, which is the container that houses the different active sessions
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sessionSwiper" {

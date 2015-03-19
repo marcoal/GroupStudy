@@ -9,7 +9,7 @@
 import Foundation
 
 /**
-This class is the view for our custom course cells in the master view. It is responsible for displaying the icons indicating the number of people and sessions, or the plus sign if the group is empty, as well the course name.
+    This class is the view for our custom course cells in the master view. It is responsible for displaying the icons indicating the number of people and sessions, or the plus sign if the group is empty, as well the course name.
 */
 class CustomCourseTableCell: UITableViewCell {
     
@@ -31,7 +31,7 @@ class CustomCourseTableCell: UITableViewCell {
     @IBOutlet weak var bookIcon: UIImageView!
     
     /**
-    This function adds a blur effect to the cell.
+        This function adds a blur effect to the cell.
     */
     func addCellBlur() {
         addBlur(self.contentView, [self.contentView])
@@ -42,10 +42,10 @@ class CustomCourseTableCell: UITableViewCell {
     }
     
     /**
-    This function is called by the MasterViewController to update the coursename in a sell.
-    * It takes a string with the course name.
+        This function is called by the MasterViewController to update the coursename in a sell.
+        * It takes a string with the course name.
     
-    :param: courseName the name of the course to be displayed
+        :param: courseName the name of the course to be displayed
     */
     func updateCellName(courseName: String) {
         self.courseNameLabel?.adjustsFontSizeToFitWidth = true
@@ -53,11 +53,11 @@ class CustomCourseTableCell: UITableViewCell {
     }
     
     /**
-    This function is called to update the numbers on the right side of the cell.
-    * It takes the number of people in a session as well as the number of sessions and displays the proper numbers (or an 'add' sign if the numbers are zero.
+        This function is called to update the numbers on the right side of the cell.
+        * It takes the number of people in a session as well as the number of sessions and displays the proper numbers (or an 'add' sign if the numbers are zero.
 
-    :param:  numPeople  the number of people in an active study session
-    :param:  numSessions  the number of active study sessions
+        :param:  numPeople  the number of people in an active study session
+        :param:  numSessions  the number of active study sessions
     */
     func updateCellContents(numPeople: Int, numSessions: Int) {
         self.courseNameLabel?.adjustsFontSizeToFitWidth = true
