@@ -14,10 +14,10 @@ class DatabaseAccess {
     var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     /**
-    This function signs up the user in the database.
-    * It takes a FBGraphUser and if the user doesn't exist yet he is signed up
+        This function signs up the user in the database.
+        * It takes a FBGraphUser and if the user doesn't exist yet he is signed up
 
-    *:param:  user  a FBGraphUser that should be signed up
+        :param:  user  a FBGraphUser that should be signed up
     */
     func signupUser(user: FBGraphUser, callback: () -> ()) {
         var query = PFUser.query();
@@ -58,15 +58,16 @@ class DatabaseAccess {
             }
         }
     }
+    
     /**
-    This function checks if a user is in a session. 
-    * This has to happen when a user reopns the app after he closed it
-    * Only performs callback funciton if user corresponding to userID is not in session
-    * It is used to handle edge cases such as only sending a push notification to a user
-    * if he/she is not in the session
+        This function checks if a user is in a session.
+        * This has to happen when a user reopns the app after he closed it
+        * Only performs callback funciton if user corresponding to userID is not in session
+        * It is used to handle edge cases such as only sending a push notification to a user
+        * if he/she is not in the session
 
-    :param:  userID  the userID of the currentUser
-    :param:  sessionID  the session that is to be checked
+        :param:  userID  the userID of the currentUser
+        :param:  sessionID  the session that is to be checked
     */
     func isUserInSession(userID: String, sessionID: String, cb: (String, String) -> ()) {
         //first queries to get the right session
@@ -109,14 +110,14 @@ class DatabaseAccess {
     }
 
     /**
-    This function checks whether a session Exists
-    * It is necessary because a user may have recieved a push notification from a session, but only opens it once the session has already been deleted
-    * It returns a callback that specifies the four parameters below and a boolean weather or not the session was found
-    
-    :param: userID  the user that has been invited
-    :param: sessionID  the session that he is invited to
-    :param: courseName  the course that the seession is in
-    :param: message  the message to be displayed to the user in case the session is no longer there
+        This function checks whether a session Exists
+        * It is necessary because a user may have recieved a push notification from a session, but only opens it once the session has already been deleted
+        * It returns a callback that specifies the four parameters below and a boolean weather or not the session was found
+        
+        :param: userID  the user that has been invited
+        :param: sessionID  the session that he is invited to
+        :param: courseName  the course that the seession is in
+        :param: message  the message to be displayed to the user in case the session is no longer there
     */
     func sessionExists(userid: String, sessionID: String, courseName: String, message: String, cb: (String, String, String, String, Bool) -> ()){
         var query = PFQuery(className: "Sessions")
@@ -137,10 +138,10 @@ class DatabaseAccess {
     }
 
     /**
-    Ths function takes a session and returns the users in the callback
-    * It returns a list of tuples (username, userID)
-    
-    :param: sessionID the sessionID of the session to be checked
+        Ths function takes a session and returns the users in the callback
+        * It returns a list of tuples (username, userID)
+        
+        :param: sessionID the sessionID of the session to be checked
     */
     func getSessionUsers(sessionID: String, callback: ([(String, String)]) -> ()) {
         var query = PFQuery(className: "Sessions")
@@ -181,10 +182,10 @@ class DatabaseAccess {
     }
 
     /**
-    This function queries the database for the pictures of the users that were initially stored
-    * It has a callback function that returns a dictionary of (userID: image)
-    
-    :param:  userIDs  a list of userIDs
+        This function queries the database for the pictures of the users that were initially stored
+        * It has a callback function that returns a dictionary of (userID: image)
+        
+        :param:  userIDs  a list of userIDs
     */
     func getSessionUsersPictures(userIDs: [String], callback: ([String: UIImage]) -> ()) {
         var userImages = [String: UIImage]()
@@ -236,24 +237,21 @@ class DatabaseAccess {
         }
     }
     
-    //pins the sseperate pieces of the image, userID, imageData together
+    /**
+        Pins the image in the background.
+    */
     func pinImageInBackground(userID: String, imageData: NSData) {
-//        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-//        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-//            dispatch_async(dispatch_get_main_queue()) {
-                var pfObj = PFObject(className: "UserPictures") // Pin the object to the background
-                pfObj["userID"] = userID
-                pfObj["imageData"] = imageData
-                pfObj.pin()
-//            }
-//        }
+        var pfObj = PFObject(className: "UserPictures")
+        pfObj["userID"] = userID
+        pfObj["imageData"] = imageData
+        pfObj.pinInBackground()
     }
     
     /**
-    This function makes the user leave the session when he hits the leave button
-    
-    :param:  userID  the userId of the current user
-    :param:  sessionID  the session to be left
+        This function makes the user leave the session when he hits the leave button
+        
+        :param:  userID  the userId of the current user
+        :param:  sessionID  the session to be left
     */
     func leaveSession(userID: String, sessionID: String, callback: () -> ()) {
         //queries for the session
@@ -283,11 +281,11 @@ class DatabaseAccess {
     }
     
     /** 
-    This functions takes a classID and returns the information about all the sessions
-    * It converts the object information to a list of dictionaries about the sessions
-    * It has a callback that takes a list of dictionaries. One dictionary for every session
-    
-    :param: fromID  the classID
+        This functions takes a classID and returns the information about all the sessions
+        * It converts the object information to a list of dictionaries about the sessions
+        * It has a callback that takes a list of dictionaries. One dictionary for every session
+        
+        :param: fromID  the classID
     */
     func getSessionInfo(fromID: String, callback:([[String: String]]) -> ()){
         var sessionQuery = PFQuery(className: "Sessions")
@@ -311,11 +309,11 @@ class DatabaseAccess {
     }
     
     /**
-    This functions takes courseName and returns the information about all the sessions
-    * It converts the object information to a list of dictionaries about the sessions
-    * It has a callback that takes a list of dictionaries. One dictionary for every session
-    
-    :param: courseName  the courseName
+        This functions takes courseName and returns the information about all the sessions
+        * It converts the object information to a list of dictionaries about the sessions
+        * It has a callback that takes a list of dictionaries. One dictionary for every session
+        
+        :param: courseName  the courseName
     */
     func getSessions(courseName: String, callback: ([[String: String]]) -> ()) {
         var sessionQuery = PFQuery(className: "Sessions")
@@ -338,6 +336,12 @@ class DatabaseAccess {
         }
     }
     
+    /**
+        Handles and sends the push notification
+    
+        :param:  userid  the userID of the user being sent the push notification
+        :param:  course  the course of the session the user is being invited to
+    */
     func sendPushCallback(userid: String, course: String) {
         let push = PFPush()
         push.setChannel("a"+userid)
@@ -353,14 +357,14 @@ class DatabaseAccess {
     }
     
     /**
-    This function adds a session, when the user creates a new session
-    * It returns a callback with the session information as a dictionary
-    
-    :param:  userID  the userID of the user creating the session
-    :param:  courseName  the name of the course that the user is creating the session for
-    :param:  description  the description of the session
-    :param:  location  the location written by the user
-    :param:  geoTag  the geoLocation from the map
+        This function adds a session, when the user creates a new session
+        * It returns a callback with the session information as a dictionary
+        
+        :param:  userID  the userID of the user creating the session
+        :param:  courseName  the name of the course that the user is creating the session for
+        :param:  description  the description of the session
+        :param:  location  the location written by the user
+        :param:  geoTag  the geoLocation from the map
     */
     func addSession(userID: String, courseName: String, description: String, location: String, geoTag: CLLocationCoordinate2D, callback: ([String: String]) -> ()) {
         if userID != "" {
@@ -386,10 +390,10 @@ class DatabaseAccess {
     }
     
     /** 
-    This function handles the session joining by a user
-    
-    :param:  sessionID  the session that will be joined
-    :param:  userID  the userID of the current user
+        This function handles the session joining by a user
+        
+        :param:  sessionID  the session that will be joined
+        :param:  userID  the userID of the current user
     */
     func joinSession(sessionID: String, userID: String, callback: () -> ()) {
         var query = PFQuery(className: "Sessions")
@@ -418,12 +422,12 @@ class DatabaseAccess {
     
     
     /**
-    This function updates the cell information of the class
-    * It takes a courseName and returns the number of sessions and the total amount of people in all sessions for that class
-    * The callback sets the information on the cell
+        This function updates the cell information of the class
+        * It takes a courseName and returns the number of sessions and the total amount of people in all sessions for that class
+        * The callback sets the information on the cell
 
-    :param:  courseName  the name of the course whose information should be found
-    :param:  cell  the cell that should be updated
+        :param:  courseName  the name of the course whose information should be found
+        :param:  cell  the cell that should be updated
     */
     func updateCell(courseName: String, cell: UITableViewCell, callback: (Int, Int, UITableViewCell) -> ()) {
         var query = PFQuery(className: "Sessions")
@@ -443,10 +447,10 @@ class DatabaseAccess {
     }
     
     /**
-    This function is called when the user adds a new class to his current classes
-    
-    :param:  userID  the userID of the current user
-    :param:  courseName  the name of the course that the user is adding
+        This function is called when the user adds a new class to his current classes
+        
+        :param:  userID  the userID of the current user
+        :param:  courseName  the name of the course that the user is adding
     */
     func addCourseToUser(userID: String, courseName: String, callback: () -> ()) {
         var query = PFQuery(className: "EnrolledCourses")
@@ -478,12 +482,12 @@ class DatabaseAccess {
     }
     
     /**
-    This function is called if the user disenrolls from a class
-    * It has a callback function that makes sure that the class is deleted from the tableViewCell
-    
-    :param:  userID  the userID of the current user
-    :param:  courseName  the name of the course he wishes to disenroll from
-    :param:  index  the indexPath of that course on the TableView
+        This function is called if the user disenrolls from a class
+        * It has a callback function that makes sure that the class is deleted from the tableViewCell
+        
+        :param:  userID  the userID of the current user
+        :param:  courseName  the name of the course he wishes to disenroll from
+        :param:  index  the indexPath of that course on the TableView
     */
     func deleteCourseFromUser(userID: String, courseName: String, index: NSIndexPath, callback: (NSIndexPath) -> ()) {
         var query = PFQuery(className: "EnrolledCourses")
@@ -507,11 +511,11 @@ class DatabaseAccess {
     }
     
     /**
-    This function gets the courses the user is in to display on the course TableView
-    * It has a callback that sends the courses that the user is enrolled in and information whether the courselist should be reloaded or not
-    
-    :param:  userID  the userID of the current user
-    :param:  tableReload  a boolean specifiying whether or not the table should be reloaded after the update
+        This function gets the courses the user is in to display on the course TableView
+        * It has a callback that sends the courses that the user is enrolled in and information whether the courselist should be reloaded or not
+        
+        :param:  userID  the userID of the current user
+        :param:  tableReload  a boolean specifiying whether or not the table should be reloaded after the update
     */
     func getCourses(userID: String, tableReload: Bool, callback: ([String], Bool) -> ()) {
         var query_courses = PFQuery(className: "EnrolledCourses")
@@ -530,9 +534,9 @@ class DatabaseAccess {
     }
     
     /**
-    This function handles the regex, capitalization, spaces, numbers
-    
-    :param:  text  the query of the user
+        This function handles the regex, capitalization, spaces, numbers
+        
+        :param:  text  the query of the user
     */
     func getRegexSearchTerm(text: String) -> String {
         var searchText = text.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -550,10 +554,10 @@ class DatabaseAccess {
     }
     
     /**
-    This function gets all the courses, as the user is typing, and displays them for him to enroll in a new course
-    * the callback function displays the list of the courses that are to be displayed
-    
-    :param:  searchText  the text of the users query
+        This function gets all the courses, as the user is typing, and displays them for him to enroll in a new course
+        * the callback function displays the list of the courses that are to be displayed
+        
+        :param:  searchText  the text of the users query
     */
     func getCourseList(searchText: String, callback: ([String]) -> ()) {
         //If the user deletes everything in the query, we want to display nothing
@@ -584,6 +588,4 @@ class DatabaseAccess {
             }
         }
     }
-    
-    
 }
