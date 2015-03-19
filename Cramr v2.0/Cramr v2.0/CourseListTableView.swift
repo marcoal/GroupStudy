@@ -25,9 +25,9 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     var courses = []
     
     /**
-    This function is the callback for the search.
-    * It sets the courses that were returned from the query as the courses variable, to construct the table
-    * It reloads teh data in the table view, to make sure that the courses are displayed
+        This function is the callback for the search.
+        * It sets the courses that were returned from the query as the courses variable, to construct the table
+        * It reloads teh data in the table view, to make sure that the courses are displayed
     */
     func courseListCallback(courses: [String]) {
         self.courses = courses
@@ -35,8 +35,8 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     /**
-    This function queries the database for the courses that math the query
-    * It reacts to the when the text change in teh searchbar
+        This function queries the database for the courses that math the query
+        * It reacts to the when the text change in teh searchbar
     */
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
         (UIApplication.sharedApplication().delegate as AppDelegate).getCourseListFromAD(searchText, cb: courseListCallback)
@@ -51,7 +51,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /**
-    This function displays the information for this view
+        This function displays the information for this view
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,25 +79,25 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     // TABLE VIEW FUNCTIONS
     
     /**
-    This function returns the size of table view, which is the number of rows
-    * The number of rows is the number courses
+        This function returns the size of table view, which is the number of rows
+        * The number of rows is the number courses
 
-    :param:  tableView  the tableView that we want this information from
-    :param:  section  the section to check
+        :param:  tableView  the tableView that we want this information from
+        :param:  section  the section to check
 
-    :returns: an integer that is the number of rows in that section
+        :returns: an integer that is the number of rows in that section
     */
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.courses.count;
     }
     
     /**
-    This function sets the content of a specific cell and the returns the cell
+        This function sets the content of a specific cell and the returns the cell
 
-    :param:  tableView  the tableView that we want to edit
-    :param:  indexPath  the current index that in the table view that we want to edit
+        :param:  tableView  the tableView that we want to edit
+        :param:  indexPath  the current index that in the table view that we want to edit
 
-    :returns: a UITableViewCell which has had its content set
+        :returns: a UITableViewCell which has had its content set
     */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
@@ -112,10 +112,10 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /**
-    This function sets the course that was seletected to the current user information
+        This function sets the course that was seletected to the current user information
     
-    :param:  tableView
-    :param:  indexPath  the index of the selection, to get the name of course
+        :param:  tableView
+        :param:  indexPath  the index of the selection, to get the name of course
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // checks for network connecttivity

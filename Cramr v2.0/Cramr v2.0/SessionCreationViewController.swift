@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 /**
-View controller to create a new session. It allows the user to set the description of the session, and the location of the session. Both by typing it, and by setting the map.
+    View controller to create a new session. It allows the user to set the description of the session, and the location of the session. Both by typing it, and by setting the map.
 */
 class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
@@ -39,8 +39,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     @IBOutlet weak var locationField: UITextField!
     
     /**
-    This function is called when the user taps the create session button.
-    * After some error checking, it calls the addSession function
+        This function is called when the user taps the create session button.
+        * After some error checking, it calls the addSession function
     */
     @IBAction func createSession(sender: AnyObject) {
         var descriptionText = descriptionField.text
@@ -63,12 +63,12 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     /**
-    This function is a general alert function, it takes in one of three errors and outputs the message as an alert. The three possible errors are:
-    * missing description and location,
-    * missing description only,
-    * missing location only.
+        This function is a general alert function, it takes in one of three errors and outputs the message as an alert. The three possible errors are:
+        * missing description and location,
+        * missing description only,
+        * missing location only.
 
-    :param:  message  - a string that specifies the error message to output
+        :param:  message  - a string that specifies the error message to output
     */
     func errorAlert(message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .Alert)
@@ -79,8 +79,8 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     /**
-    Callback function, called after the new session has sucessfully been saved into the database.
-    It sets the current session for the user as the one he just specified and segues to the locked screen view. 
+        Callback function, called after the new session has sucessfully been saved into the database.
+        * It sets the current session for the user as the one he just specified and segues to the locked screen view.
     */
     func addSessionCallback(session: [String: String]) {
         self.newSession = session
@@ -88,19 +88,19 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     /**
-    This function calls the app delegate with the information from the new session. It is called when the user wants to create the new session.
-    In the app delegate function, the database is updated with the new session and then the callback function sets the current session.
+        This function calls the app delegate with the information from the new session. It is called when the user wants to create the new session.
+        * In the app delegate function, the database is updated with the new session and then the callback function sets the current session.
     
-    :param:  location  the user specified location
-    :param:  description  the user specified description
-    :param:  geoTag  the map specified location as a coordinate
+        :param:  location  the user specified location
+        :param:  description  the user specified description
+        :param:  geoTag  the map specified location as a coordinate
     */
     func addSession(location: String, description: String, geoTag: CLLocationCoordinate2D) {
         (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
     }
     
     /**
-    This function executes the segue to the locked session view and passes the newSession as an object
+        This function executes the segue to the locked session view and passes the newSession as an object
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lockSessionView" {
@@ -119,7 +119,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     /**
-    This function updates the location on the map as the user moves around on the map
+        This function updates the location on the map as the user moves around on the map
     */
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         if let location = locations.first as? CLLocation {
@@ -129,7 +129,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
   
     /**
-    This function zooms back to the current location of the user, if he clicks the button to recenter on the map
+        This function zooms back to the current location of the user, if he clicks the button to recenter on the map
     */
     @IBAction func tappedLocationButton(sender: AnyObject) {
         if (self.mapView.myLocation != nil) {
@@ -144,7 +144,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     /**
-    This function sets up the map. Specifies the location of the marker with some math that took as longer to figure out than we would like to admit
+        This function sets up the map. Specifies the location of the marker with some math that took as longer to figure out than we would like to admit
     */
     func setupMap() {
         locationManager.delegate = self
@@ -161,7 +161,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     
 
     /**
-    This function specifies the navigation items, the colors of the view and what is loaded immidately.
+        This function specifies the navigation items, the colors of the view and what is loaded immidately.
     */
     override func viewDidLoad() {
         descriptionField.delegate = self
