@@ -21,7 +21,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var refreshingCourseList: Bool = false
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     var sessionsForSelectedRow = [[String: String]]()
     
@@ -178,7 +178,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         :param:  numSessions  number of currently active sessions
     */
     func cellUpdateCallback(numPeople: Int, numSessions: Int, cell: UITableViewCell) {
-        (cell as CustomCourseTableCell).updateCellContents(numPeople, numSessions: numSessions)
+        (cell as! CustomCourseTableCell).updateCellContents(numPeople, numSessions: numSessions)
     }
     
     /**
@@ -192,10 +192,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         :returns: It returns the newly created cell
     */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: CustomCourseTableCell = self.tableView.dequeueReusableCellWithIdentifier("CustomCourseCell") as CustomCourseTableCell
+        var cell: CustomCourseTableCell = self.tableView.dequeueReusableCellWithIdentifier("CustomCourseCell") as! CustomCourseTableCell
         var fullCourseName = self.coursesIn[indexPath.row] as String
         cell.updateCellName(fullCourseName)
-        (UIApplication.sharedApplication().delegate as AppDelegate).updateCellAD(fullCourseName, cell: cell as UITableViewCell, cb: cellUpdateCallback)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).updateCellAD(fullCourseName, cell: cell as UITableViewCell, cb: cellUpdateCallback)
         return cell
     }
     
@@ -230,7 +230,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.appDelegate.isConnectedToNetwork() {
             self.view.userInteractionEnabled = false
-            (UIApplication.sharedApplication().delegate as AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
+            (UIApplication.sharedApplication().delegate as! AppDelegate).getSessionsAD(self.coursesIn[indexPath.row] as String, cb: getSessionsCallback)
         }
     }
     
@@ -255,7 +255,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     */
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            (UIApplication.sharedApplication().delegate as AppDelegate).deleteCourseFromUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: (self.coursesIn[indexPath.row] as String), index: indexPath, cb: deleteCourseCallback)
+            (UIApplication.sharedApplication().delegate as! AppDelegate).deleteCourseFromUserAD((UIApplication.sharedApplication().delegate as! AppDelegate).localData.getUserID(), courseName: (self.coursesIn[indexPath.row] as String), index: indexPath, cb: deleteCourseCallback)
         }
     }
 
@@ -282,7 +282,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
-                var s = (segue.destinationViewController as SessionBrowserViewController)
+                var s = (segue.destinationViewController as! SessionBrowserViewController)
                 s.courseName = courseName
                 s.sessions = self.sessionsForSelectedRow
             }
@@ -290,7 +290,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             waitForCompleteUpdate()
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var courseName = self.coursesIn[indexPath.row] as String
-                (segue.destinationViewController as SessionCreationViewController).courseName = courseName
+                (segue.destinationViewController as! SessionCreationViewController).courseName = courseName
                 
             }
         }

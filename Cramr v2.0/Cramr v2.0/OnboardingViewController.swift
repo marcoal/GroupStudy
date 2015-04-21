@@ -60,7 +60,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
         self.view.backgroundColor = cramrBlue
         
         /* Getting the page View controller */
-        pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OnboardingPageViewController") as UIPageViewController
+        pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OnboardingPageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self
         
         let pageContentViewController = self.viewControllerAtIndex(0)
@@ -106,7 +106,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as OnboardingContentViewController).pageIndex!
+        var index = (viewController as! OnboardingContentViewController).pageIndex!
         index++
         if(index >= self.images.count){
             return nil
@@ -124,7 +124,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
     */
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as OnboardingContentViewController).pageIndex!
+        var index = (viewController as! OnboardingContentViewController).pageIndex!
         if(index <= 0){
             return nil
         }
@@ -142,7 +142,7 @@ class OnboardingViewController: UIViewController, UIPageViewControllerDataSource
         if((self.pageTitles.count == 0) || (index >= self.pageTitles.count)) {
             return nil
         }
-        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OnboardingContentViewController") as OnboardingContentViewController
+        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OnboardingContentViewController") as! OnboardingContentViewController
         
         pageContentViewController.imageName = self.images[index]
         pageContentViewController.titleText = self.pageTitles[index]

@@ -14,7 +14,7 @@ import MapKit
 */
 class SessionCreationViewController : UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     
     var courseName: String?  {
@@ -53,7 +53,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
             errorAlert("Please fill in a description!")
         } else if locationText == "" {
             errorAlert("Please fill in a room!")
-        } else if appDelegate.isConnectedToNetwork() {
+        } else if self.appDelegate.isConnectedToNetwork() {
             var center: CGPoint = mapView.center
             var loc: CLLocationCoordinate2D = mapView.camera.target
             addSession(locationText, description: descriptionText, geoTag: loc)
@@ -96,7 +96,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
         :param:  geoTag  the map specified location as a coordinate
     */
     func addSession(location: String, description: String, geoTag: CLLocationCoordinate2D) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).addSessionAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).addSessionAD((UIApplication.sharedApplication().delegate as! AppDelegate).localData.getUserID(), courseName: self.courseName!, description: description, location: location, geoTag: geoTag, cb: addSessionCallback)
     }
     
     /**
@@ -104,7 +104,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "lockSessionView" {
-            var destController = segue.destinationViewController as SessionLockedViewController
+            var destController = segue.destinationViewController as! SessionLockedViewController
             destController.session = self.newSession
         }
     }
@@ -138,7 +138,7 @@ class SessionCreationViewController : UIViewController, CLLocationManagerDelegat
     }
     
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true;
     }

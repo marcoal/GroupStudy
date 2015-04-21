@@ -54,9 +54,9 @@ class SessionBrowserViewController : UIViewController {
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sessionSwiper" {
-            (segue.destinationViewController as SessionViewController).sessions = self.sessions!
+            (segue.destinationViewController as! SessionViewController).sessions = self.sessions!
         } else if segue.identifier == "createSessionView" {
-            (segue.destinationViewController as SessionCreationViewController).courseName = self.courseName
+            (segue.destinationViewController as! SessionCreationViewController).courseName = self.courseName
         }
     }
     

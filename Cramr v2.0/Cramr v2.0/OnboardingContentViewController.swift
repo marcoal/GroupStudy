@@ -13,7 +13,7 @@ import Foundation
 */
 class OnboardingContentViewController: UIViewController {
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     @IBOutlet weak var goToLoginButton: UIButton!
     
@@ -94,7 +94,7 @@ class OnboardingContentViewController: UIViewController {
     func addVideo() {
         let filepath = NSBundle.mainBundle().pathForResource(self.imageName, ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)
-        self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
+        self.avplayer = AVPlayer.playerWithURL(fileURL)as! AVPlayer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
         
         var height = UIScreen.mainScreen().bounds.size.height / 1.5

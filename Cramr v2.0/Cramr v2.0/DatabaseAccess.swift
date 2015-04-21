@@ -11,7 +11,7 @@ import CoreData
 
 class DatabaseAccess {
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     /**
         This function signs up the user in the database.
@@ -32,7 +32,7 @@ class DatabaseAccess {
                     //specifies the information that is necessary for a user
                     parse_user.username = user.name
                     parse_user.password = ""
-                    parse_user.email = user.objectForKey("email") as String
+                    parse_user.email = user.objectForKey("email") as! String
                     parse_user["userID"] = user.objectID
                     
                     //grabs the image from facebook and stores it as a UIImage
@@ -75,10 +75,10 @@ class DatabaseAccess {
         query.getObjectInBackgroundWithId(sessionID) {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var session = object as PFObject
+                var session = object as! PFObject
                 //gets the active users from that session
-                var users = session.objectForKey("active_users") as [String]
-                var courseName = session.objectForKey("course") as String
+                var users = session.objectForKey("active_users") as! [String]
+                var courseName = session.objectForKey("course") as! String
                 //queries for the user by userID
                 var userQuery : PFQuery = PFUser.query()
                 userQuery.whereKey("userID", containedIn: users)
@@ -86,11 +86,11 @@ class DatabaseAccess {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
                         var found = false
-                        var users = objects as [PFObject]
+                        var users = objects as! [PFObject]
                         var usersTupleArray = [(String, String)]()
                         // For each user in the session's users, check that our userID is not there
                         for user in users {
-                            var other_user_id = user["userID"] as String
+                            var other_user_id = user["userID"] as! String
                             if userID == other_user_id{
                                 found = true
                             }
@@ -150,9 +150,9 @@ class DatabaseAccess {
         query.getObjectInBackgroundWithId(sessionID) {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var session = object as PFObject
+                var session = object as! PFObject
                 //gets the active users
-                var users = session.objectForKey("active_users") as [String]
+                var users = session.objectForKey("active_users") as! [String]
                 //then queries for the user
                 var userQuery : PFQuery = PFUser.query()
                 
@@ -161,11 +161,11 @@ class DatabaseAccess {
                 userQuery.findObjectsInBackgroundWithBlock {
                     (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil {
-                        var users = objects as [PFObject]
+                        var users = objects as! [PFObject]
                         var usersTupleArray = [(String, String)]()
                         for user in users {
-                            var userName = user["username"] as String
-                            var userID = user["userID"] as String
+                            var userName = user["username"] as! String
+                            var userID = user["userID"] as! String
                             var tup = (userName, userID)
                             usersTupleArray.append(tup)
                         }
@@ -198,8 +198,8 @@ class DatabaseAccess {
             local_query.getFirstObjectInBackgroundWithBlock {
                 (object: AnyObject!, error: NSError!) -> Void in
                 if object != nil { // checks if saved locally
-                    var obj = object as PFObject
-                    let userImage = UIImage(data: obj["imageData"] as NSData)
+                    var obj = object as! PFObject
+                    let userImage = UIImage(data: obj["imageData"] as! NSData)
                     userImages[userID] = userImage
                     if userImages.count == userIDs.count {
                         callback(userImages)
@@ -211,8 +211,8 @@ class DatabaseAccess {
                     query.findObjectsInBackgroundWithBlock {
                         (objects: [AnyObject]!, error: NSError!) -> Void in
                         if error == nil {
-                            let userPhoto = objects[0] as PFObject
-                            let userImageFile = userPhoto["imageFile"] as PFFile
+                            let userPhoto = objects[0] as! PFObject
+                            let userImageFile = userPhoto["imageFile"] as! PFFile
                             //extracts data
                             userImageFile.getDataInBackgroundWithBlock {
                                 (imageData: NSData!, error: NSError!) -> Void in
@@ -260,8 +260,8 @@ class DatabaseAccess {
         query.getObjectInBackgroundWithId(sessionID) {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var session = object as PFObject
-                var users = session.objectForKey("active_users") as [String]
+                var session = object as! PFObject
+                var users = session.objectForKey("active_users") as! [String]
                 users.removeAtIndex(find(users, userID)!)
                 //if there are still users in the session, then the list of active users is replaced with the list without the user that was removed and the new list is saved
                 if users.count > 0 {
@@ -272,7 +272,7 @@ class DatabaseAccess {
                     session.deleteInBackground()
                 }
                 //and the session is deleted out of local data because it has been updated and is therefore no longer current
-                (UIApplication.sharedApplication().delegate as AppDelegate).localData.deleteSession()
+                (UIApplication.sharedApplication().delegate as! AppDelegate).localData.deleteSession()
                 callback()
             } else {
                 // Log details of the failure
@@ -295,11 +295,11 @@ class DatabaseAccess {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 var sessions = [[String: String]]()
-                var parseSessions = objects as [PFObject]
+                var parseSessions = objects as! [PFObject]
                 //each session is processed
                 for object in parseSessions {
                     //convertToSessionDict takes six strings (sessionID, descirption, location, courseName, latitute, longitude) and returns it as a dictionary from that title to the actual information
-                    sessions.append(convertToSessionDict(object.objectId, object["description"] as String, object["location"] as String, object["course"] as String, object["latitude"] as String, object["longitude"] as String))
+                    sessions.append(convertToSessionDict(object.objectId, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
                 }
                 callback(sessions)
             } else {
@@ -324,10 +324,10 @@ class DatabaseAccess {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 var sessions = [[String: String]]()
-                var parseSessions = objects as [PFObject]
+                var parseSessions = objects as! [PFObject]
                 for object in parseSessions {
                     //convertToSessionDict takes six strings (sessionID, descirption, location, courseName, latitute, longitude) and returns it as a dictionary from that title to the actual information
-                    sessions.append(convertToSessionDict(object.objectId, object["description"] as String, object["location"] as String, object["course"] as String, object["latitude"] as String, object["longitude"] as String))
+                    sessions.append(convertToSessionDict(object.objectId, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
                 }
                 callback(sessions)
             } else {
@@ -381,8 +381,8 @@ class DatabaseAccess {
             new_session.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError!) -> Void in
                 if success {
-                    (UIApplication.sharedApplication().delegate as AppDelegate).localData.setSession(new_session.objectId)
-                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as String, new_session["longitude"] as String)
+                    (UIApplication.sharedApplication().delegate as! AppDelegate).localData.setSession(new_session.objectId)
+                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as! String, new_session["longitude"] as! String)
                     callback(sessionDict)
                     
                 }
@@ -401,8 +401,8 @@ class DatabaseAccess {
         query.getObjectInBackgroundWithId(sessionID) {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var currSession = object as PFObject
-                var activeUsers = currSession["active_users"] as [String]
+                var currSession = object as! PFObject
+                var activeUsers = currSession["active_users"] as! [String]
                 //makes sure the user is not in the session yet
                 if find(activeUsers, userID) == nil {
                     activeUsers.append(userID)
@@ -412,7 +412,7 @@ class DatabaseAccess {
                     // NSLog("User already in the session he/she is joining.")
                 }
                 //the the current session as this session
-                (UIApplication.sharedApplication().delegate as AppDelegate).localData.setSession(sessionID)
+                (UIApplication.sharedApplication().delegate as! AppDelegate).localData.setSession(sessionID)
                 callback()
             } else {
                 // Log details of the failure
@@ -436,7 +436,7 @@ class DatabaseAccess {
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
-                var sessions = objects as [PFObject]
+                var sessions = objects as! [PFObject]
                 var numSessions = sessions.count
                 var numPeople = 0
                 for s in sessions {
@@ -462,8 +462,8 @@ class DatabaseAccess {
                 (object: AnyObject!, error: NSError!) -> Void in
                 if object != nil {
                     //then the enrolled courses array of the user is updated
-                    var object_user = object as PFObject
-                    var course_array = object_user["enrolled_courses"] as [String]
+                    var object_user = object as! PFObject
+                    var course_array = object_user["enrolled_courses"] as! [String]
                     //we make sure he is not already in the course
                     if !contains(course_array, courseName) {
                         course_array += [courseName]
@@ -498,7 +498,7 @@ class DatabaseAccess {
                 (object: AnyObject!, error: NSError!) -> Void in
                 if error == nil {
                     if object != nil {
-                        var object_user = object as PFObject
+                        var object_user = object as! PFObject
                         object_user["enrolled_courses"].removeObject(courseName)
                         object_user.saveInBackground()
                     }
@@ -524,8 +524,8 @@ class DatabaseAccess {
         query_courses.getFirstObjectInBackgroundWithBlock {
             (object: AnyObject!, error: NSError!) -> Void in
             if error == nil {
-                var course = object as PFObject
-                var enrolled_courses = course["enrolled_courses"] as [String]
+                var course = object as! PFObject
+                var enrolled_courses = course["enrolled_courses"] as! [String]
                 callback(enrolled_courses, tableReload)
             } else {
                 // Log details of the failure
@@ -575,10 +575,10 @@ class DatabaseAccess {
             
             query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
-                    var courses = objects as [PFObject]
+                    var courses = objects as! [PFObject]
                     var course_titles: [String] = []
                     for c in courses {
-                        course_titles.append(c["title"] as String)
+                        course_titles.append(c["title"] as! String)
                     }
                     callback(course_titles)
                 } else {

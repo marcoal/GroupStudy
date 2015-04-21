@@ -15,7 +15,7 @@ class SessionContentViewController: UIViewController {
     
     var session: [String: String]!
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     @IBOutlet weak var descript: UILabel!
     
@@ -41,8 +41,8 @@ class SessionContentViewController: UIViewController {
         * It has a callback function that regulates the segue
     */
     @IBAction func joinButton(sender: AnyObject) {
-        if appDelegate.isConnectedToNetwork() {
-            (UIApplication.sharedApplication().delegate as AppDelegate).joinSessionAD(session["sessionID"]!, userID: (UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), cb: joinSessionCallback)
+        if self.appDelegate.isConnectedToNetwork() {
+            (UIApplication.sharedApplication().delegate as! AppDelegate).joinSessionAD(session["sessionID"]!, userID: (UIApplication.sharedApplication().delegate as! AppDelegate).localData.getUserID(), cb: joinSessionCallback)
         } else {
             checkForNetwork(self, self.appDelegate)
         }
@@ -63,7 +63,7 @@ class SessionContentViewController: UIViewController {
             self.currentMembersDict[elem.1] = elem.0
         }
         
-        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).getSessionUsersPicturesAD(userIDs, cb: displayCurrentUsers)
         
     }
     /**
@@ -76,7 +76,7 @@ class SessionContentViewController: UIViewController {
         descript.text = "  We're working on: " + (session["description"]! as String)
         locationLabel.text = "  We're working at: " + (session["location"]! as String)
         descript.numberOfLines = 0
-        (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).getSessionUsersAD(session["sessionID"]!, cb: setUsersLabelCallback)
         
     }
     /**
@@ -186,7 +186,7 @@ class SessionContentViewController: UIViewController {
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pushToLockedFromJoin" {
-            (segue.destinationViewController as SessionLockedViewController).session = self.session
+            (segue.destinationViewController as! SessionLockedViewController).session = self.session
         }
     }
 }

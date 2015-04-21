@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     var avplayer: AVPlayer = AVPlayer()
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     var isFirstRun: Bool = false
     
@@ -33,7 +33,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Get the intro video frome the bundle and instantiate the player
         let filepath = NSBundle.mainBundle().pathForResource("cramr_intro_video", ofType: "mov")
         let fileURL = NSURL.fileURLWithPath(filepath!)
-        self.avplayer = AVPlayer.playerWithURL(fileURL) as AVPlayer
+        self.avplayer = AVPlayer.playerWithURL(fileURL) as! AVPlayer
         
         //Set notification when player reaches the end of the vidoe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerItemDidReachEnd", name: notificationKey, object: self.avplayer)
@@ -59,7 +59,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         :param: notif NSNotification
     */
     func playerItemDidReachEnd(notif: NSNotification){
-        var p:  AVPlayer = notif.object as AVPlayer
+        var p:  AVPlayer = notif.object as! AVPlayer
         p.seekToTime(kCMTimeZero)
         p.play()
     }
@@ -72,8 +72,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         if (FBSession.activeSession().isOpen){
             var friendsRequest : FBRequest = FBRequest.requestForMe()
             friendsRequest.startWithCompletionHandler{(connection:FBRequestConnection!, result:AnyObject!,error:NSError!) -> Void in
-                var resultdict = result as NSDictionary
-                self.appDelegate.localData.setUserID(resultdict["id"] as String)
+                var resultdict = result as! NSDictionary
+                self.appDelegate.localData.setUserID(resultdict["id"] as! String)
             }
         }
     }
@@ -88,7 +88,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     */
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         if self.isFirstRun {
-            appDelegate.go_to_onboarding(animated: false)
+            self.appDelegate.go_to_onboarding(animated: false)
         } else {
             self.performSegueWithIdentifier("toMaster", sender: self)
         }
@@ -100,7 +100,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         :param: user FBGraphUser
     */
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        var userEmail = user.objectForKey("email") as String
+        var userEmail = user.objectForKey("email") as! String
         
         // Query parse for user with userid, and fetch data in background, if the user
         // is not already in parse, sign him/her up with parse and cached the userid and username

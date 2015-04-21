@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SystemConfiguration
+import HockeySDK
 
 @UIApplicationMain
 /**
@@ -24,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var session = [String: String]()
     
     var localData = LocalDatastore()
+    
+    func setupHockey() {
+        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("2865cc2d2644f3f88feb0afe08d39a3f")
+        BITHockeyManager.sharedHockeyManager().startManager()
+        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
+    }
+    
     
     /**
         This functions sets up Parse
@@ -103,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         :param:  sessionID  the session that is to be checked
     */
     func isUserInSessionAD(userID: String, seshID: String, cb: (String, String) -> ()) {
-        self.DBAccess!.isUserInSession(userID, sessionID: seshID, cb)
+        self.DBAccess!.isUserInSession(userID, sessionID: seshID, cb: cb)
     }
     
     /**
@@ -197,6 +205,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set up Google Maps Services Key
         GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
 
+        
+        setupHockey()
+        
         if localData.getSessionID() != ""{
             self.go_to_locked()
             return true
@@ -218,11 +229,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         //checks if this is the first time the user ever launches, if it is, then we have to run the onboarding
         var firstRun = true //isFirstRun()
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         self.window?.makeKeyAndVisible()
         //specify the storyboard and the location of teh storyboard to start
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as LoginViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("loginStoryBoardID") as! LoginViewController
         vc.isFirstRun = firstRun
         navController.pushViewController(vc, animated: animated)
     }
@@ -232,9 +243,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func go_to_onboarding(animated: Bool = false) {
         self.window?.makeKeyAndVisible()
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController") as OnboardingViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("OnboardingViewController") as! OnboardingViewController
         navController.pushViewController(vc, animated: true)
     }
     
@@ -255,9 +266,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getSessionInfoCallback(session: [[String: String]]) {
         self.session = session[0]
         self.window?.makeKeyAndVisible()
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier("sessionLockedStoryBoardID") as SessionLockedViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("sessionLockedStoryBoardID") as! SessionLockedViewController
         vc.session = self.session
         navController.pushViewController(vc, animated: false)
     }
@@ -279,9 +290,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func go_to_masterview(animated: Bool = false){
         self.window?.makeKeyAndVisible()
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier("masterViewStoryBoardID") as MasterViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("masterViewStoryBoardID") as! MasterViewController
         navController.pushViewController(vc, animated: animated)
     }
     
@@ -292,9 +303,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func go_to_create_from_push(courseName: String){
         self.window?.makeKeyAndVisible()
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = storyboard.instantiateViewControllerWithIdentifier("createViewStoryBoardID") as SessionCreationViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("createViewStoryBoardID") as! SessionCreationViewController
         vc.courseName = courseName
         navController.pushViewController(vc, animated: false)
     }
@@ -357,7 +368,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
         }
         alert.addAction(closeAction)
-        let navController = self.window!.rootViewController as UINavigationController
+        let navController = self.window!.rootViewController as! UINavigationController
         navController.presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -386,7 +397,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let closeAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
             }
             alert.addAction(closeAction)
-            let navController = self.window!.rootViewController as UINavigationController
+            let navController = self.window!.rootViewController as! UINavigationController
             navController.presentViewController(alert, animated: true, completion: nil)
         } else {
             self.alertSessionNoLonger(courseName)
@@ -437,9 +448,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         This function handles received push notification.
     */
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        var message = userInfo["message"] as String
-        var seshid = userInfo["seshid"] as String
-        var courseName = userInfo["courseName"] as String
+        var message = userInfo["message"] as! String
+        var seshid = userInfo["seshid"] as! String
+        var courseName = userInfo["courseName"]as! String
         var userid = localData.getUserID()
         self.sessionExists_beforePromptAD(userid, seshid: seshid, courseName: courseName, message: message)
         
@@ -450,7 +461,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user being prompted.
     */
     func sessionExists_beforePromptAD(userid: String, seshid: String, courseName: String, message: String){
-        self.DBAccess!.sessionExists(userid, sessionID: seshid, courseName: courseName, message: message, self.handlePushInviteCallback)
+        self.DBAccess!.sessionExists(userid, sessionID: seshid, courseName: courseName, message: message, cb: self.handlePushInviteCallback)
     }
     
     /**
@@ -527,7 +538,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "Casa.Cramr_v2_0" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -550,7 +561,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

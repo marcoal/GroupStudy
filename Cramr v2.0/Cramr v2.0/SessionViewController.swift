@@ -54,7 +54,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
             return nil
         }
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let dataViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionContent") as SessionContentViewController
+        let dataViewController = storyboard?.instantiateViewControllerWithIdentifier("sessionContent") as! SessionContentViewController
         dataViewController.session = self.sessions[index]
         return dataViewController
     }
@@ -86,7 +86,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
-            as SessionContentViewController)
+            as! SessionContentViewController)
         
         if (index == 0) || (index == NSNotFound) {
             return nil
@@ -105,7 +105,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
         var index = indexOfViewController(viewController
-            as SessionContentViewController)
+            as! SessionContentViewController)
         
         if index == NSNotFound {
             return nil
@@ -134,7 +134,7 @@ class SessionViewController: UIPageViewController, UIPageViewControllerDataSourc
         viewControllerAtIndex(0)!
         
         let viewControllers: NSArray = [startingViewController]
-        pageController!.setViewControllers(viewControllers,
+        pageController!.setViewControllers(viewControllers as [AnyObject],
             direction: .Forward,
             animated: false,
             completion: nil)

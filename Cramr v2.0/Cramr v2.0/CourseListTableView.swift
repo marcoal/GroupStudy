@@ -20,7 +20,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var classSearch: UISearchBar!
     
     //to make calling the appDelegate easier, which we need for interacting with the database
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     var courses = []
     
@@ -39,7 +39,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         * It reacts to the when the text change in teh searchbar
     */
     func searchBar(_classSearch: UISearchBar, textDidChange searchText: String) {
-        (UIApplication.sharedApplication().delegate as AppDelegate).getCourseListFromAD(searchText, cb: courseListCallback)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).getCourseListFromAD(searchText, cb: courseListCallback)
     }
     
     func setupSearch() {
@@ -100,7 +100,7 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
         :returns: a UITableViewCell which has had its content set
     */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var cell:UITableViewCell = self.courseTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
         cell.textLabel?.text = self.courses[indexPath.row] as? String
         cell.contentView.backgroundColor = .whiteColor()
         cell.textLabel?.textColor = cramrBlue
@@ -119,9 +119,9 @@ class CourseListTableView: UIViewController, UITableViewDataSource, UITableViewD
     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // checks for network connecttivity
-        if appDelegate.isConnectedToNetwork() {
+        if self.appDelegate.isConnectedToNetwork() {
             //It takes the courses that was selected
-            (UIApplication.sharedApplication().delegate as AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as String, cb: selectedRowCallBack)
+            (UIApplication.sharedApplication().delegate as! AppDelegate).addCourseToUserAD((UIApplication.sharedApplication().delegate as! AppDelegate).localData.getUserID(), courseName: self.courses[indexPath.row] as! String, cb: selectedRowCallBack)
         } else {
             //If there is no network it deselects the row to make sure nothing happens once connectivity is restored
             checkForNetwork(self, self.appDelegate, message: "")

@@ -21,7 +21,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     
     var wasClosed = false
     
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     @IBOutlet weak var leaveButton: UIButton!
 
@@ -113,13 +113,13 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
     */
     func facebookViewControllerDoneWasPressed(sender: AnyObject!) {
         var text = NSMutableString()
-        let picker = sender as FBFriendPickerViewController
+        let picker = sender as! FBFriendPickerViewController
         
         // For each friend that the user selected,  if the user is not already in the session,
         // send a push in background (form this view's perspective, handled by AppDelegate)
         for friend in picker.selection {
-            var fdict = friend as NSDictionary
-            var id = fdict.objectForKey("id") as String
+            var fdict = friend as! NSDictionary
+            var id = fdict.objectForKey("id") as! String
             println(id)
             appDelegate.isUserInSessionAD(id, seshID: appDelegate.localData.getSessionID(), cb: appDelegate.sendPushCallback)
             
@@ -303,7 +303,7 @@ class SessionLockedViewController: UIViewController, FBFriendPickerDelegate {
             
             while (!self.wasClosed) {
                 dispatch_async(dispatch_get_main_queue()) {
-                    (UIApplication.sharedApplication().delegate as AppDelegate).getSessionUsersAD(self.session["sessionID"]!, cb: self.currentUsersCallback)
+                    (UIApplication.sharedApplication().delegate as! AppDelegate).getSessionUsersAD(self.session["sessionID"]!, cb: self.currentUsersCallback)
                 }
                 sleep(5)
             }

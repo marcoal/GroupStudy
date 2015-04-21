@@ -48,7 +48,7 @@ class LocalDatastore {
     * and reloads it with the a new courselist in its callback
     */
     func resetEnrolledCourses() {
-        (UIApplication.sharedApplication().delegate as AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as AppDelegate).localData.getUserID(), tableReload: false, cb: resetEnrolledCoursesCallback)
+        (UIApplication.sharedApplication().delegate as! AppDelegate).getCoursesFromAD((UIApplication.sharedApplication().delegate as! AppDelegate).localData.getUserID(), tableReload: false, cb: resetEnrolledCoursesCallback)
     }
 
     /**
@@ -100,8 +100,8 @@ class LocalDatastore {
     This function initially printed out userID and sessionID for debugging purposes
     */
     func printInfo() {
-        var u = self.user["userID"] as String
-        var s = self.user["sessionID"] as String
+        var u = self.user["userID"] as! String
+        var s = self.user["sessionID"] as! String
         //        NSLog("User ID: " + u)
         //        NSLog("Sesh ID: " + s)
     }
@@ -184,7 +184,7 @@ class LocalDatastore {
     :returns: userID string
     */
     func getUserID() -> String {
-        return self.getUser()["userID"] as String
+        return self.getUser()["userID"] as! String
     }
     
     /** 
@@ -193,7 +193,7 @@ class LocalDatastore {
     :returns: username string
     */
     func getUserName() -> String{
-        return self.getUser()["username"] as String
+        return self.getUser()["username"] as! String
     }
     
     /** 
@@ -202,7 +202,7 @@ class LocalDatastore {
     :returns: sessionID string
     */
     func getSessionID() -> String {
-        return self.getUser()["sessionID"] as String
+        return self.getUser()["sessionID"] as! String
     }
     
     
