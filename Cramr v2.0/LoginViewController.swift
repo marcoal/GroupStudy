@@ -116,7 +116,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
                 parse_user["userID"] = user.objectID
                 
                 var imageData : UIImage!
-                let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+                let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture?type=large")
                 if let data = NSData(contentsOfURL: url!) {
                     imageData = UIImage(data: data)
                 }

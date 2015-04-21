@@ -37,7 +37,7 @@ class DatabaseAccess {
                     
                     //grabs the image from facebook and stores it as a UIImage
                     var imageData : UIImage!
-                    let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture")
+                    let url: NSURL? = NSURL(string: "https://graph.facebook.com/\(user.objectID)/picture/?type=large")
                     if let data = NSData(contentsOfURL: url!) {
                         imageData = UIImage(data: data)
                     }
