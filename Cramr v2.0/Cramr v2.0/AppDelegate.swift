@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import SystemConfiguration
-import HockeySDK
 
 @UIApplicationMain
 /**
@@ -27,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var localData = LocalDatastore()
     
     func setupHockey() {
-        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("2865cc2d2644f3f88feb0afe08d39a3f")
-        BITHockeyManager.sharedHockeyManager().startManager()
-        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
+//        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("2865cc2d2644f3f88feb0afe08d39a3f")
+//        BITHockeyManager.sharedHockeyManager().startManager()
+//        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
     }
     
     
@@ -325,7 +324,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             // Register for Push Notifications before iOS 8
-            application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
+            application.registerForRemoteNotifications()
+
         }
     }
     
@@ -493,7 +493,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Handles FBAppCall
         * Required for Facebook Login
     */
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: NSString?, annotation: AnyObject) -> Bool {
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication, withSession: PFFacebookUtils.session())
         return wasHandled
     }
