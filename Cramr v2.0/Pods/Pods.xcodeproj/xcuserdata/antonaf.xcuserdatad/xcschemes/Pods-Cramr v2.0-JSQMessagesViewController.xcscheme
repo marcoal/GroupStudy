@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EC14BCDA830B17E4244CA5CA"
+               BlueprintIdentifier = "3051B0EC65BDD5FA43BAAD9F"
                BuildableName = "libPods-Cramr v2.0-JSQMessagesViewController.a"
                BlueprintName = "Pods-Cramr v2.0-JSQMessagesViewController"
                ReferencedContainer = "container:Pods.xcodeproj">

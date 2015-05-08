@@ -187,6 +187,8 @@ class SessionContentViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "pushToLockedFromJoin" {
             (segue.destinationViewController as! SessionLockedViewController).session = self.session
+        } else if segue.identifier == "chatSegue" {
+            (segue.destinationViewController as! MessagesViewController).session = self.session
         }
     }
 }

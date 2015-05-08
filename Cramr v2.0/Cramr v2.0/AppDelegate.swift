@@ -25,12 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var localData = LocalDatastore()
     
-    func setupHockey() {
-//        BITHockeyManager.sharedHockeyManager().configureWithIdentifier("2865cc2d2644f3f88feb0afe08d39a3f")
-//        BITHockeyManager.sharedHockeyManager().startManager()
-//        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
-    }
-    
     
     /**
         This functions sets up Parse
@@ -204,8 +198,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set up Google Maps Services Key
         GMSServices.provideAPIKey("AIzaSyCg7Pfd0VZi559Ofjn5tKGeB8UK8q24-Wc")
 
-        
-        setupHockey()
         
         if localData.getSessionID() != ""{
             self.go_to_locked()

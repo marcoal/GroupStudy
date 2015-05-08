@@ -133,6 +133,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         appDelegate.localData.setUserID(user.objectID)
         appDelegate.localData.setUserName(user.name)
+        appDelegate.DBAccess?.getUserPictureURL(user.objectID, callback: setImageURLCallback)
+    }
+    
+    func setImageURLCallback(imageUrl: String) {
+        appDelegate.localData.setImageURL(imageUrl)
     }
     
     /**

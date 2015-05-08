@@ -238,6 +238,22 @@ class DatabaseAccess {
         }
     }
     
+    func getUserPictureURL(userID: String, callback: (String) -> ()) {
+        //queries every userID separetely
+        var query = PFQuery(className: "UserPhoto")
+        query.whereKey("imageName", containsString: userID)
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                let userPhoto = objects[0] as! PFObject
+                let userImageFile = userPhoto["imageFile"] as! PFFile
+                callback(userImageFile.url)
+            } else  {
+                NSLog("Error in getUserPictureURL: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+    
     /**
         Pins the image in the background.
     */

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D4307A92FF940C4EF60437A1"
+               BlueprintIdentifier = "4CE4176E37EA87447A657828"
                BuildableName = "libPods-Cramr v2.0.a"
                BlueprintName = "Pods-Cramr v2.0"
                ReferencedContainer = "container:Pods.xcodeproj">

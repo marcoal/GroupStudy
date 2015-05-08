@@ -205,6 +205,16 @@ class LocalDatastore {
         return self.getUser()["sessionID"] as! String
     }
     
+    func setImageURL(imageURL: String) {
+        var loggedUser = self.getUser()
+        loggedUser["imageURL"] = imageURL
+        loggedUser.pinInBackground()
+    }
+    
+    func getImageURL() -> String {
+        return self.getUser()["imageURL"] as! String
+    }
+    
     
     /**
     This function returns the current user.
@@ -224,6 +234,7 @@ class LocalDatastore {
                 self.user["userID"] = ""
                 self.user["sessionID"] = ""
                 self.user["username"] = ""
+                self.user["imageURL"] = ""
             }
         }
         self.printInfo()

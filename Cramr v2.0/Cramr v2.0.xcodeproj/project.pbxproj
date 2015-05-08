@@ -33,6 +33,7 @@
 		62F2E13F1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */; };
 		62F2E1401AB4EB190083ACB3 /* CreateSession221.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */; };
 		6CF41AC2F14A7B09A74474A1 /* libPods-Cramr v2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A45360738ED5E83B2079B21 /* libPods-Cramr v2.0.a */; };
+		7B07CAA01AFCC33C00B8EAF1 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B07CA9F1AFCC33C00B8EAF1 /* Firebase.framework */; };
 		7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCC1A772A570043841E /* AppDelegate.swift */; };
 		7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCE1A772A570043841E /* Cramr_v2_0.xcdatamodeld */; };
 		7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFD11A772A570043841E /* MasterViewController.swift */; };
@@ -62,7 +63,6 @@
 		7BE9B4D11AA518F400CD015D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D01AA518F400CD015D /* GLKit.framework */; };
 		7BE9B4D31AA518FF00CD015D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D21AA518FF00CD015D /* ImageIO.framework */; };
 		7BE9B4D51AA5190C00CD015D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D41AA5190C00CD015D /* libc++.dylib */; };
-		7BE9B4D71AA5191E00CD015D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D61AA5191E00CD015D /* libicucore.dylib */; };
 		7BE9B4D91AA5192C00CD015D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */; };
 		FA3C1AF11A844CE300DB86AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */; };
 		FA3C1AF31A844CEC00DB86AC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */; };
@@ -111,6 +111,8 @@
 		62F2E13B1AB4EB190083ACB3 /* AddCourseCS106A.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AddCourseCS106A.mov; sourceTree = "<group>"; };
 		62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = BrowseSessionsCS106A.mov; sourceTree = "<group>"; };
 		62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = CreateSession221.mov; sourceTree = "<group>"; };
+		7B07CA9D1AFCC2E900B8EAF1 /* Firebase.framework-2.2.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = "Firebase.framework-2.2.2.zip"; path = "../../../../../../Downloads/Firebase.framework-2.2.2.zip"; sourceTree = "<group>"; };
+		7B07CA9F1AFCC33C00B8EAF1 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../../../../../../Desktop/Firebase.framework; sourceTree = "<group>"; };
 		7B33AFC71A772A570043841E /* Cramr v2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cramr v2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B33AFCB1A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFCC1A772A570043841E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,9 +162,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B07CAA01AFCC33C00B8EAF1 /* Firebase.framework in Frameworks */,
 				7B4FA77A1AA51C3500CABAC4 /* CoreData.framework in Frameworks */,
 				7BE9B4D91AA5192C00CD015D /* OpenGLES.framework in Frameworks */,
-				7BE9B4D71AA5191E00CD015D /* libicucore.dylib in Frameworks */,
 				7BE9B4D51AA5190C00CD015D /* libc++.dylib in Frameworks */,
 				7BE9B4D31AA518FF00CD015D /* ImageIO.framework in Frameworks */,
 				7BE9B4D11AA518F400CD015D /* GLKit.framework in Frameworks */,
@@ -186,8 +188,8 @@
 				62BC8C621A7AD65500864C72 /* Social.framework in Frameworks */,
 				62BC8C601A7AD65000864C72 /* AdSupport.framework in Frameworks */,
 				62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */,
-				62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */,
 				62BC8C731A7AD72400864C72 /* libz.dylib in Frameworks */,
+				62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */,
 				7BE9B4C91AA5181900CD015D /* GoogleMaps.framework in Frameworks */,
 				6CF41AC2F14A7B09A74474A1 /* libPods-Cramr v2.0.a in Frameworks */,
 			);
@@ -206,6 +208,8 @@
 		62BC8C711A7AD6EE00864C72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B07CA9F1AFCC33C00B8EAF1 /* Firebase.framework */,
+				7B07CA9D1AFCC2E900B8EAF1 /* Firebase.framework-2.2.2.zip */,
 				7B498E3D1AFCAD47007EBB67 /* JSQSystemSoundPlayer */,
 				7B498E361AFCABC9007EBB67 /* JSQMessagesViewController */,
 				7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */,
@@ -280,6 +284,7 @@
 				7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
 				7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */,
+				7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */,
 				7B9642AF1A969EA800331CA7 /* Util.swift */,
 				625806871A7DA2A7002AAD26 /* LoginViewController.swift */,
 				FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */,
@@ -297,7 +302,6 @@
 				7B33AFCE1A772A570043841E /* Cramr_v2_0.xcdatamodeld */,
 				7B33AFCA1A772A570043841E /* Supporting Files */,
 				62BC8C801A7AD83000864C72 /* Cramr v2.0-Bridging-Header.h */,
-				7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */,
 			);
 			path = "Cramr v2.0";
 			sourceTree = "<group>";
@@ -636,9 +640,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/antonaf/Desktop,
 				);
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-licucore",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cramr v2.0/Cramr v2.0-Bridging-Header.h";
@@ -657,9 +666,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/antonaf/Desktop,
 				);
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-licucore",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Cramr v2.0/Cramr v2.0-Bridging-Header.h";

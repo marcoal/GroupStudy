@@ -15,3 +15,4 @@
 #import <AVFoundation/AVAsset.h>
 #import "JSQSystemSoundPlayer.h"
 #import <JSQMessagesViewController/JSQMessages.h>
+#import <Firebase/Firebase.h>
