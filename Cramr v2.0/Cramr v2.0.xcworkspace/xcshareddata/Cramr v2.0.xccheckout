@@ -12,6 +12,8 @@
 	<dict>
 		<key>34DB58C3C299570B0AE1507342B3D826C701F155</key>
 		<string>https://github.com/marcoal/GroupStudy.git</string>
+		<key>5C880BE1B99588B39156D68833EAB2407BF6A594</key>
+		<string>https://github.com/firebase/ios-swift-chat-example.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Cramr v2.0/Cramr v2.0.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>34DB58C3C299570B0AE1507342B3D826C701F155</key>
 		<string>../..</string>
+		<key>5C880BE1B99588B39156D68833EAB2407BF6A594</key>
+		<string>../../../fireChat</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/marcoal/GroupStudy.git</string>
@@ -28,6 +32,14 @@
 	<string>34DB58C3C299570B0AE1507342B3D826C701F155</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5C880BE1B99588B39156D68833EAB2407BF6A594</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fireChat</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

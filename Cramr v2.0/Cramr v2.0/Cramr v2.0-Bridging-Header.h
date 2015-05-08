@@ -13,3 +13,5 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVAsset.h>
+#import "JSQSystemSoundPlayer.h"
+#import <JSQMessagesViewController/JSQMessages.h>

@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
             endingLineNumber = "66"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -56,6 +56,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Cramr_v2_0.LoginViewController.setCurrUser (Cramr_v2_0.LoginViewController)() -&gt; ()"
                   moduleName = "Cramr v2.0"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antonaf/Dropbox/Stanford/Junior/CS194/git/Cramr%20v2.0/LoginViewController.swift"
                   timestampString = "444545059.216027"
                   startingColumnNumber = "9223372036854775807"
@@ -70,6 +71,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Cramr_v2_0.LoginViewController.(setCurrUser (Cramr_v2_0.LoginViewController) -&gt; () -&gt; ()).(closure #1)"
                   moduleName = "Cramr v2.0"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antonaf/Dropbox/Stanford/Junior/CS194/git/Cramr%20v2.0/LoginViewController.swift"
                   timestampString = "444545059.216168"
                   startingColumnNumber = "9223372036854775807"
@@ -187,8 +189,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
             endingLineNumber = "190"
-            landmarkName = "getSessions(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -203,7 +205,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
             endingLineNumber = "194"
-            landmarkName = "getSessions(_:callback:)"
+            landmarkName = "getSessionUsersPictures(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -340,6 +342,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Cramr_v2_0.SessionViewController.viewControllerAtIndex (Cramr_v2_0.SessionViewController)(Swift.Int) -&gt; Swift.Optional&lt;Cramr_v2_0.SessionContentViewController&gt;"
                   moduleName = "Cramr v2.0"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antonaf/Dropbox/Stanford/Junior/CS194/git/Cramr%20v2.0/Cramr%20v2.0/SessionViewController.swift"
                   timestampString = "446543612.520373"
                   startingColumnNumber = "9223372036854775807"
@@ -354,6 +357,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "Cramr_v2_0.SessionViewController.viewControllerAtIndex (Cramr_v2_0.SessionViewController)(Swift.Int) -&gt; Swift.Optional&lt;Cramr_v2_0.SessionContentViewController&gt;"
                   moduleName = "Cramr v2.0"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/antonaf/Dropbox/Stanford/Junior/CS194/git/Cramr%20v2.0/Cramr%20v2.0/SessionViewController.swift"
                   timestampString = "446543612.521073"
                   startingColumnNumber = "9223372036854775807"
@@ -489,7 +493,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "getSessionUsers(_:callback:)"
+            landmarkName = "signupUser(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -505,7 +509,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
-            landmarkName = "getSessionUsers(_:callback:)"
+            landmarkName = "signupUser(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -553,7 +557,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
             endingLineNumber = "160"
-            landmarkName = "leaveSession(_:sessionID:callback:)"
+            landmarkName = "getSessionUsers(_:callback:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -569,7 +573,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
+            landmarkName = "isUserInSession(_:sessionID:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -585,7 +589,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
             endingLineNumber = "95"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
+            landmarkName = "isUserInSession(_:sessionID:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -601,7 +605,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
             endingLineNumber = "109"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
+            landmarkName = "isUserInSession(_:sessionID:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -617,7 +621,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
             endingLineNumber = "108"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
+            landmarkName = "isUserInSession(_:sessionID:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -633,8 +637,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
             endingLineNumber = "113"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -649,8 +653,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
             endingLineNumber = "114"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -665,8 +669,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -713,8 +717,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "116"
             endingLineNumber = "116"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -729,8 +733,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
             endingLineNumber = "117"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -745,7 +749,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "getSessionUsersPictures(_:callback:)"
+            landmarkName = "isUserInSession(_:sessionID:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -761,7 +765,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
             endingLineNumber = "138"
-            landmarkName = "pinImageInBackground(_:imageData:)"
+            landmarkName = "sessionExists(_:sessionID:courseName:message:cb:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -777,8 +781,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
             endingLineNumber = "141"
-            landmarkName = "pinImageInBackground(_:imageData:)"
-            landmarkType = "5">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

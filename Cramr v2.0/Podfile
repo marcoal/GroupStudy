@@ -1,11 +1,13 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '8.1'
 
+xcodeproj 'Cramr v2.0.xcodeproj'
+
 target 'Cramr v2.0' do
 
-pod 'AFNetworking'
+pod 'JSQSystemSoundPlayer'
 
-pod 'Facebook-iOS-SDK'
+pod 'JSQMessagesViewController'  
 
 end
 
