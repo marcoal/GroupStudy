@@ -21,12 +21,12 @@ class DatabaseAccess {
     */
     func signupUser(user: FBGraphUser, callback: () -> ()) {
         var query = PFUser.query();
-        query.whereKey("userID", containsString: user.objectID)
-        query.findObjectsInBackgroundWithBlock {
-            (users: [AnyObject]!, error: NSError!) -> Void in
+        query!.whereKey("userID", containsString: user.objectID)
+        query?.findObjectsInBackgroundWithBlock {
+            (users: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 //checks to make sure user isn't there yet
-                if users.count == 0 {
+                if users!.count == 0 {
                     //NSLog("Grabbing picture!")
                     var parse_user = PFUser()
                     //specifies the information that is necessary for a user
@@ -54,7 +54,7 @@ class DatabaseAccess {
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error in signupUser: %@ %@", error, error.userInfo!)
+                NSLog("Error in signupUser: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -73,17 +73,17 @@ class DatabaseAccess {
         //first queries to get the right session
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 var session = object as! PFObject
                 //gets the active users from that session
                 var users = session.objectForKey("active_users") as! [String]
                 var courseName = session.objectForKey("course") as! String
                 //queries for the user by userID
-                var userQuery : PFQuery = PFUser.query()
+                var userQuery : PFQuery = PFUser.query()!
                 userQuery.whereKey("userID", containedIn: users)
                 userQuery.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    (objects: [AnyObject]?, error: NSError?) -> Void in
                     if error == nil {
                         var found = false
                         var users = objects as! [PFObject]
@@ -104,7 +104,7 @@ class DatabaseAccess {
                 
             } else {
                 // Log details of the failure
-                NSLog("Error in isUserInSesssion: %@ %@", error, error.userInfo!)
+                NSLog("Error in isUserInSesssion: %@ %@", error!, error!.userInfo!)
             }
         }
         
@@ -123,14 +123,14 @@ class DatabaseAccess {
     func sessionExists(userid: String, sessionID: String, courseName: String, message: String, cb: (String, String, String, String, Bool) -> ()){
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 //If the session IS found, the callback function is called with true
                 cb(userid, sessionID, courseName, message, true)
             }
             else {
                 //If the session IS not found, the callback function is called with false
-                if error.code == kPFErrorObjectNotFound {
+                if error?.code == 101 {
                      cb(userid, sessionID, courseName, message, false)
                 }
                 println("Ignore the Parse error in the log above, we handle no results matched the query")
@@ -148,18 +148,18 @@ class DatabaseAccess {
         var query = PFQuery(className: "Sessions")
         //find the session
         query.getObjectInBackgroundWithId(sessionID) {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 var session = object as! PFObject
                 //gets the active users
                 var users = session.objectForKey("active_users") as! [String]
                 //then queries for the user
-                var userQuery : PFQuery = PFUser.query()
+                var userQuery : PFQuery = PFUser.query()!
                 
                 userQuery.whereKey("userID", containedIn: users)
                 //finds all the users whose userID were specified
                 userQuery.findObjectsInBackgroundWithBlock {
-                    (objects: [AnyObject]!, error: NSError!) -> Void in
+                    (objects: [AnyObject]?, error: NSError?) -> Void in
                     if error == nil {
                         var users = objects as! [PFObject]
                         var usersTupleArray = [(String, String)]()
@@ -176,7 +176,7 @@ class DatabaseAccess {
             } else {
                 // Log details of the failure
                 println("what the fuck") //can we take this out now?
-                NSLog("Error in getSessionUsers: %@ %@", error, error.userInfo!)
+                NSLog("Error in getSessionUsers: %@ %@", error!, error!.userInfo!)
             }
         }
         
@@ -196,7 +196,7 @@ class DatabaseAccess {
             local_query.fromLocalDatastore()
             local_query.whereKey("userID", equalTo: userID)
             local_query.getFirstObjectInBackgroundWithBlock {
-                (object: AnyObject!, error: NSError!) -> Void in
+                (object: AnyObject?, error: NSError?) -> Void in
                 if object != nil { // checks if saved locally
                     var obj = object as! PFObject
                     let userImage = UIImage(data: obj["imageData"] as! NSData)
@@ -209,28 +209,28 @@ class DatabaseAccess {
                     var query = PFQuery(className: "UserPhoto")
                     query.whereKey("imageName", containsString: userID)
                     query.findObjectsInBackgroundWithBlock {
-                        (objects: [AnyObject]!, error: NSError!) -> Void in
+                        (objects: [AnyObject]?, error: NSError?) -> Void in
                         if error == nil {
-                            let userPhoto = objects[0] as! PFObject
+                            let userPhoto = objects![0] as! PFObject
                             let userImageFile = userPhoto["imageFile"] as! PFFile
                             //extracts data
                             userImageFile.getDataInBackgroundWithBlock {
-                                (imageData: NSData!, error: NSError!) -> Void in
+                                (imageData: NSData?, error: NSError?) -> Void in
                                 if error == nil {
-                                    let image = UIImage(data:imageData)
+                                    let image = UIImage(data:imageData!)
                                     userImages[userID] = image
                                     //pins image for later use
-                                    self.pinImageInBackground(userID, imageData: imageData)
+                                    self.pinImageInBackground(userID, imageData: imageData!)
                                     if userImages.count == userIDs.count {
                                         callback(userImages)
                                     }
                                     
                                 } else  {
-                                    NSLog("Error in inner getSessionUsersPictures: %@ %@", error, error.userInfo!)
+                                    NSLog("Error in inner getSessionUsersPictures: %@ %@", error!, error!.userInfo!)
                                 }
                             }
                         } else  {
-                            NSLog("Error in outer getSessionUsersPictures: %@ %@", error, error.userInfo!)
+                            NSLog("Error in outer getSessionUsersPictures: %@ %@", error!, error!.userInfo!)
                         }
                     }
                 }
@@ -258,7 +258,7 @@ class DatabaseAccess {
         //queries for the session
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 var session = object as! PFObject
                 var users = session.objectForKey("active_users") as! [String]
@@ -276,7 +276,7 @@ class DatabaseAccess {
                 callback()
             } else {
                 // Log details of the failure
-                NSLog("Error in leaveSession: %@ %@", error, error.userInfo!)
+                NSLog("Error in leaveSession: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -292,19 +292,19 @@ class DatabaseAccess {
         var sessionQuery = PFQuery(className: "Sessions")
         sessionQuery.whereKey("objectId", equalTo: fromID)
         sessionQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 var sessions = [[String: String]]()
                 var parseSessions = objects as! [PFObject]
                 //each session is processed
                 for object in parseSessions {
                     //convertToSessionDict takes six strings (sessionID, descirption, location, courseName, latitute, longitude) and returns it as a dictionary from that title to the actual information
-                    sessions.append(convertToSessionDict(object.objectId, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
+                    sessions.append(convertToSessionDict(object.objectId!, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
                 }
                 callback(sessions)
             } else {
                 // Log details of the failure
-                NSLog("Error in getSessionInfo: %@ %@", error, error.userInfo!)
+                NSLog("Error in getSessionInfo: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -321,18 +321,18 @@ class DatabaseAccess {
         sessionQuery.whereKey("course", equalTo: courseName)
         
         sessionQuery.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 var sessions = [[String: String]]()
                 var parseSessions = objects as! [PFObject]
                 for object in parseSessions {
                     //convertToSessionDict takes six strings (sessionID, descirption, location, courseName, latitute, longitude) and returns it as a dictionary from that title to the actual information
-                    sessions.append(convertToSessionDict(object.objectId, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
+                    sessions.append(convertToSessionDict(object.objectId!, object["description"] as! String, object["location"] as! String, object["course"] as! String, object["latitude"] as! String, object["longitude"] as! String))
                 }
                 callback(sessions)
             } else {
                 // Log details of the failure
-                NSLog("Error in getSessions: %@ %@", error, error.userInfo!)
+                NSLog("Error in getSessions: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -379,10 +379,10 @@ class DatabaseAccess {
             new_session["latitude"] = "\(geoTag.latitude)"
             new_session["longitude"] = "\(geoTag.longitude)"
             new_session.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError!) -> Void in
+                (success: Bool, error: NSError?) -> Void in
                 if success {
-                    (UIApplication.sharedApplication().delegate as! AppDelegate).localData.setSession(new_session.objectId)
-                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId, description, location, courseName, new_session["latitude"] as! String, new_session["longitude"] as! String)
+                    (UIApplication.sharedApplication().delegate as! AppDelegate).localData.setSession(new_session.objectId!)
+                    var sessionDict: [String: String] = convertToSessionDict(new_session.objectId!, description, location, courseName, new_session["latitude"] as! String, new_session["longitude"] as! String)
                     callback(sessionDict)
                     
                 }
@@ -399,7 +399,7 @@ class DatabaseAccess {
     func joinSession(sessionID: String, userID: String, callback: () -> ()) {
         var query = PFQuery(className: "Sessions")
         query.getObjectInBackgroundWithId(sessionID) {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 var currSession = object as! PFObject
                 var activeUsers = currSession["active_users"] as! [String]
@@ -416,7 +416,7 @@ class DatabaseAccess {
                 callback()
             } else {
                 // Log details of the failure
-                NSLog("Error in joinSession: %@ %@", error, error.userInfo!)
+                NSLog("Error in joinSession: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -434,13 +434,13 @@ class DatabaseAccess {
         var query = PFQuery(className: "Sessions")
         query.whereKey("course", equalTo: courseName)
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 var sessions = objects as! [PFObject]
                 var numSessions = sessions.count
                 var numPeople = 0
                 for s in sessions {
-                    numPeople += s["active_users"].count
+                    numPeople += s["active_users"]!.count
                 }
                 callback(numPeople, numSessions, cell)
             }
@@ -459,7 +459,7 @@ class DatabaseAccess {
             query.whereKey("userID", equalTo: userID)
             //the user is found
             query.getFirstObjectInBackgroundWithBlock {
-                (object: AnyObject!, error: NSError!) -> Void in
+                (object: AnyObject?, error: NSError?) -> Void in
                 if object != nil {
                     //then the enrolled courses array of the user is updated
                     var object_user = object as! PFObject
@@ -495,17 +495,17 @@ class DatabaseAccess {
         if userID != "" {
             query.whereKey("userID", equalTo: userID)
             query.getFirstObjectInBackgroundWithBlock {
-                (object: AnyObject!, error: NSError!) -> Void in
+                (object: AnyObject?, error: NSError?) -> Void in
                 if error == nil {
                     if object != nil {
                         var object_user = object as! PFObject
-                        object_user["enrolled_courses"].removeObject(courseName)
+                        object_user["enrolled_courses"]!.removeObject(courseName)
                         object_user.saveInBackground()
                     }
                     callback(index)
                 } else {
                     // Log details of the failure
-                    NSLog("Error in deleteCourseFromUser: %@ %@", error, error.userInfo!)
+                    NSLog("Error in deleteCourseFromUser: %@ %@", error!, error!.userInfo!)
                 }
             }
         }
@@ -522,14 +522,14 @@ class DatabaseAccess {
         var query_courses = PFQuery(className: "EnrolledCourses")
         query_courses.whereKey("userID", equalTo: userID)
         query_courses.getFirstObjectInBackgroundWithBlock {
-            (object: AnyObject!, error: NSError!) -> Void in
+            (object: AnyObject?, error: NSError?) -> Void in
             if error == nil {
                 var course = object as! PFObject
                 var enrolled_courses = course["enrolled_courses"] as! [String]
                 callback(enrolled_courses, tableReload)
             } else {
                 // Log details of the failure
-                NSLog("Error in getCourses: %@ %@", error, error.userInfo!)
+                NSLog("Error in getCourses: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -573,7 +573,7 @@ class DatabaseAccess {
             var regex = self.getRegexSearchTerm(searchText)
             query.whereKey("title", matchesRegex: regex, modifiers: "i")
             
-            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]?, error: NSError?) -> Void in
                 if error == nil {
                     var courses = objects as! [PFObject]
                     var course_titles: [String] = []
@@ -583,7 +583,7 @@ class DatabaseAccess {
                     callback(course_titles)
                 } else {
                     // Log details of the failure
-                    NSLog("Error in getCourseList: %@ %@", error, error.userInfo!)
+                    NSLog("Error in getCourseList: %@ %@", error!, error!.userInfo!)
                 }
                 
             }

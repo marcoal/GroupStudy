@@ -10,7 +10,6 @@
 		6231EA251AB1571100AB19CC /* cramr_intro_video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 6231EA211AB1571100AB19CC /* cramr_intro_video.mov */; };
 		625806821A7D994C002AAD26 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806811A7D994C002AAD26 /* FacebookSDK.framework */; };
 		625806841A7D9979002AAD26 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */; };
-		625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */; };
 		625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625806871A7DA2A7002AAD26 /* LoginViewController.swift */; };
 		62B246941A97F385006D23D8 /* CustomCourseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B246931A97F385006D23D8 /* CustomCourseTableCell.swift */; };
 		62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C5D1A7AD64800864C72 /* Accounts.framework */; };
@@ -21,9 +20,7 @@
 		62BC8C681A7AD67600864C72 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C671A7AD67600864C72 /* CoreGraphics.framework */; };
 		62BC8C6A1A7AD67E00864C72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C691A7AD67E00864C72 /* CoreLocation.framework */; };
 		62BC8C6C1A7AD68600864C72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C6B1A7AD68600864C72 /* Foundation.framework */; };
-		62BC8C701A7AD6D500864C72 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C6E1A7AD6D500864C72 /* Parse.framework */; };
 		62BC8C731A7AD72400864C72 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C721A7AD72400864C72 /* libz.dylib */; };
-		62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C741A7AD73300864C72 /* libsqlite3.dylib */; };
 		62BC8C771A7AD74A00864C72 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C761A7AD74A00864C72 /* SystemConfiguration.framework */; };
 		62BC8C791A7AD75F00864C72 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C781A7AD75F00864C72 /* QuartzCore.framework */; };
 		62BC8C7B1A7AD78000864C72 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BC8C7A1A7AD78000864C72 /* MobileCoreServices.framework */; };
@@ -32,6 +29,7 @@
 		62F2E13E1AB4EB190083ACB3 /* AddCourseCS106A.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13B1AB4EB190083ACB3 /* AddCourseCS106A.mov */; };
 		62F2E13F1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13C1AB4EB190083ACB3 /* BrowseSessionsCS106A.mov */; };
 		62F2E1401AB4EB190083ACB3 /* CreateSession221.mov in Resources */ = {isa = PBXBuildFile; fileRef = 62F2E13D1AB4EB190083ACB3 /* CreateSession221.mov */; };
+		7157DAF4B9AA9DD679B8ECBA /* libPods-Cramr v2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F664A54A132B1874E9F85933 /* libPods-Cramr v2.0.a */; };
 		7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCC1A772A570043841E /* AppDelegate.swift */; };
 		7B33AFD01A772A570043841E /* Cramr_v2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFCE1A772A570043841E /* Cramr_v2_0.xcdatamodeld */; };
 		7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFD11A772A570043841E /* MasterViewController.swift */; };
@@ -40,11 +38,19 @@
 		7B33AFD91A772A570043841E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFD81A772A570043841E /* Images.xcassets */; };
 		7B33AFDC1A772A570043841E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B33AFDA1A772A570043841E /* LaunchScreen.xib */; };
 		7B33AFE81A772A570043841E /* Cramr_v2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */; };
+		7B388BDA1AF2E789001328CC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B388BD91AF2E789001328CC /* Message.swift */; };
+		7B388BDC1AF2E799001328CC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B388BDB1AF2E799001328CC /* MessagesViewController.swift */; };
 		7B4FA77A1AA51C3500CABAC4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE9B4CC1AA518CF00CD015D /* CoreData.framework */; };
 		7B85596D1A9D35BF00387783 /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */; };
+		7B8686521AFC8FE900E948DB /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8686511AFC8FE900E948DB /* libstdc++.6.0.9.dylib */; };
+		7B8686541AFC906000E948DB /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8686531AFC906000E948DB /* libsqlite3.0.dylib */; };
+		7B86865A1AFC980E00E948DB /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8686461AFC8EBE00E948DB /* ParseCrashReporting.framework */; };
+		7B86865B1AFC980E00E948DB /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B8686471AFC8EBE00E948DB /* ParseUI.framework */; };
+		7B86865E1AFC980E00E948DB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B86864A1AFC8EBE00E948DB /* Parse.framework */; };
 		7B9642B01A969EA800331CA7 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642AF1A969EA800331CA7 /* Util.swift */; };
 		7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */; };
 		7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9B54AE1A7B066500064762 /* CourseListTableView.swift */; };
+		7BA656A51AF2E45E00AB265F /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA656A41AF2E45E00AB265F /* Firebase.framework */; };
 		7BA8E3EA1A89F0E200728163 /* SessionLockedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */; };
 		7BC138FF1AB05636004DD044 /* OnboardingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */; };
 		7BC139001AB05636004DD044 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */; };
@@ -77,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2780D5A5AC9158D29589DF45 /* Pods-Cramr v2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cramr v2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cramr v2.0/Pods-Cramr v2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		6231EA211AB1571100AB19CC /* cramr_intro_video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = cramr_intro_video.mov; sourceTree = "<group>"; };
 		625806811A7D994C002AAD26 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
@@ -91,7 +98,6 @@
 		62BC8C671A7AD67600864C72 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		62BC8C691A7AD67E00864C72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		62BC8C6B1A7AD68600864C72 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		62BC8C6D1A7AD6D500864C72 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		62BC8C6E1A7AD6D500864C72 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		62BC8C721A7AD72400864C72 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		62BC8C741A7AD73300864C72 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -116,10 +122,22 @@
 		7B33AFE11A772A570043841E /* Cramr v2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cramr v2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B33AFE61A772A570043841E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B33AFE71A772A570043841E /* Cramr_v2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cramr_v2_0Tests.swift; sourceTree = "<group>"; };
+		7B388BD91AF2E789001328CC /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7B388BDB1AF2E799001328CC /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		7B85596C1A9D35BF00387783 /* DatabaseAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
+		7B8686461AFC8EBE00E948DB /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "../../../../../../Downloads/parse-library-1.7.2/ParseCrashReporting.framework"; sourceTree = "<group>"; };
+		7B8686471AFC8EBE00E948DB /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "../../../../../../Downloads/parse-library-1.7.2/ParseUI.framework"; sourceTree = "<group>"; };
+		7B8686481AFC8EBE00E948DB /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = "../../../../../../Downloads/parse-library-1.7.2/ParseFacebookUtilsV4.framework"; sourceTree = "<group>"; };
+		7B8686491AFC8EBE00E948DB /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../../../../Downloads/parse-library-1.7.2/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
+		7B86864A1AFC8EBE00E948DB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../Downloads/parse-library-1.7.2/Parse.framework"; sourceTree = "<group>"; };
+		7B8686511AFC8FE900E948DB /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		7B8686531AFC906000E948DB /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		7B8686561AFC912C00E948DB /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		7B8686571AFC912C00E948DB /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		7B9642AF1A969EA800331CA7 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		7B9642B11A96B85A00331CA7 /* LocalDatastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDatastore.swift; sourceTree = "<group>"; };
 		7B9B54AE1A7B066500064762 /* CourseListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseListTableView.swift; sourceTree = "<group>"; };
+		7BA656A41AF2E45E00AB265F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		7BA8E3E91A89F0E200728163 /* SessionLockedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLockedViewController.swift; sourceTree = "<group>"; };
 		7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingContentViewController.swift; sourceTree = "<group>"; };
 		7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +153,8 @@
 		7BE9B4D41AA5190C00CD015D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7BE9B4D61AA5191E00CD015D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F664A54A132B1874E9F85933 /* libPods-Cramr v2.0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cramr v2.0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85DE766FB603FF59FDFA257 /* Pods-Cramr v2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cramr v2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cramr v2.0/Pods-Cramr v2.0.release.xcconfig"; sourceTree = "<group>"; };
 		FA3C1AEE1A8448D900DB86AC /* TestsPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestsPlayground.playground; sourceTree = "<group>"; };
 		FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -148,6 +168,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B86865A1AFC980E00E948DB /* ParseCrashReporting.framework in Frameworks */,
+				7B86865B1AFC980E00E948DB /* ParseUI.framework in Frameworks */,
+				7B86865E1AFC980E00E948DB /* Parse.framework in Frameworks */,
+				7B8686541AFC906000E948DB /* libsqlite3.0.dylib in Frameworks */,
+				7B8686521AFC8FE900E948DB /* libstdc++.6.0.9.dylib in Frameworks */,
 				7B4FA77A1AA51C3500CABAC4 /* CoreData.framework in Frameworks */,
 				7BE9B4D91AA5192C00CD015D /* OpenGLES.framework in Frameworks */,
 				7BE9B4D71AA5191E00CD015D /* libicucore.dylib in Frameworks */,
@@ -163,20 +188,19 @@
 				62BC8C7B1A7AD78000864C72 /* MobileCoreServices.framework in Frameworks */,
 				62BC8C791A7AD75F00864C72 /* QuartzCore.framework in Frameworks */,
 				62BC8C771A7AD74A00864C72 /* SystemConfiguration.framework in Frameworks */,
-				625806861A7D9F62002AAD26 /* ParseFacebookUtils.framework in Frameworks */,
 				625806821A7D994C002AAD26 /* FacebookSDK.framework in Frameworks */,
 				62BC8C641A7AD66700864C72 /* AudioToolbox.framework in Frameworks */,
 				62BC8C661A7AD67000864C72 /* CFNetwork.framework in Frameworks */,
 				62BC8C6A1A7AD67E00864C72 /* CoreLocation.framework in Frameworks */,
 				62BC8C681A7AD67600864C72 /* CoreGraphics.framework in Frameworks */,
 				62BC8C6C1A7AD68600864C72 /* Foundation.framework in Frameworks */,
-				62BC8C701A7AD6D500864C72 /* Parse.framework in Frameworks */,
 				62BC8C621A7AD65500864C72 /* Social.framework in Frameworks */,
 				62BC8C601A7AD65000864C72 /* AdSupport.framework in Frameworks */,
+				7BA656A51AF2E45E00AB265F /* Firebase.framework in Frameworks */,
 				62BC8C5E1A7AD64800864C72 /* Accounts.framework in Frameworks */,
-				62BC8C751A7AD73300864C72 /* libsqlite3.dylib in Frameworks */,
 				62BC8C731A7AD72400864C72 /* libz.dylib in Frameworks */,
 				7BE9B4C91AA5181900CD015D /* GoogleMaps.framework in Frameworks */,
+				7157DAF4B9AA9DD679B8ECBA /* libPods-Cramr v2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,38 +217,48 @@
 		62BC8C711A7AD6EE00864C72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */,
-				7BE9B4D61AA5191E00CD015D /* libicucore.dylib */,
-				7BE9B4D41AA5190C00CD015D /* libc++.dylib */,
-				7BE9B4D21AA518FF00CD015D /* ImageIO.framework */,
-				7BE9B4D01AA518F400CD015D /* GLKit.framework */,
-				7BE9B4CE1AA518E800CD015D /* CoreText.framework */,
+				62BC8C5D1A7AD64800864C72 /* Accounts.framework */,
+				62BC8C5F1A7AD65000864C72 /* AdSupport.framework */,
+				62BC8C631A7AD66700864C72 /* AudioToolbox.framework */,
+				FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */,
+				62BC8C651A7AD67000864C72 /* CFNetwork.framework */,
 				7BE9B4CC1AA518CF00CD015D /* CoreData.framework */,
+				62BC8C671A7AD67600864C72 /* CoreGraphics.framework */,
+				62BC8C691A7AD67E00864C72 /* CoreLocation.framework */,
+				FA3C1AF41A844D0400DB86AC /* CoreMedia.framework */,
+				7BE9B4CE1AA518E800CD015D /* CoreText.framework */,
+				625806811A7D994C002AAD26 /* FacebookSDK.framework */,
+				625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */,
+				7BA656A41AF2E45E00AB265F /* Firebase.framework */,
+				62BC8C6B1A7AD68600864C72 /* Foundation.framework */,
+				7BE9B4D01AA518F400CD015D /* GLKit.framework */,
 				7BE9B4CA1AA5186A00CD015D /* GoogleMaps.bundle */,
 				7BE9B4C81AA5181900CD015D /* GoogleMaps.framework */,
-				FA3C1AF41A844D0400DB86AC /* CoreMedia.framework */,
-				FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */,
-				FA3C1AF01A844CE300DB86AC /* AVFoundation.framework */,
-				625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */,
-				625806831A7D9979002AAD26 /* FBUserSettingsViewResources.bundle */,
-				62BC8C7E1A7AD7BF00864C72 /* StoreKit.framework */,
-				62BC8C7C1A7AD7B400864C72 /* Security.framework */,
-				62BC8C7A1A7AD78000864C72 /* MobileCoreServices.framework */,
-				62BC8C781A7AD75F00864C72 /* QuartzCore.framework */,
-				62BC8C761A7AD74A00864C72 /* SystemConfiguration.framework */,
+				7BE9B4D21AA518FF00CD015D /* ImageIO.framework */,
+				7BE9B4D41AA5190C00CD015D /* libc++.dylib */,
+				7BE9B4D61AA5191E00CD015D /* libicucore.dylib */,
+				F664A54A132B1874E9F85933 /* libPods-Cramr v2.0.a */,
+				7B8686531AFC906000E948DB /* libsqlite3.0.dylib */,
 				62BC8C741A7AD73300864C72 /* libsqlite3.dylib */,
+				7B8686511AFC8FE900E948DB /* libstdc++.6.0.9.dylib */,
+				7B8686561AFC912C00E948DB /* libstdc++.6.dylib */,
+				7B8686571AFC912C00E948DB /* libstdc++.dylib */,
 				62BC8C721A7AD72400864C72 /* libz.dylib */,
-				625806811A7D994C002AAD26 /* FacebookSDK.framework */,
-				62BC8C6D1A7AD6D500864C72 /* Bolts.framework */,
+				FA3C1AF21A844CEC00DB86AC /* MediaPlayer.framework */,
+				62BC8C7A1A7AD78000864C72 /* MobileCoreServices.framework */,
+				7BE9B4D81AA5192C00CD015D /* OpenGLES.framework */,
+				7B86864A1AFC8EBE00E948DB /* Parse.framework */,
 				62BC8C6E1A7AD6D500864C72 /* Parse.framework */,
-				62BC8C6B1A7AD68600864C72 /* Foundation.framework */,
-				62BC8C691A7AD67E00864C72 /* CoreLocation.framework */,
-				62BC8C671A7AD67600864C72 /* CoreGraphics.framework */,
-				62BC8C651A7AD67000864C72 /* CFNetwork.framework */,
-				62BC8C631A7AD66700864C72 /* AudioToolbox.framework */,
+				7B8686461AFC8EBE00E948DB /* ParseCrashReporting.framework */,
+				7B8686491AFC8EBE00E948DB /* ParseFacebookUtils.framework */,
+				625806851A7D9F62002AAD26 /* ParseFacebookUtils.framework */,
+				7B8686481AFC8EBE00E948DB /* ParseFacebookUtilsV4.framework */,
+				7B8686471AFC8EBE00E948DB /* ParseUI.framework */,
+				62BC8C781A7AD75F00864C72 /* QuartzCore.framework */,
+				62BC8C7C1A7AD7B400864C72 /* Security.framework */,
 				62BC8C611A7AD65500864C72 /* Social.framework */,
-				62BC8C5F1A7AD65000864C72 /* AdSupport.framework */,
-				62BC8C5D1A7AD64800864C72 /* Accounts.framework */,
+				62BC8C7E1A7AD7BF00864C72 /* StoreKit.framework */,
+				62BC8C761A7AD74A00864C72 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,6 +276,7 @@
 				7B33AFC91A772A570043841E /* Cramr v2.0 */,
 				7B33AFE41A772A570043841E /* Cramr v2.0Tests */,
 				7B33AFC81A772A570043841E /* Products */,
+				7C0ED983824D9F6262173436 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,6 +292,8 @@
 		7B33AFC91A772A570043841E /* Cramr v2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				7B388BDB1AF2E799001328CC /* MessagesViewController.swift */,
+				7B388BD91AF2E789001328CC /* Message.swift */,
 				7BC138FD1AB05636004DD044 /* OnboardingContentViewController.swift */,
 				7BC138FE1AB05636004DD044 /* OnboardingViewController.swift */,
 				7B33AFCC1A772A570043841E /* AppDelegate.swift */,
@@ -308,6 +345,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7C0ED983824D9F6262173436 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2780D5A5AC9158D29589DF45 /* Pods-Cramr v2.0.debug.xcconfig */,
+				F85DE766FB603FF59FDFA257 /* Pods-Cramr v2.0.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,9 +361,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B33AFEB1A772A570043841E /* Build configuration list for PBXNativeTarget "Cramr v2.0" */;
 			buildPhases = (
+				54253EC418DE87314BB24CDA /* Check Pods Manifest.lock */,
 				7B33AFC31A772A570043841E /* Sources */,
 				7B33AFC41A772A570043841E /* Frameworks */,
 				7B33AFC51A772A570043841E /* Resources */,
+				E8CDBA8692B528C1558AAB55 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -413,6 +461,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54253EC418DE87314BB24CDA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E8CDBA8692B528C1558AAB55 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cramr v2.0/Pods-Cramr v2.0-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7B33AFC31A772A570043841E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -421,6 +502,7 @@
 				7B85596D1A9D35BF00387783 /* DatabaseAccess.swift in Sources */,
 				625806881A7DA2A7002AAD26 /* LoginViewController.swift in Sources */,
 				7B9642B21A96B85A00331CA7 /* LocalDatastore.swift in Sources */,
+				7B388BDA1AF2E789001328CC /* Message.swift in Sources */,
 				7BCFFFF01A82CFC700CD0C40 /* SessionContentViewController.swift in Sources */,
 				7BE9B4C31AA50C9000CD015D /* SessionCreationViewController.swift in Sources */,
 				7B9B54AF1A7B066500064762 /* CourseListTableView.swift in Sources */,
@@ -429,6 +511,7 @@
 				62B246941A97F385006D23D8 /* CustomCourseTableCell.swift in Sources */,
 				7B33AFCD1A772A570043841E /* AppDelegate.swift in Sources */,
 				7BC138FF1AB05636004DD044 /* OnboardingContentViewController.swift in Sources */,
+				7B388BDC1AF2E799001328CC /* MessagesViewController.swift in Sources */,
 				7BC139001AB05636004DD044 /* OnboardingViewController.swift in Sources */,
 				7B33AFD21A772A570043841E /* MasterViewController.swift in Sources */,
 				7B9642B01A969EA800331CA7 /* Util.swift in Sources */,
@@ -560,6 +643,7 @@
 		};
 		7B33AFEC1A772A570043841E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2780D5A5AC9158D29589DF45 /* Pods-Cramr v2.0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -568,6 +652,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"/Users/antonaf/Downloads/JSQSystemSoundPlayer-develop",
+					"4/JSQSystemSoundPlayer/build/Debug-iphoneos",
+					"/Users/antonaf/Downloads/JSQSystemSoundPlayer-develop",
+					4/JSQSystemSoundPlayer/build/Debug,
+					"/Users/antonaf/Downloads/parse-library-1.7.2",
 				);
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -580,6 +670,7 @@
 		};
 		7B33AFED1A772A570043841E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F85DE766FB603FF59FDFA257 /* Pods-Cramr v2.0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -588,6 +679,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"/Users/antonaf/Downloads/JSQSystemSoundPlayer-develop",
+					"4/JSQSystemSoundPlayer/build/Debug-iphoneos",
+					"/Users/antonaf/Downloads/JSQSystemSoundPlayer-develop",
+					4/JSQSystemSoundPlayer/build/Debug,
+					"/Users/antonaf/Downloads/parse-library-1.7.2",
 				);
 				INFOPLIST_FILE = "Cramr v2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

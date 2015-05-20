@@ -105,10 +105,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Query parse for user with userid, and fetch data in background, if the user
         // is not already in parse, sign him/her up with parse and cached the userid and username
         var query = PFUser.query();
-        query.whereKey("userID", containsString: user.objectID)
-        query.findObjectsInBackgroundWithBlock {
-            (users: [AnyObject]!, error: NSError!) -> Void in
-            if users.count == 0 {
+        query!.whereKey("userID", containsString: user.objectID)
+        query?.findObjectsInBackgroundWithBlock {
+            (users: [AnyObject]?, error: NSError?) -> Void in
+            if users!.count == 0 {
                 var parse_user = PFUser()
                 parse_user.username = user.name
                 parse_user.password = ""
